@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NIPN Laos Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="http://example.com/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="js/allcharts.js"></script>
+  <style type="text/css">
+         
+  </style>
+</head>
+<body>
+
+<header class="header-fixed-bottom-wrap">
+    
+    <div class="header-fixed-bottom">
+      <div class="dropdown ">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Languages
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-menu-right">
+      <li><a href="#">English</a></li>
+      <li><a href="#">Lao</a></li>
+    </ul>
+  </div>
+    </div>
+
+  </header>
+
+
+<div class="container">
+  <h2><img src="images/laos.png"/> <b class="green">Nutrition</b> Dashboard</h2>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Nutrition Status</a></li>
+    <li><a data-toggle="tab" href="#menu1">LSIS</a></li>
+    <li><a data-toggle="tab" href="#menu2">SENITEL SURVEY</a></li>
+    <li><a data-toggle="tab" href="#menu3">LECS</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+
+          <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                                    <div class="test">
+                    <div class="nuTpBx">
+                    <div class="sprite-t1-b1"></div>
+                    <div class="nuHeading">49%</div>
+                    <h1 class="nuText">Exclusive breastfeeding under 6 months</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                                    <div class="test" style="padding-left:2px;">
+                    <div class="nuTpBx" style="background:#EA528F;">
+                    <div class="sprite-t1-b2"></div>
+                    <div class="nuHeading">2%</div>
+                    <h1 class="nuText">Overweight prevalence</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+              </div><!--  End card two  -->
+          </div>
+
+          <!--   Card section 2 -->
+      <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-6 pr-1"> 
+                                    <div class="test">
+                    <div class="nuTpBx" style="background-color: #F27B53;">
+                    <div class="sprite-t1-b3"></div>
+                    <div class="nuHeading">25%</div>
+                    <h1 class="nuText">Low birth weight</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6">
+                
+                                    <div class="test" style="padding-left:2px;">
+                    <div class="nuTpBx" style="background:#0EADD4;">
+                    <div class="sprite-t1-b4"></div>
+                    <div class="nuHeading">2%</div>
+                    <h1 class="nuText">Minimum acceptable diet (breastfed)</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+              </div><!--  End card two section2  -->
+          </div>
+          <!-- Card section 3-->
+
+          <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-6 pr-1"> 
+                <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart1"></div>
+                      
+                  </figure>
+                    </div><!-- End chartbox -->                     
+
+              </div> <!-- Card One -->
+
+              <div class="col-sm-6">
+                
+                    <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart2"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->                     
+
+
+              </div><!--  End card two section 3 -->
+      
+    </div> 
+    <!-- Section 2.1  -->
+
+        <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-6 pr-1"> 
+                <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart3"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->                     
+
+              </div> <!-- Card One -->
+
+              <div class="col-sm-6">
+                
+                    <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart4"></div>
+                      
+                  </figure>
+                 
+                    </div><!-- End chartbox -->                     
+
+
+              </div><!--  End card two section 3 -->
+      
+    </div> 
+    <!-- End of Section 2.1 -->
+
+    <!-- Section 4 -->
+               <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-12 pr-1"> 
+                      <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart5"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox --> 
+
+
+              </div>
+            </div><!-- End Section 4-->
+
+            <!-- start section 5 -->
+
+
+          <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                     <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart6"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                   <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart7"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+              </div><!--  End card two  -->
+          </div>
+
+
+            <!-- End Section5 -->
+
+            <!-- Last cards foot card   -->
+
+            <div class="row nopadding" style="padding-top: 4px;">
+                  <div class="col-sm-6 pr-1"> 
+                                        <div class="test">
+                        <div class="nuTpBx" style="background-color: #F27B53;">
+                        <div class="sprite-t2-b1"></div>
+                        <div class="nuHeading">25%</div>
+                        <h1 class="nuText">Vitamin A supplementation</h1>
+                        <span class="unit">Percent</span>
+                        <div class="nuInBtmBx">source: LSB
+                        </div>
+                        </div>
+                      </div>
+
+
+                  </div> <!-- Card One -->
+                  <div class="col-sm-6">
+                    
+                                        <div class="test" style="padding-left:2px;">
+                        <div class="nuTpBx" style="background:#0EADD4;">
+                        <div class="sprite-t2-b2"></div>
+                        <div class="nuHeading">2%</div>
+                        <h1 class="nuText">Early initiation of breastfeeding</h1>
+                        <span class="unit">Percent</span>
+                        <div class="nuInBtmBx">source: LSB
+                        </div>
+                        </div>
+                      </div>
+
+                  </div><!--  End card two section2  -->
+          </div>
+
+          <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                                    <div class="test">
+                    <div class="nuTpBx">
+                    <div class="sprite-t2-b3"></div>
+                    <div class="nuHeading">25%</div>
+                    <h1 class="nuText">Bottle feeding</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                                    <div class="test" style="padding-left:2px;">
+                    <div class="nuTpBx" style="background:#EA528F;">
+                    <div class="sprite-t2-b4"></div>
+                    <div class="nuHeading">2%</div>
+                    <h1 class="nuText">Minimum dietary diversity</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+              </div><!--  End card two  -->
+
+          </div>  <!-- End last card foot card -->
+
+          <br/>
+  </div><!-- ******************************** End Home ************************************************* -->
+
+   <!-- ******************************** Start menu two ************************************************* -->
+    <div id="menu1" class="tab-pane fade">
+
+       <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                                    <div class="test">
+                    <div class="nuTpBx" style="background-color: #FFCA22;">
+                    <div class="sprite-t3-b1"></div>
+                    <div class="nuHeading">49%</div>
+                    <h1 class="nuText">Total fertility rate</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                                    <div class="test" style="padding-left:2px;">
+                    <div class="nuTpBx" style="background:#6CE2FF;">
+                    <div class="sprite-t3-b2"></div>
+                    <div class="nuHeading">2%</div>
+                    <h1 class="nuText">Early child bearing</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+              </div><!--  End card two  -->
+          </div>
+
+          <!--   Card section 2 -->
+      <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-6 pr-1"> 
+                                    <div class="test">
+                    <div class="nuTpBx" style="background-color: #F15D4A;">
+                    <div class="sprite-t3-b3"></div>
+                    <div class="nuHeading">25%</div>
+                    <h1 class="nuText">Contraceptive prevalence rate - any method</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6">
+                
+                                    <div class="test" style="padding-left:2px;">
+                    <div class="nuTpBx" style="background:#919AA3;">
+                    <div class="sprite-t3-b4"></div>
+                    <div class="nuHeading">2%</div>
+                    <h1 class="nuText">Adolescent birth rate</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+              </div><!--  End card two section2  -->
+          </div>
+          <!-- Card section 3-->
+
+          <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-6 pr-1"> 
+                <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart8"></div>
+                      
+                  </figure>
+                    </div><!-- End chartbox -->                     
+
+              </div> <!-- Card One -->
+
+              <div class="col-sm-6">
+                
+                    <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart9"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->                     
+
+
+              </div><!--  End card two section 3 -->
+      
+    </div> 
+    <!-- Section 2.1  -->
+
+        <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-6 pr-1"> 
+                <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart10"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->                     
+
+              </div> <!-- Card One -->
+
+              <div class="col-sm-6">
+                
+                    <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart11"></div>
+                      
+                  </figure>
+                 
+                    </div><!-- End chartbox -->                     
+
+
+              </div><!--  End card two section 3 -->
+      
+    </div> 
+    <!-- End of Section 2.1 -->
+
+    <!-- Section 4 -->
+               <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-12 pr-1"> 
+                      <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart12"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox --> 
+
+
+              </div>
+            </div><!-- End Section 4-->
+
+            <!-- start section 5 -->
+
+
+          <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                     <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart13"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                   <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart14"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+              </div><!--  End card two  -->
+          </div>
+
+
+            <!-- End Section5 -->
+
+            <!-- Last cards foot card   -->
+
+            <div class="row nopadding" style="padding-top: 4px;">
+                  <div class="col-sm-6 pr-1"> 
+                                        <div class="test">
+                        <div class="nuTpBx" style="background-color: #46BEBC;">
+                        <div class="sprite-t3-b5"></div>
+                        <div class="nuHeading">25%</div>
+                        <h1 class="nuText">Vitamin A supplementation</h1>
+                        <span class="unit">Percent</span>
+                        <div class="nuInBtmBx">source: LSB
+                        </div>
+                        </div>
+                      </div>
+
+
+                  </div> <!-- Card One -->
+                  <div class="col-sm-6">
+                    
+                                        <div class="test" style="padding-left:2px;">
+                        <div class="nuTpBx" style="background:#F15D4A;">
+                        <div class="sprite-t3-b6"></div>
+                        <div class="nuHeading">2%</div>
+                        <h1 class="nuText">Early initiation of breastfeeding</h1>
+                        <span class="unit">Percent</span>
+                        <div class="nuInBtmBx">source: LSB
+                        </div>
+                        </div>
+                      </div>
+
+                  </div><!--  End card two section2  -->
+          </div>
+
+          <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                                    <div class="test">
+                    <div class="nuTpBx" style="background-color: #FEB302;">
+                    <div class="sprite-t3-b1"></div>
+                    <div class="nuHeading">25%</div>
+                    <h1 class="nuText">Bottle feeding</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                                    <div class="test" style="padding-left:2px;">
+                    <div class="nuTpBx" style="background:#EA528F;">
+                    <div class="sprite-t3-b2"></div>
+                    <div class="nuHeading">2%</div>
+                    <h1 class="nuText">Minimum dietary diversity</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+              </div><!--  End card two  -->
+          </div>  <!-- End last card foot card -->
+          <br/>
+  </div>
+  
+  <!-- ******************************** End Menu 2 ************************************************* -->
+  <!-- ******************************** Start menu 3 ************************************************* -->  
+    <div id="menu2" class="tab-pane fade">
+      <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                                    <div class="test">
+                    <div class="nuTpBx">
+                    <div class="sprite-t1-b1"></div>
+                    <div class="nuHeading">49%</div>
+                    <h1 class="nuText">Exclusive breastfeeding under 6 months</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                                    <div class="test" style="padding-left:2px;">
+                    <div class="nuTpBx" style="background:#EA528F;">
+                    <div class="sprite-t1-b2"></div>
+                    <div class="nuHeading">2%</div>
+                    <h1 class="nuText">Overweight prevalence</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+              </div><!--  End card two  -->
+          </div>
+
+          <!-- Section 2 -->
+               <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-12 pr-1"> 
+                      <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart15"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox --> 
+
+
+              </div>
+            </div><!-- End Section 2-->
+
+            <!-- Section 3 -->
+           <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                     <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart16"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                   <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart17"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+              </div><!--  End card two  -->
+          </div> <!-- End Section 3 -->
+
+           <!-- Section 4 -->
+
+           <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                     <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart18"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                   <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart19"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+              </div><!--  End card two  -->
+          </div> <!-- End Section 4 -->
+
+          <!-- Section 5 -->
+               <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-12 pr-1"> 
+                      <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart20"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox --> 
+
+
+              </div>
+            </div><!-- End Section 5-->
+
+            <br/>
+
+    </div><!-- End menu 2 -->
+    <!-- ******************************** End menu3 ************************************************* -->
+     <!-- ******************************** Sart menu4 ************************************************* -->
+
+    <div id="menu3" class="tab-pane fade">
+       <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                                    <div class="test">
+                    <div class="nuTpBx" style="background-color: #FEB302;">
+                    <div class="sprite-t3-b1"></div>
+                    <div class="nuHeading">25%</div>
+                    <h1 class="nuText">Bottle feeding</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                                    <div class="test" style="padding-left:2px;">
+                    <div class="nuTpBx" style="background:#EA528F;">
+                    <div class="sprite-t3-b2"></div>
+                    <div class="nuHeading">2%</div>
+                    <h1 class="nuText">Minimum dietary diversity</h1>
+                    <span class="unit">Percent</span>
+                    <div class="nuInBtmBx">source: LSB
+                    </div>
+                    </div>
+                  </div>
+
+              </div><!--  End card two  -->
+          </div>  <!-- End last card foot card -->
+
+          <!-- Section 1 -->
+
+           <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                     <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart21"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                   <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart22"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+              </div><!--  End card two  -->
+          </div> <!-- End Section 1 -->
+
+          <!-- Section 2 -->
+
+           <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                     <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart23"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                   <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart24"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+              </div><!--  End card two  -->
+          </div> <!-- End Section 2 -->
+
+          <!-- Section 3 -->
+               <div class="row nopadding" style="padding-top: 4px;">
+              <div class="col-sm-12 pr-1"> 
+                      <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart26"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox --> 
+
+
+              </div>
+            </div><!-- End Section 3-->
+
+            <!-- start section 4-->
+            <div class="row nopadding" style="padding-top: 5px;">
+              <div class="col-sm-6 pr-1"> 
+                     <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart25"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+
+
+              </div> <!-- Card One -->
+              <div class="col-sm-6 pr-1">
+                
+                   <div class="chartbox">   
+                  <figure class="highcharts-figure">
+                      
+                      <div id="chart27"></div>
+                      
+                  </figure>
+                  
+                    </div><!-- End chartbox -->
+              </div><!--  End card two  -->
+          </div> <!-- End Section 4 -->
+
+
+
+    </div>
+    <br/>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="footer-fixed-bottom-wrap">
+    
+    <div class="footer-fixed-bottom">
+      <p class="copyright"> &copy 2019 NIPN Laos | Supported by: <img src="images/unicef.png"></p>
+    </div>
+
+  </footer>
+
+</body>
+</html>

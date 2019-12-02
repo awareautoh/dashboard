@@ -1,0 +1,315 @@
+ /*
+  Version: 1.0
+  Created date: 29 Nov 2019
+  The national platforms for Nutrition project Lao PDR
+  Data Analysis Unit, Center for Development Policy Research 
+  Ministry of Planning and Inestment 
+  Created by: Data Analysis Unit 
+*/
+ @media (min-width: 768px) {
+            
+          .container{
+              max-width: 970px;
+          }
+      }
+
+
+          * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .nuTpBx{
+          position: absolute;
+          text-align: right;
+          background: #df577d;
+          width: inherit;
+        height:inherit;
+
+      }
+      .nuTpBx{
+          position: absolute;
+          text-align: right;
+          background: #46BEBC;
+          width: inherit;
+        height:inherit;
+
+      }
+      .sprite-t1-b1 {
+          display: inline-block;
+         background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -929px -248px;
+          width: 93px;
+          height: 93px;
+            }
+      .sprite-t1-b2 {
+          display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -941px -701px;
+          width: 81px;
+          height: 84px;
+      }
+      .sprite-t1-b3 {
+              display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -843px -845px;
+          width: 71px;
+          height: 118px;
+            }
+      .sprite-t1-b4 {
+              display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -682px -500px;
+          width: 122px;
+          height: 82px;
+                  }
+          .sprite-t2-b1 {
+                  display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -682px -663px;
+          width: 87px;
+          height: 81px;
+                  }
+          .sprite-t2-b2 {
+                display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -769px -698px;
+          width: 87px;
+          height: 87px;
+                  }
+          .sprite-t2-b3 {
+             display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -966px -607px;
+          width: 37px;
+          height: 84px;
+                  }
+          .sprite-t2-b4 {
+              display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -682px -500px;
+          width: 122px;
+          height: 82px;
+                  }
+
+
+    /* ******************************************** menu two box  ********************************/
+
+  .sprite-t3-b1 {
+    display: inline-block;
+    background: url(../images/sprites-1.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    float: left;
+    margin: 20px;
+    background-position: -876px -607px;
+    width: 90px;
+    height: 94px;
+  }
+  .sprite-t3-b2 {
+    display: inline-block;
+    background: url(../images/sprites-1.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    float: left;
+    margin: 20px;
+    background-position: -767px -785px;
+    width: 76px;
+    height: 100px;
+  }
+  .sprite-t3-b3 {
+    display: inline-block;
+    background: url(../images/sprites-1.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    float: left;
+    margin: 20px;
+    background-position: -804px -500px;
+    width: 101px;
+    height: 103px;
+  }
+  .sprite-t3-b4 {
+    display: inline-block;
+    background: url(../images/sprites-1.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    float: left;
+    margin: 20px;
+    background-position: -810px -372px;
+    width: 128px;
+    height: 128px;
+  }
+  .sprite-t3-b5 {
+    display: inline-block;
+    background: url(../images/sprites-1.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    float: left;
+    margin: 20px;
+    background-position: -682px -372px;
+    width: 128px;
+    height: 128px;
+  }
+  .sprite-t3-b6 {
+    display: inline-block;
+    background: url(../images/sprites-1.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    float: left;
+    margin: 20px;
+    background-position: -682px -744px;
+    width: 85px;
+    height: 79px;
+}
+/* ******************************************** End menu two box  ********************************/
+      .nuTpBx .nuHeading {
+          color: #fff;
+          padding: 10px 20px 0px 20px;
+          text-align: right;
+          font-size: 50px;
+      }
+      .nuTpBx .nuText {
+          text-align: right;
+          color: #fff;
+          padding: 5px 20px 0 0;
+          font-size: 18px;
+      }
+      .nuTpBx span.unit {
+          color: #fff;
+          font-size: 10px;
+          padding: 0 20px;
+      }
+      .nuTpBx .nuInBtmBx {
+          background: rgba(0,0,0,0.2);
+          bottom: 0;
+          color: #fff;
+          font-size: 12px;
+          padding: 5px 20px;
+          text-align: right;
+          position: absolute;
+          width: 100%;
+      }
+      .test{
+        width: 100%;
+        height: 192px;
+        margin-left: 13px;
+    
+      }
+      .no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+.chartbox{
+  width: 100%;
+  border: 1px solid #CCCCCC;
+  margin-left: 15px;
+ 
+}
+.nopadding > div[class^="col-"] {
+    padding-right: 0;
+    padding-left: 2px;
+  }
+  .nav-tabs{
+    border-style: none;
+    font-size: 18px;
+  }
+  .full-width-div {
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+.green{
+
+  
+  font-weight: bolder;
+}
+.footer-fixed-bottom-wrap {
+  width: 100%;
+  height: auto;
+  z-index: 1000 !important;
+  bottom: 0;
+}
+.footer-fixed-bottom {
+  text-align: center;
+  background: #efefef;
+}
+.footer-fixed-bottom > .copyright {
+  margin: 0;
+  padding: 25px;
+  box-shadow: 10px 10px 5px #888;
+}
+.footer-fixed-bottom > .btn {
+  border-radius: 0;
+}
+/*  
+top header
+*/
+.header-fixed-bottom-wrap {
+  width: 100%;
+  height: auto;
+  z-index: 1000 !important;
+  bottom: 0;
+  text-align: right;
+}
+.header-fixed-bottom {
+  text-align: right;
+  background: #efefef;
+  padding: 15px;
+}
+.header-fixed-bottom > .copyright {
+  margin: 0;
+  padding: 25px;
+  box-shadow: 10px 10px 5px #888;
+}
+.header-fixed-bottom > .btn {
+  border-radius: 0;
+}
+  
