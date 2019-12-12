@@ -236,3 +236,58 @@ $(document).ready(function() {
     };
 
 });
+
+//Section 2 Chart: Immediate determinants of undernutrition
+
+//IYCF Chart
+$(document).ready(function (){
+    d3.csv('data/IYCF.csv').then(makeIYCFChart);
+
+    function makeIYCFChart (IYCF) {
+        let province = IYCF.map(IYCF => IYCF.Province);
+        let valueInitiationBreast = IYCF.map(IYCF => IYCF.ValueEarlyBreast);
+        let valueExclusiveBreast = IYCF.map(IYCF => IYCF.ValueExclusiveBreast);
+        let NPANTaget = IYCF.map(IYCF => IYCF.NPANTarget);
+        let ctx = document.getElementById('IYCFChart').getContext("2d");
+        let IYCFChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: province,
+                datasets: [{
+                    label: 'Early Initiation of Breastfeeding',
+                    data: valueInitiationBreast,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    order: 1,
+                }, {
+                    label: 'Exclusive Breastfeeding',
+                    data: valueExclusiveBreast,
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1,
+                    order: 2,
+                }, {
+                    label: 'NPAN Taget',
+                    data: NPANTaget,
+                    backgroundColor: 'lightPink',
+                    borderColor: 'red',
+                    borderWidth: 1,
+                    type: 'line',
+                    fill: false,
+                    order: 3,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                },
+                maintainAspectRatio: false,
+            }
+        });
+    }
+});

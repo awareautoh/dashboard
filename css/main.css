@@ -51,7 +51,7 @@
   text-align: center;
 }
 
-.card#sec1 {
+.card#sec1, .card#sec2 {
   background: #ffcdd2;
   height: auto !important;
 }
