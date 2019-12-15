@@ -1,3 +1,5 @@
+//import { polygonHull } from "d3";
+
 /*
   Version: 1.0
   Created date: 29 Nov 2019
@@ -291,3 +293,96 @@ $(document).ready(function (){
         });
     }
 });
+
+//Creat Map Chart
+// $(document).ready(function () {
+//     d3.json("map/LAO_ADM1.json").then(map);
+//     function map(lao) {
+//     let province = ChartGeo.topojson.(lao, lao.objects.LAO_ADM1).features;
+//     let vte = province.find((d) => d.properties.Name === 'Vientiane Capital');
+//     let ph = province.find((d) => d.properties.Name === 'Phongsaly');
+//     console.log(province);
+//     let Map = new Chart(document.getElementById("Map").getContext("2d"), {
+//     type: 'choropleth',
+//     data: {
+//       labels: province.map(d => d.properties.Name),
+//       datasets: [{
+//         label: 'Province',
+//         data: [{
+//             value: 0.1,
+//             feature: vte
+//         }, {
+//             value:0.9,
+//             feature: ph
+//         }],
+//       }]
+//     }
+//   });
+// };
+// });
+$(document).ready(function () {
+    //Set variable map directory
+    let mapData = ("map/LAO_ADM1.json");
+    //Set to select SVG DOM
+    let svg = d3.select("#test");
+    //Set Scale
+    let colorScale = d3.scaleQuantile()
+        .domain([1, 10])
+        .range(d3.schemeBlues[9]);
+    //Set tooltips
+
+    d3.json(mapData).then(creatMap);
+    function creatMap(lao) {
+        //Import Map Topojson type as Geojson structure
+        let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        //Set porjection map type
+        let projection = d3.geoMercator()
+            .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
+        console.log((myMap.features).map(d => d.properties.Name));
+        console.log(myMap.features);
+
+        //Draw a graph use "g" because draw multiple path in one time
+        svg.append("g")
+            .selectAll("path")
+            .data(myMap.features)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale(d.properties.feature_id));
+        
+        //Draw a line border for each province
+        svg.append("path")
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .attr("class", "mapBorder")
+            .attr("d", d3.geoPath().projection(projection));
+    }
+});
+
+$(document).ready(function () {
+    let mapData = ("map/LAO_ADM1.json");
+    
+    let svg = d3.select("#test1");
+    
+    d3.json(mapData).then(creatMap);
+    let colorScale = d3.scaleQuantile()
+      .domain([1, 10])
+      .range(d3.schemeBlues[9]);
+    function creatMap(lao) {
+        let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        let projection = d3.geoMercator()
+            .fitHeight(360, myMap);
+        console.log((myMap.features).map(d => d.properties.feature_id));
+        console.log(myMap.features);
+    
+        svg.append("g")
+            .selectAll("path")
+            .data(myMap.features)
+            .enter()
+            .append("path").attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale(d.properties.feature_id));
+        svg.append("path")
+        .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+        .attr("class", "mapBorder1")
+        .attr("d", d3.geoPath().projection(projection));
+    }
+    });

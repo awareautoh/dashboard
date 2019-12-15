@@ -113,4 +113,33 @@ top header
 .header-fixed-bottom > .btn {
   border-radius: 0;
 }
+
+/*Chart Customize*/
+#test :hover {
+  fill: orange;
+  }
+  .mapBorder {
+  fill: none;
+  stroke: #eee;
+  pointer-events: none;
+  }
+#test {
+  position: relative;
+  display: block;
+  margin: auto;
+}
+
+#test1 :hover {
+  fill: orange;
+  }
+  .mapBorder1 {
+  fill: none;
+  stroke: #eee;
+  pointer-events: none;
+  }
+  #test1 {
+    position: relative;
+    display: block;
+    margin: auto;
+  }
   
