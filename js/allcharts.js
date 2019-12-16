@@ -330,6 +330,10 @@ $(document).ready(function () {
         .domain([1, 10])
         .range(d3.schemeBlues[9]);
     //Set tooltips
+    var tooltip = d3.select("body").append("div") 
+    .attr("class", "tooltip")       
+    .style("opacity", 0);
+
 
     d3.json(mapData).then(creatMap);
     function creatMap(lao) {
@@ -349,6 +353,22 @@ $(document).ready(function () {
             .append("path")
             .attr("d", d3.geoPath().projection(projection))
             .attr("fill", d => colorScale(d.properties.feature_id));
+            
+        svg.selectAll("path")
+            .data(myMap.features)
+            .on("mouseover", function(d) {    
+                tooltip.transition()    
+                .duration(200)    
+                .style("opacity", .9);    
+                tooltip.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+              })          
+              .on("mouseout", function(d) {   
+                tooltip.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+              });
         
         //Draw a line border for each province
         svg.append("path")
