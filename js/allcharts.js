@@ -322,28 +322,35 @@ $(document).ready(function (){
 // });
 $(document).ready(function () {
     //Set variable map directory
-    let mapData = ("map/LAO_ADM1.json");
+    let mapDraw = ("map/LAO_ADM1.json");
+    let stuntingData = ("data/stunting_map.csv");
     //Set to select SVG DOM
     let svg = d3.select("#test");
     //Set Scale
-    let colorScale = d3.scaleQuantile()
-        .domain([1, 10])
-        .range(d3.schemeBlues[9]);
+    let colorScale = d3.scaleThreshold()
+        .domain([2.4, 2.5, 10.0, 20.0, 30.0])
+        .range(d3.schemeBlues[6]);
     //Set tooltips
-    var tooltip = d3.select("body").append("div") 
+    let tooltip1 = d3.select("body").append("div") 
     .attr("class", "tooltip")       
     .style("opacity", 0);
 
+    //Set variable to import data
+    let = stuntingSort = d3.map();
+    let promise = [
+        d3.json(mapDraw),
+        d3.csv(stuntingData, d => stuntingSort.set(d.feature_id, +d.ValueStunting11))
+    ];
 
-    d3.json(mapData).then(creatMap);
-    function creatMap(lao) {
+    Promise.all(promise).then(creatMap);
+    function creatMap(value) {
+        let lao = value[0];
+        let stunting = value[1];
         //Import Map Topojson type as Geojson structure
         let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
         //Set porjection map type
         let projection = d3.geoMercator()
             .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
-        console.log((myMap.features).map(d => d.properties.Name));
-        console.log(myMap.features);
 
         //Draw a graph use "g" because draw multiple path in one time
         svg.append("g")
@@ -352,8 +359,73 @@ $(document).ready(function () {
             .enter()
             .append("path")
             .attr("d", d3.geoPath().projection(projection))
-            .attr("fill", d => colorScale(d.properties.feature_id));
-            
+            .attr("fill", d => colorScale(d.properties.feature_id = stuntingSort.get(d.properties.feature_id)));
+    
+        svg.selectAll("path")
+            .data(myMap.features)
+            .on("mouseover", function(d) {    
+                tooltip1.transition()    
+                .duration(200)    
+                .style("opacity", .9);    
+                tooltip1.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+              })          
+              .on("mouseout", function(d) {   
+                tooltip1.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+              });
+        
+        //Draw a line border for each province
+        svg.append("path")
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .attr("class", "mapBorder")
+            .attr("d", d3.geoPath().projection(projection));
+    }
+});
+//Map 11
+$(document).ready(function () {
+    //Set variable map directory
+    let mapDraw = ("map/LAO_ADM1.json");
+    let stuntingData = ("data/stunting_map.csv");
+    //Set to select SVG DOM
+    let svg = d3.select("#test1");
+    //Set Scale
+    let colorScale = d3.scaleThreshold()
+        .domain([2.4, 2.5, 10.0, 20.0, 30.0])
+        .range(d3.schemeBlues[6]);
+    //Set tooltips
+    let tooltip = d3.select("body").append("div") 
+    .attr("class", "tooltip1")       
+    .style("opacity", 0);
+
+    //Set variable to import data
+    let = stuntingSort1 = d3.map();
+    let promise = [
+        d3.json(mapDraw),
+        d3.csv(stuntingData, d => stuntingSort1.set(d.feature_id, +d.ValueStunting17))
+    ];
+
+    Promise.all(promise).then(creatMap);
+    function creatMap(value) {
+        let lao = value[0];
+        let stunting = value[1];
+        //Import Map Topojson type as Geojson structure
+        let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        //Set porjection map type
+        let projection = d3.geoMercator()
+            .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
+
+        //Draw a graph use "g" because draw multiple path in one time
+        svg.append("g")
+            .selectAll("path")
+            .data(myMap.features)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale(d.properties.feature_id = stuntingSort1.get(d.properties.feature_id)));
+    
         svg.selectAll("path")
             .data(myMap.features)
             .on("mouseover", function(d) {    
@@ -377,32 +449,3 @@ $(document).ready(function () {
             .attr("d", d3.geoPath().projection(projection));
     }
 });
-
-$(document).ready(function () {
-    let mapData = ("map/LAO_ADM1.json");
-    
-    let svg = d3.select("#test1");
-    
-    d3.json(mapData).then(creatMap);
-    let colorScale = d3.scaleQuantile()
-      .domain([1, 10])
-      .range(d3.schemeBlues[9]);
-    function creatMap(lao) {
-        let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
-        let projection = d3.geoMercator()
-            .fitHeight(360, myMap);
-        console.log((myMap.features).map(d => d.properties.feature_id));
-        console.log(myMap.features);
-    
-        svg.append("g")
-            .selectAll("path")
-            .data(myMap.features)
-            .enter()
-            .append("path").attr("d", d3.geoPath().projection(projection))
-            .attr("fill", d => colorScale(d.properties.feature_id));
-        svg.append("path")
-        .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
-        .attr("class", "mapBorder1")
-        .attr("d", d3.geoPath().projection(projection));
-    }
-    });

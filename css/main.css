@@ -155,4 +155,16 @@ div.tooltip {
   border: 0px;        
   pointer-events: none;     
 }
+
+div.tooltip1 { 
+  position: absolute;     
+  text-align: center;     
+  width: 100px;          
+  height: 30px;         
+  padding: 2px;       
+  font: 12px sans-serif;    
+  background: #fff; 
+  border: 0px;        
+  pointer-events: none;     
+}
   
