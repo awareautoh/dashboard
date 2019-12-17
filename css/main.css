@@ -114,7 +114,7 @@ top header
   border-radius: 0;
 }
 
-/*Chart Customize*/
+/* Chart Customize*/
 #test :hover {
   fill: orange;
   }
@@ -137,11 +137,11 @@ top header
   stroke: #eee;
   pointer-events: none;
   }
-  #test1 {
-    position: relative;
-    display: block;
-    margin: auto;
-  }
+#test1 {
+  position: relative;
+  display: block;
+  margin: auto;
+}
 
 /* Adjust Tooltoop */
 div.tooltip { 
