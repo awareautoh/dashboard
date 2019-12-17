@@ -245,7 +245,6 @@ $(document).ready(function() {
 //---Women Undernutrition Chart--
 
 //Creat Women Mulnutriotion
-//Import data
 $(document).ready(function() {
     d3.csv('data/prevalence_of_anemia.csv').then(makeChartWomenMulnutrition);
 
@@ -403,9 +402,255 @@ $(document).ready(function (){
     }
 });
 
+//MiniDiet Chart
+$(document).ready(function (){
+    d3.csv('data/minimumDiet.csv').then(makeMiniDietChart);
+
+    function makeMiniDietChart (miniDiet) {
+        let province = miniDiet.map(miniDiet => miniDiet.Province);
+        let valueMiniDiet = miniDiet.map(miniDiet => miniDiet.ValueMiniDietDiversity);
+        let valueAcceptDiet = miniDiet.map(miniDiet => miniDiet.ValueAcceptDiet);
+        let NPANTaget = miniDiet.map(miniDiet => miniDiet.NPANTarget);
+        let ctx = document.getElementById('miniDietChart').getContext("2d");
+        let miniDietChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: province,
+                datasets: [{
+                    label: 'Prevalance of Minimum Diet Diversity',
+                    data: valueMiniDiet,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    order: 1,
+                }, {
+                    label: 'Prevalance of Minimum Acceptable Diet',
+                    data: valueAcceptDiet,
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1,
+                    order: 2,
+                }, {
+                    label: 'NPAN Taget',
+                    data: NPANTaget,
+                    backgroundColor: 'lightPink',
+                    borderColor: 'red',
+                    borderWidth: 1,
+                    type: 'line',
+                    fill: false,
+                    order: 3,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                },
+                maintainAspectRatio: false,
+            }
+        });
+    }
+});
+
+//Women Diet Chart
+$(document).ready(function() {
+    d3.csv('data/womenDiet.csv').then(makeChartWomenDiet);
+
+    function makeChartWomenDiet (womenDiet) {
+        let province = womenDiet.map(womenDiet => womenDiet.Province);
+        let valueWomenDiet = womenDiet.map(womenDiet => womenDiet.ValueWomenDiet);
+        let nationalAverage = womenDiet.map(womenDiet => womenDiet.NationalWomenDiet);
+
+        //Creat Chart Women Mulnutrtion
+        let ctx = document.getElementById('womenDietChart').getContext("2d");
+        let womenDietChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Percentage of Women Anemia Prevalence',
+                        data: valueWomenDiet,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                maintainAspectRatio: false,
+                annotation: {
+                    annotations: [{
+                        type: 'line',
+                        mode: 'vertical',
+                        scaleID: 'x-axis-0',
+                        value: 32.4,
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        label: {
+                            enabled: true,
+                            content: "National 32.4%",
+                            position: "center",
+                        }
+                    }]
+                }
+            }
+        });
+        
+    };
+
+});
+
+//Open Defaction Map
+$(document).ready(function () {
+    //Set variable map directory
+    let mapDraw = ("map/LAO_ADM1.json");
+    let openDefaceData = ("data/openDefaceMap.csv");
+    //Set to select SVG DOM
+    let svg = d3.select("#openDefaceMap");
+    //Set Scale
+    let colorScale = d3.scaleQuantize([1, 100], d3.schemeRdPu[9]);
+    //Set tooltips
+    let tooltipOpenDeface = d3.select("body").append("div") 
+    .attr("class", "tooltipOpenDeface")
+    .style("opacity", 0);
+
+    //Set variable to import data
+    let = openDefaceSort = d3.map();
+    let promise = [
+        d3.json(mapDraw),
+        d3.csv(openDefaceData, d => openDefaceSort.set(d.feature_id, +d.ValueOpenDaface))
+    ];
+    console.log(openDefaceSort);
+    Promise.all(promise).then(creatMap);
+    function creatMap(value) {
+        let lao = value[0];
+        let openDeface = value[1];
+        //Import Map Topojson type as Geojson structure
+        let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        //Set porjection map type
+        let projection = d3.geoMercator()
+            .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
+
+        //Draw a graph use "g" because draw multiple path in one time
+        svg.append("g")
+            .selectAll("path")
+            .data(myMap.features)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale(d.properties.feature_id = openDefaceSort.get(d.properties.feature_id)));
+    
+        svg.selectAll("path")
+            .data(myMap.features)
+            .on("mouseover", function(d) {    
+                tooltipOpenDeface.transition()    
+                .duration(200)    
+                .style("opacity", .9);    
+                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");
+              })          
+              .on("mouseout", function(d) {   
+                tooltipOpenDeface.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+              });
+        
+        //Draw a line border for each province
+        svg.append("path")
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .attr("class", "mapBorder")
+            .attr("d", d3.geoPath().projection(projection));
+    }
+});
+
+//Map Section 3
+$(document).ready(function () {
+    let session3Data = ("data/session3_data.csv")
+    d3.csv(session3Data).then(makeChartSession3);
+
+    function makeChartSession3 (value) {
+        let province = value.map(d => d.Province);
+        let valueVitA = value.map(d => d.ValueVitA);
+        let valueDeworm = value.map(d => d.ValueDeworm);
+        let valueIronFolic = value.map(d => d.ValueIronFolic);
+        let nationalVitA = value.map(d => d.NationalVitA);
+        let nationalDeworm = value.map(d => d.NationalDeworm);
+        let nationalIronFolic = value.map(d => d.NationalIronFolic);
 
 
-//Section Create Map
+
+        //Creat Chart Women Mulnutrtion
+        let ChartVitA = document.getElementById('vitAChart').getContext("2d");
+        let drawVitAChart = new Chart(ChartVitA, {
+            type: 'horizontalBar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Percentage of Women Anemia Prevalence',
+                        data: valueVitA,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                maintainAspectRatio: false,
+                annotation: {
+                    events: ["mouseover"],
+                    annotations: [{
+                        type: 'line',
+                        mode: 'vertical',
+                        scaleID: 'x-axis-0',
+                        value: 38.5,
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        label: {
+                            enabled: true,
+                            content: "National 32.4%",
+                            position: "center",
+                        },
+                        onMouseover: function(e) {
+                            this.options.label["enabled"] = false;
+                            console.log(this.options.label);
+                        },
+                    }]
+                }
+            }
+        });
+        
+    };
+
+
+
+});
+
+
+//---Section Create Map
 
 //Stunting 2011 Map
 $(document).ready(function () {
@@ -457,8 +702,7 @@ $(document).ready(function () {
                 .style("opacity", .9);    
                 tooltip1.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
                 .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px")
-                .style("fill", "orange");  
+                .style("top", (d3.event.pageY - 28) + "px");  
               })          
               .on("mouseout", function(d) {   
                 tooltip1.transition()    

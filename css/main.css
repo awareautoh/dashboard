@@ -115,56 +115,29 @@ top header
 }
 
 /* Chart Customize*/
-#test :hover {
+#test :hover, #test1 :hover, #openDefaceMap :hover {
   fill: orange;
   }
-  .mapBorder {
+.mapBorder {
   fill: none;
   stroke: #eee;
   pointer-events: none;
-  }
-#test {
-  position: relative;
-  display: block;
-  margin: auto;
 }
-
-#test1 :hover {
-  fill: orange;
-  }
-  .mapBorder1 {
-  fill: none;
-  stroke: #eee;
-  pointer-events: none;
-  }
-#test1 {
+#test, #test1, #openDefaceMap {
   position: relative;
   display: block;
   margin: auto;
 }
 
 /* Adjust Tooltoop */
-div.tooltip { 
-  position: absolute;     
-  text-align: center;     
-  width: 100px;          
-  height: 30px;         
-  padding: 2px;       
-  font: 12px sans-serif;    
-  background: #fff; 
-  border: 0px;        
-  pointer-events: none;     
+div.tooltip, div.tooltip1, div.tooltipOpenDeface {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 30px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: #fff;
+  border: 0px;
+  pointer-events: none;
 }
-
-div.tooltip1 { 
-  position: absolute;     
-  text-align: center;     
-  width: 100px;          
-  height: 30px;         
-  padding: 2px;       
-  font: 12px sans-serif;    
-  background: #fff; 
-  border: 0px;        
-  pointer-events: none;     
-}
-  
