@@ -593,7 +593,7 @@ $(document).ready(function () {
 
 
 
-        //Creat Chart Women Mulnutrtion
+        //Creat Chart Vitamin A Supplement Coverage
         let ChartVitA = document.getElementById('vitAChart').getContext("2d");
         let drawVitAChart = new Chart(ChartVitA, {
             type: 'horizontalBar',
@@ -634,19 +634,57 @@ $(document).ready(function () {
                             content: "National 32.4%",
                             position: "center",
                         },
-                        onMouseover: function(e) {
-                            this.options.label["enabled"] = false;
-                            console.log(this.options.label);
-                        },
                     }]
                 }
             }
         });
         
     };
-
-
-
+        //Creat Chart Children Received Deworming Coverage
+        let ChartDeworming = document.getElementById('dewormingChart').getContext("2d");
+        let drawDewormingChart = new Chart(ChartVitA, {
+            type: 'horizontalBar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Percentage of Women Anemia Prevalence',
+                        data: valueVitA,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                maintainAspectRatio: false,
+                annotation: {
+                    events: ["mouseover"],
+                    annotations: [{
+                        type: 'line',
+                        mode: 'vertical',
+                        scaleID: 'x-axis-0',
+                        value: 38.5,
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        label: {
+                            enabled: true,
+                            content: "National 32.4%",
+                            position: "center",
+                        },
+                    }]
+                }
+            }
+        });
 });
 
 
