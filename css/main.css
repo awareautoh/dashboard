@@ -52,11 +52,6 @@
   text-align: center;
 }
 
-.card#sec1, .card#sec2 {
-  background: #ffcdd2;
-  height: auto !important;
-}
-
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -250,6 +245,26 @@ div.tooltip1 {
 .navbar-custom .icon-bar {
     background-color:#33aa33;
 }
-#header{
- 
+/* end custom navbar */ 
+.top{
+  margin-top: 0px !important;
+  font-weight: bolder;
+}
+/* Main header of the graph */ 
+#header{/* Nutrition Overview */ 
+  background-color: #34AE8D;
+  color: #ffffff;
+
+}
+.card#sec1{
+  background: #87C7F3;
+  height: auto !important;
+  color: #ffffff;
+  font-size: 15px;
+}
+.topic{
+  padding: 10px;
+  text-align: center;
+  color: #575757;
+  font-weight: bold;
 }
