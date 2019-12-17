@@ -236,9 +236,21 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface {
   color: #ffffff;
   font-size: 15px;
 }
+.card#sec2{
+  background: #FFCA22;
+  height: auto !important;
+  color: #ffffff;
+  font-size: 15px;
+}
 .topic{
   padding: 10px;
   text-align: center;
   color: #575757;
   font-weight: bold;
+}
+.card#sec3{
+  background-color: #A1C654;
+  height: auto !important;
+  color: #ffffff;
+  font-size: 15px;
 }
