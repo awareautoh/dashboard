@@ -587,8 +587,6 @@ $(document).ready(function () {
         let valueVitA = value.map(d => d.ValueVitA);
         let valueDeworm = value.map(d => d.ValueDeworm);
         let valueIronFolic = value.map(d => d.ValueIronFolic);
-        let nationalVitA = value.map(d => d.NationalVitA);
-        let nationalDeworm = value.map(d => d.NationalDeworm);
         let nationalIronFolic = value.map(d => d.NationalIronFolic);
 
 
@@ -631,25 +629,24 @@ $(document).ready(function () {
                         borderDash: [5, 5],
                         label: {
                             enabled: true,
-                            content: "National 32.4%",
+                            content: "National 38.5%",
                             position: "center",
                         },
                     }]
                 }
             }
         });
-        
-    };
+
         //Creat Chart Children Received Deworming Coverage
         let ChartDeworming = document.getElementById('dewormingChart').getContext("2d");
-        let drawDewormingChart = new Chart(ChartVitA, {
+        let drawDewormingChart = new Chart(ChartDeworming, {
             type: 'horizontalBar',
             data: {
                 labels: province,
                 datasets: [
                     {
                         label: 'Percentage of Women Anemia Prevalence',
-                        data: valueVitA,
+                        data: valueDeworm,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1,
@@ -672,20 +669,190 @@ $(document).ready(function () {
                         type: 'line',
                         mode: 'vertical',
                         scaleID: 'x-axis-0',
-                        value: 38.5,
+                        value: 38.7,
                         borderColor: 'rgb(75, 192, 192)',
                         borderWidth: 1,
                         borderDash: [5, 5],
                         label: {
                             enabled: true,
-                            content: "National 32.4%",
+                            content: "National 38.7%",
                             position: "center",
                         },
                     }]
                 }
             }
         });
+
+        //Creat Chart Iron Folic Coverage
+        let chartIronFolic = document.getElementById('ironFolicChart').getContext("2d");
+        let drawIronFolic = new Chart(chartIronFolic, {
+            type: 'bar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Iron/Folic Supplement Coverage',
+                        data: valueIronFolic,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    },
+                    {
+                        label: 'National',
+                        data: nationalIronFolic,
+                        type: 'line',
+                        fill: false,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        order: 2,
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                maintainAspectRatio: false, 
+            }
+        });
+        
+    };
 });
+
+//---Section 4 Chart
+
+//---->Women Status
+$(document).ready(function () {
+    //Set variable map directory
+    let mapDraw = ("map/LAO_ADM1.json");
+    let womenStatusData = ("data/womenStatusMap.csv");
+    //Set to select SVG DOM
+    let svg = d3.select("#womenStatusMap");
+    //Set Scale
+    let colorScale = d3.scaleThreshold()
+        .domain([0, 0.699, 0.799, 0.879, 0.967])
+        .range(["#fbe9e7", "#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]);
+    //Set tooltips
+    let tooltipWomenStatus = d3.select("body").append("div") 
+    .attr("class", "tooltipWomenStatus")
+    .style("opacity", 0);
+
+    //Set variable to import data
+    let = womenStatusSort = d3.map();
+    let promise = [
+        d3.json(mapDraw),
+        d3.csv(womenStatusData, d => womenStatusSort.set(d.feature_id, +d.ValueWomenStatus))
+    ];
+    console.log(womenStatusSort);
+    Promise.all(promise).then(creatMap);
+    function creatMap(value) {
+        let lao = value[0];
+        let womenStatus = value[1];
+        //Import Map Topojson type as Geojson structure
+        let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        //Set porjection map type
+        let projection = d3.geoMercator()
+            .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
+
+        //Draw a graph use "g" because draw multiple path in one time
+        svg.append("g")
+            .selectAll("path")
+            .data(myMap.features)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale(+(d.properties.feature_id = womenStatusSort.get(d.properties.feature_id))/100));
+    
+        svg.selectAll("path")
+            .data(myMap.features)
+            .on("mouseover", function(d) {    
+                tooltipWomenStatus.transition()    
+                .duration(200)    
+                .style("opacity", .9);    
+                tooltipWomenStatus.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");
+              })          
+              .on("mouseout", function(d) {   
+                tooltipWomenStatus.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+              });
+        
+        //Draw a line border for each province
+        svg.append("path")
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .attr("class", "mapBorder")
+            .attr("d", d3.geoPath().projection(projection));
+        
+        //Add Legend
+        svg.append("g")
+        .attr("transform", "translate(0,250)")
+        .append(() => legend({
+            color: d3.scaleThreshold(["70<", "80<", "87.9<", ">88"],
+            ["#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]),
+            title: "GER Female Secondary School (%)",
+            width: 190}));
+    }
+});
+
+//--->Socio Status Chart
+$(document).ready(function() {
+    let socioStatusData = ("data/socio_status.csv");
+    d3.csv(socioStatusData).then(makeChartSocioStatus);
+
+    function makeChartSocioStatus (socio) {
+        let province = socio.map(d => d.Province);
+        let valueSocio = socio.map(d => d.ValueSocioStatus);
+        let nationalSocio = socio.map(d => d.NationalSocioStatus);
+
+        //Creat Chart Women Mulnutrtion
+        let ctx = document.getElementById('socioStatusChart').getContext("2d");
+        let socioStatusChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Proportion of population below proverty line',
+                        data: valueSocio,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    },
+                    {
+                        label: 'National',
+                        data: nationalSocio,
+                        type: 'line',
+                        fill: false,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        order: 2,
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                maintainAspectRatio: false, 
+            }
+        });
+        
+    };
+
+});
+
 
 
 //---Section Create Map
