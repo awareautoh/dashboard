@@ -24,8 +24,8 @@
   </style>
 </head>
 <body>
-  <div class="container">
-  <header>
+
+   <header>
     <div class="header-fixed-bottom-wrap">
       <div class="header-fixed-bottom">
         <div class="dropdown ">
@@ -39,117 +39,82 @@
       </div>
     </div>
   </header>
-
+  <div class="container">
     <h2><img src="images/laos.png"/> <b class="green">Nutrition</b> Dashboard</h2>
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#home">Nutrition Status</a></li>
+    <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a data-toggle="tab" href="#home">Nutrition Status</a></li>
       <li><a data-toggle="tab" href="#menu1">LSIS</a></li>
       <li><a data-toggle="tab" href="#menu2">SENITEL SURVEY</a></li>
       <li><a data-toggle="tab" href="#menu3">LECS</a></li>
-    </ul>
+      </ul>
+    </div> 
+</nav>
     <div class="tab-content">
       <div id="home" class="tab-pane fade in active">
             <div class="row">
               <div class="col-lg-12">
                 <div class="card" id="header">
-                  <h1>Overview of NIPN Project</h1>
-                  <p>A National Information Platform for Nutrition (NIPN) is rooted within existing institutions and national multisectoral coordination systems for nutrition</p> 
+                  <h1 class="top">Overview of Nutrition</h1>
+                 
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card" id="highLight" style="background-image: url('img_avatar.png'); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                <div class="card" id="highLight" style="background-color: #FFCA22; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                  <div class="icon1"></div>
                   <h1>49%</h1>
                   <p>Exclusive breastfeeding under 6 months</p>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card" id="highLight" style="background-image: url('img_avatar.png'); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                <div class="card" id="highLight" style="background-color:#6CE2FF; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                  <div class="icon2"></div>
                   <h1>2%</h1>
                   <p>Overweight prevalence</p> 
                 </div>
               </div>
               <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card" id="highLight" style="background-image: url('img_avatar.png'); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                <div class="card" id="highLight" style="background-color: #F15D4A; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                  <div class="icon3"></div>
                   <h1>2%</h1>
                   <p>Overweight prevalence</p> 
                 </div>
               </div>
               <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card" id="highLight" style="background-image: url('img_avatar.png'); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                <div class="card" id="highLight" style="background-color: #919AA3; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                  <div class="icon4"></div>
                   <h1>2%</h1>
                   <p>Overweight prevalence</p> 
                 </div>
               </div>
             </div>
             <!-- Section 2.1  -->
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="cardChart">
-                  <h1>Chart2</h1>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                      <canvas id="myChart"></canvas>
-                      <script>
-                        var ctx = document.getElementById('myChart');
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                                datasets: [{
-                                    label: '# of Votes',
-                                    data: [12, 19, 3, 5, 2, 3],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(54, 162, 235, 0.2)',
-                                        'rgba(255, 206, 86, 0.2)',
-                                        'rgba(75, 192, 192, 0.2)',
-                                        'rgba(153, 102, 255, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                },
-                                maintainAspectRatio: false
-                            }
-                        });
-                      </script>
-                    </div>                 
-                </div>
-              </div>
-            </div>
             <!--Section 1 Key Nutrition Indicator-->
             <div class="row">
                 <div class="col-lg-12">
                   <div class="card" id="sec1">
-                    <h1>Current status of key nutrition indicators</h1>
+                    <h1 class="sec1">Current Status of Key Nutrition Indicators</h1>
                   </div>
                 </div>
                 <div class="col-lg-12">
                   <div class="cardChart">
-                    <h1 style="text-align: center;">Child Mulnutrition</h1>
+                    <h3 class="topic" style="padding-top: 10px;">Child Mulnutrition</h3>
                     <div style="position: relative; display: block; height: 360px; width: auto;">
                       <canvas id="wastingAndOverweightChart"></canvas>
                     </div>
-                    <div class= "toolbars">
-                      <button type="button" id='Chart1SortWasting' class="btn btn-default" style="margin: auto; display: block;">Sort Wasting</button>
-                      <button type="button" id='Chart1SortOverWeight' class="btn btn-default" style="margin: auto; display: block;">Sort Overweight</button>
+                    <div class= "toolbar" style="text-align: center;">
+                      <button type="button" id='Chart1SortWasting' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Wasting</button>
+                      <button type="button" id='Chart1SortOverWeight' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Overweight</button>
                     </div>
                   </div>                 
                 </div>
@@ -288,6 +253,13 @@
         </div>
       </div>
       </div>
+        </div> <!-- End Home  -->
+
+        <div id="menu1"> </div>
+        <div id="menu2"> </div>
+        <div id="menu3"> </div>
+      </div> <!-- End tab content -->
+      </div> <!-- End container -->
       <!--Add Footer-->
       <footer class="footer-fixed-bottom-wrap">
           <div class="footer-fixed-bottom">
