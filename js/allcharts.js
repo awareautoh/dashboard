@@ -120,6 +120,7 @@ function ramp(color, n = 256) {
 //Chart Key Nutrition
 //---Child Mulnutrtion Chart--
 //-----Import data
+
 Chart.plugins.unregister(ChartDataLabels);
 $(document).ready(function() {
     d3.csv('data/wasting_unsorted.csv').then(makeChartWastingAndOverweight); //Add data by D3JS library
