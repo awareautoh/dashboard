@@ -117,30 +117,38 @@ function ramp(color, n = 256) {
     return svg.node();
   }
 
+//File path for import data
+let wastingPath = "data/wasting_unsorted.csv";
+let anemiaPath = "data/prevalence_of_anemia.csv";
+let weightAndObesity = "data/prevalence_overweight_and_obesity.csv";
+let IYCFPath = "data/IYCF.csv";
+let minimumDietPath = "data/minimumDiet.csv";
+let womenDietPath = "data/womenDiet.csv";
+let session3Path = ("data/session3_data.csv");
+let socioStatusPath = ("data/socio_status.csv");
 //Chart Key Nutrition
-//---Child Mulnutrtion Chart--
-//-----Import data
+
+//---Child Mulnutrtion Chart
 Chart.plugins.unregister(ChartDataLabels);
 $(document).ready(function() {
-    d3.csv('data/wasting_unsorted.csv').then(makeChartWastingAndOverweight); //Add data by D3JS library
-    
+    d3.csv(wastingPath).then(makeChartWastingAndOverweight); //Add data by D3JS library
     function makeChartWastingAndOverweight(wasting) {
         //Create a sub data from main file (sorting list)
         let wastingSort = wasting.slice().sort((a, b) => a.ValueWasting - b.ValueWasting);
         let overWeightSort = wasting.slice().sort((a, b) => a.ValueOverWeight - b.ValueOverWeight);
         //Create Variable by Stat index
-        let provinceW = wasting.map(wasting => wasting.Province);
-        let valueW = wasting.map(wasting => wasting.ValueWasting);
-        let provinceO = wasting.map(wasting => wasting.Province);
-        let valueO = wasting.map(wasting => wasting.ValueOverWeight);
+        let provinceW = wasting.map(d => d.Province);
+        let valueW = wasting.map(d => d.ValueWasting);
+        let provinceO = wasting.map(d => d.Province);
+        let valueO = wasting.map(d => d.ValueOverWeight);
         //Sorted Variable for Wasting
-        let provinceWSort = wastingSort.map(wastingSort => wastingSort.Province);
-        let valueWSort = wastingSort.map(wastingSort => wastingSort.ValueWasting);
-        let valueOByWSort = wastingSort.map(wastingSort => wastingSort.ValueOverWeight);
+        let provinceWSort = wastingSort.map(d => d.Province);
+        let valueWSort = wastingSort.map(d => d.ValueWasting);
+        let valueOByWSort = wastingSort.map(d => d.ValueOverWeight);
         //Sorted Variable for Overweight
-        let provinceOSort = overWeightSort.map(overWeightSort => overWeightSort.Province);
-        let valueOSort = overWeightSort.map(overWeightSort => overWeightSort.ValueWasting);
-        let valueSByOSort = overWeightSort.map(overWeightSort => overWeightSort.ValueOverWeight);
+        let provinceOSort = overWeightSort.map(d => d.Province);
+        let valueOSort = overWeightSort.map(d => d.ValueWasting);
+        let valueSByOSort = overWeightSort.map(d => d.ValueOverWeight);
         var ctx = document.getElementById('wastingAndOverweightChart').getContext("2d");
         var Chart1 = new Chart(ctx, {
             type: 'bar',
@@ -168,6 +176,13 @@ $(document).ready(function() {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
+                        },
+                        display: false,
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
                         }
                     }]
                 },
@@ -183,27 +198,27 @@ $(document).ready(function() {
         let x = 0;
         $('#Chart1SortWasting').on('click', function() {
             if (x == 0) {
-                Chart1.data.datasets.forEach((datasets, index) => {
-                    if (index == 0) { //Add condition to change group set for 2 array
-                        datasets.data = valueWSort;
+                Chart1.data.datasets.forEach((d, i) => { //d: dataset; i: index
+                    if (i == 0) { //Add condition to change group set for 2 array
+                        d.data = valueWSort;
                     } else {
-                        datasets.data = valueOByWSort;
+                        d.data = valueOByWSort;
                     }
                 });
-                Chart1.data.labels.forEach((labels) =>  {
+                Chart1.data.labels.forEach(() =>  {
                     Chart1.data.labels = provinceWSort;
                 });
                 Chart1.update();
                 x = 1;
             } else {
-                Chart1.data.datasets.forEach((datasets, index) => {
-                    if (index == 0) {
-                        datasets.data = valueW;
+                Chart1.data.datasets.forEach((d, i) => {
+                    if (i == 0) {
+                        d.data = valueW;
                     } else {
-                        datasets.data = valueO;
+                        d.data = valueO;
                     }
                 });
-                Chart1.data.labels.forEach((labels) =>  {
+                Chart1.data.labels.forEach(() =>  {
                     Chart1.data.labels = provinceW;
                 });
                 Chart1.update();
@@ -212,27 +227,27 @@ $(document).ready(function() {
         });
         $('#Chart1SortOverWeight').on('click', function() {
             if (x == 0) {
-                Chart1.data.datasets.forEach((datasets, index) => {
-                    if (index == 0) { //Add condition to change group set for 2 array
-                        datasets.data = valueOSort;
+                Chart1.data.datasets.forEach((d, i) => { //d: dataset; i: index
+                    if (i == 0) { //Add condition to change group set for 2 array
+                        d.data = valueOSort;
                     } else {
-                        datasets.data = valueSByOSort;
+                        d.data = valueSByOSort;
                     }
                 });
-                Chart1.data.labels.forEach((labels) =>  {
+                Chart1.data.labels.forEach(() =>  {
                     Chart1.data.labels = provinceOSort;
                 });
                 Chart1.update();
                 x = 1;
             } else {
-                Chart1.data.datasets.forEach((datasets, index) => {
-                    if (index == 0) {
-                        datasets.data = valueW;
+                Chart1.data.datasets.forEach((d, i) => {
+                    if (i == 0) {
+                        d.data = valueW;
                     } else {
-                        datasets.data = valueO;
+                        d.data = valueO;
                     }
                 });
-                Chart1.data.labels.forEach((labels) =>  {
+                Chart1.data.labels.forEach(() =>  {
                     Chart1.data.labels = provinceW;
                 });
                 Chart1.update();
@@ -242,16 +257,16 @@ $(document).ready(function() {
     };
 });
 
-//---Women Undernutrition Chart--
 
+
+//---Women Undernutrition Chart--
 //Creat Women Mulnutriotion
 $(document).ready(function() {
-    d3.csv('data/prevalence_of_anemia.csv').then(makeChartWomenMulnutrition);
-
+    d3.csv(anemiaPath).then(makeChartWomenMulnutrition);
     function makeChartWomenMulnutrition (anemia) {
-        let province = anemia.map(anemia => anemia.Province);
-        let value = anemia.map(anemia => anemia.ValueAnemia);
-        let WHO = anemia.map(anemia => anemia.WHOCutOff);
+        let province = anemia.map(d => d.Province);
+        let value = anemia.map(d=> d.ValueAnemia);
+        let WHO = anemia.map(d => d.WHOCutOff);
 
         //Creat Chart Women Mulnutrtion
         let ctx = document.getElementById('womenAnemia').getContext("2d");
@@ -270,12 +285,14 @@ $(document).ready(function() {
                         order: 1
                     },
                     {
-                        label: 'WHO Cutoff',
+                        label: 'WHO Cutoff 20%',
                         data: WHO,
                         type: 'line',
                         fill: false,
                         borderColor: 'rgba(255, 99, 132, 1)',
-                        order: 2,
+                        pointStyle: "line",
+                        borderWidth: 1,
+                        order: 1,
                     }
                 ]
             },
@@ -284,10 +301,13 @@ $(document).ready(function() {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
-                        }
+                        },
+                    }],
+                    xAxes: [{
+                        gridLines: false,
                     }]
                 },
-                maintainAspectRatio: false, 
+                maintainAspectRatio: false,
             }
         });
         
@@ -296,12 +316,11 @@ $(document).ready(function() {
 });
 //Creat Women Overweight and Obesiry Chart
 $(document).ready(function() {
-    d3.csv('data/prevalence_overweight_and_obesity.csv').then(makeChartWomenMulnutrition);
-
+    d3.csv(weightAndObesity).then(makeChartWomenMulnutrition);
     function makeChartWomenMulnutrition (overWeightObese) {
-        let province = overWeightObese.map(overWeightObese => overWeightObese.Province);
-        let valueWOverWeight = overWeightObese.map(overWeightObese => overWeightObese.ValueWomenOverWeight);
-        let valueWObese = overWeightObese.map(overWeightObese => overWeightObese.ValueObese);
+        let province = overWeightObese.map(d => d.Province);
+        let valueWOverWeight = overWeightObese.map(d => d.ValueWomenOverWeight);
+        let valueWObese = overWeightObese.map(d => d.ValueObese);
         let ctx = document.getElementById('womenOverweightAndObese').getContext("2d");
         let womenOverweightAndObese = new Chart(ctx, {
             type: 'bar',
@@ -334,9 +353,14 @@ $(document).ready(function() {
                             beginAtZero: true,
                         },
                         stacked: true,
+                        display: false,
                     }],
                     xAxes: [{
                         stacked: true,
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
+                        }
                     }]
                 },
                 maintainAspectRatio: false,
@@ -351,13 +375,12 @@ $(document).ready(function() {
 
 //IYCF Chart
 $(document).ready(function (){
-    d3.csv('data/IYCF.csv').then(makeIYCFChart);
-
+    d3.csv(IYCFPath).then(makeIYCFChart);
     function makeIYCFChart (IYCF) {
-        let province = IYCF.map(IYCF => IYCF.Province);
-        let valueInitiationBreast = IYCF.map(IYCF => IYCF.ValueEarlyBreast);
-        let valueExclusiveBreast = IYCF.map(IYCF => IYCF.ValueExclusiveBreast);
-        let NPANTaget = IYCF.map(IYCF => IYCF.NPANTarget);
+        let province = IYCF.map(d => d.Province);
+        let valueInitiationBreast = IYCF.map(d => d.ValueEarlyBreast);
+        let valueExclusiveBreast = IYCF.map(d => d.ValueExclusiveBreast);
+        let NPANTaget = IYCF.map(d => d.NPANTarget);
         let ctx = document.getElementById('IYCFChart').getContext("2d");
         let IYCFChart = new Chart(ctx, {
             type: 'bar',
@@ -378,12 +401,14 @@ $(document).ready(function (){
                     borderWidth: 1,
                     order: 2,
                 }, {
-                    label: 'NPAN Taget',
+                    label: 'NPAN Taget 70%',
                     data: NPANTaget,
                     backgroundColor: 'lightPink',
                     borderColor: 'red',
-                    borderWidth: 1,
+                    borderWidth: 0.5,
                     type: 'line',
+                    pointStyle: "line",
+                    borderDash: [5, 5],
                     fill: false,
                     order: 3,
                 }]
@@ -394,7 +419,13 @@ $(document).ready(function (){
                         ticks: {
                             beginAtZero: true,
                         }
-                    }]
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
+                        }
+                    }],
                 },
                 maintainAspectRatio: false,
             }
@@ -404,13 +435,12 @@ $(document).ready(function (){
 
 //MiniDiet Chart
 $(document).ready(function (){
-    d3.csv('data/minimumDiet.csv').then(makeMiniDietChart);
-
+    d3.csv(minimumDietPath).then(makeMiniDietChart);
     function makeMiniDietChart (miniDiet) {
-        let province = miniDiet.map(miniDiet => miniDiet.Province);
-        let valueMiniDiet = miniDiet.map(miniDiet => miniDiet.ValueMiniDietDiversity);
-        let valueAcceptDiet = miniDiet.map(miniDiet => miniDiet.ValueAcceptDiet);
-        let NPANTaget = miniDiet.map(miniDiet => miniDiet.NPANTarget);
+        let province = miniDiet.map(d => d.Province);
+        let valueMiniDiet = miniDiet.map(d => d.ValueMiniDietDiversity);
+        let valueAcceptDiet = miniDiet.map(d => d.ValueAcceptDiet);
+        let NPANTaget = miniDiet.map(d => d.NPANTarget);
         let ctx = document.getElementById('miniDietChart').getContext("2d");
         let miniDietChart = new Chart(ctx, {
             type: 'bar',
@@ -431,12 +461,14 @@ $(document).ready(function (){
                     borderWidth: 1,
                     order: 2,
                 }, {
-                    label: 'NPAN Taget',
+                    label: 'NPAN Taget 50%',
                     data: NPANTaget,
                     backgroundColor: 'lightPink',
                     borderColor: 'red',
-                    borderWidth: 1,
+                    borderWidth: 0.5,
                     type: 'line',
+                    pointStyle: "line",
+                    borderDash: [5, 5],
                     fill: false,
                     order: 3,
                 }]
@@ -447,7 +479,13 @@ $(document).ready(function (){
                         ticks: {
                             beginAtZero: true,
                         }
-                    }]
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
+                        }
+                    }],
                 },
                 maintainAspectRatio: false,
             }
@@ -457,12 +495,12 @@ $(document).ready(function (){
 
 //Women Diet Chart
 $(document).ready(function() {
-    d3.csv('data/womenDiet.csv').then(makeChartWomenDiet);
+    d3.csv(womenDietPath).then(makeChartWomenDiet);
 
     function makeChartWomenDiet (womenDiet) {
-        let province = womenDiet.map(womenDiet => womenDiet.Province);
-        let valueWomenDiet = womenDiet.map(womenDiet => womenDiet.ValueWomenDiet);
-        let nationalAverage = womenDiet.map(womenDiet => womenDiet.NationalWomenDiet);
+        let province = womenDiet.map(d => d.Province);
+        let valueWomenDiet = womenDiet.map(d => d.ValueWomenDiet);
+        let nationalAverage = womenDiet.map(d => d.NationalWomenDiet);
 
         //Creat Chart Women Mulnutrtion
         let ctx = document.getElementById('womenDietChart').getContext("2d");
@@ -486,6 +524,15 @@ $(document).ready(function() {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
+                        },
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
                         }
                     }]
                 },
@@ -533,7 +580,6 @@ $(document).ready(function () {
         d3.json(mapDraw),
         d3.csv(openDefaceData, d => openDefaceSort.set(d.feature_id, +d.ValueOpenDaface))
     ];
-    console.log(openDefaceSort);
     Promise.all(promise).then(creatMap);
     function creatMap(value) {
         let lao = value[0];
@@ -579,8 +625,7 @@ $(document).ready(function () {
 
 //Map Section 3
 $(document).ready(function () {
-    let session3Data = ("data/session3_data.csv")
-    d3.csv(session3Data).then(makeChartSession3);
+    d3.csv(session3Path).then(makeChartSession3);
 
     function makeChartSession3 (value) {
         let province = value.map(d => d.Province);
@@ -613,6 +658,15 @@ $(document).ready(function () {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
+                        },
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
                         }
                     }]
                 },
@@ -659,6 +713,15 @@ $(document).ready(function () {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
+                        },
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
                         }
                     }]
                 },
@@ -700,11 +763,13 @@ $(document).ready(function () {
                         order: 1
                     },
                     {
-                        label: 'National',
+                        label: 'National 25.4%',
                         data: nationalIronFolic,
                         type: 'line',
+                        pointStyle: "line",
+                        borderWidth: 1,
                         fill: false,
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
                         order: 2,
                     }
                 ]
@@ -715,7 +780,13 @@ $(document).ready(function () {
                         ticks: {
                             beginAtZero: true
                         }
-                    }]
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
+                        }
+                    }],
                 },
                 maintainAspectRatio: false, 
             }
@@ -748,7 +819,6 @@ $(document).ready(function () {
         d3.json(mapDraw),
         d3.csv(womenStatusData, d => womenStatusSort.set(d.feature_id, +d.ValueWomenStatus))
     ];
-    console.log(womenStatusSort);
     Promise.all(promise).then(creatMap);
     function creatMap(value) {
         let lao = value[0];
@@ -803,8 +873,7 @@ $(document).ready(function () {
 
 //--->Socio Status Chart
 $(document).ready(function() {
-    let socioStatusData = ("data/socio_status.csv");
-    d3.csv(socioStatusData).then(makeChartSocioStatus);
+    d3.csv(socioStatusPath).then(makeChartSocioStatus);
 
     function makeChartSocioStatus (socio) {
         let province = socio.map(d => d.Province);
@@ -828,11 +897,13 @@ $(document).ready(function() {
                         order: 1
                     },
                     {
-                        label: 'National',
+                        label: 'National 23.2%',
                         data: nationalSocio,
                         type: 'line',
+                        pointStyle: "line",
+                        borderWidth: 1,
                         fill: false,
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
                         order: 2,
                     }
                 ]
@@ -843,7 +914,13 @@ $(document).ready(function() {
                         ticks: {
                             beginAtZero: true
                         }
-                    }]
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawBorder: true,
+                            drawOnChartArea: false,
+                        }
+                    }],
                 },
                 maintainAspectRatio: false, 
             }
@@ -1014,3 +1091,100 @@ $(document).ready(function () {
     }
 });
 
+
+$(document).ready(function () {
+    let sankeyDataImport = 'data/energy.csv'; //Data directory path
+    Promise.resolve(d3.csv(sankeyDataImport, d3.autoType)).then(importSankeyData); //Import data, use promise.resolve function to handle data import
+    let svg = d3.select("#sankey"); //crate variale svg to select DOM
+    function importSankeyData (data) {
+        let width = 900;
+        let height = 900;
+        let edgeColor = "input";
+        let align = "justify";
+        let keys = data.columns.slice(0, -1)
+
+
+        let dataNodes = Array.from(new Set(data.flatMap(l => [l.source, l.target])), name => ({name}));
+        let dataLinks = data;
+
+        function graph () { //Function to minipulate data in sankey format
+            let index = -1;
+            const nodes = [];
+            const nodeByKey = new Map;
+            const indexByKey = new Map;
+            const links = [];
+          
+            for (const k of keys) {
+              for (const d of data) {
+                const key = JSON.stringify([k, d[k]]);
+                if (nodeByKey.has(key)) continue;
+                const node = {name: d[k]};
+                nodes.push(node);
+                nodeByKey.set(key, node);
+                indexByKey.set(key, ++index);
+              }
+            }
+          
+            for (let i = 1; i < keys.length; ++i) {
+              const a = keys[i - 1];
+              const b = keys[i];
+              const prefix = keys.slice(0, i + 1);
+              const linkByKey = new Map;
+              for (const d of data) {
+                const names = prefix.map(k => d[k]);
+                const key = JSON.stringify(names);
+                const value = d.value || 1;
+                let link = linkByKey.get(key);
+                if (link) { link.value += value; continue; }
+                link = {
+                  source: indexByKey.get(JSON.stringify([a, d[a]])),
+                  target: indexByKey.get(JSON.stringify([b, d[b]])),
+                  names,
+                  value
+                };
+                links.push(link);
+                linkByKey.set(key, link);
+              }
+            }
+          
+            return {nodes, links};
+        };
+
+
+        let test = graph(data);
+        console.log(test);
+        console.log(dataNodes);
+        console.log(dataLinks);
+
+        let useData = {dataNodes, dataLinks};
+
+        function color() {
+            const color = d3.scaleOrdinal(d3.schemeCategory10);
+            return name => color(name.replace(/ .*/, ""));
+          };
+
+        console.log(color);
+
+        function format() {
+            const f = d3.format(",.0f");
+            return d => `${f(d)} TWh`;
+          }
+        
+        let sankey =
+          d3.sankey() //Set-up Sankey
+          .nodeWidth(d => d.name)
+          .nodeAlign(d3[`sankey${align[0].toUpperCase()}${align.slice(1)}`])
+          .nodeWidth(15)
+          .nodePadding(10)
+          .extent([[1, 5], [width, height - 5]]); //Width: 640, Height: 960 NOTE: Manual Entry
+        
+        let {nodes, links} = sankey({
+            nodes: useData.dataNodes.map(d => Object.assign({}, d)),
+            links: useData.dataLinks.map(d => Object.assign({}, d))
+            });
+
+        
+        console.log(nodes);
+        console.log(links);
+    }
+});

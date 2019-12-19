@@ -110,9 +110,9 @@ top header
   border-radius: 0;
 }
 
-/* Chart Customize*/
+/* Map Chart Customize*/
 #test :hover, #test1 :hover, #openDefaceMap :hover, #womenStatusMap :hover {
-  fill: orange;
+  fill: #e3f2fd;
   }
 .mapBorder {
   fill: none;
@@ -125,7 +125,7 @@ top header
   margin: auto;
 }
 
-/* Adjust Tooltoop */
+/* Modified Map Tooltoop */
 div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
   position: absolute;
   text-align: center;
