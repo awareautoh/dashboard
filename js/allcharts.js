@@ -126,10 +126,14 @@ let minimumDietPath = "data/minimumDiet.csv";
 let womenDietPath = "data/womenDiet.csv";
 let session3Path = ("data/session3_data.csv");
 let socioStatusPath = ("data/socio_status.csv");
-//Chart Key Nutrition
+
+//Chart.js global config
+Chart.plugins.unregister(ChartDataLabels); //cogfig Chart.JS label pugin not to show label on all chart by default
+
+
+//Build Chart
 
 //---Child Mulnutrtion Chart
-Chart.plugins.unregister(ChartDataLabels);
 $(document).ready(function() {
     d3.csv(wastingPath).then(makeChartWastingAndOverweight); //Add data by D3JS library
     function makeChartWastingAndOverweight(wasting) {
@@ -177,11 +181,12 @@ $(document).ready(function() {
                         ticks: {
                             beginAtZero: true
                         },
-                        display: false,
+                        gridLines: {
+                            borderDash: [3, 10]
+                        }
                     }],
                     xAxes: [{
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }]
@@ -302,9 +307,14 @@ $(document).ready(function() {
                         ticks: {
                             beginAtZero: true
                         },
+                        gridLines: {
+                            borderDash: [3, 10],
+                        }
                     }],
                     xAxes: [{
-                        gridLines: false,
+                        gridLines: {
+                            drawOnChartArea: false,
+                        }
                     }]
                 },
                 maintainAspectRatio: false,
@@ -353,12 +363,13 @@ $(document).ready(function() {
                             beginAtZero: true,
                         },
                         stacked: true,
-                        display: false,
+                        gridLines: {
+                            borderDash: [3, 10]
+                        }
                     }],
                     xAxes: [{
                         stacked: true,
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }]
@@ -408,7 +419,6 @@ $(document).ready(function (){
                     borderWidth: 0.5,
                     type: 'line',
                     pointStyle: "line",
-                    borderDash: [5, 5],
                     fill: false,
                     order: 3,
                 }]
@@ -418,11 +428,13 @@ $(document).ready(function (){
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
                         }
                     }],
                     xAxes: [{
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }],
@@ -468,7 +480,6 @@ $(document).ready(function (){
                     borderWidth: 0.5,
                     type: 'line',
                     pointStyle: "line",
-                    borderDash: [5, 5],
                     fill: false,
                     order: 3,
                 }]
@@ -478,11 +489,13 @@ $(document).ready(function (){
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
                         }
                     }],
                     xAxes: [{
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }],
@@ -526,13 +539,15 @@ $(document).ready(function() {
                             beginAtZero: true
                         },
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }],
                     xAxes: [{
                         ticks: {
                             beginAtZero: true,
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
                         }
                     }]
                 },
@@ -545,7 +560,6 @@ $(document).ready(function() {
                         value: 32.4,
                         borderColor: 'rgb(75, 192, 192)',
                         borderWidth: 1,
-                        borderDash: [5, 5],
                         label: {
                             enabled: true,
                             content: "National 32.4%",
@@ -660,13 +674,15 @@ $(document).ready(function () {
                             beginAtZero: true
                         },
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }],
                     xAxes: [{
                         ticks: {
                             beginAtZero: true,
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
                         }
                     }]
                 },
@@ -680,7 +696,6 @@ $(document).ready(function () {
                         value: 38.5,
                         borderColor: 'rgb(75, 192, 192)',
                         borderWidth: 1,
-                        borderDash: [5, 5],
                         label: {
                             enabled: true,
                             content: "National 38.5%",
@@ -715,13 +730,15 @@ $(document).ready(function () {
                             beginAtZero: true
                         },
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }],
                     xAxes: [{
                         ticks: {
                             beginAtZero: true,
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
                         }
                     }]
                 },
@@ -735,7 +752,6 @@ $(document).ready(function () {
                         value: 38.7,
                         borderColor: 'rgb(75, 192, 192)',
                         borderWidth: 1,
-                        borderDash: [5, 5],
                         label: {
                             enabled: true,
                             content: "National 38.7%",
@@ -779,11 +795,13 @@ $(document).ready(function () {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
                         }
                     }],
                     xAxes: [{
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }],
@@ -913,11 +931,13 @@ $(document).ready(function() {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
                         }
                     }],
                     xAxes: [{
                         gridLines: {
-                            drawBorder: true,
                             drawOnChartArea: false,
                         }
                     }],
