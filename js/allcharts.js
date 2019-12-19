@@ -588,7 +588,7 @@ $(document).ready(function () {
         let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
         //Set porjection map type
         let projection = d3.geoMercator()
-            .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
+            .fitSize([320, 320], myMap); //Auto fit SVG refer to svg set at HTML
 
         //Draw a graph use "g" because draw multiple path in one time
         svg.append("g")
@@ -827,7 +827,7 @@ $(document).ready(function () {
         let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
         //Set porjection map type
         let projection = d3.geoMercator()
-            .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
+            .fitSize([320, 320], myMap); //Auto fit SVG refer to svg set at HTML
 
         //Draw a graph use "g" because draw multiple path in one time
         svg.append("g")
@@ -965,7 +965,7 @@ $(document).ready(function () {
         let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
         //Set porjection map type
         let projection = d3.geoMercator()
-            .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
+        .fitSize([320, 320], myMap); //Auto fit SVG refer to svg set at HTML
 
         //Draw a graph use "g" because draw multiple path in one time
         svg.append("g")
@@ -1044,7 +1044,7 @@ $(document).ready(function () {
         let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
         //Set porjection map type
         let projection = d3.geoMercator()
-            .fitHeight(360, myMap); //Auto fit SVG to height 360 refer to svg set at HTML
+            .fitSize([320, 320], myMap); //Auto fit SVG refer to svg set at HTML
 
         //Draw a graph use "g" because draw multiple path in one time
         svg.append("g")
@@ -1095,10 +1095,10 @@ $(document).ready(function () {
 $(document).ready(function () {
     let sankeyDataImport = 'data/energy.csv'; //Data directory path
     Promise.resolve(d3.csv(sankeyDataImport, d3.autoType)).then(importSankeyData); //Import data, use promise.resolve function to handle data import
-    let svg = d3.select("#sankey"); //crate variale svg to select DOM
     function importSankeyData (data) {
-        let width = 900;
-        let height = 900;
+        let width = 800;
+        let height = 700;
+        let svg = d3.select("#sankey"); //crate variale svg to select DOM
         let edgeColor = "input";
         let align = "justify";
         let keys = data.columns.slice(0, -1)
@@ -1152,39 +1152,96 @@ $(document).ready(function () {
 
 
         let test = graph(data);
-        console.log(test);
-        console.log(dataNodes);
-        console.log(dataLinks);
 
         let useData = {dataNodes, dataLinks};
 
-        function color() {
-            const color = d3.scaleOrdinal(d3.schemeCategory10);
-            return name => color(name.replace(/ .*/, ""));
-          };
-
-        console.log(color);
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
 
         function format() {
             const f = d3.format(",.0f");
             return d => `${f(d)} TWh`;
           }
         
-        let sankey =
-          d3.sankey() //Set-up Sankey
-          .nodeWidth(d => d.name)
-          .nodeAlign(d3[`sankey${align[0].toUpperCase()}${align.slice(1)}`])
-          .nodeWidth(15)
-          .nodePadding(10)
-          .extent([[1, 5], [width, height - 5]]); //Width: 640, Height: 960 NOTE: Manual Entry
-        
+        let sankey = d3.sankey()
+            .nodeId(d => d.name)
+            .nodeAlign(d3[`sankey${align[0].toUpperCase()}${align.slice(1)}`])
+            .nodeWidth(15)
+            .nodePadding(10)
+            .extent([[1, 5], [width - 1, height - 5]]);
         let {nodes, links} = sankey({
-            nodes: useData.dataNodes.map(d => Object.assign({}, d)),
-            links: useData.dataLinks.map(d => Object.assign({}, d))
-            });
+            nodes: dataNodes.map(d => Object.assign({}, d)),
+            links: dataLinks.map(d => Object.assign({}, d))
+        });
 
-        
         console.log(nodes);
         console.log(links);
+
+        svg.append("g")
+        .attr("stroke", "#000")
+        .selectAll("rect")
+        .data(nodes)
+        .join("rect")
+        .attr("x", d => d.x0)
+        .attr("y", d => d.y0)
+        .attr("height", d => d.y1 - d.y0)
+        .attr("width", d => d.x1 - d.x0)
+        .attr("fill", d => color(d.name))
+        .append("title")
+        .text(d => `${d.name}\n${format(d.value)}`);
+
+
+        const link = svg.append("g")
+            .attr("fill", "none")
+            .attr("stroke-opacity", 0.5)
+            .selectAll("g")
+            .data(links)
+            .join("g")
+            .style("mix-blend-mode", "multiply");
+
+        if (edgeColor === "path") {
+            const gradient = link.append("linearGradient")
+                .attr("id", d => (d.uid = DOM.uid("link")).id)
+                .attr("gradientUnits", "userSpaceOnUse")
+                .attr("x1", d => d.source.x1)
+                .attr("x2", d => d.target.x0);
+        
+            gradient.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", d => {
+                    let name = d.source.name;
+                    return color(name.replace(/ .*/, ""));
+                });
+        
+            gradient.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", d => {
+                    let name = d.target.name;
+                    return color(name.replace(/ .*/, ""));
+                });
+            }
+
+        link.append("path")
+            .attr("d", d3.sankeyLinkHorizontal())
+            .attr("stroke", d => edgeColor === "none" ? "#aaa"
+                : edgeColor === "path" ? d.uid 
+                : edgeColor === "input" ? color(d.source.name) 
+                : color(d.target.name))
+            .attr("stroke-width", d => Math.max(1, d.width));
+
+        link.append("title")
+        .text(d => `${d.source.name} → ${d.target.name}\n${format(d.value)}`);
+      
+        svg.append("g")
+            .style("font", "10px sans-serif")
+            .selectAll("text")
+            .data(nodes)
+            .join("text")
+            .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+            .attr("y", d => (d.y1 + d.y0) / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+            .text(d => d.name);
+
+        svg.node();
     }
 });
