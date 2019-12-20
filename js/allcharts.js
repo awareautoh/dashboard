@@ -1004,9 +1004,49 @@ $(document).ready(function () {
 
 //Provincial Nutrition Committee Graph
 //--> Provincial Nutrition Committee Graph
-
 $(document).ready(function () {
+    let ctx = document.getElementById('proNutriCommitChart').getContext("2d");
+        let proNutriCommitChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Provincial Nutrition Committees 100%'],
+                datasets: [{
+                        label: '',
+                        data: [100],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    }]
+            },
+            options: {
+                maintainAspectRatio: false, 
+            }
+        });
+});
 
+//--> Provincial Using DHIS2 Graph
+$(document).ready(function () {
+    let ctx = document.getElementById('districtDHIS2Chart').getContext("2d");
+        let proNutriCommitChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Districts using DHIS2 100%'],
+                datasets: [{
+                        label: '',
+                        data: [100],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    }]
+            },
+            options: {
+                maintainAspectRatio: false, 
+            }
+        });
 });
 
 
