@@ -472,9 +472,9 @@ $(document).ready(function () {
     //Set to select SVG DOM
     let svg = d3.select("#openDefaceMap");
     //Set Scale
-    let colorScale = d3.scaleQuantize([1, 100], d3.schemeRdPu[9]);
+    let colorScale = d3.scaleQuantize([0, 40], d3.schemeOranges[5]);
     //Set tooltips
-    let tooltipOpenDeface = d3.select("body").append("div") 
+    let tooltipOpenDeface = d3.select(".tab-content").append("div") 
     .attr("class", "tooltipOpenDeface")
     .style("opacity", 0);
 
@@ -524,6 +524,16 @@ $(document).ready(function () {
             .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
             .attr("class", "mapBorder")
             .attr("d", d3.geoPath().projection(projection));
+
+
+        //Add legend
+        svg.append("g")
+        .attr("transform", "translate(0,250)")
+        .append(() => legend({
+            color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
+            d3.schemeOranges[5]),
+            title: "Open Defaction (%)",
+            width: 190}));
     }
 });
 
@@ -705,7 +715,7 @@ $(document).ready(function () {
 
 //---Section 4 Chart
 
-//---->Women Status
+//---->Women Status Map
 $(document).ready(function () {
     //Set variable map directory
     let mapDraw = ("map/LAO_ADM1.json");
@@ -717,7 +727,7 @@ $(document).ready(function () {
         .domain([0, 0.699, 0.799, 0.879, 0.967])
         .range(["#fbe9e7", "#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]);
     //Set tooltips
-    let tooltipWomenStatus = d3.select("body").append("div") 
+    let tooltipWomenStatus = d3.select(".tab-content").append("div") 
     .attr("class", "tooltipWomenStatus")
     .style("opacity", 0);
 
@@ -856,7 +866,7 @@ $(document).ready(function () {
         .domain([0, 0.025, 0.10, 0.20, 0.30])
         .range(["#fafafa", "#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]);
     //Set tooltips
-    let tooltip1 = d3.select("body").append("div") 
+    let tooltip1 = d3.select(".tab-content").append("div") 
     .attr("class", "tooltip")       
     .style("opacity", 0);
 
@@ -935,7 +945,7 @@ $(document).ready(function () {
         .domain([0, 0.025, 0.10, 0.20, 0.30])
         .range(["#fafafa", "#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]);
     //Set tooltips
-    let tooltip = d3.select("body").append("div") 
+    let tooltip = d3.select(".tab-content").append("div") 
     .attr("class", "tooltip1")       
     .style("opacity", 0);
 
