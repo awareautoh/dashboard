@@ -1,0 +1,9 @@
+source,target,value
+Deprived,Nutrition,51.6
+Deprived,Health,69.5
+Nutrition,Rural without road,60.1
+Nutrition,Rural with road,53.9
+Nutrition,Ubran,42.7
+Health,Rural without road,78.4
+Health,Rural with road,71.9
+Health,Ubran,59.9
