@@ -1212,7 +1212,6 @@ $(document).ready(function () {
             .attr("dy", "0.35em")
             .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
             .text(d => d.name);
-        console.log(nodes);
         svg.node();
     }
 });
@@ -1273,6 +1272,32 @@ $(document).ready(function () {
             .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
             .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
             select();
+            let database = [];
+            database = (root.data.children.map(d => d.name));    
+            
+            let checkParent  = () => {
+                let maxHeight = root.height;
+                let selectedHeight = d.height;
+                let marginHeight = maxHeight - 1;
+                let toAdd = "parent";
+                let selectCircle = d;
+                let a = [];
+                console.log(marginHeight);
+                while (selectedHeight < maxHeight) {
+                    selectCircle = selectCircle[toAdd];
+                    if (selectedHeight == marginHeight) {
+                        a.push(d.data.name);
+                        selectedHeight++;
+                    }
+                    a.push(selectCircle.data.name);
+                    selectedHeight++;
+                }
+                let b =[];
+                database.forEach(d => a.includes(d) ? b.push(d): null);
+                console.log(b);
+            }
+            checkParent();
+            console.log(d);
         }
 
         function zoomTo(v) {
@@ -1386,5 +1411,4 @@ Promise.resolve(d3.csv(JS, d3.autoType)).then(testJS); //Import data, use promis
 function testJS (value) {
     let check = [{"Stunting": value.map(d => d.ValueWasting)}];
     let a = check.filter(d => Object.keys(d) == 'Stunting');
-    console.log(a);
 }

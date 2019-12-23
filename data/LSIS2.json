@@ -7,15 +7,15 @@
             {
                 "name": "Sex",
                 "children": [
-                    {"name": "Male", "value": 21.6},
-                    {"name": "Female", "value": 20.6}
+                    {"name": "Male", "children": [{"name": "Male", "value": 34.0}]},
+                    {"name": "Female", "children": [{"name": "Female", "value": 32.0}]}
                 ]
             },
             {
                 "name": "Area",
                 "children": [
-                    {"name": "Urban", "value": 13.9},
-                    {"name": "Rural", "value": 23.8}
+                    {"name": "Urban", "children": [{"name": "Urban", "value": 13.9}]},
+                    {"name": "Rural", "children": [{"name": "Rural","value": 23.8}]}
                 ]
             }
         ]
@@ -26,8 +26,8 @@
             {
                 "name": "Sex",
                 "children": [
-                    {"name": "Male", "value": 34.0},
-                    {"name": "Female", "value": 32.0}
+                    {"name": "Male", "children": [{"name": "Male", "value": 21.6}]},
+                    {"name": "Female", "children": [{"name": "Female", "value": 20.6}]}
                 ]
             }
          ]

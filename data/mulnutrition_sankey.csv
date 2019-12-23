@@ -1,11 +1,18 @@
 source,target,value
-Deprived,Nutrition,51.6
-Deprived,Health,69.5
-Deprived,ECD,93.9
-Deprived,Child Protection,46.0
-Deprived,Water,33.0
-Deprived,Sanitation,70.4
-Deprived,Housing,42.6
+Child is stunted,Nutrition,66.0
+Child is stunted,Health,72.1
+Child is stunted,ECD,96.8
+Child is stunted,Child Protection,52.0
+Child is stunted,Water,43.2
+Child is stunted,Sanitation,77.3
+Child is stunted,Housing,52.6
+Child is not stunted,Nutrition,44.0
+Child is not stunted,Health,68.1
+Child is not stunted,ECD,32.6
+Child is not stunted,Child Protection,43.0
+Child is not stunted,Water,27.9
+Child is not stunted,Sanitation,67.0
+Child is not stunted,Housing,37.9
 Nutrition,Non Exclusive breastdfeeding,55.0
 Nutrition,Minimum Acceptable Diet IYCF,71.6
 Nutrition,Underweight,21.1
