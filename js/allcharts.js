@@ -1074,10 +1074,10 @@ $(document).ready(function () {
 $(document).ready(function () {
     let sankeyDataImport = 'data/mulnutrition_sankey.csv'; //Data directory path
     Promise.resolve(d3.csv(sankeyDataImport, d3.autoType)).then(importSankeyData); //Import data, use promise.resolve function to handle data import
+    let svg = d3.select("#sankey"); //crate variale svg to select DOM
     function importSankeyData (data) {
         let width = 800;
-        let height = 700;
-        let svg = d3.select("#sankey"); //crate variale svg to select DOM
+        let height = 800;
         let edgeColor = "input";
         let align = "justify";
         let keys = data.columns.slice(0, -1)
@@ -1135,13 +1135,7 @@ $(document).ready(function () {
         let useData = {dataNodes, dataLinks};
 
         const color = d3.scaleOrdinal(d3.schemePastel1);
-
-        function format() {
-            const f = d3.format(",.0f");
-            return d => `${f(d)} TWh`;
-          }
         
-        //Set-up Sankey properties
         let sankey = d3.sankey()
             .nodeId(d => d.name)
             .nodeAlign(d3[`sankey${align[0].toUpperCase()}${align.slice(1)}`])
@@ -1153,7 +1147,6 @@ $(document).ready(function () {
             links: dataLinks.map(d => Object.assign({}, d))
         });
 
-        //Create Rect SVG for rach node
         svg.append("g")
         .attr("stroke", "#000")
         .selectAll("rect")
@@ -1165,9 +1158,9 @@ $(document).ready(function () {
         .attr("width", d => d.x1 - d.x0)
         .attr("fill", d => color(d.name))
         .append("title")
-        .text(d => `${d.name}\n${format(d.value)}`);
+        .text(d => `${d.name}\n ${d.value}`);
 
-        //Add link path to connect each node from left to right
+
         const link = svg.append("g")
             .attr("fill", "none")
             .attr("stroke-opacity", 0.5)
@@ -1197,7 +1190,7 @@ $(document).ready(function () {
                     return color(name.replace(/ .*/, ""));
                 });
             }
-        
+
         link.append("path")
             .attr("d", d3.sankeyLinkHorizontal())
             .attr("stroke", d => edgeColor === "none" ? "#aaa"
@@ -1207,10 +1200,8 @@ $(document).ready(function () {
             .attr("stroke-width", d => Math.max(1, d.width));
 
         link.append("title")
-        .text(d => `${d.source.name} → ${d.target.name}\n${format(d.value)}`);
-        
-
-        //Add Text to each node rect
+        .text(d => `${d.source.name} → ${d.target.name}\n` + d.value);
+      
         svg.append("g")
             .style("font", "10px sans-serif")
             .selectAll("text")
@@ -1221,13 +1212,9 @@ $(document).ready(function () {
             .attr("dy", "0.35em")
             .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
             .text(d => d.name);
-
+        console.log(nodes);
         svg.node();
     }
-
-
-
-
 });
 
 

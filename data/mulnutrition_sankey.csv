@@ -1,9 +1,32 @@
 source,target,value
 Deprived,Nutrition,51.6
 Deprived,Health,69.5
-Nutrition,Rural without road,60.1
-Nutrition,Rural with road,53.9
-Nutrition,Ubran,42.7
-Health,Rural without road,78.4
-Health,Rural with road,71.9
-Health,Ubran,59.9
+Deprived,ECD,93.9
+Deprived,Child Protection,46.0
+Deprived,Water,33.0
+Deprived,Sanitation,70.4
+Deprived,Housing,42.6
+Nutrition,Non Exclusive breastdfeeding,55.0
+Nutrition,Minimum Acceptable Diet IYCF,71.6
+Nutrition,Underweight,21.1
+Nutrition,Late Initiation of breastfeeding (+1H),48.5
+Health,Unskilled Birth Attendant,35.7
+Health,DPT Vaccine,44.0
+Health,Measles Vaccine,39.4
+Health,Antenatal Care,77.4
+Health,Postnatal Care of Child,53.0
+ECD,< 1 Book,90.9
+ECD,ECE Programme,63.5
+ECD,ECDI: Literacy-numeracy,74.9
+ECD,Adult Child Interaction,16.9
+Child Protection,Birth Registration,26.5
+Child Protection,Negligence,11.6
+Child Protection,Physical Discipline,34.5
+Water,Unimproved Drinking Water,18.5
+Water,Water Treatment,24.3
+Sanitation,Handwashing,50.7
+Sanitation,Unimproved Toilet & Open Defacation,31.8
+Sanitation,Safe Disposal of Child Faeces,78.1
+Housing,Overcrowding,27.6
+Housing,Floor & Roof,12.5
+Housing,Solid Cooking Fuel,20.9

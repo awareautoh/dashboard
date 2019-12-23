@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    let sankeyDataImport = 'data/energy.csv'; //Data directory path
+    let sankeyDataImport = 'data/mulnutrition_sankey.csv'; //Data directory path
     Promise.resolve(d3.csv(sankeyDataImport, d3.autoType)).then(importSankeyData); //Import data, use promise.resolve function to handle data import
     let svg = d3.select("#sankey"); //crate variale svg to select DOM
     function importSankeyData (data) {
         let width = 800;
-        let height = 700;
+        let height = 800;
         let edgeColor = "input";
         let align = "justify";
         let keys = data.columns.slice(0, -1)
@@ -61,11 +61,11 @@ $(document).ready(function () {
 
         let useData = {dataNodes, dataLinks};
 
-        const color = d3.scaleOrdinal(d3.schemeCategory10);
+        const color = d3.scaleOrdinal(d3.schemePastel1);
 
-        function format() {
+        function format(test) {
             const f = d3.format(",.0f");
-            return d => `${f(d)} TWh`;
+            return test => `${f(test)} TWh`;
           }
         
         let sankey = d3.sankey()
@@ -78,9 +78,6 @@ $(document).ready(function () {
             nodes: dataNodes.map(d => Object.assign({}, d)),
             links: dataLinks.map(d => Object.assign({}, d))
         });
-
-        console.log(nodes);
-        console.log(links);
 
         svg.append("g")
         .attr("stroke", "#000")
@@ -135,7 +132,7 @@ $(document).ready(function () {
             .attr("stroke-width", d => Math.max(1, d.width));
 
         link.append("title")
-        .text(d => `${d.source.name} → ${d.target.name}\n${format(d.value)}`);
+        .text(d => `${d.source.name} → ${d.target.name}\n` + d.value);
       
         svg.append("g")
             .style("font", "10px sans-serif")
@@ -147,7 +144,7 @@ $(document).ready(function () {
             .attr("dy", "0.35em")
             .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
             .text(d => d.name);
-
+        console.log(nodes);
         svg.node();
     }
 });
