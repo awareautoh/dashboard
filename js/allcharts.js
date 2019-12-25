@@ -1,3 +1,4 @@
+"use strict";
 /*
   Version: 1.0
   Created date: 29 Nov 2019
@@ -16,18 +17,7 @@ let minimumDietPath = "data/minimumDiet.csv";
 let womenDietPath = "data/womenDiet.csv";
 let session3Path = "data/session3_data.csv";
 let socioStatusPath = "data/socio_status.csv";
-let mapDraw = "map/LAO_ADM1.json";
-let openDefaceData = "data/openDefaceMap.csv";
-let womenStatusData = "data/womenStatusMap.csv";
-let stuntingData = "data/stunting_map.csv";
-let circleLSIS2Path = "data/LSIS2.json";
-let subLSIS2Path = "data/LSIS2.json";
 
-//Set d3.map() to each map varaible
-let openDefaceSort = d3.map();
-let womenStatusSort = d3.map();
-let stuntingSort1 = d3.map();
-let stuntingSort = d3.map();
 
 Promise.all([
     d3.csv(wastingPath),
@@ -38,13 +28,6 @@ Promise.all([
     d3.csv(womenDietPath),
     d3.csv(session3Path),
     d3.csv(socioStatusPath),
-    d3.json(mapDraw),//Map LAO_ADM1
-    d3.csv(openDefaceData, d => openDefaceSort.set(d.feature_id, +d.ValueOpenDaface)),//Map
-    d3.csv(womenStatusData, d => womenStatusSort.set(d.feature_id, +d.ValueWomenStatus)),//Map
-    d3.csv(stuntingData, d => stuntingSort1.set(d.feature_id, +d.ValueStunting17)),//Stunting 2017 Map
-    d3.csv(stuntingData, d => stuntingSort.set(d.feature_id, +d.ValueStunting11)),//Stunting 2011 Map
-    d3.json(circleLSIS2Path),
-    d3.json(subLSIS2Path)
 ]).then(buildChart);
 
 //Chart.js global config
@@ -60,7 +43,7 @@ function buildChart (value) {
     const miniDiet = value[4];
     const womenDiet = value[5];
     const mapSec3 = value[6];
-    const lao = value[8];
+    const socio = value[7]
 
     //---Child Mulnutrtion Chart
     $(document).ready(function() {
@@ -82,8 +65,8 @@ function buildChart (value) {
         let provinceOSort = overWeightSort.map(d => d.Province);
         let valueOSort = overWeightSort.map(d => d.ValueWasting);
         let valueSByOSort = overWeightSort.map(d => d.ValueOverWeight);
-        var getWastingAndOverweightChart = document.getElementById('wastingAndOverweightChart').getContext("2d");
-        var wastingAndOverweightChart = new Chart(getWastingAndOverweightChart, {
+        let getWastingAndOverweightChart = document.getElementById('wastingAndOverweightChart').getContext("2d");
+        let wastingAndOverweightChart = new Chart(getWastingAndOverweightChart, {
             type: 'bar',
             data: {
                 labels: provinceW,
@@ -132,59 +115,59 @@ function buildChart (value) {
         let x = 0;
         $('#Chart1SortWasting').on('click', function() {
             if (x == 0) {
-                Chart1.data.datasets.forEach((d, i) => { //d: dataset; i: index
+                wastingAndOverweightChart.data.datasets.forEach((d, i) => { //d: dataset; i: index
                     if (i == 0) { //Add condition to change group set for 2 array
                         d.data = valueWSort;
                     } else {
                         d.data = valueOByWSort;
                     }
                 });
-                Chart1.data.labels.forEach(() =>  {
-                    Chart1.data.labels = provinceWSort;
+                wastingAndOverweightChart.data.labels.forEach(() =>  {
+                    wastingAndOverweightChart.data.labels = provinceWSort;
                 });
-                Chart1.update();
+                wastingAndOverweightChart.update();
                 x = 1;
             } else {
-                Chart1.data.datasets.forEach((d, i) => {
+                wastingAndOverweightChart.data.datasets.forEach((d, i) => {
                     if (i == 0) {
                         d.data = valueW;
                     } else {
                         d.data = valueO;
                     }
                 });
-                Chart1.data.labels.forEach(() =>  {
-                    Chart1.data.labels = provinceW;
+                wastingAndOverweightChart.data.labels.forEach(() =>  {
+                    wastingAndOverweightChart.data.labels = provinceW;
                 });
-                Chart1.update();
+                wastingAndOverweightChart.update();
                 x = 0;
             };
         });
         $('#Chart1SortOverWeight').on('click', function() {
             if (x == 0) {
-                Chart1.data.datasets.forEach((d, i) => { //d: dataset; i: index
+                wastingAndOverweightChart.data.datasets.forEach((d, i) => { //d: dataset; i: index
                     if (i == 0) { //Add condition to change group set for 2 array
                         d.data = valueOSort;
                     } else {
                         d.data = valueSByOSort;
                     }
                 });
-                Chart1.data.labels.forEach(() =>  {
-                    Chart1.data.labels = provinceOSort;
+                wastingAndOverweightChart.data.labels.forEach(() =>  {
+                    wastingAndOverweightChart.data.labels = provinceOSort;
                 });
-                Chart1.update();
+                wastingAndOverweightChart.update();
                 x = 1;
             } else {
-                Chart1.data.datasets.forEach((d, i) => {
+                wastingAndOverweightChart.data.datasets.forEach((d, i) => {
                     if (i == 0) {
                         d.data = valueW;
                     } else {
                         d.data = valueO;
                     }
                 });
-                Chart1.data.labels.forEach(() =>  {
-                    Chart1.data.labels = provinceW;
+                wastingAndOverweightChart.data.labels.forEach(() =>  {
+                    wastingAndOverweightChart.data.labels = provinceW;
                 });
-                Chart1.update();
+                wastingAndOverweightChart.update();
                 x = 0;
             };
         });
@@ -192,7 +175,7 @@ function buildChart (value) {
 
 
     //---Women Undernutrition Chart---
-    //Creat Women Mulnutriotion
+        //Creat Women Mulnutriotion
         const province = anemia.map(d => d.Province); //This province variable represent every province variable in every chart
         let valueAnemia = anemia.map(d=> d.ValueAnemia);
         let WHO = anemia.map(d => d.WHOCutOff);
@@ -464,238 +447,355 @@ function buildChart (value) {
             }
         });
 
-    //Open Defaction Map
-        //Set Scale
-            let colorScaleOpenDeface = d3.scaleQuantize([0, 40], d3.schemeOranges[5]);
-            //Set tooltips
-            let tooltipOpenDeface = d3.select(".tab-content").append("div") 
-            .attr("class", "tooltipOpenDeface")
-            .style("opacity", 0);
-
-            //Select DOM
-            let openDefaceSVG = d3.select("#openDefaceMap");
-            
-        //Draw a graph use "g" because draw multiple path in one time
-            //Import Map Topojson type as Geojson structure
-            const openDefaceMap = topojson.feature(lao, lao.objects.LAO_ADM1);
-            //Set porjection map type
-            let projectionOpenDefaceMap = d3.geoMercator()
-                .fitSize([320, 320], openDefaceMap);
-
-        openDefaceSVG.append("g")
-            .selectAll("path")
-            .data(openDefaceMap)
-            .enter()
-            .append("path")
-            .attr("d", d3.geoPath().projection(projectionOpenDefaceMap))
-            .attr("fill", d => colorScaleOpenDeface(d.properties.feature_id = openDefaceSort.get(d.properties.feature_id)));
-        console.log(openDefaceMap);
-        openDefaceSVG.selectAll("path")
-            .data(openDefaceMap.features)
-            .on("mouseover", function(d) {
-                tooltipOpenDeface.transition()    
-                .duration(200)    
-                .style("opacity", .9);    
-                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");
-            })          
-            .on("mouseout", function(d) {   
-                tooltipOpenDeface.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
-            });
-            
-        //Draw a line border for each province
-        openDefaceSVG.append("path")
-            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
-            .attr("class", "mapBorder")
-            .attr("d", d3.geoPath().projection(projectionOpenDefaceMap));
-
-
-        //Add legend
-        openDefaceSVG.append("g")
-        .attr("transform", "translate(0,250)")
-        .append(() => legend({
-            color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
-            d3.schemeOranges[5]),
-            title: "Open Defaction (%)",
-            width: 190}));
-
-
     //Map Section 3
-            let valueVitA = mapSec3.map(d => d.ValueVitA);
-            let valueDeworm = mapSec3.map(d => d.ValueDeworm);
-            let valueIronFolic = mapSec3.map(d => d.ValueIronFolic);
-            let nationalIronFolic = mapSec3.map(d => d.NationalIronFolic);
+        let valueVitA = mapSec3.map(d => d.ValueVitA);
+        let valueDeworm = mapSec3.map(d => d.ValueDeworm);
+        let valueIronFolic = mapSec3.map(d => d.ValueIronFolic);
+        let nationalIronFolic = mapSec3.map(d => d.NationalIronFolic);
 
-            //Creat Chart Vitamin A Supplement Coverage
-            let ChartVitA = document.getElementById('vitAChart').getContext("2d");
-            let drawVitAChart = new Chart(ChartVitA, {
-                type: 'horizontalBar',
-                data: {
-                    labels: province,
-                    datasets: [
-                        {
-                            label: 'Percentage of Women Anemia Prevalence',
-                            data: valueVitA,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                            order: 1
-                        }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            },
-                            gridLines: {
-                                drawOnChartArea: false,
-                            }
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                            },
-                            gridLines: {
-                                borderDash: [3, 10]
-                            }
-                        }]
-                    },
-                    maintainAspectRatio: false,
-                    annotation: {
-                        events: ["mouseover"],
-                        annotations: [{
-                            type: 'line',
-                            mode: 'vertical',
-                            scaleID: 'x-axis-0',
-                            value: 38.5,
-                            borderColor: 'rgb(75, 192, 192)',
-                            borderWidth: 1,
-                            label: {
-                                enabled: true,
-                                content: "National 38.5%",
-                                position: "center",
-                            },
-                        }]
-                    }
-                }
-            });
-
-            //Creat Chart Children Received Deworming Coverage
-            let ChartDeworming = document.getElementById('dewormingChart').getContext("2d");
-            let drawDewormingChart = new Chart(ChartDeworming, {
-                type: 'horizontalBar',
-                data: {
-                    labels: province,
-                    datasets: [
-                        {
-                            label: 'Percentage of Women Anemia Prevalence',
-                            data: valueDeworm,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                            order: 1
-                        }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            },
-                            gridLines: {
-                                drawOnChartArea: false,
-                            }
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                            },
-                            gridLines: {
-                                borderDash: [3, 10]
-                            }
-                        }]
-                    },
-                    maintainAspectRatio: false,
-                    annotation: {
-                        events: ["mouseover"],
-                        annotations: [{
-                            type: 'line',
-                            mode: 'vertical',
-                            scaleID: 'x-axis-0',
-                            value: 38.7,
-                            borderColor: 'rgb(75, 192, 192)',
-                            borderWidth: 1,
-                            label: {
-                                enabled: true,
-                                content: "National 38.7%",
-                                position: "center",
-                            },
-                        }]
-                    }
-                }
-            });
-
-            //Creat Chart Iron Folic Coverage
-            let chartIronFolic = document.getElementById('ironFolicChart').getContext("2d");
-            let drawIronFolic = new Chart(chartIronFolic, {
-                type: 'bar',
-                data: {
-                    labels: province,
-                    datasets: [
-                        {
-                            label: 'Iron/Folic Supplement Coverage',
-                            data: valueIronFolic,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                            order: 1
+    //Creat Chart Vitamin A Supplement Coverage
+        let ChartVitA = document.getElementById('vitAChart').getContext("2d");
+        let drawVitAChart = new Chart(ChartVitA, {
+            type: 'horizontalBar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Percentage of Women Anemia Prevalence',
+                        data: valueVitA,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
                         },
-                        {
-                            label: 'National 25.4%',
-                            data: nationalIronFolic,
-                            type: 'line',
-                            pointStyle: "line",
-                            borderWidth: 1,
-                            fill: false,
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            order: 2,
+                        gridLines: {
+                            drawOnChartArea: false,
                         }
-                    ]
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
+                        }
+                    }]
                 },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            },
-                            gridLines: {
-                                borderDash: [3, 10]
-                            }
-                        }],
-                        xAxes: [{
-                            gridLines: {
-                                drawOnChartArea: false,
-                            }
-                        }],
-                    },
-                    maintainAspectRatio: false, 
+                maintainAspectRatio: false,
+                annotation: {
+                    events: ["mouseover"],
+                    annotations: [{
+                        type: 'line',
+                        mode: 'vertical',
+                        scaleID: 'x-axis-0',
+                        value: 38.5,
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 1,
+                        label: {
+                            enabled: true,
+                            content: "National 38.5%",
+                            position: "center",
+                        },
+                    }]
                 }
-            });
+            }
+        });
+
+    //Creat Chart Children Received Deworming Coverage
+        let ChartDeworming = document.getElementById('dewormingChart').getContext("2d");
+        let drawDewormingChart = new Chart(ChartDeworming, {
+            type: 'horizontalBar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Percentage of Women Anemia Prevalence',
+                        data: valueDeworm,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            drawOnChartArea: false,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
+                        }
+                    }]
+                },
+                maintainAspectRatio: false,
+                annotation: {
+                    events: ["mouseover"],
+                    annotations: [{
+                        type: 'line',
+                        mode: 'vertical',
+                        scaleID: 'x-axis-0',
+                        value: 38.7,
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 1,
+                        label: {
+                            enabled: true,
+                            content: "National 38.7%",
+                            position: "center",
+                        },
+                    }]
+                }
+            }
+        });
+
+    //Creat Chart Iron Folic Coverage
+        let chartIronFolic = document.getElementById('ironFolicChart').getContext("2d");
+        let drawIronFolic = new Chart(chartIronFolic, {
+            type: 'bar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Iron/Folic Supplement Coverage',
+                        data: valueIronFolic,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    },
+                    {
+                        label: 'National 25.4%',
+                        data: nationalIronFolic,
+                        type: 'line',
+                        pointStyle: "line",
+                        borderWidth: 1,
+                        fill: false,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        order: 2,
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: false,
+                        }
+                    }],
+                },
+                maintainAspectRatio: false, 
+            }
+        });
 
     //---Section 4 Chart
 
-    //---->Women Status Map
-        //Set to select SVG DOM
-        let womenStatusMapSVG = d3.select("#womenStatusMap");
+    //--->Socio Status Chart
+        let valueSocio = socio.map(d => d.ValueSocioStatus);
+        let nationalSocio = socio.map(d => d.NationalSocioStatus);
+
+    //Creat Chart Women Mulnutrtion
+        let getSocioStatusChart = document.getElementById('socioStatusChart').getContext("2d");
+        let socioStatusChart = new Chart(getSocioStatusChart, {
+            type: 'bar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: 'Proportion of population below proverty line',
+                        data: valueSocio,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        order: 1
+                    },
+                    {
+                        label: 'National 23.2%',
+                        data: nationalSocio,
+                        type: 'line',
+                        pointStyle: "line",
+                        borderWidth: 1,
+                        fill: false,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        order: 2,
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                            borderDash: [3, 10]
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: false,
+                        }
+                    }],
+                },
+                maintainAspectRatio: false, 
+            }
+        });
+
+    //Provincial Nutrition Committee Graph
+    //--> Provincial Nutrition Committee Graph
+        let getProNutriCommitChart = document.getElementById('proNutriCommitChart').getContext("2d");
+        let proNutriCommitChart = new Chart(getProNutriCommitChart, {
+            type: 'doughnut',
+            data: {
+                labels: ['Provincial Nutrition Committees 100%'],
+                datasets: [{
+                        label: '',
+                        data: [100],
+                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                        borderWidth: 0,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                    }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                cutoutPercentage: 70,
+            }
+        });
+
+        //--> Provincial Using DHIS2 Graph
+        let getDistrictDHIS2Chart = document.getElementById('districtDHIS2Chart').getContext("2d");
+        let districtDHIS2Chart = new Chart(getDistrictDHIS2Chart, {
+            type: 'doughnut',
+            data: {
+                labels: ['Districts using DHIS2 100%'],
+                datasets: [{
+                        label: '',
+                        data: [100],
+                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                        borderWidth: 0,
+                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                    }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                cutoutPercentage: 70,
+            }
+        });
+    });
+};
+
+
+    //---Section Create Map
+
+    //Open Defaction Map
+    $(document).ready(function () {
+        //Set variable map directory
+        let mapDraw = ("map/LAO_ADM1.json");
+        let openDefacePath = ("data/openDefaceMap.csv");
         //Set Scale
-        let colorScaleForWomenStatusMap = d3.scaleThreshold()
+        let colorScale = d3.scaleQuantize([0, 40], d3.schemeOranges[5]);
+        //Set tooltips
+        let tooltipOpenDeface = d3.select(".tab-content").append("div") 
+        .attr("class", "tooltipOpenDeface")
+        .style("opacity", 0);
+
+        //Select DOM
+        let svg = d3.select("#openDefaceMap");
+
+        //Set variable to import data
+        let openDefaceSort = d3.map();
+        let promise = [
+            d3.json(mapDraw),
+            d3.csv(openDefacePath, d => openDefaceSort.set(d.feature_id, +d.ValueOpenDaface))
+        ];
+
+        Promise.all(promise).then(creatMap);
+        function creatMap(value) {
+            let lao = value[0];
+        //Draw a graph use "g" because draw multiple path in one time
+            //Import Map Topojson type as Geojson structure
+            let openDefaceMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+            //Set porjection map type
+            let projection = d3.geoMercator()
+                .fitSize([320, 320], openDefaceMap);
+
+            svg.append("g")
+                .selectAll("path")
+                .data(openDefaceMap.features)
+                .enter()
+                .append("path")
+                .attr("d", d3.geoPath().projection(projection))
+                .attr("fill", d => colorScale(d.properties.feature_id = openDefaceSort.get(d.properties.feature_id)));
+
+            svg.selectAll("path")
+                .data(openDefaceMap.features)
+                .on("mouseover", function(d) {
+                    tooltipOpenDeface.transition()    
+                    .duration(200)    
+                    .style("opacity", .9);    
+                    tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                    .style("left", (d3.event.pageX) + "px")   
+                    .style("top", (d3.event.pageY - 28) + "px");
+                })          
+                .on("mouseout", function(d) {   
+                    tooltipOpenDeface.transition()    
+                    .duration(500)    
+                    .style("opacity", 0); 
+                });
+                
+            //Draw a line border for each province
+            svg.append("path")
+                .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+                .attr("class", "mapBorder")
+                .attr("d", d3.geoPath().projection(projection));
+
+
+            //Add legend
+            svg.append("g")
+            .attr("transform", "translate(0,250)")
+            .append(() => legend({
+                color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
+                d3.schemeOranges[5]),
+                title: "Open Defaction (%)",
+                width: 190}));
+            }
+        });
+
+    //---->Women Status Map
+    $(document).ready(function () {
+        //Set variable map directory
+        let mapDraw = ("map/LAO_ADM1.json");
+        let womenStatusPath = ("data/womenStatusMap.csv");
+        //Set to select SVG DOM
+        let svg = d3.select("#womenStatusMap");
+        //Set Scale
+        let colorScale = d3.scaleThreshold()
             .domain([0, 0.699, 0.799, 0.879, 0.967])
             .range(["#fbe9e7", "#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]);
         //Set tooltips
@@ -703,119 +803,62 @@ function buildChart (value) {
         .attr("class", "tooltipWomenStatus")
         .style("opacity", 0);
         
-        //Set variable for import map data
-        let womenStatusMap = topojson.feature(lao, lao.objects.LAO_ADM1);
-        //Set porjection map type
-        let projectionWomenStatusMap = d3.geoMercator()
-            .fitSize([320, 320], womenStatusMap);
+        //Set variable to import data
+        let womenStatusSort = d3.map();
+        let promise = [
+            d3.json(mapDraw),
+            d3.csv(womenStatusPath, d => womenStatusSort.set(d.feature_id, +d.ValueWomenStatus))
+        ];
 
-        console.log(womenStatusMap);
+        Promise.all(promise).then(creatMap);
+        function creatMap(value) {
+            let lao = value[0];
+            //Set variable for import map data
+            let womenStatusMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+            //Set porjection map type
+            let projection = d3.geoMercator()
+                .fitSize([320, 320], womenStatusMap);
+            //Draw a graph use "g" because draw multiple path in one time
+            svg.append("g")
+                .selectAll("path")
+                .data(womenStatusMap.features)
+                .enter()
+                .append("path")
+                .attr("d", d3.geoPath().projection(projection))
+                .attr("fill", d => colorScale(+(d.properties.feature_id = womenStatusSort.get(d.properties.feature_id))/100));
 
-        //Draw a graph use "g" because draw multiple path in one time
-        womenStatusMapSVG.append("g")
-            .selectAll("path")
-            .data(womenStatusMap.features)
-            .enter()
-            .append("path")
-            .attr("d", d3.geoPath().projection(projectionWomenStatusMap))
-            .attr("fill", d => colorScaleForWomenStatusMap(+(d.properties.feature_id = womenStatusSort.get(d.properties.feature_id))/100));
-
-        womenStatusMapSVG.selectAll("path")
-            .data(womenStatusMap.features)
-            .on("mouseover", function(d) {    
-                tooltipWomenStatus.transition()    
-                .duration(200)    
-                .style("opacity", .9);    
-                tooltipWomenStatus.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");
-            })          
-            .on("mouseout", function(d) {   
-                tooltipWomenStatus.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
-            });
+            svg.selectAll("path")
+                .data(womenStatusMap.features)
+                .on("mouseover", function(d) {    
+                    tooltipWomenStatus.transition()    
+                    .duration(200)    
+                    .style("opacity", .9);    
+                    tooltipWomenStatus.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                    .style("left", (d3.event.pageX) + "px")   
+                    .style("top", (d3.event.pageY - 28) + "px");
+                })          
+                .on("mouseout", function(d) {   
+                    tooltipWomenStatus.transition()    
+                    .duration(500)    
+                    .style("opacity", 0); 
+                });
             
-        //Draw a line border for each province
-        womenStatusMapSVG.append("path")
-            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
-            .attr("class", "mapBorder")
-            .attr("d", d3.geoPath().projection(projectionWomenStatusMap));
+            //Draw a line border for each province
+            svg.append("path")
+                .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+                .attr("class", "mapBorder")
+                .attr("d", d3.geoPath().projection(projection));
         
-        //Add Legend
-        womenStatusMapSVG.append("g")
-            .attr("transform", "translate(0,250)")
-            .append(() => legend({
-                color: d3.scaleThreshold(["70<", "80<", "87.9<", ">88"],
-                ["#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]),
-                title: "GER Female Secondary School (%)",
-                width: 190}));
+            //Add Legend
+            svg.append("g")
+                .attr("transform", "translate(0,250)")
+                .append(() => legend({
+                    color: d3.scaleThreshold(["70<", "80<", "87.9<", ">88"],
+                    ["#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]),
+                    title: "GER Female Secondary School (%)",
+                    width: 190}));
+        }
     });
-
-    //--->Socio Status Chart
-    $(document).ready(function() {
-        d3.csv(socioStatusPath).then(makeChartSocioStatus);
-
-        function makeChartSocioStatus (socio) {
-            let province = socio.map(d => d.Province);
-            let valueSocio = socio.map(d => d.ValueSocioStatus);
-            let nationalSocio = socio.map(d => d.NationalSocioStatus);
-
-            //Creat Chart Women Mulnutrtion
-            let ctx = document.getElementById('socioStatusChart').getContext("2d");
-            let socioStatusChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: province,
-                    datasets: [
-                        {
-                            label: 'Proportion of population below proverty line',
-                            data: valueSocio,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                            order: 1
-                        },
-                        {
-                            label: 'National 23.2%',
-                            data: nationalSocio,
-                            type: 'line',
-                            pointStyle: "line",
-                            borderWidth: 1,
-                            fill: false,
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            order: 2,
-                        }
-                    ]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            },
-                            gridLines: {
-                                borderDash: [3, 10]
-                            }
-                        }],
-                        xAxes: [{
-                            gridLines: {
-                                drawOnChartArea: false,
-                            }
-                        }],
-                    },
-                    maintainAspectRatio: false, 
-                }
-            });
-            
-        };
-
-    });
-
-
-
-    //---Section Create Map
 
     //Stunting 2011 Map
     $(document).ready(function () {
@@ -834,7 +877,7 @@ function buildChart (value) {
         .style("opacity", 0);
 
         //Set variable to import data
-        let = stuntingSort = d3.map();
+        let stuntingSort = d3.map();
         let promise = [
             d3.json(mapDraw),
             d3.csv(stuntingData, d => stuntingSort.set(d.feature_id, +d.ValueStunting11))
@@ -893,8 +936,6 @@ function buildChart (value) {
         }
     });
 
-
-
     //Stunting 2017 Map
     $(document).ready(function () {
         //Set variable map directory
@@ -912,7 +953,7 @@ function buildChart (value) {
         .style("opacity", 0);
 
         //Set variable to import data
-        let = stuntingSort1 = d3.map();
+        let stuntingSort1 = d3.map();
         let promise = [
             d3.json(mapDraw),
             d3.csv(stuntingData, d => stuntingSort1.set(d.feature_id, +d.ValueStunting17))
@@ -974,50 +1015,6 @@ function buildChart (value) {
     });
 
 
-    //Provincial Nutrition Committee Graph
-    //--> Provincial Nutrition Committee Graph
-    $(document).ready(function () {
-        let ctx = document.getElementById('proNutriCommitChart').getContext("2d");
-            let proNutriCommitChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Provincial Nutrition Committees 100%'],
-                    datasets: [{
-                            label: '',
-                            data: [100],
-                            backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                            borderWidth: 0,
-                            hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 70,
-                }
-            });
-    });
-
-    //--> Provincial Using DHIS2 Graph
-    $(document).ready(function () {
-        let ctx = document.getElementById('districtDHIS2Chart').getContext("2d");
-            let proNutriCommitChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Districts using DHIS2 100%'],
-                    datasets: [{
-                            label: '',
-                            data: [100],
-                            backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                            borderWidth: 0,
-                            hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 70,
-                }
-            });
-    });
 
 
 
@@ -1189,7 +1186,7 @@ function buildChart (value) {
             .range(d3.schemeGreys[5]);
         
         //Set data format
-        format = d3.format(",d");
+        let format = d3.format(",d");
 
 
         //Set Height and Width
@@ -1215,7 +1212,7 @@ function buildChart (value) {
 
             //Function to creat zoom
             function zoom(d) {
-                focus0 = focus;
+                let focus0 = focus;
                 //Set d to fucus; d refer to root later
                 focus = d;
                 //set annimation while zooming
@@ -1363,5 +1360,4 @@ function buildChart (value) {
                     }
                 };
         }
-    });
-}
+});
