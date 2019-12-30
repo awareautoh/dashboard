@@ -1298,7 +1298,7 @@ function buildChart (value) {
                 .join("text")
                 .style("fill-opacity", d => d.parent === root ? 1 : 0)
                 .style("display", d => d.parent === root ? "inline" : "none")
-                .text(d => d.data.name + d.data.value);
+                .text(d => d.data.name);
 
 
             zoomTo([root.x, root.y, root.r * 2]);
