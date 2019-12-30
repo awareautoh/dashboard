@@ -73,17 +73,17 @@ function buildChart (value) {
                 datasets: [{
                     label: 'Wasting',
                     data: valueW,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgb(54, 162, 235)',
-                    borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(54, 162, 235, 0.1)'
+                    backgroundColor: '#6CE2FF',
+                    borderColor: 'rgb(0, 0, 0)',
+                    borderWidth: 0,
+                    hoverBackgroundColor: '#6CE2FF'
                 },{
                     label: 'Overweight',
                     data: valueO,
-                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                    borderColor: 'rgb(255, 206, 86)',
-                    borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(255, 206, 86, 0.1)'
+                    backgroundColor: '#FFCA22',
+                    borderColor: 'rgb(0, 0, 0)',
+                    borderWidth: 0,
+                    hoverBackgroundColor: '#FFCA22'
                 }]
             },
             plugins: [ChartDataLabels],
@@ -94,7 +94,7 @@ function buildChart (value) {
                             beginAtZero: true
                         },
                         gridLines: {
-                            borderDash: [3, 10]
+                            borderDash: [3, 5]
                         }
                     }],
                     xAxes: [{
@@ -685,8 +685,10 @@ function buildChart (value) {
             options: {
                 maintainAspectRatio: false,
                 cutoutPercentage: 70,
-            }
+            },
+
         });
+
 
         //--> Provincial Using DHIS2 Graph
         let getDistrictDHIS2Chart = document.getElementById('districtDHIS2Chart').getContext("2d");
@@ -1361,3 +1363,74 @@ function buildChart (value) {
                 };
         }
 });
+
+//for  Sentinel  survey
+
+$(document).ready(function() {
+var tohCanvas = document.getElementById("stunts");
+const myChartJSPlugin = {
+  beforeDraw: function(chart) {
+                    var width = chart.chart.width,
+                        height = chart.chart.height,
+                        ctx = chart.chart.ctx;
+
+                    ctx.restore();
+                    var fontSize = (height / 80).toFixed(2);
+                    ctx.font = fontSize + "em sans-serif";
+                    ctx.textBaseline = "middle";
+
+                    var text = "45%",
+                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctx.fillText(text, textX, textY);
+                    ctx.save();
+                  }
+};
+Chart.pluginService.register(myChartJSPlugin);
+
+var stData = {
+    labels: [
+       '',
+        
+    ],
+    datasets: [
+        {
+            label: '',
+            data: [35,75],
+            backgroundColor: [
+                "#75C050",
+                
+               
+            ],
+            
+            borderWidth: 0
+        }]
+};
+
+var chartOptions = {
+ cutoutPercentage: 88,
+  animation: {
+    animateRotate: true,
+    duration: 9000
+  },
+  legend: {
+    display:false
+  },
+  tooltips: {
+    enabled: false
+  
+  },
+  plugins:[myChartJSPlugin]
+  
+};
+
+
+var pieChart = new Chart(tohCanvas, {
+  type: 'doughnut',
+  data: stData,
+  options: chartOptions
+});
+
+});
+

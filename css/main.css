@@ -254,3 +254,9 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
   color: #ffffff;
   font-size: 15px;
 }
+.num1{
+  font-size: 70px;
+  font-weight: bolder;
+  color: #ffffff;
+  text-align: center;
+}
