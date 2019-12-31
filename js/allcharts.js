@@ -1364,30 +1364,40 @@ function buildChart (value) {
         }
 });
 
-//for  Sentinel  survey
+//for  Sentinel  survey ********************************************************************
+// For the first block graph 
+// all of these charts are consisted of custom plugin called 
+//******************************************************************************************
 
-$(document).ready(function() {
-var tohCanvas = document.getElementById("stunts");
 const myChartJSPlugin = {
-  beforeDraw: function(chart) {
+  beforeDraw: function(chart)  {
+	  
+				if(chart.config.options.plugins1){
                     var width = chart.chart.width,
                         height = chart.chart.height,
-                        ctx = chart.chart.ctx;
+                        ctt = chart.chart.ctx;
 
-                    ctx.restore();
-                    var fontSize = (height / 80).toFixed(2);
-                    ctx.font = fontSize + "em sans-serif";
-                    ctx.textBaseline = "middle";
+                    ctt.restore();
+                    var fontSize = (height / 70).toFixed(2);
+                    ctt.font = fontSize + "em sans-serif";
+                    ctt.textBaseline = "middle";
 
                     var text = "45%",
-                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                        textX = Math.round((width - ctt.measureText(text).width) / 2),
                         textY = height / 2;
 
-                    ctx.fillText(text, textX, textY);
-                    ctx.save();
-                  }
+                    ctt.fillText(text, textX, textY);
+                    ctt.save();
+					ctt.restore();
+					
+				}
+                  
+			}
 };
+
 Chart.pluginService.register(myChartJSPlugin);
+$(document).ready(function() {
+var tohCanvas = document.getElementById("stunts");
 
 var stData = {
     labels: [
@@ -1396,11 +1406,11 @@ var stData = {
     ],
     datasets: [
         {
-            label: '',
+			label: '',
             data: [35,75],
             backgroundColor: [
                 "#75C050",
-                
+				
                
             ],
             
@@ -1421,8 +1431,9 @@ var chartOptions = {
     enabled: false
   
   },
-  plugins:[myChartJSPlugin]
-  
+  plugins1: [myChartJSPlugin],
+  maintainAspectRatio : false
+   
 };
 
 
@@ -1433,4 +1444,238 @@ var pieChart = new Chart(tohCanvas, {
 });
 
 });
+
+//chart wasting 
+
+const myChartJSPlugin1 = {
+  beforeDraw: function(chart)  {
+	  
+				if(chart.config.options.plugins2){
+                    var width = chart.chart.width,
+                        height = chart.chart.height,
+                        ctt = chart.chart.ctx;
+
+                    ctt.restore();
+                    var fontSize = (height / 70).toFixed(2);
+                    ctt.font = fontSize + "em sans-serif";
+                    ctt.textBaseline = "middle";
+
+                    var text = "15%",
+                        textX = Math.round((width - ctt.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctt.fillText(text, textX, textY);
+                    ctt.save();
+					ctt.restore();
+					
+				}
+                  
+			}
+};
+
+Chart.pluginService.register(myChartJSPlugin1);
+$(document).ready(function() {
+var tohCanvas = document.getElementById("wastingS");
+
+var stData = {
+    labels: [
+       '',
+        
+    ],
+    datasets: [
+        {
+			label: '',
+            data: [15,85],
+            backgroundColor: [
+                "#EA528F",
+				
+               
+            ],
+            
+            borderWidth: 0
+        }]
+};
+
+var chartOptions = {
+ cutoutPercentage: 88,
+  animation: {
+    animateRotate: true,
+    duration: 9000
+  },
+  legend: {
+    display:false
+  },
+  tooltips: {
+    enabled: false
+  
+  },
+  plugins2: [myChartJSPlugin1],
+  maintainAspectRatio : false
+   
+};
+
+
+var pieChart = new Chart(tohCanvas, {
+  type: 'doughnut',
+  data: stData,
+  options: chartOptions
+});
+
+});
+
+//Underweight graph 
+
+const myChartJSPlugin2 = {
+  beforeDraw: function(chart)  {
+	  
+				if(chart.config.options.plugins3){
+                    var width = chart.chart.width,
+                        height = chart.chart.height,
+                        ctt = chart.chart.ctx;
+
+                    ctt.restore();
+                    var fontSize = (height / 70).toFixed(2);
+                    ctt.font = fontSize + "em sans-serif";
+                    ctt.textBaseline = "middle";
+
+                    var text = "5%",
+                        textX = Math.round((width - ctt.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctt.fillText(text, textX, textY);
+                    ctt.save();
+					ctt.restore();
+					
+				}
+                  
+			}
+};
+
+Chart.pluginService.register(myChartJSPlugin2);
+$(document).ready(function() {
+var tohCanvas = document.getElementById("underweightS");
+
+var stData = {
+    labels: [
+       '',
+        
+    ],
+    datasets: [
+        {
+			label: '',
+            data: [5,95],
+            backgroundColor: [
+                "#F27B53",
+				
+               
+            ],
+            
+            borderWidth: 0
+        }]
+};
+
+var chartOptions = {
+ cutoutPercentage: 88,
+  animation: {
+    animateRotate: true,
+    duration: 9000
+  },
+  legend: {
+    display:false
+  },
+  tooltips: {
+    enabled: false
+  
+  },
+  plugins3: [myChartJSPlugin2],
+  maintainAspectRatio : false
+   
+};
+
+
+var pieChart = new Chart(tohCanvas, {
+  type: 'doughnut',
+  data: stData,
+  options: chartOptions
+});
+
+});
+
+//Over weight graph 
+const myChartJSPlugin3 = {
+  beforeDraw: function(chart)  {
+	  
+				if(chart.config.options.plugins4){
+                    var width = chart.chart.width,
+                        height = chart.chart.height,
+                        ctt = chart.chart.ctx;
+
+                    ctt.restore();
+                    var fontSize = (height / 60).toFixed(2);
+                    ctt.font = fontSize + "em sans-serif";
+                    ctt.textBaseline = "middle";
+
+                    var text = "3%",
+                        textX = Math.round((width - ctt.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctt.fillText(text, textX, textY);
+                    ctt.save();
+					ctt.restore();
+					
+				}
+                  
+			}
+};
+
+Chart.pluginService.register(myChartJSPlugin3);
+$(document).ready(function() {
+var tohCanvas = document.getElementById("overweightS");
+
+var stData = {
+    labels: [
+       '',
+        
+    ],
+    datasets: [
+        {
+			label: '',
+            data: [3,97],
+            backgroundColor: [
+                "#0EADD4",
+				
+               
+            ],
+            
+            borderWidth: 0
+        }]
+};
+
+var chartOptions = {
+ cutoutPercentage: 88,
+  animation: {
+    animateRotate: true,
+    duration: 9000
+  },
+  legend: {
+    display:false
+  },
+  tooltips: {
+    enabled: false
+  
+  },
+  plugins4: [myChartJSPlugin3],
+  maintainAspectRatio : false
+   
+};
+
+
+var pieChart = new Chart(tohCanvas, {
+  type: 'doughnut',
+  data: stData,
+  options: chartOptions
+});
+
+});
+
 
