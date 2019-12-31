@@ -56,14 +56,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
  
-  .nav-tabs{
+.nav-tabs{
     border-style: none;
-    font-size: 18px;
+    font-size: 25px;
   }
-  .full-width-div {
+.full-width-div {
     position: absolute;
     width: 100%;
     left: 0;
+}
+.navbar-nav{
+  font-size: 16px;
+  color:#2C3335;
+  font-weight: bolder;
 }
 .green{
   font-weight: bolder;

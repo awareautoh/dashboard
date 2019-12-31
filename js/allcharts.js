@@ -177,8 +177,9 @@ function buildChart (value) {
     //---Women Undernutrition Chart---
         //Creat Women Mulnutriotion
         const province = anemia.map(d => d.Province); //This province variable represent every province variable in every chart
-        let valueAnemia = anemia.map(d=> d.ValueAnemia);
         let WHO = anemia.map(d => d.WHOCutOff);
+        let valueAnemia = anemia.map(d=> d.ValueAnemia);
+        
 
         //Creat Chart Women Mulnutrtion
         let getWomenAnemia = document.getElementById('womenAnemia').getContext("2d");
@@ -187,25 +188,26 @@ function buildChart (value) {
             data: {
                 labels: province,
                 datasets: [
-                    {
-                        label: 'Percentage of Women Anemia Prevalence',
-                        data: valueAnemia,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        order: 1
-                    },
-                    {
+                     {
                         label: 'WHO Cutoff 20%',
                         data: WHO,
                         type: 'line',
                         fill: false,
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderColor: '#E71C23',
                         pointStyle: "line",
                         borderWidth: 1,
                         order: 1,
+                    },
+                    {
+                        label: 'Percentage of Women Anemia Prevalence',
+                        data: valueAnemia,
+                        backgroundColor: '#0ABDE3',
+                        borderColor: '#0ABDE3',
+                        borderWidth: 0,
+                        hoverBackgroundColor: '#0ABDE3',
+                        order: 1
                     }
+                   
                 ]
             },
             options: {
@@ -215,7 +217,7 @@ function buildChart (value) {
                             beginAtZero: true
                         },
                         gridLines: {
-                            borderDash: [3, 10],
+                            borderDash: [3, 5],
                         }
                     }],
                     xAxes: [{
@@ -225,6 +227,14 @@ function buildChart (value) {
                     }]
                 },
                 maintainAspectRatio: false,
+                 legend: {
+						    labels: {
+						      usePointStyle: true,
+						    }
+						},
+
+
+
             }
         });
 
@@ -676,16 +686,21 @@ function buildChart (value) {
                 labels: ['Provincial Nutrition Committees 100%'],
                 datasets: [{
                         label: '',
-                        data: [100],
-                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                        borderWidth: 0,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        data: [100,0],
+                        backgroundColor: '#0091EA',
+                        borderWidth: 0
+                        
                     }]
             },
             options: {
                 maintainAspectRatio: false,
-                cutoutPercentage: 70,
-            },
+                cutoutPercentage: 88,
+                pluginDH2:[],
+                tooltips: {
+			    enabled: false
+			  
+			  }
+			},
 
         });
 
@@ -699,19 +714,54 @@ function buildChart (value) {
                 datasets: [{
                         label: '',
                         data: [100],
-                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                        borderWidth: 0,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        backgroundColor: '#26ae60',
+                        borderWidth: 0
+                        
                     }]
             },
             options: {
                 maintainAspectRatio: false,
-                cutoutPercentage: 70,
+                cutoutPercentage: 88,
+                pluginDH2:[],
+                tooltips: {
+			    enabled: false
+			  
+			  }
             }
         });
     });
 };
 
+//Custom plugins for DHIS2 and provinacial committee **********
+const jsPluginDH2 = {
+  beforeDraw: function(chart)  {
+	  
+				if(chart.config.options.pluginDH2){
+                    var width = chart.chart.width,
+                        height = chart.chart.height,
+                        ctt = chart.chart.ctx;
+
+                    ctt.restore();
+                    var fontSize = (height / 75).toFixed(2);
+                    ctt.font = fontSize + "em sans-serif";
+                    ctt.textBaseline = "middle";
+
+                    var text = "100%",
+                        textX = Math.round((width - ctt.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctt.fillText(text, textX, textY);
+                    ctt.save();
+					ctt.restore();
+					
+				}
+                  
+			}
+};
+
+Chart.pluginService.register(jsPluginDH2);
+
+//end custom plugins ****************************
 
     //---Section Create Map
 
