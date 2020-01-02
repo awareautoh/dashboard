@@ -8,6 +8,12 @@
  
 */
 
+//Color shade
+const red = "#FF99A6";
+const blue = "#80d8ff";
+const yellow = "#ffee58";
+const green = "#66bb6a";
+
 //File path for import data
 let wastingPath = "data/wasting_unsorted.csv";
 let anemiaPath = "data/prevalence_of_anemia.csv";
@@ -73,17 +79,15 @@ function buildChart (value) {
                 datasets: [{
                     label: 'Wasting',
                     data: valueW,
-                    backgroundColor: '#6CE2FF',
+                    backgroundColor: '#80d6ff',
                     borderColor: 'rgb(0, 0, 0)',
                     borderWidth: 0,
-                    hoverBackgroundColor: '#6CE2FF'
                 },{
                     label: 'Overweight',
                     data: valueO,
-                    backgroundColor: '#FFCA22',
+                    backgroundColor: '#FF99A6',
                     borderColor: 'rgb(0, 0, 0)',
                     borderWidth: 0,
-                    hoverBackgroundColor: '#FFCA22'
                 }]
             },
             plugins: [ChartDataLabels],
@@ -91,7 +95,8 @@ function buildChart (value) {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 5]
@@ -181,7 +186,7 @@ function buildChart (value) {
         let valueAnemia = anemia.map(d=> d.ValueAnemia);
         
 
-        //Creat Chart Women Mulnutrtion
+        //Creat Women Mulnutrtion
         let getWomenAnemia = document.getElementById('womenAnemia').getContext("2d");
         let womenAnemia = new Chart(getWomenAnemia, {
             type: 'bar',
@@ -195,17 +200,14 @@ function buildChart (value) {
                         fill: false,
                         borderColor: '#E71C23',
                         pointStyle: "line",
-                        borderWidth: 1,
-                        order: 1,
+                        borderWidth: 0,
                     },
                     {
                         label: 'Percentage of Women Anemia Prevalence',
                         data: valueAnemia,
-                        backgroundColor: '#0ABDE3',
+                        backgroundColor: '#80d8ff',
                         borderColor: '#0ABDE3',
                         borderWidth: 0,
-                        hoverBackgroundColor: '#0ABDE3',
-                        order: 1
                     }
                    
                 ]
@@ -214,7 +216,8 @@ function buildChart (value) {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 5],
@@ -231,10 +234,7 @@ function buildChart (value) {
 						    labels: {
 						      usePointStyle: true,
 						    }
-						},
-
-
-
+                        },
             }
         });
 
@@ -250,18 +250,14 @@ function buildChart (value) {
                     {
                         label: 'Women Overweight',
                         data: valueWOverWeight,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        backgroundColor: '#80d8ff',
+                        borderWidth: 0,
                     },
                     {
                         label: 'Women Obese',
                         data: valueWObese,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgb(54, 162, 235)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(54, 162, 235, 0.1)'
+                        backgroundColor: '#FF99A6',
+                        borderWidth: 0,
                     }
                 ]
             },
@@ -271,6 +267,7 @@ function buildChart (value) {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         stacked: true,
                         gridLines: {
@@ -302,27 +299,22 @@ function buildChart (value) {
                 datasets: [{
                     label: 'Early Initiation of Breastfeeding',
                     data: valueInitiationBreast,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    order: 1,
+                    backgroundColor: '#ffee58',
+                    borderWidth: 0,
                 }, {
                     label: 'Exclusive Breastfeeding',
                     data: valueExclusiveBreast,
-                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    borderWidth: 1,
-                    order: 2,
+                    backgroundColor: '#80d8ff',
+                    borderWidth: 0,
                 }, {
                     label: 'NPAN Taget 70%',
                     data: NPANTagetIYCF,
                     backgroundColor: 'lightPink',
                     borderColor: 'red',
-                    borderWidth: 0.5,
+                    borderWidth: 0,
                     type: 'line',
                     pointStyle: "line",
                     fill: false,
-                    order: 3,
                 }]
             },
             options: {
@@ -330,6 +322,7 @@ function buildChart (value) {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 10]
@@ -357,27 +350,22 @@ function buildChart (value) {
                 datasets: [{
                     label: 'Prevalance of Minimum Diet Diversity',
                     data: valueMiniDiet,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    order: 1,
+                    backgroundColor: '#ffee58',
+                    borderWidth: 0,
                 }, {
                     label: 'Prevalance of Minimum Acceptable Diet',
                     data: valueAcceptDiet,
-                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    borderWidth: 1,
-                    order: 2,
+                    backgroundColor: '#80d8ff',
+                    borderWidth: 0,
                 }, {
                     label: 'NPAN Taget 50%',
                     data: NPANTagetMiniDiet,
                     backgroundColor: 'lightPink',
                     borderColor: 'red',
-                    borderWidth: 0.5,
+                    borderWidth: 0,
                     type: 'line',
                     pointStyle: "line",
                     fill: false,
-                    order: 3,
                 }]
             },
             options: {
@@ -385,6 +373,7 @@ function buildChart (value) {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 10]
@@ -410,12 +399,10 @@ function buildChart (value) {
                 labels: province,
                 datasets: [
                     {
-                        label: 'Percentage of Women Anemia Prevalence',
+                        label: 'Percentage of Women Dietary Diversity',
                         data: valueWomenDiet,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        backgroundColor: blue,
+                        borderWidth: 0,
                         order: 1
                     }]
             },
@@ -432,6 +419,7 @@ function buildChart (value) {
                     xAxes: [{
                         ticks: {
                             beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 10]
@@ -471,13 +459,10 @@ function buildChart (value) {
                 labels: province,
                 datasets: [
                     {
-                        label: 'Percentage of Women Anemia Prevalence',
+                        label: "Percentage of Vitamin A Supplement Coverage",
                         data: valueVitA,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        order: 1
+                        backgroundColor: green,
+                        borderWidth: 0,
                     }]
             },
             options: {
@@ -493,6 +478,7 @@ function buildChart (value) {
                     xAxes: [{
                         ticks: {
                             beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 10]
@@ -527,13 +513,10 @@ function buildChart (value) {
                 labels: province,
                 datasets: [
                     {
-                        label: 'Percentage of Women Anemia Prevalence',
+                        label: 'Percentage of Who Received Deworming Coverage',
                         data: valueDeworm,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        order: 1
+                        backgroundColor: green,
+                        borderWidth: 0,
                     }]
             },
             options: {
@@ -549,6 +532,7 @@ function buildChart (value) {
                     xAxes: [{
                         ticks: {
                             beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 10]
@@ -585,21 +569,18 @@ function buildChart (value) {
                     {
                         label: 'Iron/Folic Supplement Coverage',
                         data: valueIronFolic,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        order: 1
+                        backgroundColor: green,
+                        borderWidth: 0,
                     },
                     {
                         label: 'National 25.4%',
                         data: nationalIronFolic,
                         type: 'line',
                         pointStyle: "line",
-                        borderWidth: 1,
+                        borderWidth: 0,
                         fill: false,
+                        backgroundColor: 'rgba(54, 162, 235, 1)',
                         borderColor: 'rgba(54, 162, 235, 1)',
-                        order: 2,
                     }
                 ]
             },
@@ -607,7 +588,8 @@ function buildChart (value) {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 10]
@@ -628,8 +610,6 @@ function buildChart (value) {
     //--->Socio Status Chart
         let valueSocio = socio.map(d => d.ValueSocioStatus);
         let nationalSocio = socio.map(d => d.NationalSocioStatus);
-
-    //Creat Chart Women Mulnutrtion
         let getSocioStatusChart = document.getElementById('socioStatusChart').getContext("2d");
         let socioStatusChart = new Chart(getSocioStatusChart, {
             type: 'bar',
@@ -639,11 +619,8 @@ function buildChart (value) {
                     {
                         label: 'Proportion of population below proverty line',
                         data: valueSocio,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        order: 1
+                        backgroundColor: blue,
+                        borderWidth: 0,
                     },
                     {
                         label: 'National 23.2%',
@@ -652,8 +629,8 @@ function buildChart (value) {
                         pointStyle: "line",
                         borderWidth: 1,
                         fill: false,
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        order: 2,
+                        backgroundColor: red,
+                        borderColor: red,
                     }
                 ]
             },
@@ -661,7 +638,8 @@ function buildChart (value) {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
                         },
                         gridLines: {
                             borderDash: [3, 10]
@@ -763,8 +741,11 @@ Chart.pluginService.register(jsPluginDH2);
 
 //end custom plugins ****************************
 
-    //---Section Create Map
 
+
+    //*******************************************
+    //---Section Create Map**********************
+    //*******************************************
     //Open Defaction Map
     $(document).ready(function () {
         //Set variable map directory
@@ -1065,20 +1046,14 @@ Chart.pluginService.register(jsPluginDH2);
         
         }
     });
+    //************************
+    //END MAP SECTION*********
+    //************************
 
 
-
-
-
-
-
-
-
-
-
-
-
-    //WARNING: Test Section
+    //*****************************************************//
+    //**************WARNING: Test Section*****************//
+    //***************************************************//
     //Sankey Graph
     $(document).ready(function () {
         let sankeyDataImport = 'data/mulnutrition_sankey.csv'; //Data directory path
