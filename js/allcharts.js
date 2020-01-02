@@ -5,7 +5,7 @@
   The national platforms for Nutrition project Lao PDR
   Data Analysis Unit, Center for Development Policy Research 
   Ministry of Planning and Inestment 
-  Credit: highchats.com 
+ 
 */
 
 //File path for import data
