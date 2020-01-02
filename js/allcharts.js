@@ -1728,4 +1728,7 @@ var pieChart = new Chart(tohCanvas, {
 
 });
 
+// function to save chart js as picture 
+
+
 
