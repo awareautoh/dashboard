@@ -46,8 +46,9 @@ Promise.all([
 //Chart.js global config
 Chart.plugins.unregister(ChartDataLabels); //cogfig Chart.JS label pugin not to show label on all chart by default
 
-
-//Build Chart
+//**********************************/
+//Build Chart All ChartJS gose here
+//*********************************/
 function buildChart (value) {
     const wasting = value[0];
     const anemia = value[1];
@@ -1046,319 +1047,323 @@ const jsPluginDH2 = {
                   
 			}
 };
+//**********************************************/
+//END All ChartJS Section//
+//*********************************************/
 
+//Add Custom plugins ****************************
 Chart.pluginService.register(jsPluginDH2);
 
 //end custom plugins ****************************
 
 
 
-    //*******************************************
-    //---Section Create Map**********************
-    //*******************************************
-    //Open Defaction Map
-    $(document).ready(function () {
-        //Set variable map directory
-        let mapDraw = ("map/LAO_ADM1.json");
-        let openDefacePath = ("data/openDefaceMap.csv");
-        //Set Scale
-        let colorScale = d3.scaleQuantize([0, 40], d3.schemeOranges[5]);
-        //Set tooltips
-        let tooltipOpenDeface = d3.select(".tab-content").append("div") 
-        .attr("class", "tooltipOpenDeface")
-        .style("opacity", 0);
+//*******************************************
+//---Section Create Map**********************
+//*******************************************
+//Open Defaction Map
+$(document).ready(function () {
+    //Set variable map directory
+    let mapDraw = ("map/LAO_ADM1.json");
+    let openDefacePath = ("data/openDefaceMap.csv");
+    //Set Scale
+    let colorScale = d3.scaleQuantize([0, 40], d3.schemeOranges[5]);
+    //Set tooltips
+    let tooltipOpenDeface = d3.select(".tab-content").append("div") 
+    .attr("class", "tooltipOpenDeface")
+    .style("opacity", 0);
 
-        //Select DOM
-        let svg = d3.select("#openDefaceMap");
+    //Select DOM
+    let svg = d3.select("#openDefaceMap");
 
-        //Set variable to import data
-        let openDefaceSort = d3.map();
-        let promise = [
-            d3.json(mapDraw),
-            d3.csv(openDefacePath, d => openDefaceSort.set(d.feature_id, +d.ValueOpenDaface))
-        ];
+    //Set variable to import data
+    let openDefaceSort = d3.map();
+    let promise = [
+        d3.json(mapDraw),
+        d3.csv(openDefacePath, d => openDefaceSort.set(d.feature_id, +d.ValueOpenDaface))
+    ];
 
-        Promise.all(promise).then(creatMap);
-        function creatMap(value) {
-            let lao = value[0];
-        //Draw a graph use "g" because draw multiple path in one time
-            //Import Map Topojson type as Geojson structure
-            let openDefaceMap = topojson.feature(lao, lao.objects.LAO_ADM1);
-            //Set porjection map type
-            let projection = d3.geoMercator()
-                .fitSize([320, 320], openDefaceMap);
+    Promise.all(promise).then(creatMap);
+    function creatMap(value) {
+        let lao = value[0];
+    //Draw a graph use "g" because draw multiple path in one time
+        //Import Map Topojson type as Geojson structure
+        let openDefaceMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        //Set porjection map type
+        let projection = d3.geoMercator()
+            .fitSize([320, 320], openDefaceMap);
 
-            svg.append("g")
-                .selectAll("path")
-                .data(openDefaceMap.features)
-                .enter()
-                .append("path")
-                .attr("d", d3.geoPath().projection(projection))
-                .attr("fill", d => colorScale(d.properties.feature_id = openDefaceSort.get(d.properties.feature_id)));
+        svg.append("g")
+            .selectAll("path")
+            .data(openDefaceMap.features)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale(d.properties.feature_id = openDefaceSort.get(d.properties.feature_id)));
 
-            svg.selectAll("path")
-                .data(openDefaceMap.features)
-                .on("mouseover", function(d) {
-                    tooltipOpenDeface.transition()    
-                    .duration(200)    
-                    .style("opacity", .9);    
-                    tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                    .style("left", (d3.event.pageX) + "px")   
-                    .style("top", (d3.event.pageY - 28) + "px");
-                })          
-                .on("mouseout", function(d) {   
-                    tooltipOpenDeface.transition()    
-                    .duration(500)    
-                    .style("opacity", 0); 
-                });
-                
-            //Draw a line border for each province
-            svg.append("path")
-                .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
-                .attr("class", "mapBorder")
-                .attr("d", d3.geoPath().projection(projection));
-
-
-            //Add legend
-            svg.append("g")
-            .attr("transform", "translate(0,250)")
-            .append(() => legend({
-                color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
-                d3.schemeOranges[5]),
-                title: "Open Defaction (%)",
-                width: 190}));
-            }
-        });
-
-    //---->Women Status Map
-    $(document).ready(function () {
-        //Set variable map directory
-        let mapDraw = ("map/LAO_ADM1.json");
-        let womenStatusPath = ("data/womenStatusMap.csv");
-        //Set to select SVG DOM
-        let svg = d3.select("#womenStatusMap");
-        //Set Scale
-        let colorScale = d3.scaleThreshold()
-            .domain([0, 0.699, 0.799, 0.879, 0.967])
-            .range(["#fbe9e7", "#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]);
-        //Set tooltips
-        let tooltipWomenStatus = d3.select(".tab-content").append("div") 
-        .attr("class", "tooltipWomenStatus")
-        .style("opacity", 0);
-        
-        //Set variable to import data
-        let womenStatusSort = d3.map();
-        let promise = [
-            d3.json(mapDraw),
-            d3.csv(womenStatusPath, d => womenStatusSort.set(d.feature_id, +d.ValueWomenStatus))
-        ];
-
-        Promise.all(promise).then(creatMap);
-        function creatMap(value) {
-            let lao = value[0];
-            //Set variable for import map data
-            let womenStatusMap = topojson.feature(lao, lao.objects.LAO_ADM1);
-            //Set porjection map type
-            let projection = d3.geoMercator()
-                .fitSize([320, 320], womenStatusMap);
-            //Draw a graph use "g" because draw multiple path in one time
-            svg.append("g")
-                .selectAll("path")
-                .data(womenStatusMap.features)
-                .enter()
-                .append("path")
-                .attr("d", d3.geoPath().projection(projection))
-                .attr("fill", d => colorScale(+(d.properties.feature_id = womenStatusSort.get(d.properties.feature_id))/100));
-
-            svg.selectAll("path")
-                .data(womenStatusMap.features)
-                .on("mouseover", function(d) {    
-                    tooltipWomenStatus.transition()    
-                    .duration(200)    
-                    .style("opacity", .9);    
-                    tooltipWomenStatus.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                    .style("left", (d3.event.pageX) + "px")   
-                    .style("top", (d3.event.pageY - 28) + "px");
-                })          
-                .on("mouseout", function(d) {   
-                    tooltipWomenStatus.transition()    
-                    .duration(500)    
-                    .style("opacity", 0); 
-                });
+        svg.selectAll("path")
+            .data(openDefaceMap.features)
+            .on("mouseover", function(d) {
+                tooltipOpenDeface.transition()    
+                .duration(200)    
+                .style("opacity", .9);    
+                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");
+            })          
+            .on("mouseout", function(d) {   
+                tooltipOpenDeface.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+            });
             
-            //Draw a line border for each province
-            svg.append("path")
-                .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
-                .attr("class", "mapBorder")
-                .attr("d", d3.geoPath().projection(projection));
-        
-            //Add Legend
-            svg.append("g")
-                .attr("transform", "translate(0,250)")
-                .append(() => legend({
-                    color: d3.scaleThreshold(["70<", "80<", "87.9<", ">88"],
-                    ["#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]),
-                    title: "GER Female Secondary School (%)",
-                    width: 190}));
+        //Draw a line border for each province
+        svg.append("path")
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .attr("class", "mapBorder")
+            .attr("d", d3.geoPath().projection(projection));
+
+
+        //Add legend
+        svg.append("g")
+        .attr("transform", "translate(0,250)")
+        .append(() => legend({
+            color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
+            d3.schemeOranges[5]),
+            title: "Open Defaction (%)",
+            width: 190}));
         }
     });
 
-    //Stunting 2011 Map
-    $(document).ready(function () {
-        //Set variable map directory
-        let mapDraw = ("map/LAO_ADM1.json");
-        let stuntingData = ("data/stunting_map.csv");
-        //Set to select SVG DOM
-        let svg = d3.select("#test");
-        //Set Scale
-        let colorScale = d3.scaleThreshold()
-            .domain([0, 0.025, 0.10, 0.20, 0.30])
-            .range(["#fafafa", "#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]);
-        //Set tooltips
-        let tooltip1 = d3.select(".tab-content").append("div") 
-        .attr("class", "tooltip")       
-        .style("opacity", 0);
+//---->Women Status Map
+$(document).ready(function () {
+    //Set variable map directory
+    let mapDraw = ("map/LAO_ADM1.json");
+    let womenStatusPath = ("data/womenStatusMap.csv");
+    //Set to select SVG DOM
+    let svg = d3.select("#womenStatusMap");
+    //Set Scale
+    let colorScale = d3.scaleThreshold()
+        .domain([0, 0.699, 0.799, 0.879, 0.967])
+        .range(["#fbe9e7", "#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]);
+    //Set tooltips
+    let tooltipWomenStatus = d3.select(".tab-content").append("div") 
+    .attr("class", "tooltipWomenStatus")
+    .style("opacity", 0);
+    
+    //Set variable to import data
+    let womenStatusSort = d3.map();
+    let promise = [
+        d3.json(mapDraw),
+        d3.csv(womenStatusPath, d => womenStatusSort.set(d.feature_id, +d.ValueWomenStatus))
+    ];
 
-        //Set variable to import data
-        let stuntingSort = d3.map();
-        let promise = [
-            d3.json(mapDraw),
-            d3.csv(stuntingData, d => stuntingSort.set(d.feature_id, +d.ValueStunting11))
-        ];
+    Promise.all(promise).then(creatMap);
+    function creatMap(value) {
+        let lao = value[0];
+        //Set variable for import map data
+        let womenStatusMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        //Set porjection map type
+        let projection = d3.geoMercator()
+            .fitSize([320, 320], womenStatusMap);
+        //Draw a graph use "g" because draw multiple path in one time
+        svg.append("g")
+            .selectAll("path")
+            .data(womenStatusMap.features)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale(+(d.properties.feature_id = womenStatusSort.get(d.properties.feature_id))/100));
 
-        Promise.all(promise).then(creatMap);
-        function creatMap(value) {
-            let lao = value[0];
-            let stunting = value[1];
-            //Import Map Topojson type as Geojson structure
-            let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
-            //Set porjection map type
-            let projection = d3.geoMercator()
+        svg.selectAll("path")
+            .data(womenStatusMap.features)
+            .on("mouseover", function(d) {    
+                tooltipWomenStatus.transition()    
+                .duration(200)    
+                .style("opacity", .9);    
+                tooltipWomenStatus.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");
+            })          
+            .on("mouseout", function(d) {   
+                tooltipWomenStatus.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+            });
+        
+        //Draw a line border for each province
+        svg.append("path")
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .attr("class", "mapBorder")
+            .attr("d", d3.geoPath().projection(projection));
+    
+        //Add Legend
+        svg.append("g")
+            .attr("transform", "translate(0,250)")
+            .append(() => legend({
+                color: d3.scaleThreshold(["70<", "80<", "87.9<", ">88"],
+                ["#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]),
+                title: "GER Female Secondary School (%)",
+                width: 190}));
+    }
+});
+
+//Stunting 2011 Map
+$(document).ready(function () {
+    //Set variable map directory
+    let mapDraw = ("map/LAO_ADM1.json");
+    let stuntingData = ("data/stunting_map.csv");
+    //Set to select SVG DOM
+    let svg = d3.select("#test");
+    //Set Scale
+    let colorScale = d3.scaleThreshold()
+        .domain([0, 0.025, 0.10, 0.20, 0.30])
+        .range(["#fafafa", "#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]);
+    //Set tooltips
+    let tooltip1 = d3.select(".tab-content").append("div") 
+    .attr("class", "tooltip")       
+    .style("opacity", 0);
+
+    //Set variable to import data
+    let stuntingSort = d3.map();
+    let promise = [
+        d3.json(mapDraw),
+        d3.csv(stuntingData, d => stuntingSort.set(d.feature_id, +d.ValueStunting11))
+    ];
+
+    Promise.all(promise).then(creatMap);
+    function creatMap(value) {
+        let lao = value[0];
+        let stunting = value[1];
+        //Import Map Topojson type as Geojson structure
+        let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        //Set porjection map type
+        let projection = d3.geoMercator()
+        .fitSize([320, 320], myMap); //Auto fit SVG refer to svg set at HTML
+
+        //Draw a graph use "g" because draw multiple path in one time
+        svg.append("g")
+            .selectAll("path")
+            .data(myMap.features)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale((d.properties.feature_id = stuntingSort.get(d.properties.feature_id))/100));
+        svg.selectAll("path")
+            .data(myMap.features)
+            .on("mouseover", function(d) {    
+                tooltip1.transition()    
+                .duration(200)    
+                .style("opacity", .9);    
+                tooltip1.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+            })          
+            .on("mouseout", function(d) {   
+                tooltip1.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+            });
+        
+        //Draw a line border for each province
+        svg.append("path")
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .attr("class", "mapBorder")
+            .attr("d", d3.geoPath().projection(projection));
+
+        //Add Legend
+        svg.append("g")
+        .attr("transform", "translate(0,250)")
+        .append(() => legend({
+            color: d3.scaleThreshold(["<2.5", "2.5", "10", "20", ">=30"],
+            ["#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]),
+            title: "WHO Classification, 2017 (%)",
+            width: 190}));
+    
+    
+    }
+});
+
+//Stunting 2017 Map
+$(document).ready(function () {
+    //Set variable map directory
+    let mapDraw = ("map/LAO_ADM1.json");
+    let stuntingData = ("data/stunting_map.csv");
+    //Set to select SVG DOM
+    let svg = d3.select("#test1");
+    //Set Scale
+    let colorScale = d3.scaleThreshold()
+        .domain([0, 0.025, 0.10, 0.20, 0.30])
+        .range(["#fafafa", "#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]);
+    //Set tooltips
+    let tooltip = d3.select(".tab-content").append("div") 
+    .attr("class", "tooltip1")       
+    .style("opacity", 0);
+
+    //Set variable to import data
+    let stuntingSort1 = d3.map();
+    let promise = [
+        d3.json(mapDraw),
+        d3.csv(stuntingData, d => stuntingSort1.set(d.feature_id, +d.ValueStunting17))
+    ];
+
+    Promise.all(promise).then(creatMap);
+    function creatMap(value) {
+        let lao = value[0];
+        let stunting = value[1];
+        //Import Map Topojson type as Geojson structure
+        let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
+        //Set porjection map type
+        let projection = d3.geoMercator()
             .fitSize([320, 320], myMap); //Auto fit SVG refer to svg set at HTML
 
-            //Draw a graph use "g" because draw multiple path in one time
-            svg.append("g")
-                .selectAll("path")
-                .data(myMap.features)
-                .enter()
-                .append("path")
-                .attr("d", d3.geoPath().projection(projection))
-                .attr("fill", d => colorScale((d.properties.feature_id = stuntingSort.get(d.properties.feature_id))/100));
-            svg.selectAll("path")
-                .data(myMap.features)
-                .on("mouseover", function(d) {    
-                    tooltip1.transition()    
-                    .duration(200)    
-                    .style("opacity", .9);    
-                    tooltip1.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                    .style("left", (d3.event.pageX) + "px")   
-                    .style("top", (d3.event.pageY - 28) + "px");  
-                })          
-                .on("mouseout", function(d) {   
-                    tooltip1.transition()    
-                    .duration(500)    
-                    .style("opacity", 0); 
-                });
-            
-            //Draw a line border for each province
-            svg.append("path")
-                .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
-                .attr("class", "mapBorder")
-                .attr("d", d3.geoPath().projection(projection));
-
-            //Add Legend
-            svg.append("g")
-            .attr("transform", "translate(0,250)")
-            .append(() => legend({
-                color: d3.scaleThreshold(["<2.5", "2.5", "10", "20", ">=30"],
-                ["#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]),
-                title: "WHO Classification, 2017 (%)",
-                width: 190}));
+        //Draw a graph use "g" because draw multiple path in one time
+        svg.append("g")
+            .selectAll("path")
+            .data(myMap.features)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath().projection(projection))
+            .attr("fill", d => colorScale((d.properties.feature_id = stuntingSort1.get(d.properties.feature_id))/100));
+    
+        svg.selectAll("path")
+            .data(myMap.features)
+            .on("mouseover", function(d) {    
+                tooltip.transition()    
+                .duration(200)    
+                .style("opacity", .9);    
+                tooltip.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+            })          
+            .on("mouseout", function(d) {   
+                tooltip.transition()    
+                .duration(500)    
+                .style("opacity", 0); 
+            });
         
-        
-        }
-    });
+        //Draw a line border for each province
+        svg.append("path")
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .attr("class", "mapBorder")
+            .attr("d", d3.geoPath().projection(projection));
 
-    //Stunting 2017 Map
-    $(document).ready(function () {
-        //Set variable map directory
-        let mapDraw = ("map/LAO_ADM1.json");
-        let stuntingData = ("data/stunting_map.csv");
-        //Set to select SVG DOM
-        let svg = d3.select("#test1");
-        //Set Scale
-        let colorScale = d3.scaleThreshold()
-            .domain([0, 0.025, 0.10, 0.20, 0.30])
-            .range(["#fafafa", "#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]);
-        //Set tooltips
-        let tooltip = d3.select(".tab-content").append("div") 
-        .attr("class", "tooltip1")       
-        .style("opacity", 0);
-
-        //Set variable to import data
-        let stuntingSort1 = d3.map();
-        let promise = [
-            d3.json(mapDraw),
-            d3.csv(stuntingData, d => stuntingSort1.set(d.feature_id, +d.ValueStunting17))
-        ];
-
-        Promise.all(promise).then(creatMap);
-        function creatMap(value) {
-            let lao = value[0];
-            let stunting = value[1];
-            //Import Map Topojson type as Geojson structure
-            let myMap = topojson.feature(lao, lao.objects.LAO_ADM1);
-            //Set porjection map type
-            let projection = d3.geoMercator()
-                .fitSize([320, 320], myMap); //Auto fit SVG refer to svg set at HTML
-
-            //Draw a graph use "g" because draw multiple path in one time
-            svg.append("g")
-                .selectAll("path")
-                .data(myMap.features)
-                .enter()
-                .append("path")
-                .attr("d", d3.geoPath().projection(projection))
-                .attr("fill", d => colorScale((d.properties.feature_id = stuntingSort1.get(d.properties.feature_id))/100));
-        
-            svg.selectAll("path")
-                .data(myMap.features)
-                .on("mouseover", function(d) {    
-                    tooltip.transition()    
-                    .duration(200)    
-                    .style("opacity", .9);    
-                    tooltip.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                    .style("left", (d3.event.pageX) + "px")   
-                    .style("top", (d3.event.pageY - 28) + "px");  
-                })          
-                .on("mouseout", function(d) {   
-                    tooltip.transition()    
-                    .duration(500)    
-                    .style("opacity", 0); 
-                });
-            
-            //Draw a line border for each province
-            svg.append("path")
-                .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
-                .attr("class", "mapBorder")
-                .attr("d", d3.geoPath().projection(projection));
-
-            //Add legend
-            svg.append("g")
-            .attr("transform", "translate(0,250)")
-            .append(() => legend({
-                color: d3.scaleThreshold(["<2.5", "2.5", "10", "20", ">=30"],
-                ["#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]),
-                title: "WHO Classification, 2017 (%)",
-                width: 190}));    
-        
-        
-        
-        }
-    });
-    //************************
-    //END MAP SECTION*********
-    //************************
+        //Add legend
+        svg.append("g")
+        .attr("transform", "translate(0,250)")
+        .append(() => legend({
+            color: d3.scaleThreshold(["<2.5", "2.5", "10", "20", ">=30"],
+            ["#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]),
+            title: "WHO Classification, 2017 (%)",
+            width: 190}));    
+    
+    
+    
+    }
+});
+//************************
+//END MAP SECTION*********
+//************************
 
 
     //*****************************************************//
@@ -1780,7 +1785,7 @@ var pieChart = new Chart(tohCanvas, {
 
 });
 
-//chart wasting 
+//chart wasting
 
 const myChartJSPlugin1 = {
   beforeDraw: function(chart)  {
