@@ -23,6 +23,10 @@ let minimumDietPath = "data/minimumDiet.csv";
 let womenDietPath = "data/womenDiet.csv";
 let session3Path = "data/session3_data.csv";
 let socioStatusPath = "data/socio_status.csv";
+let agri1Path = "data/agri1.csv";
+let agri2Path = "data/yield.csv";
+let agri3Path = "data/pro.csv";
+
 
 
 Promise.all([
@@ -34,6 +38,9 @@ Promise.all([
     d3.csv(womenDietPath),
     d3.csv(session3Path),
     d3.csv(socioStatusPath),
+    d3.csv(agri1Path),
+    d3.csv(agri2Path),
+    d3.csv(agri3Path),
 ]).then(buildChart);
 
 //Chart.js global config
@@ -49,10 +56,313 @@ function buildChart (value) {
     const miniDiet = value[4];
     const womenDiet = value[5];
     const mapSec3 = value[6];
-    const socio = value[7]
+    const socio = value[7];
+    const agri1 = value[8];
+    const agri2 = value[9];
+    const agri3 = value[10]
 
     //---Child Mulnutrtion Chart
     $(document).ready(function() {
+
+
+    // create agri culture1  chart	
+     let aLabel = agri1.map(d=> d.Year);
+     let avalue = agri1.map(d=> d.Total);
+	 let avalue2 = agri1.map(d=> d.Lowlandrainfedpaddy);
+	 let avalue3 = agri1.map(d=> d.DrySeasonpaddy);
+	 let avalue4 = agri1.map(d=> d.Upland);
+
+    let getagri1Chart = document.getElementById('agri1Chart').getContext("2d");
+     let agri1Chart = new Chart(getagri1Chart, {
+     	 type: 'bar',
+                    data: {
+                        labels: aLabel,
+                        datasets: [
+                            {
+								label: "Total",
+                                data: avalue,
+								backgroundColor: '#ffee58',
+								borderWidth: 0,
+
+								
+			
+                            },
+							{
+								label: "Low land rainfed paddy",
+                                data: avalue2,
+								backgroundColor: '#10b4fb',
+								borderWidth: 0,
+								
+			
+                            },
+							{
+								label: "Dry Season paddy",
+                                data: avalue3,
+								backgroundColor: '#f30d0d',
+								borderWidth: 0,
+								
+			
+                            },
+							{
+								label: "Upland rainfed paddy",
+                                data: avalue4,
+								backgroundColor: '#2aad32',
+								borderWidth: 0,
+								
+                            }
+                                                  
+                        ]
+						
+                    },
+                    options: {
+                    	scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 10,
+                        },
+                        gridLines: {
+                            borderDash: [3, 5]
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: false,
+                        }
+                    }]
+                },
+                        
+                        legend: {
+                            display: true
+                        },
+                         maintainAspectRatio: false,
+
+
+                        
+                    }
+
+     });
+
+    //end gri1 
+
+    //agri2 chart 
+
+    	let agri2Label = agri2.map(d=> d.Year);
+        let agri2value = agri2.map(d=> d.Total);
+		let agri2value2 = agri2.map(d=> d.Lowlandrainfedpaddy);
+		let agri2value3 = agri2.map(d=> d.DrySeasonpaddy);
+		let agri2value4 = agri2.map(d=> d.Upland);
+
+		let getagri2Chart = document.getElementById('agri2Chart').getContext("2d");
+     	let agri2Chart = new Chart(getagri2Chart, {
+
+     		        type: 'line',
+     		                    data: {
+     		                        labels: agri2Label,
+     		                        datasets: [
+     		                            {
+     										label: "Total",
+     		                                data: agri2value,
+     										backgroundColor: '#ffee58',
+     										borderColor:'#ffee58',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:false
+     										
+     										
+     					
+     		                            },
+     									{
+     										label: "Low landrainfed paddy",
+     		                                data: agri2value2,
+     										backgroundColor: '#10b4fb',
+     										borderColor: '#2196f3',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:false
+     										
+     					
+     		                            },
+     									{
+     										label: "Dry Season paddy",
+     		                                data: agri2value3,
+     										backgroundColor: '#f30d0d',
+     										borderColor: '#f30d0d',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:false
+     										
+     					
+     		                            },
+     									{
+     										label: "Upland rainfed paddy",
+     		                                data: agri2value4,
+     										backgroundColor: '#2aad32',
+     										borderColor: '#2aad32',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:false
+     										
+     					
+     		                            }
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: false,
+     									usePointStyle: true,
+     									labels: {
+     										 
+     										  
+     										  boxWidth: 20,
+     										  boxHeight: 2
+     										}
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 8,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
+
+
+     	});
+
+
+    //end agri 2
+
+    // agri 3 graph 
+    	let agri3Label = agri3.map(d=> d.Year);
+        let agri3value = agri3.map(d=> d.Total);
+    	let agri3value2 = agri3.map(d=> d.Lowlandrainfedpaddy);
+    	let agri3value3 = agri3.map(d=> d.DrySeasonpaddy);
+    	let agri3value4 = agri3.map(d=> d.Upland);
+
+    	let getagri3Chart = document.getElementById('agri3Chart').getContext("2d");
+     	let agri3Chart = new Chart(getagri3Chart, {
+
+     		type: 'bar',
+     		                    data: {
+     		                        labels: agri3Label,
+     		                        datasets: [
+     		                            {
+     										label: "Total",
+     		                                data: agri3value,
+     										backgroundColor: '#ffee58',
+     										borderColor:'#ffee58',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:false
+     										
+     										
+     					
+     		                            },
+     									{
+     										label: "Lowland rainfed paddy",
+     		                                data: agri3value2,
+     										backgroundColor: '#10b4fb',
+     										borderColor: '#2196f3',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:false
+     										
+     					
+     		                            },
+     									{
+     										label: "Dry Season paddy",
+     		                                data: agri3value3,
+     										backgroundColor: '#f30d0d',
+     										borderColor: '#f30d0d',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:false
+     										
+     					
+     		                            },
+     									{
+     										label: "Upland rainfed paddy",
+     		                                data: agri3value4,
+     										backgroundColor: '#2aad32',
+     										borderColor: '#2aad32',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:false
+     										
+     					
+     		                            }
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: false,
+     									usePointStyle: true,
+     									labels: {
+     										 
+     										  
+     										  boxWidth: 20,
+     										  boxHeight: 2
+     										}
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     								 stacked: true ,
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 7,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     								 stacked: true,
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
+
+
+
+
+
+
+     	});
+
+
+
+
+    //end agri 3 graph 
 
     //---Wasting Chart---
         //Create a sub data from main file (sorting list)
