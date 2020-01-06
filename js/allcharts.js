@@ -15,17 +15,20 @@ const yellow = "#ffee58";
 const green = "#66bb6a";
 
 //File path for import data
-let wastingPath = "data/wasting_unsorted.csv";
-let anemiaPath = "data/prevalence_of_anemia.csv";
-let weightAndObesity = "data/prevalence_overweight_and_obesity.csv";
-let IYCFPath = "data/IYCF.csv";
-let minimumDietPath = "data/minimumDiet.csv";
-let womenDietPath = "data/womenDiet.csv";
-let session3Path = "data/session3_data.csv";
-let socioStatusPath = "data/socio_status.csv";
-let agri1Path = "data/agri1.csv";
-let agri2Path = "data/yield.csv";
-let agri3Path = "data/pro.csv";
+const wastingPath = "data/wasting_unsorted.csv";
+const anemiaPath = "data/prevalence_of_anemia.csv";
+const weightAndObesity = "data/prevalence_overweight_and_obesity.csv";
+const IYCFPath = "data/IYCF.csv";
+const minimumDietPath = "data/minimumDiet.csv";
+const womenDietPath = "data/womenDiet.csv";
+const session3Path = "data/session3_data.csv";
+const socioStatusPath = "data/socio_status.csv";
+const agri1Path = "data/agri1.csv";
+const agri2Path = "data/yield.csv";
+const agri3Path = "data/pro.csv";
+const lsisOverviewPath = "data/lsis_indicator_overview.csv";
+const lsisTrendPath = "data/lsis_indicator_trend.csv";
+const lsisIndicatorSubPath = "data/lsis_indicator_sub.csv";
 
 
 
@@ -41,13 +44,16 @@ Promise.all([
     d3.csv(agri1Path),
     d3.csv(agri2Path),
     d3.csv(agri3Path),
+    d3.csv(lsisOverviewPath),
+    d3.csv(lsisTrendPath),
+    d3.csv(lsisIndicatorSubPath),
 ]).then(buildChart);
 
 //*************************************/
 //Chart.js global config
 //*************************************/
 Chart.plugins.unregister(ChartDataLabels); //cogfig Chart.JS label pugin not to show label on all chart by default
-Chart.defaults.global.plugins.deferred.delay = 500; //Global set up for ChartJS plugin: deffer, delay transition: 500
+Chart.defaults.global.plugins.deferred.delay = 250; //Global set up for ChartJS plugin: deffer, delay transition: 500
 Chart.defaults.global.plugins.deferred.xOffset = "50%"; //Global set up for ChartJS plugin: deffer, 50% view point to activate plugin
 
 
@@ -65,7 +71,11 @@ function buildChart (value) {
     const socio = value[7];
     const agri1 = value[8];
     const agri2 = value[9];
-    const agri3 = value[10]
+    const agri3 = value[10];
+    const lsisOverview = value[11];
+    const lsisTrend = value[12];
+    const lsisIndicatorSub = value[13];
+
 
     //---Child Mulnutrtion Chart
     $(document).ready(function() {
@@ -369,7 +379,11 @@ function buildChart (value) {
 
 
     //end agri 3 graph 
+    
 
+    //*******************************/
+    //START Home Tab Chart
+    //*******************************/
     //---Wasting Chart---
         //Create a sub data from main file (sorting list)
         let wastingSort = wasting.slice().sort((a, b) => a.ValueWasting - b.ValueWasting);
@@ -425,11 +439,6 @@ function buildChart (value) {
                     }]
                 },
                 maintainAspectRatio: false,
-                plugins: {
-                        datalabels: {
-                            align: 'end'
-                        }
-                    } 
             }
         });
         //Add function for click button
@@ -613,6 +622,15 @@ function buildChart (value) {
             data: {
                 labels: province,
                 datasets: [{
+                    label: 'NPAN Taget 70%',
+                    data: NPANTagetIYCF,
+                    backgroundColor: 'lightPink',
+                    borderColor: 'red',
+                    borderWidth: 0,
+                    type: 'line',
+                    pointStyle: "line",
+                    fill: false,
+                }, {
                     label: 'Early Initiation of Breastfeeding',
                     data: valueInitiationBreast,
                     backgroundColor: '#ffee58',
@@ -622,15 +640,6 @@ function buildChart (value) {
                     data: valueExclusiveBreast,
                     backgroundColor: '#80d8ff',
                     borderWidth: 0,
-                }, {
-                    label: 'NPAN Taget 70%',
-                    data: NPANTagetIYCF,
-                    backgroundColor: 'lightPink',
-                    borderColor: 'red',
-                    borderWidth: 0,
-                    type: 'line',
-                    pointStyle: "line",
-                    fill: false,
                 }]
             },
             options: {
@@ -664,6 +673,15 @@ function buildChart (value) {
             data: {
                 labels: province,
                 datasets: [{
+                    label: 'NPAN Taget 50%',
+                    data: NPANTagetMiniDiet,
+                    backgroundColor: 'lightPink',
+                    borderColor: 'red',
+                    borderWidth: 0,
+                    type: 'line',
+                    pointStyle: "line",
+                    fill: false,
+                }, {
                     label: 'Prevalance of Minimum Diet Diversity',
                     data: valueMiniDiet,
                     backgroundColor: '#ffee58',
@@ -673,15 +691,6 @@ function buildChart (value) {
                     data: valueAcceptDiet,
                     backgroundColor: '#80d8ff',
                     borderWidth: 0,
-                }, {
-                    label: 'NPAN Taget 50%',
-                    data: NPANTagetMiniDiet,
-                    backgroundColor: 'lightPink',
-                    borderColor: 'red',
-                    borderWidth: 0,
-                    type: 'line',
-                    pointStyle: "line",
-                    fill: false,
                 }]
             },
             options: {
@@ -883,21 +892,21 @@ function buildChart (value) {
                 labels: province,
                 datasets: [
                     {
-                        label: 'Iron/Folic Supplement Coverage',
-                        data: valueIronFolic,
-                        backgroundColor: green,
-                        borderWidth: 0,
-                    },
-                    {
                         label: 'National 25.4%',
                         data: nationalIronFolic,
                         type: 'line',
                         pointStyle: "line",
                         borderWidth: 0,
                         fill: false,
-                        backgroundColor: 'rgba(54, 162, 235, 1)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                    }
+                        backgroundColor: blue,
+                        borderColor: blue,
+                    },
+                    {
+                        label: 'Iron/Folic Supplement Coverage',
+                        data: valueIronFolic,
+                        backgroundColor: green,
+                        borderWidth: 0,
+                    },
                 ]
             },
             options: {
@@ -933,12 +942,6 @@ function buildChart (value) {
                 labels: province,
                 datasets: [
                     {
-                        label: 'Proportion of population below proverty line',
-                        data: valueSocio,
-                        backgroundColor: blue,
-                        borderWidth: 0,
-                    },
-                    {
                         label: 'National 23.2%',
                         data: nationalSocio,
                         type: 'line',
@@ -947,7 +950,13 @@ function buildChart (value) {
                         fill: false,
                         backgroundColor: red,
                         borderColor: red,
-                    }
+                    },
+                    {
+                        label: 'Proportion of population below proverty line',
+                        data: valueSocio,
+                        backgroundColor: blue,
+                        borderWidth: 0,
+                    },
                 ]
             },
             options: {
@@ -1023,6 +1032,150 @@ function buildChart (value) {
 			  }
             }
         });
+
+        //**********************************************/
+        //LSIS Tab
+        //*********************************************/
+        
+        //Creat LSIS Overview Indicator
+        let valueLSISOverview = (lsisOverview.slice().sort((a, b) => b.Value - a.Value)).map(d => d.Value);
+        let LSISIndicator = (lsisOverview.slice().sort((a, b) => b.Value - a.Value)).map(d => d.Indicator);
+
+
+        //Creat LSIS Overview Indicator
+        let getLsisOverviewChart = document.getElementById('lsisOverviewChart').getContext("2d");
+        let lsisOverviewChart = new Chart(getLsisOverviewChart, {
+            type: 'bar',
+            data: {
+                labels: LSISIndicator,
+                datasets: [
+                    {
+                        label: "Indicator",
+                        data: valueLSISOverview,
+                        backgroundColor: '#80d8ff',
+                        borderColor: '#0ABDE3',
+                        borderWidth: 0,
+                    }
+                ],
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
+                        },
+                        gridLines: {
+                            borderDash: [3, 5],
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: false,
+                        },
+                        display: false,
+                    }]
+                },
+                maintainAspectRatio: false,
+                onClick: check,
+            }
+        });
+
+        //Creat LSIS Overview Provincial
+        let getLsisProvincialOverview = document.getElementById('lsisProvincialOverview').getContext("2d");
+        let lsisProvincialOverview = new Chart(getLsisProvincialOverview, {
+            type: 'bar',
+            data: {
+                labels: province,
+                datasets: [
+                    {
+                        label: [],
+                        data: [],
+                        backgroundColor: '#80d8ff',
+                        borderColor: '#0ABDE3',
+                        borderWidth: 0,
+                    }
+                ],
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
+                        },
+                        gridLines: {
+                            borderDash: [3, 5],
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: false,
+                        },
+                    }]
+                },
+                maintainAspectRatio: false,
+            }
+        });
+
+        //Creat LSIS Overview Indicator
+        let getLsisOverviewTrend = document.getElementById('lsisOverviewTrend').getContext("2d");
+        let lsisOverviewTrend = new Chart(getLsisOverviewTrend, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: "Indicator",
+                        data: [],
+                        backgroundColor: '#80d8ff',
+                        borderColor: '#0ABDE3',
+                        borderWidth: 0,
+                    }
+                
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
+                        },
+                        gridLines: {
+                            borderDash: [3, 5],
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: false,
+                        },
+                    }]
+                },
+                maintainAspectRatio: false,
+            }
+        });
+
+        function check(chart) {
+            let activePoints = this.getElementsAtEvent(chart);
+            let choosedIndicator = LSISIndicator[activePoints[0]._index];
+
+            //Creat LSIS Overview Provincial
+            let valueLSISOverviewSub = lsisIndicatorSub.map(d => d[choosedIndicator]);
+
+            //Creat LSIS Overview Indicator
+            let valueLsisTrend = lsisTrend.map(d=> d[choosedIndicator]);
+            let LsisYear = lsisTrend.map(d => d.Year);
+        
+            function test(lsisProvincialOverview) {
+                lsisProvincialOverview.data.datasets.label = choosedIndicator;
+                lsisProvincialOverview.data.datasets.data = valueLSISOverviewSub;
+                lsisProvincialOverview.update();
+                console.log(lsisProvincialOverview);
+            }
+            test;
+        }
+
     });
 };
 
@@ -1586,7 +1739,6 @@ $(document).ready(function () {
                     let toAdd = "parent";
                     let selectCircle = d;
                     let a = [];
-                    console.log(marginHeight);
                     while (selectedHeight < maxHeight) {
                         selectCircle = selectCircle[toAdd];
                         if (selectedHeight == marginHeight) {
@@ -1598,10 +1750,8 @@ $(document).ready(function () {
                     }
                     let b =[];
                     database.forEach(d => a.includes(d) ? b.push(d): null);
-                    console.log(b);
                 }
                 checkParent();
-                console.log(d);
             }
 
             function zoomTo(v) {
@@ -1692,7 +1842,7 @@ $(document).ready(function () {
                 });
                 let x = 0;
                 function select() {
-                    if (x == 0) {
+                    if (x === 0) {
                         subChart.data.datasets.forEach(function(dataset) {
                             dataset.data = [2,10];
                         });
