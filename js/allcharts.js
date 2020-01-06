@@ -1,4 +1,5 @@
 "use strict";
+
 /*
   Version: 1.0
   Created date: 29 Nov 2019
@@ -1662,8 +1663,7 @@ function buildChart (value) {
                     {
                         label: "Indicator",
                         data: valueLSISOverview,
-                        backgroundColor: '#80d8ff',
-                        borderColor: '#0ABDE3',
+                        backgroundColor: '#bdbdbd',
                         borderWidth: 0,
                     }
                 ],
@@ -1730,13 +1730,14 @@ function buildChart (value) {
 
         //Creat LSIS Overview Indicator
         let getLsisOverviewTrend = document.getElementById('lsisOverviewTrend').getContext("2d");
+        let LsisYear = lsisTrend.map(d => d.Year);
         let lsisOverviewTrend = new Chart(getLsisOverviewTrend, {
             type: 'line',
             data: {
-                labels: [],
+                labels: LsisYear,
                 datasets: [
                     {
-                        label: "Indicator",
+                        label: [],
                         data: [],
                         backgroundColor: '#80d8ff',
                         borderColor: '#0ABDE3',
@@ -1775,15 +1776,33 @@ function buildChart (value) {
 
             //Creat LSIS Overview Indicator
             let valueLsisTrend = lsisTrend.map(d=> d[choosedIndicator]);
-            let LsisYear = lsisTrend.map(d => d.Year);
-        
-            function test(lsisProvincialOverview) {
-                lsisProvincialOverview.data.datasets.label = choosedIndicator;
-                lsisProvincialOverview.data.datasets.data = valueLSISOverviewSub;
-                lsisProvincialOverview.update();
-                console.log(lsisProvincialOverview);
+
+
+            function addData(chart, dataLabel, data) {
+
+                chart.data.datasets.forEach((datasets) => {
+                    datasets.label = dataLabel;
+                });
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data = data;
+                });
+                chart.update();
             }
-            test;
+            console.log(activePoints);
+            let labelCount = activePoints[0]._chart.data.labels.length;
+            let backgroundColorToChange = [];
+            for (let i = 0; i < labelCount; i++) {
+                backgroundColorToChange.push('#bdbdbd');
+            }
+            backgroundColorToChange[activePoints[0]._index] = blue;
+            console.log(backgroundColorToChange);
+            function changeBackgoundColor (chart, color) {
+                activePoints[0]._chart.config.data.datasets[0].backgroundColor = color;
+                chart.update();
+            }
+            changeBackgoundColor(lsisOverviewChart, backgroundColorToChange);
+            addData(lsisProvincialOverview, choosedIndicator, valueLSISOverviewSub);
+            addData(lsisOverviewTrend, choosedIndicator, valueLsisTrend);
         }
 
     });
