@@ -26,7 +26,13 @@ let socioStatusPath = "data/socio_status.csv";
 let agri1Path = "data/agri1.csv";
 let agri2Path = "data/yield.csv";
 let agri3Path = "data/pro.csv";
-
+let agriVet1Path = "data/agriVet1.csv";
+let agriVet2Path = "data/agriVet2.csv";
+let agriVet3Path = "data/agriVet3.csv";
+let agriVet4Path = "data/bc.csv";
+let agriVet5Path = "data/pgs.csv";
+let agriVet6Path = "data/fish.csv";
+let agriVet7Path = "data/poul.csv";
 
 
 Promise.all([
@@ -41,6 +47,13 @@ Promise.all([
     d3.csv(agri1Path),
     d3.csv(agri2Path),
     d3.csv(agri3Path),
+    d3.csv(agriVet1Path),
+    d3.csv(agriVet2Path),
+    d3.csv(agriVet3Path),
+    d3.csv(agriVet4Path),
+    d3.csv(agriVet5Path),
+    d3.csv(agriVet6Path),
+    d3.csv(agriVet7Path),
 ]).then(buildChart);
 
 //Chart.js global config
@@ -60,7 +73,15 @@ function buildChart (value) {
     const socio = value[7];
     const agri1 = value[8];
     const agri2 = value[9];
-    const agri3 = value[10]
+    const agri3 = value[10];
+    const agriVet1 = value[11];
+    const agriVet2 = value[12];
+    const agriVet3 = value[13];
+    const agriVet4 = value[14];
+    const agriVet5 = value[15];
+    const agriVet6 = value[16];
+    const agriVet7 = value[17];
+
 
     //---Child Mulnutrtion Chart
     $(document).ready(function() {
@@ -352,18 +373,579 @@ function buildChart (value) {
      		                },
      		                        
      		                    }
+     	});
+
+    //end agri 3 graph 
+
+    //strat agriVet1 
+
+   		let agriVet1Label = agriVet1.map(d=> d.Year);
+        let agriVet1value = agriVet1.map(d=> d.leaf);
+		let agriVet1value2 = agriVet1.map(d=> d.root);
+		let agriVet1value3 = agriVet1.map(d=> d.fruit);
+
+		let getagriVet1Chart = document.getElementById('agriVet1Chart').getContext("2d");
+     	let agriVet1Chart = new Chart(getagriVet1Chart, {
+
+     		 type: 'bar',
+     		                    data: {
+     		                        labels: agriVet1Label,
+     		                        datasets: [
+     		                            {
+     										label: "Leafy Stem Vegetables",
+     		                                data: agriVet1value,
+     										backgroundColor: green,
+     										
+     										
+     										
+     					
+     		                            },
+     									{
+     										label: "Root, Bulb and Tuberous",
+     		                                data: agriVet1value2,
+     										backgroundColor: red,
+     									
+     										
+     					
+     		                            },
+     									{
+     										label: "Fruitbearing",
+     		                                data: agriVet1value3,
+     										backgroundColor: blue,
+     										
+     										
+     					
+     		                            }
+     									
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: true,
+     									usePointStyle: true,
+     									
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     								 
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 7,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     								 
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
 
 
+     	});	
 
+    //enf agriVet1  
 
+    //start agriVet2
+
+     	let agriVet2Label = agriVet2.map(d=> d.Year);
+        let agriVet2value = agriVet2.map(d=> d.leaf);
+		let agriVet2value2 = agriVet2.map(d=> d.root);
+		let agriVet2value3 = agriVet2.map(d=> d.fruit);
+
+		let getagriVet2Chart = document.getElementById('agriVet2Chart').getContext("2d");
+     	let agriVet2Chart = new Chart(getagriVet2Chart, {
+
+     		 type: 'bar',
+     		                    data: {
+     		                        labels: agriVet2Label,
+     		                        datasets: [
+     		                            {
+     										label: "Leafy Stem Vegetables",
+     		                                data: agriVet2value,
+     										backgroundColor: green,
+     										borderColor:'#259b35',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     										
+     					
+     		                            },
+     									{
+     										label: "Root, Bulb and Tuberous",
+     		                                data: agriVet2value2,
+     										
+     										borderColor: '#ef5b15',
+     										backgroundColor:red,
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     					
+     		                            },
+     									{
+     										label: "Fruitbearing",
+     		                                data: agriVet2value3,
+     										backgroundColor:blue,
+     										borderColor: '#af2f9a',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     					
+     		                            }
+     									
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: false,
+     									usePointStyle: true,
+     									labels: {
+     										 
+     										  
+     										  boxWidth: 20,
+     										  boxHeight: 2
+     										}
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     								 stacked: true,
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 5,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     								 stacked: true,
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
+     							
 
 
      	});
 
 
+    //End agriVet2
+
+    //start agriVet3 
+
+    	let agriVet3Label = agriVet3.map(d=> d.Year);
+        let agriVet3value = agriVet3.map(d=> d.leaf);
+		let agriVet3value2 = agriVet3.map(d=> d.root);
+		let agriVet3value3 = agriVet3.map(d=> d.fruit);
 
 
-    //end agri 3 graph 
+		let getagriVet3Chart = document.getElementById('agriVet3Chart').getContext("2d");
+     	let agriVet3Chart = new Chart(getagriVet3Chart, {
+
+
+     		 type: 'line',
+     		                    data: {
+     		                        labels: agriVet3Label,
+     		                        datasets: [
+     		                            {
+     										label: "Leafy Stem Vegetables",
+     		                                data: agriVet3value,
+     										backgroundColor: green,
+     										borderColor:'#ef5b15',
+     										pointRadius: 3,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     										
+     					
+     		                            },
+     									{
+     										label: "Root, Bulb and Tuberous",
+     		                                data: agriVet3value2,
+     										
+     										borderColor: '#259b35',
+     										backgroundColor:red,
+     										pointRadius: 3,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     					
+     		                            },
+     									{
+     										label: "Fruitbearing",
+     		                                data: agriVet3value3,
+     										backgroundColor:blue,
+     										borderColor: '#af2f9a',
+     										pointRadius: 3,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     					
+     		                            }
+     									
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: false,
+     									usePointStyle: true,
+     									
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     								 stacked: true,
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 7,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     								 stacked: true,
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
+
+
+     	});
+
+
+    //end Agrivet3 
+
+    //start chartVet4 
+
+    	let agriVet4Label = agriVet4.map(d=> d.Year);
+        let agriVet4value = agriVet4.map(d=> d.buffalo);
+		let agriVet4value2 = agriVet4.map(d=> d.cattle);
+
+		let getagriVet4Chart = document.getElementById('agriVet4Chart').getContext("2d");
+     	let agriVet4Chart = new Chart(getagriVet4Chart, {
+
+     		 type: 'bar',
+     		                    data: {
+     		                        labels: agriVet4Label,
+     		                        datasets: [
+     		                            {
+     										label: "Buffalo",
+     		                                data: agriVet4value,
+     										backgroundColor: '#FFEE58',
+     										borderColor:'#FFEE58',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     										
+     					
+     		                            },
+     									{
+     										label: "Cattle",
+     		                                data: agriVet4value2,
+     										
+     										borderColor: '#00A8F0',
+     										backgroundColor:'#00A8F0',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     					
+     		                            },
+     												
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: true,
+     									usePointStyle: true,
+     									
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     								 
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 5,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     								 
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
+
+     	});
+
+    //end chartVet4 
+
+    //Start chart5 
+
+    	let agriVet5Label = agriVet5.map(d=> d.Year);
+        let agriVet5value = agriVet5.map(d=> d.pig);
+		let agriVet5value2 = agriVet5.map(d=> d.gs);
+
+		let getagriVet5Chart = document.getElementById('agriVet5Chart').getContext("2d");
+     	let agriVet5Chart = new Chart(getagriVet5Chart, {
+
+     		 type: 'bar',
+     		                    data: {
+     		                        labels: agriVet5Label,
+     		                        datasets: [
+     		                            {
+     										label: "Pig",
+     		                                data: agriVet5value,
+     										backgroundColor: '#fd837b',
+     										borderColor:'#fd837b',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     										
+     					
+     		                            },
+     									{
+     										label: "Goat and Sheep",
+     		                                data: agriVet5value2,
+     										
+     										borderColor: '#00688b',
+     										backgroundColor:'#00688b',
+     										pointRadius: 5,
+     										pointBorderColor:'#7e807e',
+     										pointBorderwidth:1,
+     										fill:true
+     										
+     					
+     		                            },
+     												
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: true,
+     									usePointStyle: true,
+     									
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     								 
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 4,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     								 
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
+
+     	});
+
+
+    //End agriVet5
+
+    //Start AgriVet 6
+
+    	 let agriVet6Label = agriVet6.map(d=> d.Year);
+    	 let agriVet6value = agriVet6.map(d=> d.culturefish);
+    	 let agriVet6value2 = agriVet6.map(d=> d.capturefish);
+
+    	 let getagriVet6Chart = document.getElementById('agriVet6Chart').getContext("2d");
+     	 let agriVet6Chart = new Chart(getagriVet6Chart, {
+
+     	 		 type: 'bar',
+     	 		                    data: {
+     	 		                        labels: agriVet6Label,
+     	 		                        datasets: [
+     	 		                            {
+     	 										label: "Culture fish",
+     	 		                                data: agriVet6value,
+     	 										backgroundColor: '#fbaa1d',
+     	 										borderColor:'#fbaa1d',
+     	 										pointRadius: 5,
+     	 										pointBorderColor:'#7e807e',
+     	 										pointBorderwidth:1,
+     	 										fill:true
+     	 										
+     	 										
+     	 					
+     	 		                            },
+     	 									{
+     	 										label: "Capture fish",
+     	 		                                data: agriVet6value2,
+     	 										
+     	 										borderColor: '#fd837b',
+     	 										backgroundColor:'#fd837b',
+     	 										pointRadius: 5,
+     	 										pointBorderColor:'#7e807e',
+     	 										pointBorderwidth:1,
+     	 										fill:true
+     	 										
+     	 					
+     	 		                            },
+     	 												
+     	 		                                                  
+     	 		                        ]
+     	 								
+     	 		                    },
+     	 		                    plugins: [ChartDataLabels],
+     	 		                    options: {
+     	 		                       
+     	 		                        legend: {
+     	 		                            display: true,
+     	 									usePointStyle: true,
+     	 									
+     	 		                        },
+     	 								maintainAspectRatio: false,
+     	 								scales: {
+     	 		                    yAxes: [{
+     	 								stacked: true,
+     	 		                        ticks: {
+     	 		                            beginAtZero: true,
+     	 		                            maxTicksLimit: 5,
+     	 		                        },
+     	 		                        gridLines: {
+     	 		                            borderDash: [3, 5]
+     	 		                        }
+     	 		                    }],
+     	 		                    xAxes: [{
+     	 								stacked: true, 
+     	 		                        gridLines: {
+     	 		                            drawOnChartArea: false,
+     	 		                        }
+     	 		                    }]
+     	 		                },
+     	 		                plugins: {
+     								        datalabels: {
+     								            align: 'middle',
+     								            color:'#fff'
+
+     								        },
+     								        
+     								    }
+     	 		                        
+     	 		             }
+     	 							
+     	 });
+
+
+    //End agriVet6  
+
+
+    // start agriVet7 
+
+    	let agriVet7Label = agriVet7.map(d=> d.Year);
+        let agriVet7value = agriVet7.map(d=> d.poultry);
+
+        let getagriVet7Chart = document.getElementById('agriVet7Chart').getContext("2d");
+     	let agriVet7Chart = new Chart(getagriVet7Chart, {
+
+
+     		                    type: 'pie',
+     		                    data: {
+     		                        labels: agriVet7Label,
+     		                        datasets: [
+     		                            {
+     										label: "Poultry",
+     		                                data: agriVet7value,
+     										backgroundColor: ['rgba(0,168,240,0.4)',red,yellow],
+     										
+     										pointRadius: 5,
+     										
+     										fill:true			
+     					
+     		                            }
+     									
+     												
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    plugins: [ChartDataLabels],
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: true,
+     									usePointStyle: true,
+     									
+     		                        },
+     								maintainAspectRatio: false,
+
+     								plugins: {
+     								        datalabels: {
+     								            align: 'middle',
+     								            color:'#fff'
+
+     								        },
+     								        
+     								    }
+     							
+     		                        
+     		                    }
+
+
+     	 });
+
+
+    //End agriVet7 
 
     //---Wasting Chart---
         //Create a sub data from main file (sorting list)
