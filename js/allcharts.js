@@ -141,6 +141,7 @@ function buildChart (value) {
                         ]
 						
                     },
+                    plugins: [ChartDataLabels],
                     options: {
                     	scales: {
                     yAxes: [{
@@ -163,6 +164,15 @@ function buildChart (value) {
                             display: true
                         },
                          maintainAspectRatio: false,
+
+                         plugins: {
+     								        datalabels: {
+     								            align: 'middle',
+     								            color:'#fff'
+
+     								        },
+     								        
+     								    }  
 
 
                         
@@ -426,6 +436,7 @@ function buildChart (value) {
      		                        ]
      								
      		                    },
+     		                    plugins: [ChartDataLabels],
      		                    options: {
      		                       
      		                        legend: {
@@ -452,6 +463,15 @@ function buildChart (value) {
      		                        }
      		                    }]
      		                },
+
+     		                plugins: {
+     								        datalabels: {
+     								            align: 'middle',
+     								            color:'#fff'
+
+     								        },
+     								        
+     								    }  
      		                        
      		                    }
 
@@ -517,6 +537,7 @@ function buildChart (value) {
      		                        ]
      								
      		                    },
+     		                    plugins: [ChartDataLabels],
      		                    options: {
      		                       
      		                        legend: {
@@ -548,7 +569,15 @@ function buildChart (value) {
      		                        }
      		                    }]
      		                },
-     		                        
+     		                   
+     		                 plugins: {
+     								        datalabels: {
+     								            align: 'middle',
+     								            color:'#fff'
+
+     								        },
+     								        
+     								    }    
      		                    }
      							
 
@@ -617,6 +646,7 @@ function buildChart (value) {
      		                        ]
      								
      		                    },
+
      		                    options: {
      		                       
      		                        legend: {
