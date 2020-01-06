@@ -56,8 +56,13 @@ Promise.all([
     d3.csv(agriVet7Path),
 ]).then(buildChart);
 
+//*************************************/
 //Chart.js global config
+//*************************************/
 Chart.plugins.unregister(ChartDataLabels); //cogfig Chart.JS label pugin not to show label on all chart by default
+Chart.defaults.global.plugins.deferred.delay = 500; //Global set up for ChartJS plugin: deffer, delay transition: 500
+Chart.defaults.global.plugins.deferred.xOffset = "50%"; //Global set up for ChartJS plugin: deffer, 50% view point to activate plugin
+
 
 //**********************************/
 //Build Chart All ChartJS gose here
