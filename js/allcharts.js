@@ -37,6 +37,7 @@ const agriVet4Path = "data/bc.csv";
 const agriVet5Path = "data/pgs.csv";
 const agriVet6Path = "data/fish.csv";
 const agriVet7Path = "data/poul.csv";
+const lsisSubCategoryPath = "data/lsis_sub_category_overview.csv"
 
 
 Promise.all([
@@ -61,6 +62,7 @@ Promise.all([
     d3.csv(agriVet5Path),
     d3.csv(agriVet6Path),
     d3.csv(agriVet7Path),
+    d3.csv(lsisSubCategoryPath),
 ]).then(buildChart);
 
 //*************************************/
@@ -96,6 +98,7 @@ function buildChart (value) {
     const agriVet5 = value[18];
     const agriVet6 = value[19];
     const agriVet7 = value[20];
+    const lsisSubCategory = value[21];
 
 
     //---Child Mulnutrtion Chart
@@ -1701,7 +1704,7 @@ function buildChart (value) {
             }
         });
 
-        //Creat LSIS Overview Provincial
+        //Create LSIS Overview Provincial
         let getLsisProvincialOverview = document.getElementById('lsisProvincialOverview').getContext("2d");
         let initialChoosedIndicator = LSISIndicator[0];
         let initailValueLSISOverviewSub = lsisIndicatorSub.map(d => d[initialChoosedIndicator])
@@ -1740,7 +1743,7 @@ function buildChart (value) {
             }
         });
 
-        //Creat LSIS Overview Indicator
+        //Create LSIS Overview Indicator
         let getLsisOverviewTrend = document.getElementById('lsisOverviewTrend').getContext("2d");
         let LsisYear = lsisTrend.map(d => d.Year);
         let initialValueLsisTrend = lsisTrend.map(d=> d[initialChoosedIndicator]);
@@ -1822,6 +1825,60 @@ function buildChart (value) {
             addData(lsisProvincialOverview, choosedIndicator, valueLSISOverviewSub);
             addData(lsisOverviewTrend, choosedIndicator, valueLsisTrend);
         }
+
+        //Create LSIS Sub Category Indicator
+        let getLsisSubCategoryOverview = document.getElementById('lsisSubCategoryOverview').getContext("2d");
+        let subCategory = lsisSubCategory.map(d => d.Category);
+        let subIndicator = lsisSubCategory.map(d => d.Stunting);
+        let dataImportLenght = subCategory.length;
+        let newSubCategory = [];
+
+        for (let i = 0; i < dataImportLenght; i++) {
+            newSubCategory.push({x: subCategory[i], y: subIndicator[i]})
+        }
+
+        console.log(newSubCategory);
+        console.log(lsisSubCategory);
+        console.log(subCategory);
+        console.log(subIndicator);
+
+
+        let lsisSubCategoryOverview = new Chart(getLsisSubCategoryOverview, {
+            type: 'line',
+            data: {
+                labels: subCategory,
+                datasets: [
+                    {
+                        label: "Indicator",
+                        data: subIndicator,
+                        backgroundColor: '#80d8ff',
+                        borderColor: '#0ABDE3',
+                        borderWidth: 0,
+                    }
+                
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 5,
+                        },
+                        gridLines: {
+                            borderDash: [3, 5],
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: false,
+                        },
+                    }]
+                },
+                maintainAspectRatio: false,
+            }
+        });
+
 
     });
 };
