@@ -37,7 +37,9 @@ const agriVet4Path = "data/bc.csv";
 const agriVet5Path = "data/pgs.csv";
 const agriVet6Path = "data/fish.csv";
 const agriVet7Path = "data/poul.csv";
-
+const lec1Path = "data/Lect1.csv";
+const lec2Path = "data/lec2.csv";
+const lec3Path = "data/lec3.csv";
 
 Promise.all([
     d3.csv(wastingPath),
@@ -61,6 +63,9 @@ Promise.all([
     d3.csv(agriVet5Path),
     d3.csv(agriVet6Path),
     d3.csv(agriVet7Path),
+    d3.csv(lec1Path),
+    d3.csv(lec2Path),
+    d3.csv(lec3Path),
 ]).then(buildChart);
 
 //*************************************/
@@ -96,6 +101,9 @@ function buildChart (value) {
     const agriVet5 = value[18];
     const agriVet6 = value[19];
     const agriVet7 = value[20];
+    const lec1 = value[21];
+    const lec2 = value[22];
+    const lec3 = value[23];
 
 
     //---Child Mulnutrtion Chart
@@ -991,6 +999,281 @@ function buildChart (value) {
 
 
     //End agriVet7 
+
+    //start Lect1 chart
+
+      	let lec1Label = lec1.map(d=> d.Province);
+        let lec1value = lec1.map(d=> d.rice);
+		let lec1value2 = lec1.map(d=> d.meat);
+		let lec1value3 = lec1.map(d=> d.fish);
+
+		let getlec1Chart = document.getElementById('lec1Chart').getContext("2d");
+     	let lec1Chart = new Chart(getlec1Chart, {
+
+     		   type: 'bar',
+     		                    data: {
+     		                        labels: lec1Label,
+     		                        datasets: [
+     		                            {
+     										label: "Rice",
+     		                                data: lec1value,
+     										backgroundColor: 'rgba(0,168,240,0.9)',
+     										borderColor:'rgba(0,168,240,0.5)',
+     										
+     										lineTension: 0,
+     										fill:false			
+     					
+     		                            },
+     									 {
+     										label: "Meat",
+     		                                data: lec1value2,
+     										backgroundColor: 'rgba(213,51,105,0.8)',
+     										borderColor:'rgba(213,51,105,0.5)',
+     										pointRadius: 3,
+     										lineTension: 0,
+     								
+     										fill:true			
+     					
+     		                            },
+     									 {
+     										label: "Fish",
+     		                                data: lec1value3,
+     										backgroundColor: 'rgba(245,193,14,0.7)',
+     										borderColor:'rgba(245,193,14,0.5)',
+     										pointRadius: 3,
+     										lineTension: 0,
+     										
+     										fill:true			
+     					
+     		                            }
+     									
+     												
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: true,
+     									labels: {
+     												usePointStyle: false
+     											}
+     																		
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     								//stacked: true,
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 8,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     								//stacked: true,
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
+
+     	});
+
+
+
+    //End Lec1 chart 
+
+    //Start lec2 
+    	 let lec2Label = lec2.map(d=> d.Province);
+         let lec2value = lec2.map(d=> d.cerialandbread);
+		 let lec2value2 = lec2.map(d=> d.milkcheeseeggs);
+		 let lec2value3 = lec2.map(d=> d.oilsandfat);
+		 let lec2value4 = lec2.map(d=> d.fruit);
+
+		 let getlec2Chart = document.getElementById('lec2Chart').getContext("2d");
+     	 let lec2Chart = new Chart(getlec2Chart, {
+
+
+     	 	                    type: 'line',
+     	 	                    data: {
+     	 	                        labels: lec2Label,
+     	 	                        datasets: [
+     	 	                            {
+     	 									label: "Cerial and Bread",
+     	 	                                data: lec2value,
+     	 									backgroundColor: 'rgba(0,168,240,0.9)',
+     	 									borderColor:'rgba(0,168,240,0.5)',
+     	 									
+     	 									lineTension: 0,
+     	 									fill:false			
+     	 				
+     	 	                            },
+     	 								 {
+     	 									label: "Milk,Chees,Eeggs",
+     	 	                                data: lec2value2,
+     	 									backgroundColor: 'rgba(213,51,105,0.8)',
+     	 									borderColor:'rgba(213,51,105,0.5)',
+     	 									pointRadius: 3,
+     	 									lineTension: 0,
+     	 							
+     	 									fill:false			
+     	 				
+     	 	                            },
+     	 								 {
+     	 									label: "Oils and Fat",
+     	 	                                data: lec2value3,
+     	 									backgroundColor: 'rgba(245,193,14,0.7)',
+     	 									borderColor:'rgba(245,193,14,0.5)',
+     	 									pointRadius: 3,
+     	 									lineTension: 0,
+     	 									
+     	 									fill:false			
+     	 				
+     	 	                            },
+     	 								{
+     	 									label: "Fruit",
+     	 	                                data: lec2value4,
+     	 									backgroundColor: 'rgba(33,168,27,0.7)',
+     	 									borderColor:'rgba(33,168,27,0.5)',
+     	 									pointRadius: 3,
+     	 									lineTension: 0,		
+     	 									fill:false			
+     	 				
+     	 	                            },
+     	 								
+     	 											
+     	 	                                                  
+     	 	                        ]
+     	 							
+     	 	                    },
+     	 	                    options: {
+     	 	                       
+     	 	                        legend: {
+     	 	                            display: true,
+     	 								labels: {
+     	 											usePointStyle: true
+     	 										}
+     	 																	
+     	 	                        },
+     	 							maintainAspectRatio: false,
+     	 							scales: {
+     	 	                    yAxes: [{
+     	 							//stacked: true,
+     	 	                        ticks: {
+     	 	                            beginAtZero: true,
+     	 	                            maxTicksLimit: 8,
+     	 	                        },
+     	 	                        gridLines: {
+     	 	                            borderDash: [3, 5]
+     	 	                        }
+     	 	                    }],
+     	 	                    xAxes: [{
+     	 							//stacked: true,
+     	 	                        gridLines: {
+     	 	                            drawOnChartArea: false,
+     	 	                        }
+     	 	                    }]
+     	 	                },
+     	 	                        
+     	 	                    }  	 						
+     	 });
+
+
+
+
+    //end lec2 
+    //start lec3 
+    		let lec3Label = lec3.map(d=> d.Province);
+            let lec3value = lec3.map(d=> d.rice);
+			let lec3value2 = lec3.map(d=> d.meat);
+			let lec3value3 = lec3.map(d=> d.fish);
+				
+			let getlec3Chart = document.getElementById('lec3Chart').getContext("2d");
+     	 	let lec3Chart = new Chart(getlec3Chart, {
+
+     	 			 type: 'line',
+     	 			                    data: {
+     	 			                        labels: lec3Label,
+     	 			                        datasets: [
+     	 			                            {
+     	 											label: "Rice",
+     	 			                                data: lec3value,
+     	 											backgroundColor: 'rgba(0,144,241,0.2)',
+     	 											borderColor:'rgba(10,168,240,0.5)',
+     	 											
+     	 											lineTension: 0,
+     	 											fill:true			
+     	 						
+     	 			                            },
+     	 										 {
+     	 											label: "Meat",
+     	 			                                data: lec3value2,
+     	 											backgroundColor: 'rgba(213,51,105,0.2)',
+     	 											borderColor:'rgba(213,51,105,0.5)',
+     	 											pointRadius: 3,
+     	 											lineTension: 0,
+     	 									
+     	 											fill:true			
+     	 						
+     	 			                            },
+     	 										 {
+     	 											label: "Fish",
+     	 			                                data: lec3value3,
+     	 											backgroundColor: 'rgba(245,193,14,0.8)',
+     	 											borderColor:'rgba(245,193,14,0.5)',
+     	 											pointRadius: 3,
+     	 											lineTension: 0,
+     	 											
+     	 											fill:true		
+     	 						
+     	 			                            }
+     	 										
+     	 										
+     	 													
+     	 			                                                  
+     	 			                        ]
+     	 									
+     	 			                    },
+     	 			                    options: {
+     	 			                       
+     	 			                        legend: {
+     	 			                            display: true,
+     	 										labels: {
+     	 													usePointStyle: true
+     	 												}
+     	 																			
+     	 			                        },
+     	 									maintainAspectRatio: false,
+     	 									scales: {
+     	 			                    yAxes: [{
+     	 									//stacked: true,
+     	 			                        ticks: {
+     	 			                            beginAtZero: true,
+     	 			                            maxTicksLimit: 8,
+     	 			                        },
+     	 			                        gridLines: {
+     	 			                            borderDash: [3, 5]
+     	 			                        }
+     	 			                    }],
+     	 			                    xAxes: [{
+     	 									//stacked: true,
+     	 			                        gridLines: {
+     	 			                            drawOnChartArea: false,
+     	 			                        }
+     	 			                    }]
+     	 			                },
+     	 			                        
+     	 			                    }
+     	 	});
+
+
+    //end lec3
 
     //*******************************/
     //START Home Tab Chart
