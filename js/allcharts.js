@@ -1935,6 +1935,16 @@ function buildChart (value) {
         let valueLSISOverview = (lsisOverview.slice().sort((a, b) => b.Value - a.Value)).map(d => d.Value);
         let LSISIndicator = (lsisOverview.slice().sort((a, b) => b.Value - a.Value)).map(d => d.Indicator);
 
+        //Customize selected 1st index of bar chart
+        const lsisOverviewChartLabelLenght = LSISIndicator.length;
+        let initialBackgroundColor = [];
+        for (let i = 0; i < lsisOverviewChartLabelLenght; i++) {
+            initialBackgroundColor.push('#bdbdbd');
+        }
+        initialBackgroundColor[0] = blue;
+
+
+
 
         //Creat LSIS Overview Indicator
         let getLsisOverviewChart = document.getElementById('lsisOverviewChart').getContext("2d");
@@ -1946,7 +1956,7 @@ function buildChart (value) {
                     {
                         label: "Indicator",
                         data: valueLSISOverview,
-                        backgroundColor: '#bdbdbd',
+                        backgroundColor: initialBackgroundColor,
                         borderWidth: 0,
                     }
                 ],
@@ -1970,20 +1980,22 @@ function buildChart (value) {
                     }]
                 },
                 maintainAspectRatio: false,
-                onClick: check,
+                onClick: activateLSISSubChart,
             }
         });
 
         //Creat LSIS Overview Provincial
         let getLsisProvincialOverview = document.getElementById('lsisProvincialOverview').getContext("2d");
+        let initialChoosedIndicator = LSISIndicator[0];
+        let initailValueLSISOverviewSub = lsisIndicatorSub.map(d => d[initialChoosedIndicator])
         let lsisProvincialOverview = new Chart(getLsisProvincialOverview, {
             type: 'bar',
             data: {
                 labels: province,
                 datasets: [
                     {
-                        label: [],
-                        data: [],
+                        label: initialChoosedIndicator,
+                        data: initailValueLSISOverviewSub,
                         backgroundColor: '#80d8ff',
                         borderColor: '#0ABDE3',
                         borderWidth: 0,
@@ -2014,14 +2026,15 @@ function buildChart (value) {
         //Creat LSIS Overview Indicator
         let getLsisOverviewTrend = document.getElementById('lsisOverviewTrend').getContext("2d");
         let LsisYear = lsisTrend.map(d => d.Year);
+        let initialValueLsisTrend = lsisTrend.map(d=> d[initialChoosedIndicator]);
         let lsisOverviewTrend = new Chart(getLsisOverviewTrend, {
             type: 'line',
             data: {
                 labels: LsisYear,
                 datasets: [
                     {
-                        label: [],
-                        data: [],
+                        label: initialChoosedIndicator,
+                        data: initialValueLsisTrend,
                         backgroundColor: '#80d8ff',
                         borderColor: '#0ABDE3',
                         borderWidth: 0,
@@ -2050,7 +2063,8 @@ function buildChart (value) {
             }
         });
 
-        function check(chart) {
+        //Set function for onClick event of LSIS overview chart
+        function activateLSISSubChart(chart) {
             let activePoints = this.getElementsAtEvent(chart);
             let choosedIndicator = LSISIndicator[activePoints[0]._index];
 
@@ -2060,7 +2074,15 @@ function buildChart (value) {
             //Creat LSIS Overview Indicator
             let valueLsisTrend = lsisTrend.map(d=> d[choosedIndicator]);
 
+            //Set viriable to change color on click for bar chart
+            let labelCount = activePoints[0]._chart.data.labels.length;
+            let backgroundColorToChange = [];
+            for (let i = 0; i < labelCount; i++) {
+                backgroundColorToChange.push('#bdbdbd');
+            }
+            backgroundColorToChange[activePoints[0]._index] = blue;
 
+            //Set Function for adding new data to chart
             function addData(chart, dataLabel, data) {
 
                 chart.data.datasets.forEach((datasets) => {
@@ -2071,18 +2093,14 @@ function buildChart (value) {
                 });
                 chart.update();
             }
-            console.log(activePoints);
-            let labelCount = activePoints[0]._chart.data.labels.length;
-            let backgroundColorToChange = [];
-            for (let i = 0; i < labelCount; i++) {
-                backgroundColorToChange.push('#bdbdbd');
-            }
-            backgroundColorToChange[activePoints[0]._index] = blue;
-            console.log(backgroundColorToChange);
+            
+            //Set function to change data based on click
             function changeBackgoundColor (chart, color) {
                 activePoints[0]._chart.config.data.datasets[0].backgroundColor = color;
                 chart.update();
             }
+
+            //Activate all function above to the desired chart
             changeBackgoundColor(lsisOverviewChart, backgroundColorToChange);
             addData(lsisProvincialOverview, choosedIndicator, valueLSISOverviewSub);
             addData(lsisOverviewTrend, choosedIndicator, valueLsisTrend);
