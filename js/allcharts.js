@@ -41,6 +41,12 @@ const lsisSubCategoryPath = "data/lsis_sub_category_overview.csv"
 const lec1Path = "data/Lect1.csv";
 const lec2Path = "data/lec2.csv";
 const lec3Path = "data/lec3.csv";
+const lec4Path = "data/lec4.csv";
+const lec5Path = "data/lec5.csv";
+const lec6Path = "data/lec6.csv";
+const lec7Path = "data/lec7.csv";
+
+
 
 Promise.all([
     d3.csv(wastingPath),
@@ -68,6 +74,10 @@ Promise.all([
     d3.csv(lec1Path),
     d3.csv(lec2Path),
     d3.csv(lec3Path),
+    d3.csv(lec4Path),
+    d3.csv(lec5Path),
+    d3.csv(lec6Path),
+    d3.csv(lec7Path),
 ]).then(buildChart);
 
 //*************************************/
@@ -107,6 +117,11 @@ function buildChart (value) {
     const lec1 = value[22];
     const lec2 = value[23];
     const lec3 = value[24];
+    const lec4 = value[25];
+    const lec5 = value[26];
+    const lec6 = value[27];
+    const lec7 = value[28];
+
 
 
     //---Child Mulnutrtion Chart
@@ -1277,6 +1292,343 @@ function buildChart (value) {
 
 
     //end lec3
+
+    //strt Lec4
+
+    	let lec4Label = lec4.map(d=> d.Province);
+        let lec4value = lec4.map(d=> d.pharmacy);
+		let lec4value2 = lec4.map(d=> d.licensedpharmacy);
+		let lec4value3 = lec4.map(d=> d.medical);
+
+		 let getlec4Chart = document.getElementById('lec4Chart').getContext("2d");
+     	 let lec4Chart = new Chart(getlec4Chart, {
+
+     	 	type: 'bar',
+     	 	                    data: {
+     	 	                        labels: lec4Label,
+     	 	                        datasets: [
+     	 	                            {
+     	 									label: "Pharmacy",
+     	 	                                data: lec4value,
+     	 									backgroundColor: 'rgba(0,144,241,0.9)',
+     	 									borderColor:'rgba(10,168,240,0.5)',
+     	 									
+     	 									lineTension: 0,
+     	 									fill:true			
+     	 				
+     	 	                            },
+     	 								 {
+     	 									label: "Licensed Pharmacy",
+     	 	                                data: lec4value2,
+     	 									backgroundColor: 'rgba(213,51,105,0.9)',
+     	 									borderColor:'rgba(213,51,105,0.5)',
+     	 									pointRadius: 3,
+     	 									lineTension: 0,
+     	 							
+     	 									fill:true			
+     	 				
+     	 	                            },
+     	 								 {
+     	 									label: "Medical",
+     	 	                                data: lec4value3,
+     	 									backgroundColor: 'rgba(245,193,14,1)',
+     	 									borderColor:'rgba(245,193,14,0.5)',
+     	 									pointRadius: 3,
+     	 									lineTension: 0,
+     	 									
+     	 									fill:true		
+     	 				
+     	 	                            }
+     	 								
+     	 								
+     	 											
+     	 	                                                  
+     	 	                        ]
+     	 							
+     	 	                    },
+     	 	                    options: {
+     	 	                       
+     	 	                        legend: {
+     	 	                            display: true,
+     	 								labels: {
+     	 											usePointStyle: true
+     	 										}
+     	 																	
+     	 	                        },
+     	 							maintainAspectRatio: false,
+     	 							scales: {
+     	 	                    yAxes: [{
+     	 							stacked: true,
+     	 	                        ticks: {
+     	 	                            beginAtZero: true,
+     	 	                            maxTicksLimit: 8,
+     	 	                        },
+     	 	                        gridLines: {
+     	 	                            borderDash: [3, 5]
+     	 	                        }
+     	 	                    }],
+     	 	                    xAxes: [{
+     	 							stacked: true,
+     	 	                        gridLines: {
+     	 	                            drawOnChartArea: false,
+     	 	                        }
+     	 	                    }]
+     	 	                },
+     	 	                        
+     	 	                    }
+
+     	 });
+
+    //End Lec4 
+
+    //start Lec5 
+
+    	let lec5Label = lec5.map(d=> d.Province);
+        let lec5value = lec5.map(d=> d.primary);
+		let lec5value2 = lec5.map(d=> d.lower);
+		
+		let getlec5Chart = document.getElementById('lec5Chart').getContext("2d");
+     	let lec5Chart = new Chart(getlec5Chart, {
+
+     		
+     		                    type: 'bar',
+     		                    data: {
+     		                        labels: lec5Label,
+     		                        datasets: [
+     		                            {
+     										label: "primary school in village %",
+     		                                data: lec5value,
+     										backgroundColor: '#ff7675',
+     										
+     										
+     										lineTension: 0,
+     										fill:true			
+     					
+     		                            },
+     									 {
+     										label: "lower secondary school in village %",
+     		                                data: lec5value2,
+     										backgroundColor: '#74b9ff',
+     										
+     										pointRadius: 3,
+     										lineTension: 0,
+     								
+     										fill:true			
+     					
+     		                            },
+     								
+     									
+     												
+     		                                                  
+     		                        ]
+     								
+     		                    },
+     		                    options: {
+     		                       
+     		                        legend: {
+     		                            display: true,
+     									labels: {
+     												usePointStyle: true,
+     												fontSize:9
+     											}
+     																		
+     		                        },
+     								maintainAspectRatio: false,
+     								scales: {
+     		                    yAxes: [{
+     								stacked: true,
+     		                        ticks: {
+     		                            beginAtZero: true,
+     		                            maxTicksLimit: 8,
+     		                        },
+     		                        gridLines: {
+     		                            borderDash: [3, 5]
+     		                        }
+     		                    }],
+     		                    xAxes: [{
+     								stacked: true,
+     		                        gridLines: {
+     		                            drawOnChartArea: false,
+     		                        }
+     		                    }]
+     		                },
+     		                        
+     		                    }
+
+     	 });	
+
+    //end Lec5 
+
+    //start lec 6
+
+
+     	let lec6Label = lec6.map(d=> d.Province);
+        let lec6value = lec6.map(d=> d.l_2003);
+		let lec6value2 = lec6.map(d=> d.l_2008);
+		let lec6value3 = lec6.map(d=> d.l_2013);
+
+		let getlec6Chart = document.getElementById('lec6Chart').getContext("2d");
+     	let lec6Chart = new Chart(getlec6Chart, {
+
+     		type: 'line',
+     		    	 	                    data: {
+     		    	 	                        labels: lec6Label,
+     		    	 	                        datasets: [
+     		    	 	                            {
+     		    	 									label: "2003",
+     		    	 	                                data: lec6value,
+     		    	 									backgroundColor: 'rgba(0,168,240,0.9)',
+     		    	 									fill:false,
+     		    	 									lineTension: 0,
+     		    	 									borderColor: 'rgba(0,168,240,0.3)',
+ 
+     		    	 	                            },
+     		    	 								 {
+     		    	 									label: "2008",
+     		    	 	                                data: lec6value2,
+     		    	 									backgroundColor: 'rgba(213,51,105,0.9)',
+     		    	 									fill:false,
+     		    	 									lineTension: 0,
+     		    	 									borderColor:'rgba(213,51,105,0.3)',
+  
+     		    	 	                            },
+     		    	 								 {
+     		    	 									label: "2013",
+     		    	 	                                data: lec6value3,
+     		    	 									backgroundColor: 'rgba(245,193,14,0.9)',
+     		    	 									fill:false,
+     		    	 									lineTension: 0,
+     		    	 									borderColor: 'rgba(245,193,14,0.3)',
+     	
+ 
+     		    	 	                            },
+                     
+     		    	 	                        ]
+     		    	 							
+     		    	 	                    },
+     		    	 	                    options: {
+     		    	 	                       
+     		    	 	                        legend: {
+     		    	 	                            display: true,
+     		    	 								
+     		    	 																	
+     		    	 	                        },
+     		    	 							maintainAspectRatio: false,
+     		    	 							scales: {
+     		    	 	                    yAxes: [{
+     		    	 							//stacked: true,
+     		    	 	                        ticks: {
+     		    	 	                            beginAtZero: true,
+     		    	 	                            maxTicksLimit: 8,
+     		    	 	                        },
+     		    	 	                        gridLines: {
+     		    	 	                            borderDash: [3, 5]
+     		    	 	                        }
+     		    	 	                    }],
+     		    	 	                    xAxes: [{
+     		    	 							//stacked: true,
+     		    	 	                        gridLines: {
+     		    	 	                            drawOnChartArea: false,
+     		    	 	                        },
+
+     		    	 	                    }]
+     		    	 	                },
+     		    	 	                        
+     		    	 	                    }  	
+     	});
+    //end Lec6 
+
+    //start lec 7
+
+    	let lec7Label = lec7.map(d=> d.Year);
+        let lec7value = lec7.map(d=> d.LaoTai);
+		let lec7value2 = lec7.map(d=> d.MonKhmer);
+		let lec7value3 = lec7.map(d=> d.ChineseTibet);
+		let lec7value4 = lec7.map(d=> d.HmongMien);
+
+		let getlec7Chart = document.getElementById('lec7Chart').getContext("2d");
+     	let lec7Chart = new Chart(getlec7Chart, {
+
+
+     			 type: 'bar',
+     			     	 	                    data: {
+     			     	 	                        labels: lec7Label,
+     			     	 	                        datasets: [
+     			     	 	                            {
+     			     	 									label: "Lao Tai",
+     			     	 	                                data: lec7value,
+     			     	 									backgroundColor: 'rgba(0,168,240,0.9)',
+     			     	 									borderColor:'rgba(0,168,240,0.5)',
+     			     	 									borderWidth:0
+     			    
+     			     	 	                            },
+     			     	 								 {
+     			     	 									label: "Mon Khmer",
+     			     	 	                                data: lec7value2,
+     			     	 									backgroundColor: 'rgba(213,51,105,0.8)',
+     			     	 									borderColor:'rgba(213,51,105,0.5)',
+     			     	 									borderWidth:0
+     			     	 											
+     			     	 				
+     			     	 	                            },
+     			     	 								 {
+     			     	 									label: "Chinese Tibet",
+     			     	 	                                data: lec7value3,
+     			     	 									backgroundColor: 'rgba(245,193,14,0.7)',
+     			     	 									borderColor:'rgba(245,193,14,0.5)',
+     			     	 									borderWidth:0
+     			     	 									
+     			     	 	                            },
+     													 {
+     			     	 									label: "Hmong Mien",
+     			     	 	                                data: lec7value4,
+     			     	 									backgroundColor: 'rgba(13,129,92,0.7)',
+     			     	 									borderColor:'rgba(13,129,92,0.5)',
+     			     	 									borderWidth:0
+     			     	 											
+     			     	 				
+     			     	 	                            },
+     			     	 							
+     			                      
+     			     	 	                        ]
+     			     	 							
+     			     	 	                    },
+     			     	 	                    options: {
+     			     	 	                       
+     			     	 	                        legend: {
+     			     	 	                            display: true,
+     			     	 								labels: {
+     	 													fontSize:9
+     	 													
+     	 													}
+     			     	 																	
+     			     	 	                        },
+     			     	 							maintainAspectRatio: false,
+     			     	 							scales: {
+     			     	 	                    yAxes: [{
+     			     	 							//stacked: true,
+     			     	 	                        ticks: {
+     			     	 	                            beginAtZero: true,
+     			     	 	                            maxTicksLimit: 8,
+     			     	 	                        },
+     			     	 	                        gridLines: {
+     			     	 	                            borderDash: [3, 5]
+     			     	 	                        }
+     			     	 	                    }],
+     			     	 	                    xAxes: [{
+     			     	 							//stacked: true,
+     			     	 	                        gridLines: {
+     			     	 	                            drawOnChartArea: false,
+     			     	 	                        }
+     			     	 	                    }]
+     			     	 	                },
+     			     	 	                        
+     			     	 	                    }  	 			
+
+     	});
+				
+
+    //end lec 7
 
     //*******************************/
     //START Home Tab Chart
