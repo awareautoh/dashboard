@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>NIPN Laos Dashboard</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
-  <link rel="shortcut icon" type="image/png" href="http://example.com/favicon.png"/>
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <!-- BS CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-  <!-- BS OPT THEME -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Import plugin for to show annotation on Chart.js -->
-  <script src="node_modules/chartjs-plugin-annotation/chartjs-plugin-annotation.min.js"></script> <!--Load ChartJS plugin: Annotation from local-->
-  <script src="node_modules/chartjs-plugin-deferred/dist/chartjs-plugin-deferred.min.js"></script> <!--Load ChartJS plugin: defer transition from local-->
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="js/d3_legend.js"></script> <!-- Import script for add legend to map -->
-  <script src="node_modules/d3-sankey/dist/d3-sankey.min.js"></script>  <!-- Add Sankey D3JS -->
-  <script src="https://unpkg.com/topojson@3"></script> <!-- Import TopoJSON to read topoJSON Map file-->
-  <script src="js/allcharts.js"></script>
-  <style>
-    /* Add Initial CSS Here */
-  </style>
+    <title>NIPN Laos Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="http://example.com/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- BS CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- BS OPT THEME -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Import plugin for to show annotation on Chart.js -->
+    <script src="node_modules/chartjs-plugin-annotation/chartjs-plugin-annotation.min.js"></script> <!--Load ChartJS plugin: Annotation from local-->
+    <script src="node_modules/chartjs-plugin-deferred/dist/chartjs-plugin-deferred.min.js"></script> <!--Load ChartJS plugin: defer transition from local-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="js/d3_legend.js"></script> <!-- Import script for add legend to map -->
+    <script src="node_modules/d3-sankey/dist/d3-sankey.min.js"></script>  <!-- Add Sankey D3JS -->
+    <script src="https://unpkg.com/topojson@3"></script> <!-- Import TopoJSON to read topoJSON Map file-->
+    <script src="js/allcharts.js"></script>
+    <style>
+        /* Add Initial CSS Here */
+    </style>
 </head>
 <body>
 
    <header>
-    <div class="header-fixed-bottom-wrap">
-      <div class="header-fixed-bottom">
-        <div class="dropdown ">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Languages
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li><a href="#">English</a></li>
-          <li><a data-toggle="tab" href="#Lao">Lao</a></li>
-        </ul>
+        <div class="header-fixed-bottom-wrap">
+        <div class="header-fixed-bottom">
+            <div class="dropdown ">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Languages
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="#">English</a></li>
+            <li><a data-toggle="tab" href="#Lao">Lao</a></li>
+            </ul>
+            </div>
         </div>
-      </div>
-    </div>
+        </div>
   </header>
   <div class="container">
     <h2><img src="images/laos.png"/> <b class="green">Nutrition</b> Dashboard</h2>
     <nav class="navbar navbar-default">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+        </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -62,240 +62,236 @@
     </div> 
 </nav>
     <div class="tab-content">
-      <div id="home" class="tab-pane fade in active">
+        <div id="home" class="tab-pane fade in active">
             <div class="row">
-              <div class="col-lg-12">
-                <div class="card" id="header">
-                  <h1 class="top">Overview of Nutrition</h1>
+                <div class="col-lg-12">
+                    <div class="card" id="header">
+                        <h1 class="top">Overview of Nutrition</h1>
+                    </div>
                 </div>
-              </div>
             </div>
             <div class="row">
-              <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card" id="highLight" style="background-color: #FFCA22; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
-                  <div class="icon1"></div>
-                  <h1>44.9%</h1>
-                  <p>Exclusive breastfeeding under 6 months</p>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="card" id="highLight" style="background-color: #FFCA22; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                        <div class="icon1"></div>
+                        <h1>44.9%</h1>
+                        <p>Exclusive breastfeeding under 6 months</p>
+                    </div>
                 </div>
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="card" id="highLight" style="background-color:#6CE2FF; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                        <div class="icon2"></div>
+                        <h1>21.1%</h1>
+                        <p>Undererweight prevalence</p> 
+                    </div>
               </div>
               <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card" id="highLight" style="background-color:#6CE2FF; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
-                  <div class="icon2"></div>
-                  <h1>21.1%</h1>
-                  <p>Undererweight prevalence</p> 
-                </div>
+                    <div class="card" id="highLight" style="background-color: #F15D4A; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                        <div class="icon3"></div>
+                        <h1>9%</h1>
+                        <p>Overweight prevalence</p> 
+                    </div>
               </div>
               <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card" id="highLight" style="background-color: #F15D4A; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
-                  <div class="icon3"></div>
-                  <h1>9%</h1>
-                  <p>Overweight prevalence</p> 
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card" id="highLight" style="background-color: #919AA3; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
-                  <div class="icon4"></div>
-                  <h1>45.3%</h1>
-                  <p>Minimum Diet Diversity </p> 
-                </div>
+                    <div class="card" id="highLight" style="background-color: #919AA3; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
+                        <div class="icon4"></div>
+                        <h1>45.3%</h1>
+                        <p>Minimum Diet Diversity </p> 
+                    </div>
               </div>
             </div>
             <!-- Section 2.1  -->
             <!--Section 1 Key Nutrition Indicator-->
             <div class="row">
                 <div class="col-lg-12">
-                  <div class="card" id="sec1">
-                    <h1 class="sec1">Current Status of Key Nutrition Indicators</h1>
-                  </div>
+                    <div class="card" id="sec1">
+                        <h1 class="sec1">Current Status of Key Nutrition Indicators</h1>
+                    </div>
                 </div>
                 <div class="col-lg-12">
-                  <div class="cardChart">
-                    <h3 class="topic" style="padding-top: 10px;">Child Mulnutrition <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h3> 
-                    <div style="position: relative; display: block; height: 360px; width: auto;">
-
-                      <canvas id="wastingAndOverweightChart"></canvas>
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;">Child Mulnutrition <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h3> 
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="wastingAndOverweightChart"></canvas>
+                        </div>
+                        <div class= "toolbar" style="text-align: center;">
+                            <button type="button" id='Chart1SortWasting' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Wasting</button>
+                            <button type="button" id='Chart1SortOverWeight' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Overweight</button>
+                        </div>
                     </div>
-                    <div class= "toolbar" style="text-align: center;">
-                      <button type="button" id='Chart1SortWasting' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Wasting</button>
-                      <button type="button" id='Chart1SortOverWeight' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Overweight</button>
-                    </div>
-                  </div>                 
                 </div>
                 <div class="col-lg-12">
-                  <div class="cardChart">
-                    <h3 class="topic" style="padding-top: 10px;"> Women Undernutrtion <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
-                    <div style="position: relative; display: block; height: 360px; width: auto;">
-                      <canvas id="womenAnemia"></canvas>
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;"> Women Undernutrtion <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="womenAnemia"></canvas>
+                        </div>
+                        <h3 class="topic" style="padding-top: 10px;">Prevalence of Overweight and Obesity <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="womenOverweightAndObese"></canvas>
+                        </div>
                     </div>
-                    <h3 class="topic" style="padding-top: 10px;">Prevalence of Overweight and Obesity <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
-                    <div style="position: relative; display: block; height: 360px; width: auto;">
-                      <canvas id="womenOverweightAndObese"></canvas>
-                    </div>
-                  </div>                 
                 </div>
             </div>
             <!-- Section 2: Immediate determinants of under nutrtiotion-->
             <div class="row">
-              <div class="col-lg-12">
-                <div class="card" id="sec2">
-                  <h1>Immediate determinants of undernutrition</h1>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="cardChart">
-                  <h3 class="topic" style="padding-top: 10px;">Infant and Young Child Feeding Practices <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h3>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="IYCFChart"></canvas>
-                  </div>
-                  <h3 class="topic" style="padding-top: 10px;">Infant and Young Child Feeding Practices <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h3>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="miniDietChart"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                  <h4 class="topic" style="padding-top: 10px;"> Women Dietary Diversity <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="womenDietChart"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> Open Defaction <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                      <svg id="openDefaceMap" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 360 360"></svg>
+                <div class="col-lg-12">
+                    <div class="card" id="sec2">
+                        <h1>Immediate determinants of undernutrition</h1>
                     </div>
-                  </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;">Infant and Young Child Feeding Practices <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="IYCFChart"></canvas>
+                        </div>
+                        <h3 class="topic" style="padding-top: 10px;">Infant and Young Child Feeding Practices <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="miniDietChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Women Dietary Diversity <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="womenDietChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Open Defaction <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <svg id="openDefaceMap" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 360 360"></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Section 3: Which nutrition-specific interventions are implemented? -->
 
             <div class="row">
-              <div class="col-lg-12">
-                <div class="card" id="sec3">
-                  <h1>Which nutrition-specific interventions are implemented?</h1>
+                <div class="col-lg-12">
+                    <div class="card" id="sec3">
+                        <h1>Which nutrition-specific interventions are implemented?</h1>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> Vitamin A Supplementation Coverage <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="vitAChart"></canvas>
-                  </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Vitamin A Supplementation Coverage <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="vitAChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> Children who received Deworming Coverage <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="dewormingChart"></canvas>
-                  </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Children who received Deworming Coverage <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="dewormingChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="cardChart">
-                  <h3 class="topic" style="padding-top: 10px;"> Iron/Folic Acid Supplementation Coverage <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="ironFolicChart"></canvas>
-                  </div>
+                <div class="col-lg-12">
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;"> Iron/Folic Acid Supplementation Coverage <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="ironFolicChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-
-
             </div>
 
             <!-- Section 4: Which nutrition-sensitive interventions are implemented? -->
             <div class="row">
-              <div class="col-lg-12">
-                <div class="card" id="sec1">
-                  <h1>Which nutrition-sensitive interventions are implemented?</h1>
+                <div class="col-lg-12">
+                    <div class="card" id="sec1">
+                        <h1>Which nutrition-sensitive interventions are implemented?</h1>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> Status of Women <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <svg id="womenStatusMap" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 360 360"></svg>
-                  </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Status of Women <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <svg id="womenStatusMap" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 360 360"></svg>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                  <h4 class="topic" style="padding-top: 10px;"> Social Economic Status <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="socioStatusChart"></canvas>
-                  </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Social Economic Status <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="socioStatusChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
             <!-- Section Map Sunting -->
             <div class="row">
-              <div class="col-lg-6">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> Stunting 2011 <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <svg id="test" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 360 360"></svg>
-                  </div>
-                </div>                 
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> Stunting 2017 <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <svg id="test1" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 360 360"></svg>
-                  </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Stunting 2011 <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <svg id="test" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 360 360"></svg>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Stunting 2017 <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <svg id="test1" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 360 360"></svg>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <!-- Section 5: Provincial and Using DHIS2  -->
             <div class="row">
-              <div class="col-lg-6">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> Provincial Nutrition Commitee <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                    <canvas id="proNutriCommitChart"></canvas>
-                  </div>
-                </div>                 
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> District Using DHIS2 <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                  <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                    <canvas id="districtDHIS2Chart"></canvas>
-                  </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Provincial Nutrition Commitee <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <canvas id="proNutriCommitChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="col-lg-6">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> District Using DHIS2 <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <canvas id="districtDHIS2Chart"></canvas>
+                        </div>
+                    </div>
+                </div>
             <!-- Section6: reference -->
-              <div class="col-lg-12">
-                <div class="cardChart">
-                   <h4 class="topic" style="padding-top: 10px;"> Data Source <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                    <ul class="list-group">
-                      <li class="list-group-item">(1) Lao Social Indicator Survey (2011)</li>
-                      <li class="list-group-item">(2) Lao Expenditure and Consumption Survey (2013)</li>
-                      <li class="list-group-item">(3) Lao Social Indicator Survey  II (2017)</li>
-                      <li class="list-group-item">(4) Lao Education and Sport Database (2017)</li>
-                      <li class="list-group-item">(5) Nutrition Sentinel Surveillance1 (2019)</li>
-                      <li class="list-group-item">(6) Multiple Indicator Cluster Survey (MICS3, 2006) </li>
-                    </ul>
-                  </div>
-                </div>                 
-              </div>
-            </div> <!-- end home  -->
+                <div class="col-lg-12">
+                    <div class="cardChart">
+                        <h4 class="topic" style="padding-top: 10px;"> Data Source <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">(1) Lao Social Indicator Survey (2011)</li>
+                            <li class="list-group-item">(2) Lao Expenditure and Consumption Survey (2013)</li>
+                            <li class="list-group-item">(3) Lao Social Indicator Survey  II (2017)</li>
+                            <li class="list-group-item">(4) Lao Education and Sport Database (2017)</li>
+                            <li class="list-group-item">(5) Nutrition Sentinel Surveillance1 (2019)</li>
+                            <li class="list-group-item">(6) Multiple Indicator Cluster Survey (MICS3, 2006) </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end home  -->
 
             <div id="menu1" class="tab-pane fade"> <!--  start menu 2 -->
 
-            	<div class="row">
-	              <div class="col-lg-12">
-	                <div class="card" id="header">
-	                  <h1 class="top">LSIS II Survey 2017</h1>
-	                </div>
-	              </div>
-            	</div>
-		        <div class="row">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card" id="header">
+                      <h1 class="top">LSIS II Survey 2017</h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
               <div class="col-lg-6">
                   <div class="cardChart">
                     <div class="cardChart">
@@ -320,30 +316,66 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-12">
+            <div class="col-lg-12">
                 <div class="cardChart">
-                  <div class="cardChart">
-                      <h3 class="topic" style="padding-top: 10px;">
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;">
                         Provincial Overview
-                      </h3>
-                      <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                      <canvas id="lsisProvincialOverview"></canvas>
-                      </div>
-                  </div>
+                        </h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <canvas id="lsisProvincialOverview"></canvas>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-12">
+            </div>
+            <div class="col-lg-6">
                 <div class="cardChart">
-                  <div class="cardChart">
-                      <h3 class="topic" style="padding-top: 10px;">
-                        Sub Category Overview
-                      </h3>
-                      <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                      <canvas id="lsisSubCategoryOverview"></canvas>
-                      </div>
-                  </div>
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;">
+                        Area
+                        </h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <canvas id="lsisSubCategoryArea"></canvas>
+                        </div>
+                    </div>
                 </div>
-              </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="cardChart">
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;">
+                        Education
+                        </h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <canvas id="lsisSubCategoryEducation"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="cardChart">
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;">
+                        Ethnicity
+                        </h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <canvas id="lsisSubCategoryEthnicity"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="cardChart">
+                    <div class="cardChart">
+                        <h3 class="topic" style="padding-top: 10px;">
+                        Wealth Index Quintile
+                        </h3>
+                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <canvas id="lsisSubCategoryWealth"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
               <div class="col-lg-12">
                 <div class="cardChart">
                   <div class="cardChart">
@@ -380,74 +412,74 @@
                   </div>
                 </div> 
               </div>
-		        </div>
-		      </div> <!-- Menu 1  -->
+                </div>
+              </div> <!-- Menu 1  -->
         
          
-	        <div id="menu2" class="tab-pane fade"> <!-- Start senitel --> 
+            <div id="menu2" class="tab-pane fade"> <!-- Start senitel --> 
 
-				<div class="row">
-	              <div class="col-lg-12">
-	                <div class="card" id="header">
-	                  <h1 class="top">Nutrition Sentinel Survey 2018</h1>
-	                </div>
-	              </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card" id="header">
+                      <h1 class="top">Nutrition Sentinel Survey 2018</h1>
+                    </div>
+                  </div>
         </div>
-	        	<div class="row">
-	        		<div class="col-sm-12 col-md-3 col-lg-3">
-	        			<div class="cardChart">
-	        				<h4 class="topic" style="padding-top: 10px; color: #fff;background-color: #46BEBC;">
-		                    Stunting
-		                  	</h4>
+                <div class="row">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px; color: #fff;background-color: #46BEBC;">
+                            Stunting
+                              </h4>
                       <div style="position: relative; display: block; height: 100px; padding-bottom: 10px;">  
-		                  <canvas id="stunts"></canvas>
-	                    </div>
-	        			</div>
-                	</div>
-	        		<div class="col-sm-12 col-md-3 col-lg-3">
-						<div class="cardChart">
-	        				<h4 class="topic" style="padding-top: 10px; color: #fff;background-color: #EA528F;">
-		                    Wasting
-		                  </h4>
-		                   <div style="position: relative; display: block; height: 100px; padding-bottom: 10px;">  
+                          <canvas id="stunts"></canvas>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px; color: #fff;background-color: #EA528F;">
+                            Wasting
+                          </h4>
+                           <div style="position: relative; display: block; height: 100px; padding-bottom: 10px;">  
                       <canvas id="wastingS"></canvas>
                       </div>
-	        			</div>
-	        		</div>
-	        		<div class="col-sm-12 col-md-3 col-lg-3">
-	        			<div class="cardChart">
-	        				<h4 class="topic" style="padding-top: 10px; color: #fff;background-color: #F27B53;">
-		                    Underweight
-		                  </h4>
-		                    <div style="position: relative; display: block; height: 100px; padding-bottom: 10px;">  
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px; color: #fff;background-color: #F27B53;">
+                            Underweight
+                          </h4>
+                            <div style="position: relative; display: block; height: 100px; padding-bottom: 10px;">  
                       <canvas id="underweightS"></canvas>
                       </div>
-	        			</div>
-	        		</div>
-	        		<div class="col-sm-12 col-md-3 col-lg-3">
-	        			<div class="cardChart">
-	        				<h4 class="topic" style="padding-top: 10px; color: #fff;background-color: #0EADD4;">
-		                    Overweight
-		                  </h4>
-		                   </h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px; color: #fff;background-color: #0EADD4;">
+                            Overweight
+                          </h4>
+                           </h4>
                         <div style="position: relative; display: block; height: 100px; padding-bottom: 10px;">  
                       <canvas id="overweightS"></canvas>
                       </div>
-	        			</div>
-	        		</div>
-	        	</div>
-	        	<div class="row">
-	        		
-					 <div class="col-lg-12">
-		                <div class="cardChart">
-		                  <h3 class="topic" style="padding-top: 10px;"> Acute Malnutrition (MUAC &/or bilateral oedema) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
-		                  <div style="position: relative; display: block; height: 360px; width: auto;">
-		                    <canvas id="changechart here"></canvas>
-		                  </div>
-		                </div>
-              		</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                     <div class="col-lg-12">
+                        <div class="cardChart">
+                          <h3 class="topic" style="padding-top: 10px;"> Acute Malnutrition (MUAC &/or bilateral oedema) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
+                          <div style="position: relative; display: block; height: 360px; width: auto;">
+                            <canvas id="changechart here"></canvas>
+                          </div>
+                        </div>
+                      </div>
 
-              		<div class="col-lg-12">
+                      <div class="col-lg-12">
                 <div class="cardChart">
                    <h4 class="topic" style="padding-top: 10px;"> Vitamin A supplementation among children under 2 years of age <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
                   <div style="position: relative; display: block; height: 360px; width: auto;">
@@ -489,14 +521,14 @@
                 </div>
 
                 <div class="col-lg-12">
-	                <div class="cardChart">
-	                   <h4 class="topic" style="padding-top: 10px;"> Access to Drinking Water <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-	                  <div style="position: relative; display: block; height: 360px; width: auto;">
-	                    <canvas id="changechart"></canvas>
-	                  </div>
-	                </div>
-              	</div>
-              	<div class="col-lg-6">
+                    <div class="cardChart">
+                       <h4 class="topic" style="padding-top: 10px;"> Access to Drinking Water <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                      <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <canvas id="changechart"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
                 <div class="cardChart">
                    <h4 class="topic" style="padding-top: 10px;"> Handwashing Facilities with Soap and Water <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
                  <div style="position: relative; display: block; height: 360px; width: auto;">
@@ -514,15 +546,15 @@
                 </div>
 
                 <div class="col-lg-12">
-	                <div class="cardChart">
-	                   <h4 class="topic" style="padding-top: 10px;"> HFIAS (HH food insecurity access scale) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-	                  <div style="position: relative; display: block; height: 360px; width: auto;">
-	                    <canvas id="changechart"></canvas>
-	                  </div>
-	                </div>
-              	</div>
+                    <div class="cardChart">
+                       <h4 class="topic" style="padding-top: 10px;"> HFIAS (HH food insecurity access scale) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                      <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <canvas id="changechart"></canvas>
+                      </div>
+                    </div>
+                  </div>
 
-              	<div class="col-lg-6">
+                  <div class="col-lg-6">
                 <div class="cardChart">
                    <h4 class="topic" style="padding-top: 10px;">Months of adequate HH food provisioning <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
                  <div style="position: relative; display: block; height: 360px; width: auto;">
@@ -557,43 +589,43 @@
                 </div>
 
                  <div class="col-lg-12">
-	                <div class="cardChart">
-	                   <h4 class="topic" style="padding-top: 10px;"> Availability of specific foods in markets <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-	                  <div style="position: relative; display: block; height: 360px; width: auto;">
-	                    <canvas id="changechart"></canvas>
-	                  </div>
-	                </div>
-              	</div>
-              	<div class="col-lg-12">
-	                <div class="cardChart">
-	                   <h4 class="topic" style="padding-top: 10px;"> Price of specific foods in markets <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-	                  <div style="position: relative; display: block; height: 360px; width: auto;">
-	                    <canvas id="changechart"></canvas>
-	                  </div>
-	                </div>
-              	</div>
+                    <div class="cardChart">
+                       <h4 class="topic" style="padding-top: 10px;"> Availability of specific foods in markets <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                      <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <canvas id="changechart"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="cardChart">
+                       <h4 class="topic" style="padding-top: 10px;"> Price of specific foods in markets <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                      <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <canvas id="changechart"></canvas>
+                      </div>
+                    </div>
+                  </div>
 
 
 
-	        	</div> <!-- end row -->
-	        	<br/>
+                </div> <!-- end row -->
+                <br/>
 
 
 
 
 
-			
+            
 
-	        </div><!-- end senitel Seurvey -->
+            </div><!-- end senitel Seurvey -->
 
-	        <div id="menu3" class="tab-pane fade"> <!-- Start LECS Survey  -->
-			
-			     <div class="row">
-	              <div class="col-lg-12">
-	                <div class="card" id="header">
-	                  <h1 class="top">LECS Survey</h1>
-	                </div>
-	              </div>
+            <div id="menu3" class="tab-pane fade"> <!-- Start LECS Survey  -->
+            
+                 <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card" id="header">
+                      <h1 class="top">LECS Survey</h1>
+                    </div>
+                  </div>
             </div>
               <div class="row">
 
@@ -702,7 +734,7 @@
               </div>
               <br/>
 
-	        </div> <!-- End LECS Survey  -->
+            </div> <!-- End LECS Survey  -->
 
            <div id="menu4" class="tab-pane fade"> <!-- start Agriculture -->
              <div class="row">
@@ -831,8 +863,8 @@
            </div> <!-- End agriculture -->
 
 
-	        <!-- For Lao Language    -->
-	        <div id="Lao" class="tab-pane fade"> Lao Language</div>
+            <!-- For Lao Language    -->
+            <div id="Lao" class="tab-pane fade"> Lao Language</div>
              <!-- End Lao languauge     -->
 
 

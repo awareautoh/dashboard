@@ -14,6 +14,10 @@ const red = "#FF99A6";
 const blue = "#80d8ff";
 const yellow = "#ffee58";
 const green = "#66bb6a";
+const alphaRed = "#FF99A6b3";
+const alphaBlue = "#80d8ffb3";
+const alphaYellow = "#ffee58b3";
+const alphaGreen = "#66bb6ab3";
 
 //File path for import data
 const wastingPath = "data/wasting_unsorted.csv";
@@ -37,10 +41,13 @@ const agriVet4Path = "data/bc.csv";
 const agriVet5Path = "data/pgs.csv";
 const agriVet6Path = "data/fish.csv";
 const agriVet7Path = "data/poul.csv";
-const lsisSubCategoryPath = "data/lsis_sub_category_overview.csv"
 const lec1Path = "data/Lect1.csv";
 const lec2Path = "data/lec2.csv";
 const lec3Path = "data/lec3.csv";
+const lsisSubCategoryAreaPath = "data/lsis_sub_category_Area.csv";
+const lsisSubCategoryEducationPath = "data/lsis_sub_category_Education.csv";
+const lsisSubCategoryEthnicityPath = "data/lsis_sub_category_Ethnicity.csv";
+const lsisSubCategoryWealthPath = "data/lsis_sub_category_Wealth.csv";
 
 Promise.all([
     d3.csv(wastingPath),
@@ -64,10 +71,13 @@ Promise.all([
     d3.csv(agriVet5Path),
     d3.csv(agriVet6Path),
     d3.csv(agriVet7Path),
-    d3.csv(lsisSubCategoryPath),
     d3.csv(lec1Path),
     d3.csv(lec2Path),
     d3.csv(lec3Path),
+    d3.csv(lsisSubCategoryAreaPath),
+    d3.csv(lsisSubCategoryEducationPath),
+    d3.csv(lsisSubCategoryEthnicityPath),
+    d3.csv(lsisSubCategoryWealthPath),
 ]).then(buildChart);
 
 //*************************************/
@@ -103,10 +113,13 @@ function buildChart (value) {
     const agriVet5 = value[18];
     const agriVet6 = value[19];
     const agriVet7 = value[20];
-    const lsisSubCategory = value[21];
-    const lec1 = value[22];
-    const lec2 = value[23];
-    const lec3 = value[24];
+    const lec1 = value[21];
+    const lec2 = value[22];
+    const lec3 = value[23];
+    const lsisSubCategoryArea = value[24];
+    const lsisSubCategoryEducation = value[25];
+    const lsisSubCategoryEthnicity = value[26];
+    const lsisSubCategoryWealth = value[27];
 
 
     //---Child Mulnutrtion Chart
@@ -2077,6 +2090,18 @@ function buildChart (value) {
             //Creat LSIS Overview Indicator
             let valueLsisTrend = lsisTrend.map(d=> d[choosedIndicator]);
 
+            //Create LSIS Sub Category Area
+            let valueLsisSubCategoryArea = lsisSubCategoryArea.map(d=> d[choosedIndicator]);
+
+            //Create LSIS Sub Category Education
+            let valueLsisSubCategoryEducation = lsisSubCategoryEducation.map(d=> d[choosedIndicator]);
+
+            //Create LSIS Sub Category Ethinicity
+            let valueLsisSubCategoryEthnicity = lsisSubCategoryEthnicity.map(d=> d[choosedIndicator]);
+
+            //Create LSIS Sub Category Wealth
+            let valueLsisSubCategoryWealth = lsisSubCategoryWealth.map(d=> d[choosedIndicator]);
+
             //Set viriable to change color on click for bar chart
             let labelCount = activePoints[0]._chart.data.labels.length;
             let backgroundColorToChange = [];
@@ -2086,7 +2111,7 @@ function buildChart (value) {
             backgroundColorToChange[activePoints[0]._index] = blue;
 
             //Set Function for adding new data to chart
-            function addData(chart, dataLabel, data) {
+            function updateData(chart, dataLabel, data) {
 
                 chart.data.datasets.forEach((datasets) => {
                     datasets.label = dataLabel;
@@ -2094,6 +2119,19 @@ function buildChart (value) {
                 chart.data.datasets.forEach((dataset) => {
                     dataset.data = data;
                 });
+                chart.update();
+            }
+
+            //Function updateData specifc for polar chart on LSIS tab
+            function updateDataPolar(chart, dataLabel, data) {
+
+                chart.data.datasets.forEach((datasets) => {
+                    datasets.label = dataLabel;
+                });
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data = data;
+                });
+                chart.options.title.text = dataLabel;
                 chart.update();
             }
             
@@ -2105,65 +2143,139 @@ function buildChart (value) {
 
             //Activate all function above to the desired chart
             changeBackgoundColor(lsisOverviewChart, backgroundColorToChange);
-            addData(lsisProvincialOverview, choosedIndicator, valueLSISOverviewSub);
-            addData(lsisOverviewTrend, choosedIndicator, valueLsisTrend);
+            updateData(lsisProvincialOverview, choosedIndicator, valueLSISOverviewSub);
+            updateData(lsisOverviewTrend, choosedIndicator, valueLsisTrend);
+            updateDataPolar(lsisSubCategoryAreaChart, choosedIndicator, valueLsisSubCategoryArea);
+            updateDataPolar(lsisSubCategoryEducationChart, choosedIndicator, valueLsisSubCategoryEducation);
+            updateDataPolar(lsisSubCategoryEthnicityChart, choosedIndicator, valueLsisSubCategoryEthnicity);
+            updateDataPolar(lsisSubCategoryWealthChart, choosedIndicator, valueLsisSubCategoryWealth);
+
         }
 
         //Create LSIS Sub Category Indicator
-        let getLsisSubCategoryOverview = document.getElementById('lsisSubCategoryOverview').getContext("2d");
-        let subCategory = lsisSubCategory.map(d => d.Category);
-        let subIndicator = lsisSubCategory.map(d => d.Stunting);
-        let dataImportLenght = subCategory.length;
-        let newSubCategory = [];
 
-        for (let i = 0; i < dataImportLenght; i++) {
-            newSubCategory.push({x: subCategory[i], y: subIndicator[i]})
-        }
-
-        console.log(newSubCategory);
-        console.log(lsisSubCategory);
-        console.log(subCategory);
-        console.log(subIndicator);
-
-
-        let lsisSubCategoryOverview = new Chart(getLsisSubCategoryOverview, {
-            type: 'line',
+        //LSIS Sub Category Area
+        let getLsisSubCategoryArea = document.getElementById('lsisSubCategoryArea').getContext("2d");
+        let initialValueLsisArea = lsisSubCategoryArea.map(d=> d[initialChoosedIndicator]);
+        let categoryArea = lsisSubCategoryArea.map(d => d.Sub_Category);
+        let lsisSubCategoryAreaChart = new Chart(getLsisSubCategoryArea, {
+            type: 'polarArea',
             data: {
-                labels: subCategory,
+                labels: categoryArea,
                 datasets: [
                     {
-                        label: "Indicator",
-                        data: subIndicator,
-                        backgroundColor: '#80d8ff',
-                        borderColor: '#0ABDE3',
+                        label: initialChoosedIndicator,
+                        data: initialValueLsisArea,
+                        backgroundColor: [alphaBlue, alphaGreen, alphaRed, alphaYellow],
                         borderWidth: 0,
                     }
                 
                 ]
             },
             options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 5],
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawOnChartArea: false,
-                        },
-                    }]
-                },
                 maintainAspectRatio: false,
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: initialChoosedIndicator,
+                }
             }
         });
 
+        //LSIS Sub Category Education
+        let getLsisSubCategoryEducation = document.getElementById('lsisSubCategoryEducation').getContext("2d");
+        let initialValueLsisEducation = lsisSubCategoryEducation.map(d=> d[initialChoosedIndicator]);
+        let categoryEducation= lsisSubCategoryEducation.map(d => d.Sub_Category);
+        let lsisSubCategoryEducationChart = new Chart(getLsisSubCategoryEducation, {
+            type: 'polarArea',
+            data: {
+                labels: categoryEducation,
+                datasets: [
+                    {
+                        label: initialChoosedIndicator,
+                        data: initialValueLsisEducation,
+                        backgroundColor: [alphaBlue, alphaGreen, alphaRed, alphaYellow],
+                        borderWidth: 0,
+                    }
+                
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: initialChoosedIndicator,
+                }
+            }
+        });
+
+        //LSIS Sub Category Ethnicity
+        let getLsisSubCategoryEthnicity = document.getElementById('lsisSubCategoryEthnicity').getContext("2d");
+        let initialValueLsisEthicity = lsisSubCategoryEthnicity.map(d=> d[initialChoosedIndicator]);
+        let categoryEthnicity= lsisSubCategoryEthnicity.map(d => d.Sub_Category);
+        let lsisSubCategoryEthnicityChart = new Chart(getLsisSubCategoryEthnicity, {
+            type: 'polarArea',
+            data: {
+                labels: categoryEthnicity,
+                datasets: [
+                    {
+                        label: initialChoosedIndicator,
+                        data: initialValueLsisEthicity,
+                        backgroundColor: [alphaBlue, alphaGreen, alphaRed, alphaYellow],
+                        borderWidth: 0,
+                    }
+                
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: initialChoosedIndicator,
+                }
+            }
+        });
+
+        //LSIS Sub Category Wealth
+        let getLsisSubCategoryWealth = document.getElementById('lsisSubCategoryWealth').getContext("2d");
+        let valueLsisWealth = lsisSubCategoryWealth.map(d => d["Skill delivery"]);
+        let categoryWealth = lsisSubCategoryWealth.map(d => d.Sub_Category);
+        let lsisSubCategoryWealthChart = new Chart(getLsisSubCategoryWealth, {
+            type: 'polarArea',
+            data: {
+                labels: categoryWealth,
+                datasets: [
+                    {
+                        label: initialChoosedIndicator,
+                        data: valueLsisWealth,
+                        backgroundColor: [alphaBlue, alphaGreen, alphaRed, alphaYellow],
+                        borderWidth: 0,
+                    }
+                
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: initialChoosedIndicator,
+                },
+            },
+        });
 
     });
+
 };
 
 //Custom plugins for DHIS2 and provinacial committee **********
