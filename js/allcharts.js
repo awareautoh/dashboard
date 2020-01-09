@@ -55,6 +55,7 @@ const lsisSubCategoryAreaPath = "data/lsis_sub_category_Area.csv";
 const lsisSubCategoryEducationPath = "data/lsis_sub_category_Education.csv";
 const lsisSubCategoryEthnicityPath = "data/lsis_sub_category_Ethnicity.csv";
 const lsisSubCategoryWealthPath = "data/lsis_sub_category_Wealth.csv";
+const lec8Path = "data/lec8.csv";
 
 
 
@@ -91,6 +92,7 @@ Promise.all([
     d3.csv(lsisSubCategoryEducationPath),
     d3.csv(lsisSubCategoryEthnicityPath),
     d3.csv(lsisSubCategoryWealthPath),
+    d3.csv(lec8Path),
 ]).then(buildChart);
 
 //*************************************/
@@ -137,7 +139,7 @@ function buildChart (value) {
     const lsisSubCategoryEducation = value[29];
     const lsisSubCategoryEthnicity = value[30];
     const lsisSubCategoryWealth = value[31];
-
+    const lec8 = value[32];
 
 
 
@@ -1646,6 +1648,91 @@ function buildChart (value) {
 				
 
     //end lec 7
+
+    //start lec8 
+
+    	let lec8Label = lec8.map(d=> d.legen);
+        let lec8value = lec8.map(d=> d.l_2003);
+		let lec8value2 = lec8.map(d=> d.l_2008);
+		let lec8value3 = lec8.map(d=> d.l_2013);
+
+		let getlec8Chart = document.getElementById('lec8Chart').getContext("2d");
+     	let lec8Chart = new Chart(getlec8Chart, {
+
+     		  type: 'line',
+     		     	 	                    data: {
+     		     	 	                        labels: lec8Label,
+     		     	 	                        datasets: [
+     				
+     		     	 	                            {
+     		     	 									label: "2003",
+     		     	 	                                data: lec8value,
+     		     	 									backgroundColor: 'rgba(14,150,80,0.9)',
+     		     	 									borderColor:'rgba(14,150,80,0.5)',
+     													fill:false,
+     													lineTension:0
+     		    
+     		     	 	                            },
+     		     	 								 {
+     		     	 									label: "2008",
+     		     	 	                                data: lec8value2,
+     		     	 									backgroundColor: 'rgba(174,22,195,0.8)',
+     		     	 									borderColor:'rgba(174,22,195,0.5)',
+     													fill:false
+     		     	 											
+     		     	 				
+     		     	 	                            },
+     		     	 								 {
+     		     	 									label: "2013",
+     		     	 	                                data: lec8value3,
+     		     	 									backgroundColor: 'rgba(245,193,14,0.7)',
+     		     	 									borderColor:'rgba(245,193,14,0.5)',
+     		     	 									fill:false
+     		     	 	                            },
+
+     		     	 	                        ]
+     		     	 							
+     		     	 	                    },
+
+     												options: {
+     												   
+     													legend: {
+     														display: true,
+     														labels: {
+     	 													fontSize:9
+     	 													
+     	 													}
+     													
+     													},
+     													maintainAspectRatio: false,
+     													scales: {
+     												yAxes: [{
+     													//stacked: true,
+     													ticks: {
+     														beginAtZero: true,
+     														maxTicksLimit: 8,
+     														
+     													},
+     													gridLines: {
+     														borderDash: [3, 5]
+     													}
+     												}],
+     												xAxes: [{
+     													//stacked: true,
+     													gridLines: {
+     														drawOnChartArea: false,
+     													},
+     													ticks: {
+     														fontSize: 10
+     													   }
+     												}]
+     											},
+     													
+     												}  	 			
+
+     	});
+
+    //end lec8 
 
     //*******************************/
     //START Home Tab Chart
