@@ -14,10 +14,13 @@ const red = "#FF99A6";
 const blue = "#80d8ff";
 const yellow = "#ffee58";
 const green = "#66bb6a";
-const alphaRed = "#FF99A6b3";
-const alphaBlue = "#80d8ffb3";
-const alphaYellow = "#ffee58b3";
-const alphaGreen = "#66bb6ab3";
+const grey = "#bdbdbd";
+const purpleXyellow = "#999EFF";
+const colorSetLSISAreaChart = ["#FFAC4DB3", "#BF9C73B3", "#FFCF99B3", "#B37836B3", "#7F5626B3"];
+const colorSetLSISEducationChart = ["#1739E5B3", "#0F2699B3", "#4455AAB3", "#5C73E5B3", "#0A1A66B3"];
+const colorSetLSISEthnicityChart = ["#39806EB3", "#BFFFEFB3", "#608078B3", "#5CCCB0B3", "#73FFDCB3"];
+const colorSetLSISWealthChart = ["#4C74A8B3", "#68A0E8B3", "#2F4869B3", "#6EA9F5B3", "#5D8ECFB3"];
+
 
 //File path for import data
 const wastingPath = "data/wasting_unsorted.csv";
@@ -135,7 +138,6 @@ function buildChart (value) {
     const lsisSubCategoryEthnicity = value[30];
     const lsisSubCategoryWealth = value[31];
 
-    console.log(value);
 
 
 
@@ -2520,7 +2522,7 @@ function buildChart (value) {
                     {
                         label: initialChoosedIndicator,
                         data: initialValueLsisArea,
-                        backgroundColor: [alphaBlue, alphaGreen, alphaRed, alphaYellow],
+                        backgroundColor: colorSetLSISAreaChart,
                         borderWidth: 0,
                     }
                 
@@ -2550,7 +2552,7 @@ function buildChart (value) {
                     {
                         label: initialChoosedIndicator,
                         data: initialValueLsisEducation,
-                        backgroundColor: [alphaBlue, alphaGreen, alphaRed, alphaYellow],
+                        backgroundColor: colorSetLSISEducationChart,
                         borderWidth: 0,
                     }
                 
@@ -2580,7 +2582,7 @@ function buildChart (value) {
                     {
                         label: initialChoosedIndicator,
                         data: initialValueLsisEthicity,
-                        backgroundColor: [alphaBlue, alphaGreen, alphaRed, alphaYellow],
+                        backgroundColor: colorSetLSISEthnicityChart,
                         borderWidth: 0,
                     }
                 
@@ -2610,7 +2612,7 @@ function buildChart (value) {
                     {
                         label: initialChoosedIndicator,
                         data: valueLsisWealth,
-                        backgroundColor: [alphaBlue, alphaGreen, alphaRed, alphaYellow],
+                        backgroundColor: colorSetLSISWealthChart,
                         borderWidth: 0,
                     }
                 
@@ -3127,190 +3129,6 @@ $(document).ready(function () {
     });
 
 
-    //Circle Packing Graph
-    $(document).ready(function () {
-
-        //Import Data
-        d3.json("data/LSIS2.json").then(makeCircle);
-
-        //Set Color Scale
-        let color = d3.scaleLinear()
-            .domain([0, 5])
-            .range(d3.schemeGreys[5]);
-        
-        //Set data format
-        let format = d3.format(",d");
-
-
-        //Set Height and Width
-        let height = 600;
-        let width =  600;
-
-        
-        //Build Chart Function
-        function makeCircle (circle) { //Add function
-            let root = d3.pack() //This for set up circle
-                .size([width, width])
-                .padding(3)
-                (d3.hierarchy(circle)
-                .sum(d => d.value)
-                .sort((a, b) => b.value - a.value));
-
-            //Set Variable
-            let focus = root;
-            let view;
-
-            //Check that data was added to root viaable
-            console.log(root);
-
-            //Function to creat zoom
-            function zoom(d) {
-                let focus0 = focus;
-                //Set d to fucus; d refer to root later
-                focus = d;
-                //set annimation while zooming
-                let transition = svg.transition()
-                    .duration(d3.event.altKey ? 7500 : 750)
-                    .tween("zoom", d => {
-                    const i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2]);
-                    return t => zoomTo(i(t));
-                    });
-                label
-                .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-                .transition(transition)
-                .style("fill-opacity", d => d.parent === focus ? 1 : 0)
-                .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-                .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
-                select();
-                let database = [];
-                database = (root.data.children.map(d => d.name));    
-                
-                let checkParent  = () => {
-                    let maxHeight = root.height;
-                    let selectedHeight = d.height;
-                    let marginHeight = maxHeight - 1;
-                    let toAdd = "parent";
-                    let selectCircle = d;
-                    let a = [];
-                    while (selectedHeight < maxHeight) {
-                        selectCircle = selectCircle[toAdd];
-                        if (selectedHeight == marginHeight) {
-                            a.push(d.data.name);
-                            selectedHeight++;
-                        }
-                        a.push(selectCircle.data.name);
-                        selectedHeight++;
-                    }
-                    let b =[];
-                    database.forEach(d => a.includes(d) ? b.push(d): null);
-                }
-                checkParent();
-            }
-
-            function zoomTo(v) {
-                let k = width / v[2];
-                view = v;
-                label.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
-                node.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
-                node.attr("r", d => d.r * k);
-            }
-
-
-            //Select SVG from DOM
-            let svg = d3.select("#circlePacking")
-                        .attr("viewBox", `-${width / 2} -${height / 2} ${width} ${height}`)
-                        .style("background", "none")
-                        .style("cursor", "pointer")
-                        .on("click", () => {
-                            zoom(root);
-                        });
-            
-            //Below to create element for circle packing
-
-            let node = svg.append("g") //This create each circle
-                .selectAll("circle")
-                .data(root.descendants().slice(1))
-                .join("circle")
-                .attr("fill", d => d.children ? color(d.depth) : "white")
-                .attr("pointer-events", d => !d.children ? "none" : null)
-                .on("mouseover", function() { d3.select(this).attr("stroke", "#000"); })
-                .on("mouseout", function() { d3.select(this).attr("stroke", null); })
-                .on("click", d => focus !== d && (zoom(d), d3.event.stopPropagation()));
-
-            let label = svg.append("g") //This create text inside circle
-                .style("font", "10px sans-serif")
-                .attr("pointer-events", "none")
-                .attr("text-anchor", "middle")
-                .selectAll("text")
-                .data(root.descendants())
-                .join("text")
-                .style("fill-opacity", d => d.parent === root ? 1 : 0)
-                .style("display", d => d.parent === root ? "inline" : "none")
-                .text(d => d.data.name);
-
-
-            zoomTo([root.x, root.y, root.r * 2]);
-            svg.node();
-
-
-            //Add Chart
-                //Creat Chart Women Mulnutrtion
-                let ctx = document.getElementById('subBarChartforCirclePacking').getContext("2d");
-                let subChart = new Chart(ctx, {
-                    type: 'horizontalBar',
-                    data: {
-                        labels: ["VTE", "PH"],
-                        datasets: [
-                            {
-                                label: 'Percentage of Women Anemia Prevalence',
-                                data: [],
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                hoverBackgroundColor: 'rgba(255, 99, 132, 0.1)',
-                                order: 1
-                            }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                },
-                                gridLines: {
-                                    drawOnChartArea: false,
-                                }
-                            }],
-                            xAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                },
-                                gridLines: {
-                                    borderDash: [3, 10]
-                                }
-                            }]
-                        },
-                        maintainAspectRatio: false,
-                    }
-                });
-                let x = 0;
-                function select() {
-                    if (x === 0) {
-                        subChart.data.datasets.forEach(function(dataset) {
-                            dataset.data = [2,10];
-                        });
-                        subChart.update();
-                        x = 1;
-                    } else {
-                        subChart.data.datasets.forEach(function(dataset) {
-                            dataset.data = [];
-                        });
-                        subChart.update();
-                        x = 0;
-                    }
-                };
-        }
-});
 
 //for  Sentinel  survey ********************************************************************
 // For the first block graph 
@@ -3330,7 +3148,7 @@ const myChartJSPlugin = {
                     ctt.font = fontSize + "em sans-serif";
                     ctt.textBaseline = "middle";
 
-                    var text = "45%",
+                    var text = "24.3%",
                         textX = Math.round((width - ctt.measureText(text).width) / 2),
                         textY = height / 2;
 
@@ -3355,7 +3173,7 @@ var stData = {
     datasets: [
         {
 			label: '',
-            data: [35,75],
+            data: [24.3,(100-24.3)],
             backgroundColor: [
                 "#75C050",
 				
@@ -3408,7 +3226,7 @@ const myChartJSPlugin1 = {
                     ctt.font = fontSize + "em sans-serif";
                     ctt.textBaseline = "middle";
 
-                    var text = "15%",
+                    var text = "9.9%",
                         textX = Math.round((width - ctt.measureText(text).width) / 2),
                         textY = height / 2;
 
@@ -3433,7 +3251,7 @@ var stData = {
     datasets: [
         {
 			label: '',
-            data: [15,85],
+            data: [9.9,(100-9.9)],
             backgroundColor: [
                 "#EA528F",
 				
@@ -3486,7 +3304,7 @@ const myChartJSPlugin2 = {
                     ctt.font = fontSize + "em sans-serif";
                     ctt.textBaseline = "middle";
 
-                    var text = "5%",
+                    var text = "20.1%",
                         textX = Math.round((width - ctt.measureText(text).width) / 2),
                         textY = height / 2;
 
@@ -3501,129 +3319,51 @@ const myChartJSPlugin2 = {
 
 Chart.pluginService.register(myChartJSPlugin2);
 $(document).ready(function() {
-var tohCanvas = document.getElementById("underweightS");
+    var tohCanvas = document.getElementById("underweightS");
 
-var stData = {
-    labels: [
-       '',
-        
-    ],
-    datasets: [
-        {
-			label: '',
-            data: [5,95],
-            backgroundColor: [
-                "#F27B53",
-				
-               
-            ],
+    var stData = {
+        labels: [
+        '',
             
-            borderWidth: 0
-        }]
-};
+        ],
+        datasets: [
+            {
+                label: '',
+                data: [20.1,(100-20.1)],
+                backgroundColor: [
+                    "#F27B53",
+                    
+                
+                ],
+                
+                borderWidth: 0
+            }]
+    };
 
-var chartOptions = {
- cutoutPercentage: 88,
-  animation: {
-    animateRotate: true,
-    duration: 9000
-  },
-  legend: {
-    display:false
-  },
-  tooltips: {
-    enabled: false
-  
-  },
-  plugins3: [myChartJSPlugin2],
-  maintainAspectRatio : false
-   
-};
-
-
-var pieChart = new Chart(tohCanvas, {
-  type: 'doughnut',
-  data: stData,
-  options: chartOptions
-});
-
-});
-
-//Over weight graph 
-const myChartJSPlugin3 = {
-  beforeDraw: function(chart)  {
-	  
-				if(chart.config.options.plugins4){
-                    var width = chart.chart.width,
-                        height = chart.chart.height,
-                        ctt = chart.chart.ctx;
-
-                    ctt.restore();
-                    var fontSize = (height / 60).toFixed(2);
-                    ctt.font = fontSize + "em sans-serif";
-                    ctt.textBaseline = "middle";
-
-                    var text = "3%",
-                        textX = Math.round((width - ctt.measureText(text).width) / 2),
-                        textY = height / 2;
-
-                    ctt.fillText(text, textX, textY);
-                    ctt.save();
-					ctt.restore();
-					
-				}
-                  
-			}
-};
-
-Chart.pluginService.register(myChartJSPlugin3);
-$(document).ready(function() {
-var tohCanvas = document.getElementById("overweightS");
-
-var stData = {
-    labels: [
-       '',
-        
-    ],
-    datasets: [
-        {
-			label: '',
-            data: [3,97],
-            backgroundColor: [
-                "#0EADD4",
-				
-               
-            ],
-            
-            borderWidth: 0
-        }]
-};
-
-var chartOptions = {
- cutoutPercentage: 88,
-  animation: {
-    animateRotate: true,
-    duration: 9000
-  },
-  legend: {
-    display:false
-  },
-  tooltips: {
-    enabled: false
-  
-  },
-  plugins4: [myChartJSPlugin3],
-  maintainAspectRatio : false
-   
-};
+    var chartOptions = {
+    cutoutPercentage: 88,
+    animation: {
+        animateRotate: true,
+        duration: 9000
+    },
+    legend: {
+        display:false
+    },
+    tooltips: {
+        enabled: false
+    
+    },
+    plugins3: [myChartJSPlugin2],
+    maintainAspectRatio : false
+    
+    };
 
 
-var pieChart = new Chart(tohCanvas, {
-  type: 'doughnut',
-  data: stData,
-  options: chartOptions
-});
-
+    var pieChart = new Chart(tohCanvas, {
+    type: 'doughnut',
+    data: stData,
+    options: chartOptions
+    });
 });
 
 // function to save chart js as picture 
