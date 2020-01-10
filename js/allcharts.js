@@ -12,7 +12,10 @@
 //Color shade
 const red = "#FF99A6";
 const blue = "#80d8ff";
-const yellow = "#ffee58";
+const lightBlue = "#CCF0FF";
+const yellow = "#FFCB21";
+const darkYellow = "#806F37";
+const lightYellow = "#FFDD6E";
 const green = "#66bb6a";
 const grey = "#bdbdbd";
 const purpleXyellow = "#999EFF";
@@ -68,700 +71,661 @@ function buildChart (value) {
 
 
     //---Child Mulnutrtion Chart
-    $(document).ready(function() {
     //*******************************/
     //START Home Tab Chart
     //*******************************/
     //---Wasting Chart---
-        //Create a sub data from main file (sorting list)
-        let wastingSort = wasting.slice().sort((a, b) => a.ValueWasting - b.ValueWasting);
-        let overWeightSort = wasting.slice().sort((a, b) => a.ValueOverWeight - b.ValueOverWeight);
-        //Create Variable by Stat index
-        let provinceW = wasting.map(d => d.Province);
-        let valueW = wasting.map(d => d.ValueWasting);
-        let provinceO = wasting.map(d => d.Province);
-        let valueO = wasting.map(d => d.ValueOverWeight);
-        //Sorted Variable for Wasting
-        let provinceWSort = wastingSort.map(d => d.Province);
-        let valueWSort = wastingSort.map(d => d.ValueWasting);
-        let valueOByWSort = wastingSort.map(d => d.ValueOverWeight);
-        //Sorted Variable for Overweight
-        let provinceOSort = overWeightSort.map(d => d.Province);
-        let valueOSort = overWeightSort.map(d => d.ValueWasting);
-        let valueSByOSort = overWeightSort.map(d => d.ValueOverWeight);
-        let getWastingAndOverweightChart = document.getElementById('wastingAndOverweightChart').getContext("2d");
-        let wastingAndOverweightChart = new Chart(getWastingAndOverweightChart, {
-            type: 'bar',
-            data: {
-                labels: provinceW,
-                datasets: [{
-                    label: 'Wasting',
-                    data: valueW,
-                    backgroundColor: '#80d6ff',
-                    borderColor: 'rgb(0, 0, 0)',
-                    borderWidth: 0,
-                },{
-                    label: 'Overweight',
-                    data: valueO,
-                    backgroundColor: '#FF99A6',
-                    borderColor: 'rgb(0, 0, 0)',
-                    borderWidth: 0,
+    //Create a sub data from main file (sorting list)
+    let wastingSort = wasting.slice().sort((a, b) => a.ValueWasting - b.ValueWasting);
+    let overWeightSort = wasting.slice().sort((a, b) => a.ValueOverWeight - b.ValueOverWeight);
+    //Create Variable by Stat index
+    let provinceW = wasting.map(d => d.Province);
+    let valueW = wasting.map(d => d.ValueWasting);
+    let provinceO = wasting.map(d => d.Province);
+    let valueO = wasting.map(d => d.ValueOverWeight);
+    //Sorted Variable for Wasting
+    let provinceWSort = wastingSort.map(d => d.Province);
+    let valueWSort = wastingSort.map(d => d.ValueWasting);
+    let valueOByWSort = wastingSort.map(d => d.ValueOverWeight);
+    //Sorted Variable for Overweight
+    let provinceOSort = overWeightSort.map(d => d.Province);
+    let valueOSort = overWeightSort.map(d => d.ValueWasting);
+    let valueSByOSort = overWeightSort.map(d => d.ValueOverWeight);
+    let getWastingAndOverweightChart = document.getElementById('wastingAndOverweightChart').getContext("2d");
+    let wastingAndOverweightChart = new Chart(getWastingAndOverweightChart, {
+        type: 'bar',
+        data: {
+            labels: provinceW,
+            datasets: [{
+                label: 'Wasting',
+                data: valueW,
+                backgroundColor: blue,
+                borderWidth: 0,
+            },{
+                label: 'Overweight',
+                data: valueO,
+                backgroundColor: lightBlue,
+                borderWidth: 0,
+            }]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 5]
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
                 }]
             },
-            plugins: [ChartDataLabels],
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 5]
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }]
-                },
-                maintainAspectRatio: false,
-            }
-        });
-        //Add function for click button
-        let x = 0;
-        $('#Chart1SortWasting').on('click', function() {
-            if (x == 0) {
-                wastingAndOverweightChart.data.datasets.forEach((d, i) => { //d: dataset; i: index
-                    if (i == 0) { //Add condition to change group set for 2 array
-                        d.data = valueWSort;
-                    } else {
-                        d.data = valueOByWSort;
-                    }
-                });
-                wastingAndOverweightChart.data.labels.forEach(() =>  {
-                    wastingAndOverweightChart.data.labels = provinceWSort;
-                });
-                wastingAndOverweightChart.update();
-                x = 1;
-            } else {
-                wastingAndOverweightChart.data.datasets.forEach((d, i) => {
-                    if (i == 0) {
-                        d.data = valueW;
-                    } else {
-                        d.data = valueO;
-                    }
-                });
-                wastingAndOverweightChart.data.labels.forEach(() =>  {
-                    wastingAndOverweightChart.data.labels = provinceW;
-                });
-                wastingAndOverweightChart.update();
-                x = 0;
-            };
-        });
-        $('#Chart1SortOverWeight').on('click', function() {
-            if (x == 0) {
-                wastingAndOverweightChart.data.datasets.forEach((d, i) => { //d: dataset; i: index
-                    if (i == 0) { //Add condition to change group set for 2 array
-                        d.data = valueOSort;
-                    } else {
-                        d.data = valueSByOSort;
-                    }
-                });
-                wastingAndOverweightChart.data.labels.forEach(() =>  {
-                    wastingAndOverweightChart.data.labels = provinceOSort;
-                });
-                wastingAndOverweightChart.update();
-                x = 1;
-            } else {
-                wastingAndOverweightChart.data.datasets.forEach((d, i) => {
-                    if (i == 0) {
-                        d.data = valueW;
-                    } else {
-                        d.data = valueO;
-                    }
-                });
-                wastingAndOverweightChart.data.labels.forEach(() =>  {
-                    wastingAndOverweightChart.data.labels = provinceW;
-                });
-                wastingAndOverweightChart.update();
-                x = 0;
-            };
-        });
+            maintainAspectRatio: false,
+        }
+    });
+    //Add function for click button
+    let x = 0;
+    $('#Chart1SortWasting').on('click', function() {
+        if (x == 0) {
+            wastingAndOverweightChart.data.datasets.forEach((d, i) => { //d: dataset; i: index
+                if (i == 0) { //Add condition to change group set for 2 array
+                    d.data = valueWSort;
+                } else {
+                    d.data = valueOByWSort;
+                }
+            });
+            wastingAndOverweightChart.data.labels.forEach(() =>  {
+                wastingAndOverweightChart.data.labels = provinceWSort;
+            });
+            wastingAndOverweightChart.update();
+            x = 1;
+        } else {
+            wastingAndOverweightChart.data.datasets.forEach((d, i) => {
+                if (i == 0) {
+                    d.data = valueW;
+                } else {
+                    d.data = valueO;
+                }
+            });
+            wastingAndOverweightChart.data.labels.forEach(() =>  {
+                wastingAndOverweightChart.data.labels = provinceW;
+            });
+            wastingAndOverweightChart.update();
+            x = 0;
+        };
+    });
+    $('#Chart1SortOverWeight').on('click', function() {
+        if (x == 0) {
+            wastingAndOverweightChart.data.datasets.forEach((d, i) => { //d: dataset; i: index
+                if (i == 0) { //Add condition to change group set for 2 array
+                    d.data = valueOSort;
+                } else {
+                    d.data = valueSByOSort;
+                }
+            });
+            wastingAndOverweightChart.data.labels.forEach(() =>  {
+                wastingAndOverweightChart.data.labels = provinceOSort;
+            });
+            wastingAndOverweightChart.update();
+            x = 1;
+        } else {
+            wastingAndOverweightChart.data.datasets.forEach((d, i) => {
+                if (i == 0) {
+                    d.data = valueW;
+                } else {
+                    d.data = valueO;
+                }
+            });
+            wastingAndOverweightChart.data.labels.forEach(() =>  {
+                wastingAndOverweightChart.data.labels = provinceW;
+            });
+            wastingAndOverweightChart.update();
+            x = 0;
+        };
+    });
+
+
+
+//---Women Undernutrition Chart---
+    //Creat Women Mulnutriotion
+    let province = anemia.map(d => d.Province); //This province variable represent every province variable in home tab chart
+    let WHO = anemia.map(d => d.WHOCutOff);
+    let valueAnemia = anemia.map(d=> d.ValueAnemia);
     
 
-
-    //---Women Undernutrition Chart---
-        //Creat Women Mulnutriotion
-        const province = anemia.map(d => d.Province); //This province variable represent every province variable in every chart
-        let WHO = anemia.map(d => d.WHOCutOff);
-        let valueAnemia = anemia.map(d=> d.ValueAnemia);
-        
-
-        //Creat Women Mulnutrtion
-        let getWomenAnemia = document.getElementById('womenAnemia').getContext("2d");
-        let womenAnemia = new Chart(getWomenAnemia, {
-            type: 'bar',
-            data: {
-                labels: province,
-                datasets: [
-                     {
-                        label: 'WHO Cutoff 20%',
-                        data: WHO,
-                        type: 'line',
-                        fill: false,
-                        borderColor: '#E71C23',
-                        pointStyle: "line",
-                        borderWidth: 0,
-                    },
+    //Creat Women Mulnutrtion
+    let getWomenAnemia = document.getElementById('womenAnemia').getContext("2d");
+    let womenAnemia = new Chart(getWomenAnemia, {
+        type: 'bar',
+        data: {
+            labels: province,
+            datasets: [
                     {
-                        label: 'Percentage of Women Anemia Prevalence',
-                        data: valueAnemia,
-                        backgroundColor: '#80d8ff',
-                        borderColor: '#0ABDE3',
-                        borderWidth: 0,
-                    }
-                   
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 5],
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }]
-                },
-                maintainAspectRatio: false,
-                 legend: {
-						    labels: {
-						      usePointStyle: true,
-						    }
-                        },
-            }
-        });
-
-    //Creat Women Overweight and Obesiry Chart
-        let valueWOverWeight = overWeightObese.map(d => d.ValueWomenOverWeight);
-        let valueWObese = overWeightObese.map(d => d.ValueObese);
-        let getWomenOverweightAndObese = document.getElementById('womenOverweightAndObese').getContext("2d");
-        let womenOverweightAndObese = new Chart(getWomenOverweightAndObese, {
-            type: 'bar',
-            data: {
-                labels: province,
-                datasets: [
-                    {
-                        label: 'Women Overweight',
-                        data: valueWOverWeight,
-                        backgroundColor: '#80d8ff',
-                        borderWidth: 0,
-                    },
-                    {
-                        label: 'Women Obese',
-                        data: valueWObese,
-                        backgroundColor: '#FF99A6',
-                        borderWidth: 0,
-                    }
-                ]
-            },
-            plugins: [ChartDataLabels],
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        stacked: true,
-                        gridLines: {
-                            borderDash: [3, 10]
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }]
-                },
-                maintainAspectRatio: false,
-            }
-        });
-
-    //Section 2 Chart: Immediate determinants of undernutrition
-
-    //IYCF Chart
-        let valueInitiationBreast = IYCF.map(d => d.ValueEarlyBreast);
-        let valueExclusiveBreast = IYCF.map(d => d.ValueExclusiveBreast);
-        let NPANTagetIYCF = IYCF.map(d => d.NPANTarget);
-        let getIYCFChart = document.getElementById('IYCFChart').getContext("2d");
-        let IYCFChart = new Chart(getIYCFChart, {
-            type: 'bar',
-            data: {
-                labels: province,
-                datasets: [{
-                    label: 'NPAN Taget 70%',
-                    data: NPANTagetIYCF,
-                    backgroundColor: 'lightPink',
-                    borderColor: 'red',
-                    borderWidth: 0,
+                    label: 'WHO Cutoff 20%',
+                    data: WHO,
                     type: 'line',
-                    pointStyle: "line",
                     fill: false,
-                }, {
-                    label: 'Early Initiation of Breastfeeding',
-                    data: valueInitiationBreast,
-                    backgroundColor: '#ffee58',
+                    borderColor: '#E71C23',
+                    pointStyle: "line",
                     borderWidth: 0,
-                }, {
-                    label: 'Exclusive Breastfeeding',
-                    data: valueExclusiveBreast,
+                },
+                {
+                    label: 'Percentage of Women Anemia Prevalence',
+                    data: valueAnemia,
                     backgroundColor: '#80d8ff',
+                    borderColor: '#0ABDE3',
                     borderWidth: 0,
+                }
+                
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 5],
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
                 }]
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 10]
+            maintainAspectRatio: false,
+                legend: {
+                        labels: {
+                            usePointStyle: true,
                         }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }],
-                },
-                maintainAspectRatio: false,
-            }
-        });
+                    },
+        }
+    });
 
-    //MiniDiet Chart
-        let valueMiniDiet = miniDiet.map(d => d.ValueMiniDietDiversity);
-        let valueAcceptDiet = miniDiet.map(d => d.ValueAcceptDiet);
-        let NPANTagetMiniDiet = miniDiet.map(d => d.NPANTarget);
-        let getMiniDietChart = document.getElementById('miniDietChart').getContext("2d");
-        let miniDietChart = new Chart(getMiniDietChart, {
-            type: 'bar',
-            data: {
-                labels: province,
-                datasets: [{
-                    label: 'NPAN Taget 50%',
-                    data: NPANTagetMiniDiet,
-                    backgroundColor: 'lightPink',
-                    borderColor: 'red',
+//Creat Women Overweight and Obesiry Chart
+    let valueWOverWeight = overWeightObese.map(d => d.ValueWomenOverWeight);
+    let valueWObese = overWeightObese.map(d => d.ValueObese);
+    let getWomenOverweightAndObese = document.getElementById('womenOverweightAndObese').getContext("2d");
+    let womenOverweightAndObese = new Chart(getWomenOverweightAndObese, {
+        type: 'bar',
+        data: {
+            labels: province,
+            datasets: [
+                {
+                    label: 'Women Overweight',
+                    data: valueWOverWeight,
+                    backgroundColor: blue,
                     borderWidth: 0,
-                    type: 'line',
-                    pointStyle: "line",
-                    fill: false,
-                }, {
-                    label: 'Prevalance of Minimum Diet Diversity',
-                    data: valueMiniDiet,
-                    backgroundColor: '#ffee58',
+                },
+                {
+                    label: 'Women Obese',
+                    data: valueWObese,
+                    backgroundColor: lightBlue,
                     borderWidth: 0,
-                }, {
-                    label: 'Prevalance of Minimum Acceptable Diet',
-                    data: valueAcceptDiet,
-                    backgroundColor: '#80d8ff',
-                    borderWidth: 0,
+                }
+            ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    stacked: true,
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }],
+                xAxes: [{
+                    stacked: true,
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
                 }]
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 10]
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }],
-                },
-                maintainAspectRatio: false,
-            }
-        });
+            maintainAspectRatio: false,
+        }
+    });
 
-    //Women Diet Chart
-        let valueWomenDiet = womenDiet.map(d => d.ValueWomenDiet);
-        //Creat Chart Women Mulnutrtion
-        let getWomenDietChart = document.getElementById('womenDietChart').getContext("2d");
-        let womenDietChart = new Chart(getWomenDietChart, {
-            type: 'horizontalBar',
-            data: {
-                labels: province,
-                datasets: [
-                    {
-                        label: 'Percentage of Women Dietary Diversity',
-                        data: valueWomenDiet,
-                        backgroundColor: blue,
-                        borderWidth: 0,
-                        order: 1
-                    }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 10]
-                        }
-                    }]
-                },
-                maintainAspectRatio: false,
-                annotation: {
-                    annotations: [{
-                        type: 'line',
-                        mode: 'vertical',
-                        scaleID: 'x-axis-0',
-                        value: 32.4,
-                        borderColor: 'rgb(75, 192, 192)',
-                        borderWidth: 1,
-                        label: {
-                            enabled: true,
-                            content: "National 32.4%",
-                            position: "center",
-                        }
-                    }]
-                }
-            }
-        });
+//Section 2 Chart: Immediate determinants of undernutrition
 
-    //Map Section 3
-        let valueVitA = mapSec3.map(d => d.ValueVitA);
-        let valueDeworm = mapSec3.map(d => d.ValueDeworm);
-        let valueIronFolic = mapSec3.map(d => d.ValueIronFolic);
-        let nationalIronFolic = mapSec3.map(d => d.NationalIronFolic);
-
-    //Creat Chart Vitamin A Supplement Coverage
-        let ChartVitA = document.getElementById('vitAChart').getContext("2d");
-        let drawVitAChart = new Chart(ChartVitA, {
-            type: 'horizontalBar',
-            data: {
-                labels: province,
-                datasets: [
-                    {
-                        label: "Percentage of Vitamin A Supplement Coverage",
-                        data: valueVitA,
-                        backgroundColor: green,
-                        borderWidth: 0,
-                    }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 10]
-                        }
-                    }]
-                },
-                maintainAspectRatio: false,
-                annotation: {
-                    events: ["mouseover"],
-                    annotations: [{
-                        type: 'line',
-                        mode: 'vertical',
-                        scaleID: 'x-axis-0',
-                        value: 38.5,
-                        borderColor: 'rgb(75, 192, 192)',
-                        borderWidth: 1,
-                        label: {
-                            enabled: true,
-                            content: "National 38.5%",
-                            position: "center",
-                        },
-                    }]
-                }
-            }
-        });
-
-    //Creat Chart Children Received Deworming Coverage
-        let ChartDeworming = document.getElementById('dewormingChart').getContext("2d");
-        let drawDewormingChart = new Chart(ChartDeworming, {
-            type: 'horizontalBar',
-            data: {
-                labels: province,
-                datasets: [
-                    {
-                        label: 'Percentage of Who Received Deworming Coverage',
-                        data: valueDeworm,
-                        backgroundColor: green,
-                        borderWidth: 0,
-                    }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 10]
-                        }
-                    }]
-                },
-                maintainAspectRatio: false,
-                annotation: {
-                    events: ["mouseover"],
-                    annotations: [{
-                        type: 'line',
-                        mode: 'vertical',
-                        scaleID: 'x-axis-0',
-                        value: 38.7,
-                        borderColor: 'rgb(75, 192, 192)',
-                        borderWidth: 1,
-                        label: {
-                            enabled: true,
-                            content: "National 38.7%",
-                            position: "center",
-                        },
-                    }]
-                }
-            }
-        });
-
-    //Creat Chart Iron Folic Coverage
-        let chartIronFolic = document.getElementById('ironFolicChart').getContext("2d");
-        let drawIronFolic = new Chart(chartIronFolic, {
-            type: 'bar',
-            data: {
-                labels: province,
-                datasets: [
-                    {
-                        label: 'National 25.4%',
-                        data: nationalIronFolic,
-                        type: 'line',
-                        pointStyle: "line",
-                        borderWidth: 0,
-                        fill: false,
-                        backgroundColor: blue,
-                        borderColor: blue,
+//IYCF Chart
+    let valueInitiationBreast = IYCF.map(d => d.ValueEarlyBreast);
+    let valueExclusiveBreast = IYCF.map(d => d.ValueExclusiveBreast);
+    let NPANTagetIYCF = IYCF.map(d => d.NPANTarget);
+    let getIYCFChart = document.getElementById('IYCFChart').getContext("2d");
+    let IYCFChart = new Chart(getIYCFChart, {
+        type: 'bar',
+        data: {
+            labels: province,
+            datasets: [{
+                label: 'NPAN Taget 70%',
+                data: NPANTagetIYCF,
+                backgroundColor: 'lightPink',
+                borderColor: 'red',
+                borderWidth: 0,
+                type: 'line',
+                pointStyle: "line",
+                fill: false,
+            }, {
+                label: 'Early Initiation of Breastfeeding',
+                data: valueInitiationBreast,
+                backgroundColor: yellow,
+                borderWidth: 0,
+            }, {
+                label: 'Exclusive Breastfeeding',
+                data: valueExclusiveBreast,
+                backgroundColor: lightYellow,
+                borderWidth: 0,
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
                     },
-                    {
-                        label: 'Iron/Folic Supplement Coverage',
-                        data: valueIronFolic,
-                        backgroundColor: green,
-                        borderWidth: 0,
-                    },
-                ]
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 10]
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }],
+            maintainAspectRatio: false,
+        }
+    });
+
+//MiniDiet Chart
+    let valueMiniDiet = miniDiet.map(d => d.ValueMiniDietDiversity);
+    let valueAcceptDiet = miniDiet.map(d => d.ValueAcceptDiet);
+    let NPANTagetMiniDiet = miniDiet.map(d => d.NPANTarget);
+    let getMiniDietChart = document.getElementById('miniDietChart').getContext("2d");
+    let miniDietChart = new Chart(getMiniDietChart, {
+        type: 'bar',
+        data: {
+            labels: province,
+            datasets: [{
+                label: 'NPAN Taget 50%',
+                data: NPANTagetMiniDiet,
+                backgroundColor: 'lightPink',
+                borderColor: 'red',
+                borderWidth: 0,
+                type: 'line',
+                pointStyle: "line",
+                fill: false,
+            }, {
+                label: 'Prevalance of Minimum Diet Diversity',
+                data: valueMiniDiet,
+                backgroundColor: yellow,
+                borderWidth: 0,
+            }, {
+                label: 'Prevalance of Minimum Acceptable Diet',
+                data: valueAcceptDiet,
+                backgroundColor: lightYellow,
+                borderWidth: 0,
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
+            },
+            maintainAspectRatio: false,
+        }
+    });
+
+//Women Diet Chart
+    let valueWomenDiet = womenDiet.map(d => d.ValueWomenDiet);
+    //Creat Chart Women Mulnutrtion
+    let getWomenDietChart = document.getElementById('womenDietChart').getContext("2d");
+    let womenDietChart = new Chart(getWomenDietChart, {
+        type: 'horizontalBar',
+        data: {
+            labels: province,
+            datasets: [
+                {
+                    label: 'Percentage of Women Dietary Diversity',
+                    data: valueWomenDiet,
+                    backgroundColor: yellow,
+                    borderWidth: 0,
+                    order: 1
+                }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }]
+            },
+            maintainAspectRatio: false,
+            annotation: {
+                annotations: [{
+                    type: 'line',
+                    mode: 'vertical',
+                    scaleID: 'x-axis-0',
+                    value: 32.4,
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 1,
+                    label: {
+                        enabled: true,
+                        content: "National 32.4%",
+                        position: "center",
+                    }
+                }]
+            }
+        }
+    });
+
+//Map Section 3
+    let valueVitA = mapSec3.map(d => d.ValueVitA);
+    let valueDeworm = mapSec3.map(d => d.ValueDeworm);
+    let valueIronFolic = mapSec3.map(d => d.ValueIronFolic);
+    let nationalIronFolic = mapSec3.map(d => d.NationalIronFolic);
+
+//Creat Chart Vitamin A Supplement Coverage
+    let ChartVitA = document.getElementById('vitAChart').getContext("2d");
+    let drawVitAChart = new Chart(ChartVitA, {
+        type: 'horizontalBar',
+        data: {
+            labels: province,
+            datasets: [
+                {
+                    label: "Percentage of Vitamin A Supplement Coverage",
+                    data: valueVitA,
+                    backgroundColor: green,
+                    borderWidth: 0,
+                }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }]
+            },
+            maintainAspectRatio: false,
+            annotation: {
+                events: ["mouseover"],
+                annotations: [{
+                    type: 'line',
+                    mode: 'vertical',
+                    scaleID: 'x-axis-0',
+                    value: 38.5,
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 1,
+                    label: {
+                        enabled: true,
+                        content: "National 38.5%",
+                        position: "center",
+                    },
+                }]
+            }
+        }
+    });
+
+//Creat Chart Children Received Deworming Coverage
+    let ChartDeworming = document.getElementById('dewormingChart').getContext("2d");
+    let drawDewormingChart = new Chart(ChartDeworming, {
+        type: 'horizontalBar',
+        data: {
+            labels: province,
+            datasets: [
+                {
+                    label: 'Percentage of Who Received Deworming Coverage',
+                    data: valueDeworm,
+                    backgroundColor: green,
+                    borderWidth: 0,
+                }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }]
+            },
+            maintainAspectRatio: false,
+            annotation: {
+                events: ["mouseover"],
+                annotations: [{
+                    type: 'line',
+                    mode: 'vertical',
+                    scaleID: 'x-axis-0',
+                    value: 38.7,
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 1,
+                    label: {
+                        enabled: true,
+                        content: "National 38.7%",
+                        position: "center",
+                    },
+                }]
+            }
+        }
+    });
+
+//Creat Chart Iron Folic Coverage
+    let chartIronFolic = document.getElementById('ironFolicChart').getContext("2d");
+    let drawIronFolic = new Chart(chartIronFolic, {
+        type: 'bar',
+        data: {
+            labels: province,
+            datasets: [
+                {
+                    label: 'National 25.4%',
+                    data: nationalIronFolic,
+                    type: 'line',
+                    pointStyle: "line",
+                    borderWidth: 0,
+                    fill: false,
+                    backgroundColor: blue,
+                    borderColor: blue,
                 },
-                maintainAspectRatio: false, 
-            }
-        });
-
-    //---Section 4 Chart
-
-    //--->Socio Status Chart
-        let valueSocio = socio.map(d => d.ValueSocioStatus);
-        let nationalSocio = socio.map(d => d.NationalSocioStatus);
-        let getSocioStatusChart = document.getElementById('socioStatusChart').getContext("2d");
-        let socioStatusChart = new Chart(getSocioStatusChart, {
-            type: 'bar',
-            data: {
-                labels: province,
-                datasets: [
-                    {
-                        label: 'National 23.2%',
-                        data: nationalSocio,
-                        type: 'line',
-                        pointStyle: "line",
-                        borderWidth: 1,
-                        fill: false,
-                        backgroundColor: red,
-                        borderColor: red,
-                    },
-                    {
-                        label: 'Proportion of population below proverty line',
-                        data: valueSocio,
-                        backgroundColor: blue,
-                        borderWidth: 0,
-                    },
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                        },
-                        gridLines: {
-                            borderDash: [3, 10]
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawOnChartArea: false,
-                        }
-                    }],
+                {
+                    label: 'Iron/Folic Supplement Coverage',
+                    data: valueIronFolic,
+                    backgroundColor: green,
+                    borderWidth: 0,
                 },
-                maintainAspectRatio: false, 
-            }
-        });
-
-    //Provincial Nutrition Committee Graph
-    //--> Provincial Nutrition Committee Graph
-        let getProNutriCommitChart = document.getElementById('proNutriCommitChart').getContext("2d");
-        let proNutriCommitChart = new Chart(getProNutriCommitChart, {
-            type: 'doughnut',
-            data: {
-                labels: ['Provincial Nutrition Committees 100%'],
-                datasets: [{
-                        label: '',
-                        data: [100,0],
-                        backgroundColor: '#0091EA',
-                        borderWidth: 0
-                        
-                    }]
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
             },
-            options: {
-                maintainAspectRatio: false,
-                cutoutPercentage: 88,
-                pluginDH2:[],
-                tooltips: {
-			    enabled: false
-			  
-			  }
-			},
+            maintainAspectRatio: false, 
+        }
+    });
 
-        });
+//---Section 4 Chart
 
-
-        //--> Provincial Using DHIS2 Graph
-        let getDistrictDHIS2Chart = document.getElementById('districtDHIS2Chart').getContext("2d");
-        let districtDHIS2Chart = new Chart(getDistrictDHIS2Chart, {
-            type: 'doughnut',
-            data: {
-                labels: ['Districts using DHIS2 100%'],
-                datasets: [{
-                        label: '',
-                        data: [100],
-                        backgroundColor: '#26ae60',
-                        borderWidth: 0
-                        
-                    }]
+//--->Socio Status Chart
+    let valueSocio = socio.map(d => d.ValueSocioStatus);
+    let nationalSocio = socio.map(d => d.NationalSocioStatus);
+    let getSocioStatusChart = document.getElementById('socioStatusChart').getContext("2d");
+    let socioStatusChart = new Chart(getSocioStatusChart, {
+        type: 'bar',
+        data: {
+            labels: province,
+            datasets: [
+                {
+                    label: 'National 23.2%',
+                    data: nationalSocio,
+                    type: 'line',
+                    pointStyle: "line",
+                    borderWidth: 1,
+                    fill: false,
+                    backgroundColor: red,
+                    borderColor: red,
+                },
+                {
+                    label: 'Proportion of population below proverty line',
+                    data: valueSocio,
+                    backgroundColor: blue,
+                    borderWidth: 0,
+                },
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
             },
-            options: {
-                maintainAspectRatio: false,
-                cutoutPercentage: 88,
-                pluginDH2:[],
-                tooltips: {
-			    enabled: false
-			  
-			  }
+            maintainAspectRatio: false, 
+        }
+    });
+
+//Provincial Nutrition Committee Graph
+//--> Provincial Nutrition Committee Graph
+    let getProNutriCommitChart = document.getElementById('proNutriCommitChart').getContext("2d");
+    let proNutriCommitChart = new Chart(getProNutriCommitChart, {
+        type: 'doughnut',
+        data: {
+            labels: ['Provincial Nutrition Committees 100%'],
+            datasets: [{
+                    label: '',
+                    data: [100,0],
+                    backgroundColor: '#0091EA',
+                    borderWidth: 0
+                    
+                }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            cutoutPercentage: 88,
+            pluginDH2:[],
+            tooltips: {
+            enabled: false
+            
             }
-        });
+        },
+
+    });
 
 
+    //--> Provincial Using DHIS2 Graph
+    let getDistrictDHIS2Chart = document.getElementById('districtDHIS2Chart').getContext("2d");
+    let districtDHIS2Chart = new Chart(getDistrictDHIS2Chart, {
+        type: 'doughnut',
+        data: {
+            labels: ['Districts using DHIS2 100%'],
+            datasets: [{
+                    label: '',
+                    data: [100],
+                    backgroundColor: '#26ae60',
+                    borderWidth: 0
+                    
+                }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            cutoutPercentage: 88,
+            pluginDH2:[],
+            tooltips: {
+            enabled: false
+            
+            }
+        }
     });
 
 };
 
-//Custom plugins for DHIS2 and provinacial committee **********
-const jsPluginDH2 = {
-  beforeDraw: function(chart)  {
-	  
-				if(chart.config.options.pluginDH2){
-                    var width = chart.chart.width,
-                        height = chart.chart.height,
-                        ctt = chart.chart.ctx;
-
-                    ctt.restore();
-                    var fontSize = (height / 75).toFixed(2);
-                    ctt.font = fontSize + "em sans-serif";
-                    ctt.textBaseline = "middle";
-
-                    var text = "100%",
-                        textX = Math.round((width - ctt.measureText(text).width) / 2),
-                        textY = height / 2;
-
-                    ctt.fillText(text, textX, textY);
-                    ctt.save();
-					ctt.restore();
-					
-				}
-                  
-			}
-};
 //**********************************************/
 //END All ChartJS Section//
 //*********************************************/
-
-//Add Custom plugins ****************************
-Chart.pluginService.register(jsPluginDH2);
-
-//end custom plugins ****************************
-
-
 
 //*******************************************
 //---Section Create Map**********************
@@ -1070,6 +1034,38 @@ $(document).ready(function () {
 //END MAP SECTION*********
 //************************
 
+
+//Custom plugins for DHIS2 and provinacial committee **********
+const jsPluginDH2 = {
+  beforeDraw: function(chart)  {
+	  
+				if(chart.config.options.pluginDH2){
+                    var width = chart.chart.width,
+                        height = chart.chart.height,
+                        ctt = chart.chart.ctx;
+
+                    ctt.restore();
+                    var fontSize = (height / 75).toFixed(2);
+                    ctt.font = fontSize + "em sans-serif";
+                    ctt.textBaseline = "middle";
+
+                    var text = "100%",
+                        textX = Math.round((width - ctt.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctt.fillText(text, textX, textY);
+                    ctt.save();
+					ctt.restore();
+					
+				}
+                  
+			}
+};
+
+//Add Custom plugins ****************************
+Chart.pluginService.register(jsPluginDH2);
+
+//end custom plugins ****************************
 
 
 //for  Sentinel  survey ********************************************************************

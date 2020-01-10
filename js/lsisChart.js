@@ -95,14 +95,14 @@ function buildChart (value) {
     });
 
     //Create LSIS Overview Provincial
-    let province = lsisIndicatorSub.map(d => d.Provicne);
+    let provinceLSIS = lsisIndicatorSub.map(d => d.Province);
     let getLsisProvincialOverview = document.getElementById('lsisProvincialOverview').getContext("2d");
     let initialChoosedIndicator = LSISIndicator[0];
     let initailValueLSISOverviewSub = lsisIndicatorSub.map(d => d[initialChoosedIndicator])
     let lsisProvincialOverview = new Chart(getLsisProvincialOverview, {
         type: 'bar',
         data: {
-            labels: province,
+            labels: provinceLSIS,
             datasets: [
                 {
                     label: initialChoosedIndicator,
