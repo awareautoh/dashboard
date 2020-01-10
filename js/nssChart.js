@@ -15,6 +15,7 @@ const nssStuntingPath = "data/nssStunting.csv";
 const nssWastingPath = "data/nssWasting.csv";
 const nssUnderweightPath = "data/nssUnderweight.csv";
 const nssHHFoodSecurityPath = "data/nssHHFoodInsecurity.csv";
+const nssProvincePath = "data/nssProvince.csv";
 
 
 Promise.all([
@@ -27,6 +28,7 @@ Promise.all([
     d3.csv(nssWastingPath),
     d3.csv(nssUnderweightPath),
     d3.csv(nssHHFoodSecurityPath),
+    d3.csv(nssProvincePath),
 ]).then(buildChart);
 
 
@@ -45,8 +47,24 @@ function buildChart(value) {
     const nssWasting = value[6];
     const nssUnderweight = value[7];
     const nssHHFoodSecurity = value[8];
+    const nssProvince = value[9];
 
-    const province = nssHHMainSourceIncome.map(d => d.province); //Set fix province label
+    let province = nssHHMainSourceIncome.map(d => d.province); //Set fix province label
+
+
+    let targetProvince = nssProvince.map(d => d.province);
+    let indexOfOriginProvince = [];
+
+    //Function to re index value based on target province by index
+    for (let i = 0; i < nssProvince.length; i++) {
+        indexOfOriginProvince.push(province.indexOf(targetProvince[i]));
+    }
+    
+    function changeOriginValueIndex (indicator, target) {
+        for (let i = 0; i < indicator.length; i++) {
+            target.push(indicator[indexOfOriginProvince[i]]);
+    }
+    }
 
     //****************************************/
     //Section 1: Socio Demographic
@@ -59,40 +77,53 @@ function buildChart(value) {
     let valueUnskilledWageLabour = nssHHMainSourceIncome.map(d => d.unskilledWageLabour);
     let valueOther = nssHHMainSourceIncome.map(d => d.other);
 
+    let replacedValueCropAndLivestock = [];
+    let replacedValueBusiness = [];
+    let replacedValueSalaryAndSkilledWageLabour = [];
+    let replacedValueUnskilledWageLabour = [];
+    let replacedValueOther = [];
+
+
+    changeOriginValueIndex(valueCropAndLivestock, replacedValueCropAndLivestock);
+    changeOriginValueIndex(valueBusiness, replacedValueBusiness);
+    changeOriginValueIndex(valueSalaryAndSkilledWageLabour, replacedValueSalaryAndSkilledWageLabour);
+    changeOriginValueIndex(valueUnskilledWageLabour, replacedValueUnskilledWageLabour);
+    changeOriginValueIndex(valueOther, replacedValueOther);
+
 
     let getNssHHMainSourceIncome = document.getElementById('nssHHMainSourceIncome').getContext("2d");
     let nssHHMainSourceIncomeChart = new Chart(getNssHHMainSourceIncome, {
         type: 'bar',
         data: {
-            labels: province,
+            labels: targetProvince,
             datasets: [
                 {
                     label: 'Crop and live stock sale',
-                    data: valueCropAndLivestock,
+                    data: replacedValueCropAndLivestock,
                     backgroundColor: hhMainSourceIncomeColor[0],
                     borderWidth: 0,
                 },
                 {
                     label: 'Business',
-                    data: valueBusiness,
+                    data: replacedValueBusiness,
                     backgroundColor: hhMainSourceIncomeColor[1],
                     borderWidth: 0,
                 },
                 {
                     label: 'Salary and skilled wage labour',
-                    data: valueSalaryAndSkilledWageLabour,
+                    data: replacedValueSalaryAndSkilledWageLabour,
                     backgroundColor: hhMainSourceIncomeColor[2],
                     borderWidth: 0,
                 },
                 {
                     label: 'Unskilled wage labour',
-                    data: valueUnskilledWageLabour,
+                    data: replacedValueUnskilledWageLabour,
                     backgroundColor: hhMainSourceIncomeColor[3],
                     borderWidth: 0,
                 },
                 {
                     label: 'Other',
-                    data: valueOther,
+                    data: replacedValueOther,
                     backgroundColor: hhMainSourceIncomeColor[4],
                     borderWidth: 0,
                 },
@@ -127,34 +158,44 @@ function buildChart(value) {
     let value10M20M = nssAnnualHHIncome.map(d => d["10M20M"]);
     let valueM20M = nssAnnualHHIncome.map(d => d["M20M"]);
 
+    let replacedValueL5M = [];
+    let replacedValue5M10M = [];
+    let replacedValue10M20M = [];
+    let replacedValueM20M = [];
+
+    changeOriginValueIndex(valueL5M, replacedValueL5M);
+    changeOriginValueIndex(value5M10M, replacedValue5M10M);
+    changeOriginValueIndex(value10M20M, replacedValue10M20M);
+    changeOriginValueIndex(valueM20M, replacedValueM20M);
+
 
     let getNssAnnualHHIncome = document.getElementById('nssAnnualHHIncome').getContext("2d");
     let nssAnnualHHIncomeChart = new Chart(getNssAnnualHHIncome, {
         type: 'bar',
         data: {
-            labels: province,
+            labels: targetProvince,
             datasets: [
                 {
                     label: 'Less than 5M',
-                    data: valueL5M,
+                    data: replacedValueL5M,
                     backgroundColor: AnnualHHIncomeColor[0],
                     borderWidth: 0,
                 },
                 {
                     label: '5M-10M',
-                    data: value5M10M,
+                    data: replacedValue5M10M,
                     backgroundColor: AnnualHHIncomeColor[1],
                     borderWidth: 0,
                 },
                 {
                     label: '10M-20M',
-                    data: value10M20M,
+                    data: replacedValue10M20M,
                     backgroundColor: AnnualHHIncomeColor[2],
                     borderWidth: 0,
                 },
                 {
                     label: 'More than 20M',
-                    data: valueM20M,
+                    data: replacedValueM20M,
                     backgroundColor: AnnualHHIncomeColor[3],
                     borderWidth: 0,
                 },
@@ -190,15 +231,19 @@ function buildChart(value) {
     //Build Mininum Accpeptable Diet Chart
     let valueMiniDiet = nssMinimumDiet.map(d => d.value);
 
+    let replacedValueMiniDiet = [];
+    
+    changeOriginValueIndex(valueMiniDiet, replacedValueMiniDiet);
+
     let getNssMiniAcceptDiet = document.getElementById('nssMiniAcceptDiet').getContext("2d");
     let nssMiniAcceptDietChart = new Chart(getNssMiniAcceptDiet, {
         type: 'horizontalBar',
         data: {
-            labels: province,
+            labels: targetProvince,
             datasets: [
                 {
                     label: 'Minimum Acceptable Diet',
-                    data: valueMiniDiet,
+                    data: replacedValueMiniDiet,
                     backgroundColor: yellow,
                     borderWidth: 0,
                 },
@@ -230,15 +275,18 @@ function buildChart(value) {
     //Build Vitamin A Chart
     let valueVitaminA = nssVitaminA.map(d => d.value);
 
+    let replacedValueVitaminA = [];
+    changeOriginValueIndex(valueVitaminA, replacedValueVitaminA);
+
     let getNssVitaminA = document.getElementById('nssVitaminA').getContext("2d");
     let nssVitaminAChart = new Chart(getNssVitaminA, {
         type: 'horizontalBar',
         data: {
-            labels: province,
+            labels: targetProvince,
             datasets: [
                 {
                     label: 'Vitamin A Supplementation',
-                    data: valueVitaminA,
+                    data: replacedValueVitaminA,
                     backgroundColor: yellow,
                     borderWidth: 0,
                 },
@@ -276,28 +324,36 @@ function buildChart(value) {
     let valueOverweight = nssMaternalNutrition.map(d => d.overweight);
     let valueWomenUnderweight = nssMaternalNutrition.map(d => d.underweight);
 
+    let replacedValueObese = [];
+    let replacedValueOverweight = [];
+    let replacedValueWomenUnderweight = [];
+
+    changeOriginValueIndex(valueObese, replacedValueObese);
+    changeOriginValueIndex(valueOverweight, replacedValueOverweight);
+    changeOriginValueIndex(valueWomenUnderweight, replacedValueWomenUnderweight);
+
 
     let getNssWomenBMI = document.getElementById('nssWomenBMI').getContext("2d");
     let nssWomenBMIChart = new Chart(getNssWomenBMI, {
         type: 'bar',
         data: {
-            labels: province,
+            labels: targetProvince,
             datasets: [
                 {
                     label: 'Obese',
-                    data: valueObese,
+                    data: replacedValueObese,
                     backgroundColor: maternalNutritionColor[0],
                     borderWidth: 0,
                 },
                 {
                     label: 'Overweight',
-                    data: valueOverweight,
+                    data: replacedValueOverweight,
                     backgroundColor: maternalNutritionColor[1],
                     borderWidth: 0,
                 },
                 {
                     label: 'Underweight',
-                    data: valueWomenUnderweight,
+                    data: replacedValueWomenUnderweight,
                     backgroundColor: maternalNutritionColor[2],
                     borderWidth: 0,
                 },
@@ -338,7 +394,7 @@ function buildChart(value) {
     let nssStuntingChart = new Chart(getNssStunting, {
         type: 'horizontalBar',
         data: {
-            labels: province,
+            labels: targetProvince,
             datasets: [
                 {
                     label: 'Stunting',
@@ -349,7 +405,7 @@ function buildChart(value) {
                 {
                     label: 'LSIS II',
                     data: valueStuntingLsis,
-                    backgroundColor: green,
+                    backgroundColor: lightBlue,
                     borderWidth: 0,
                 },
             ]
@@ -383,7 +439,7 @@ function buildChart(value) {
     let nssWastingChart = new Chart(getNssWasting, {
         type: 'horizontalBar',
         data: {
-            labels: province,
+            labels: targetProvince,
             datasets: [
                 {
                     label: 'Wasting',
@@ -394,7 +450,7 @@ function buildChart(value) {
                 {
                     label: 'LSIS II',
                     data: valueWastingLsis,
-                    backgroundColor: green,
+                    backgroundColor: lightBlue,
                     borderWidth: 0,
                 },
             ]
@@ -439,7 +495,7 @@ function buildChart(value) {
                 {
                     label: 'LSIS II',
                     data: valueUnderweightLsis,
-                    backgroundColor: green,
+                    backgroundColor: lightBlue,
                     borderWidth: 0,
                 },
             ]
@@ -465,22 +521,63 @@ function buildChart(value) {
         }
     });
 
+    //Build Household Food Security Chart
+
+    let getNssTest = document.getElementById('nssTest').getContext("2d");
+    let nssTestChart = new Chart(getNssTest, {
+        type: 'bar',
+        data: {
+            labels: targetProvince,
+            datasets: [
+                {
+                    label: 'Household Food Security',
+                    data: valueStunting,
+                    backgroundColor: green,
+                    borderWidth: 0,
+                },
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        borderDash: [3, 10]
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }]
+            },
+            maintainAspectRatio: false,
+        }
+    });
+
     //****************************************/
     //Section 6: Household Food Security
     //****************************************/
 
-    //Build Underweight Chart
+    //Build Household Food Security Chart
     let valueHHFoodSecurity = nssHHFoodSecurity.map(d => d.value);
+
+    let replacedValueHHFoodSecurity = [];
+
+    changeOriginValueIndex(valueHHFoodSecurity, replacedValueHHFoodSecurity);
 
     let getNssHHFoodInsecurity = document.getElementById('nssHHFoodInsecurity').getContext("2d");
     let nssHHFoodInsecurityChart = new Chart(getNssHHFoodInsecurity, {
         type: 'bar',
         data: {
-            labels: province,
+            labels: targetProvince,
             datasets: [
                 {
                     label: 'Household Food Security',
-                    data: valueHHFoodSecurity,
+                    data: replacedValueHHFoodSecurity,
                     backgroundColor: green,
                     borderWidth: 0,
                 },
@@ -509,6 +606,8 @@ function buildChart(value) {
 
 
 }
+
+
 //*************************** */
 //Map Section
 //*************************** */
@@ -660,6 +759,3 @@ $(document).ready(function () {
             width: 190}));
         }
 });
-
-
-
