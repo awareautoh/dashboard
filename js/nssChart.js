@@ -4,6 +4,7 @@ const hhMainSourceIncomeColor = ["#FFCB21", "#FFDD6E", "#806611", "#CCA31B", "#8
 const AnnualHHIncomeColor = ["#27418F", "#7D95DB", "#5C6DA2", "#192A5C", "#3B63DB"];
 const maternalNutritionColor = ["#A2C754", "#414733", "#BED096", "#79943E", "#3A471E"];
 
+
 //File Path for import data
 const nssHHMainSourceIncomePath = "data/nssHHMainSourceIncome.csv";
 const nssAnnualHHIncomePath = "data/nssAnnualHHIncome.csv";
