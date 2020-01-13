@@ -265,3 +265,28 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
   color: #ffffff;
   text-align: center;
 }
+
+/* ****************************** */
+/* Customize NSS Tab */
+/* ****************************** */
+
+button#lsisStuntingButton, button#lsisWastingButton, button#lsisUnderweightButton {
+  background-image: none;
+  background-color: none;
+}
+
+button.active#lsisStuntingButton, button.active#lsisWastingButton, button.active#lsisUnderweightButton {
+  background: #f1f8e9;;
+  text-shadow: none
+}
+
+button#lsisStuntingButton:active, button#lsisWastingButton:active, button#lsisUnderweightButton:active {
+  background: #f1f8e9;
+  background-color: none;
+}
+
+
+button#lsisStuntingButton:hover, button#lsisWastingButton:hover, button#lsisUnderweightButton:hover {
+  background: #f1f8e9;
+  text-shadow: none;
+}
