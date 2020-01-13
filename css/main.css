@@ -290,3 +290,10 @@ button#lsisStuntingButton:hover, button#lsisWastingButton:hover, button#lsisUnde
   background: #f1f8e9;
   text-shadow: none;
 }
+/* tooltip link css */
+.tooltip.right .tooltip-inner {
+    background-color:blue;
+  }
+.tooltip.right .tooltip-arrow {
+          border-right-color: blue;
+       }
