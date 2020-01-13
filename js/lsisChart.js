@@ -49,7 +49,7 @@ function buildChart (value) {
     const lsisOverviewChartLabelLenght = LSISIndicator.length;
     let initialBackgroundColor = [];
     for (let i = 0; i < lsisOverviewChartLabelLenght; i++) {
-        initialBackgroundColor.push('#bdbdbd');
+        initialBackgroundColor.push('#e0e0e0');
     }
     initialBackgroundColor[0] = blue;
 
@@ -59,7 +59,7 @@ function buildChart (value) {
     //Creat LSIS Overview Indicator
     let getLsisOverviewChart = document.getElementById('lsisOverviewChart').getContext("2d");
     let lsisOverviewChart = new Chart(getLsisOverviewChart, {
-        type: 'bar',
+        type: 'horizontalBar',
         data: {
             labels: LSISIndicator,
             datasets: [
@@ -71,9 +71,10 @@ function buildChart (value) {
                 }
             ],
         },
+        plugins: [ChartDataLabels],
         options: {
             scales: {
-                yAxes: [{
+                xAxes: [{
                     ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
@@ -82,7 +83,7 @@ function buildChart (value) {
                         borderDash: [3, 5],
                     }
                 }],
-                xAxes: [{
+                yAxes: [{
                     gridLines: {
                         drawOnChartArea: false,
                     },
@@ -90,7 +91,19 @@ function buildChart (value) {
                 }]
             },
             maintainAspectRatio: false,
+            legend: {
+                display: false,
+            },
             onClick: activateLSISSubChart,
+            plugins: {
+                datalabels: {
+                    formatter: function(value, context) {
+                        return context.chart.data.labels[context.dataIndex];
+                    },
+                    anchor: "start",
+                    align: "end",
+                },
+            },
         }
     });
 
@@ -201,7 +214,7 @@ function buildChart (value) {
         let labelCount = activePoints[0]._chart.data.labels.length;
         let backgroundColorToChange = [];
         for (let i = 0; i < labelCount; i++) {
-            backgroundColorToChange.push('#bdbdbd');
+            backgroundColorToChange.push('#e0e0e0');
         }
         backgroundColorToChange[activePoints[0]._index] = blue;
 
