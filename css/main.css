@@ -265,3 +265,11 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
   color: #ffffff;
   text-align: center;
 }
+
+/* tooltip link css */
+.tooltip.right .tooltip-inner {
+    background-color:blue;
+  }
+.tooltip.right .tooltip-arrow {
+          border-right-color: blue;
+       }
