@@ -7,11 +7,13 @@
     <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
     <link rel="shortcut icon" type="image/png" href="http://example.com/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- BS JS-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <!-- BS CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- BS OPT THEME -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Import plugin for to show annotation on Chart.js -->
@@ -116,9 +118,10 @@
                         <div style="position: relative; display: block; height: 360px; width: auto;">
                             <canvas id="wastingAndOverweightChart"></canvas>
                         </div>
-                        <div class= "toolbar" style="text-align: center;">
-                            <button type="button" id='Chart1SortWasting' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Wasting</button>
-                            <button type="button" id='Chart1SortOverWeight' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Overweight</button>
+                        <div id= "toolbarOverview" style="text-align: center;">
+                            <button type="button" id='overviewWastingButton' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Wasting</button>
+                            <button type="button" id='overviewOverweightButton' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Overweight</button>
+                            <button type="button" id='overviewResetButton' class="btn btn-default" style="margin: 10px 5px 15px 5px; display: inline-block;">Reset</button>
                         </div>
                     </div>
                 </div>
@@ -292,109 +295,109 @@
             <div id="menu1" class="tab-pane fade"> <!--  start menu 2 -->
                 <script src="js/lsisChart.js"></script>
                 <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card" id="header">
-                      <h1 class="top">LSIS II Survey 2017</h1>
+                    <div class="col-lg-12">
+                        <div class="card" id="header">
+                            <h1 class="top">LSIS II Survey 2017</h1>
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <div class="row">
-              <div class="col-lg-6">
-                  <div class="cardChart">
-                    <div class="cardChart">
-                      <h3 class="topic" style="padding-top: 10px;">
-                        Indicator Overview
-                      </h3>
-                      <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                        <canvas id="lsisOverviewChart"></canvas>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="cardChart">
-                  <div class="cardChart">
-                    <h3 class="topic" style="padding-top: 10px;">
-                      Indicator Trending
-                    </h3>
-                    <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                      <canvas id="lsisOverviewTrend"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div class="col-lg-12">
-                <div class="cardChart">
-                    <div class="cardChart">
-                        <h3 class="topic" style="padding-top: 10px;">
-                        Provincial Overview
-                        </h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                            <canvas id="lsisProvincialOverview"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="cardChart">
-                    <div class="cardChart">
-                        <h3 class="topic" style="padding-top: 10px;">
-                        Area
-                        </h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                            <canvas id="lsisSubCategoryArea"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="cardChart">
-                    <div class="cardChart">
-                        <h3 class="topic" style="padding-top: 10px;">
-                        Education
-                        </h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                            <canvas id="lsisSubCategoryEducation"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="cardChart">
-                    <div class="cardChart">
-                        <h3 class="topic" style="padding-top: 10px;">
-                        Ethnicity
-                        </h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                            <canvas id="lsisSubCategoryEthnicity"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="cardChart">
-                    <div class="cardChart">
-                        <h3 class="topic" style="padding-top: 10px;">
-                        Wealth Index Quintile
-                        </h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
-                            <canvas id="lsisSubCategoryWealth"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                <div class="col-lg-12">
-                    <div class="cardChart">
+                    <div class="col-lg-6">
                         <div class="cardChart">
-                            <h3 class="topic" style="padding-top: 10px;">
-                            MODA Link
-                            </h3>
-                            <div style="position: relative; display: block; height: 800px; width: auto; padding: 20px;">
-                                <svg id="sankey" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 800 800"></svg>
+                            <div class="cardChart">
+                                <h3 class="topic" style="padding-top: 10px;">
+                                    Indicator Overview
+                                </h3>
+                                <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                                    <canvas id="lsisOverviewChart"></canvas>
+                                </div>
                             </div>
                         </div>
-                    </div> 
-                </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <div class="cardChart">
+                                <h3 class="topic" style="padding-top: 10px;">
+                                    Indicator Trending
+                                </h3>
+                                <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                                    <canvas id="lsisOverviewTrend"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="cardChart">
+                            <div class="cardChart">
+                                <h3 class="topic" style="padding-top: 10px;">
+                                    Provincial Overview
+                                </h3>
+                                <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                                    <canvas id="lsisProvincialOverview"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <div class="cardChart">
+                                <h3 class="topic" style="padding-top: 10px;">
+                                    Area
+                                </h3>
+                                <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                                    <canvas id="lsisSubCategoryArea"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <div class="cardChart">
+                                <h3 class="topic" style="padding-top: 10px;">
+                                    Education
+                                </h3>
+                                <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                                    <canvas id="lsisSubCategoryEducation"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <div class="cardChart">
+                                <h3 class="topic" style="padding-top: 10px;">
+                                    Ethnicity
+                                </h3>
+                                <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                                    <canvas id="lsisSubCategoryEthnicity"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <div class="cardChart">
+                                <h3 class="topic" style="padding-top: 10px;">
+                                    Wealth Index Quintile
+                                </h3>
+                                <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                                    <canvas id="lsisSubCategoryWealth"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="cardChart">
+                            <div class="cardChart">
+                                <h3 class="topic" style="padding-top: 10px;">
+                                    MODA Link
+                                </h3>
+                                <div style="position: relative; display: block; height: 800px; width: auto; padding: 20px;">
+                                    <svg id="sankey" style="width: 100%; height: 100%; display: block; margin: auto;" viewBox = "0 0 800 800"></svg>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
             </div>
         </div>
         <br/> <!-- Menu 1  -->
@@ -406,13 +409,13 @@
         -->
         <div id="menu2" class="tab-pane fade"> <!-- Start senitel --> 
             <script src="js/nssChart.js"></script>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card" id="header">
-                        <h1 class="top">Overview</h1>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card" id="header">
+                            <h1 class="top">Overview</h1>
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="row">
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="cardChart">
@@ -616,256 +619,220 @@
         <!-- end senitel Seurvey -->
 
 
-
-            <div id="menu3" class="tab-pane fade"> <!-- Start LECS Survey  -->
+        <!--
+            *******************************************
+            Start LECS Tab
+            *******************************************
+        -->
+            <div id="menu3" class="tab-pane fade">
                 <script src="js/lecsChart.js"></script>
                  <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card" id="header">
-                      <h1 class="top">LECS Survey</h1>
+                    <div class="col-lg-12">
+                        <div class="card" id="header">
+                            <h1 class="top">LECS Survey</h1>
+                        </div>
                     </div>
-                  </div>
-            </div>
-              <div class="row">
+                </div>
 
-                <div class="col-lg-12">
-                  <div class="cardChart">
-                     <h4 class="topic" style="padding-top: 10px;"> Table 9: Percent of total food consumption by province in 2012/2013 <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                    <div style="position: relative; display: block; height: 360px; width: auto;">
-                      <canvas id="lec1Chart"></canvas>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px;"> Table 9: Percent of total food consumption by province in 2012/2013 <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="lec1Chart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
 
-
-              <div class="col-lg-12 col-md-4 col-lg-4 ">
-
-                <div class="cardChart">
-                  <h4 class="topic" style="padding-top: 10px; color: #fff; background: #FBD3E9;">
-                        card1
-                  </h4>
-                  
-                </div>
-
-              </div>
-              <div class="col-lg-12 col-md-4 col-lg-4 ">
-
-                <div class="cardChart">
-                  <h4 class="topic" style="padding-top: 10px; color: #fff; background: #FBD3E9;">
-                        card1
-                  </h4>
-                  
-                </div>
-
-              </div>
-              <div class="col-lg-12 col-md-4 col-lg-4 ">
-
-                <div class="cardChart">
-                  <h4 class="topic" style="padding-top: 10px; color: #fff; background: #FBD3E9;">
-                        card1
-                  </h4>
-                  
-                </div>
-
-              </div>
-
-                <div class="col-lg-12">
-                  <div class="cardChart">
-                     <h4 class="topic" style="padding-top: 10px;"> Table 10: Percent of food consumption by type of product and provinces  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                    <div style="position: relative; display: block; height: 360px; width: auto;">
-                      <canvas id="lec2Chart"></canvas>
+                    <div class="col-lg-12 col-md-4 col-lg-4 ">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px; color: #fff; background: #FBD3E9;">
+                                card1
+                            </h4>
+                        </div>
                     </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-12">
-                  <div class="cardChart">
-                     <h4 class="topic" style="padding-top: 10px;"> <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
-                    <div style="position: relative; display: block; height: 360px; width: auto;">
-                      <canvas id="lec3Chart"></canvas>
+                    <div class="col-lg-12 col-md-4 col-lg-4 ">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px; color: #fff; background: #FBD3E9;">
+                                card1
+                            </h4>
+                        </div>
                     </div>
-                  </div>
+                    <div class="col-lg-12 col-md-4 col-lg-4 ">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px; color: #fff; background: #FBD3E9;">
+                                card1
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px;"> Table 10: Percent of food consumption by type of product and provinces  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="lec2Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="cardChart">
+                            <h4 class="topic" style="padding-top: 10px;"> <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h4>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="lec3Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Table 11: Access to health services by province and region  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="lec4Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Educational services and quality  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="lec5Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Table 4: Poverty by Geographic Regions  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display:block; height: 360px; width: auto;">
+                                <canvas id="lec6Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card" id="sec2" style="background-color: rgba(213,51,105,0.8);">
+                            <h1>Poverty headcount rate by characteristics</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Highest level of education completed  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="lec8Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Ethnicity  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="lec7Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
-                <div class="col-lg-7">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Table 11: Access to health services by province and region  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="lec4Chart"></canvas>
-                  </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-5">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Educational services and quality  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="lec5Chart"></canvas>
-                  </div>
-                  </div>
-                </div>
-
-
-                <div class="col-lg-12">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Table 4: Poverty by Geographic Regions  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display:block; height: 360px; width: auto;">
-                    <canvas id="lec6Chart"></canvas>
-                       
-                  </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-12">
-                <div class="card" id="sec2" style="background-color: rgba(213,51,105,0.8);">
-                  <h1>Poverty headcount rate by characteristics</h1>
-                </div>
-                </div>
-
-                <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Highest level of education completed  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="lec8Chart"></canvas>
-                  </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Ethnicity  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="lec7Chart"></canvas>
-                  </div>
-                  </div>
-                </div>
-
-              </div>
-              <br/>
-
-            </div> <!-- End LECS Survey  -->
+            <br/>
+        </div> <!-- End LECS Survey  -->
 
         <div id="menu4" class="tab-pane fade"> <!-- start Agriculture -->
             <script src="js/agricultureChart.js"></script>
-             <div class="row">
-                <div class="col-lg-12">
-                  <div class="card" id="header">
-                    <h1 class="top">Agriculture Cencus 2018</h1>
-                  </div>
-              </div>
-             </div>
-             <div class="row">
-                 <div class="col-lg-12">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Rice Harvested Area 2016, 2017, 2018 (Hectare) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agri1Chart"></canvas>
-                  </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Rice Yield 2016, 2017, 2018 (Ton/Hectare) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agri2Chart"></canvas>
-                  </div>
-                  </div>
-                </div>   
-
-                 <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Rice Production 2016, 2017, 2018 (Ton)   <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agri3Chart"></canvas>
-                  </div>
-                  </div>
-                </div>  
-
-                <div class="col-lg-12">
-                <div class="card" id="sec2" style="background-color: #3a9538;">
-                  <h1>Fruite and Vegetable</h1>
-                </div>
-                </div>
-
-                <div class="col-lg-12">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Vegetable and Fruit Havested Area 2016, 2017, 2018 (Hectare) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agriVet1Chart"></canvas>
-                  </div>
-                  </div>
-                </div>   
-
-                <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Vegetable and Fruit Yield 2016, 2017, 2018 (Ton/Hectare)  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agriVet2Chart"></canvas>
-                  </div>
-                  </div>
-                </div>   
-
-                 <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Vegetable and Fruit Production 2016, 2017, 2018 (Ton)   <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agriVet3Chart"></canvas>
-                  </div>
-                  </div>
-                </div>    
-
-                <div class="col-lg-12">
-                <div class="card" id="sec2">
-                  <h1>Animal Population</h1>
-                </div>
-              </div>
-
-                <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Buffalo and Cattle Population (Thaosand Head)  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agriVet4Chart"></canvas>
-                  </div>
-                  </div>
-                </div> 
-
-
-                <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Pig, Goat and Sheep Population (Thaosand Head) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agriVet5Chart"></canvas>
-                  </div>
-                  </div>
-                </div>
-
-
-                <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Poultry Population (Thaosand Head)  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <div style="position: relative; display: block; height: 300px; padding-top: 5px;"> 
-                      <canvas id="agriVet7Chart"></canvas>
-                   
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card" id="header">
+                            <h1 class="top">Agriculture Cencus 2018</h1>
+                        </div>
                     </div>
-                    
-                  </div>
-                  </div>
-                </div>   
-
-                 <div class="col-lg-6">
-                <div class="cardChart">
-                   <h5 class="topic" style="padding-top: 10px;"> Culture Fish and Capture Fish: Meat Production (Ton)  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
-                 <div style="position: relative; display: block; height: 360px; width: auto;">
-                    <canvas id="agriVet6Chart"></canvas>
-                  </div>
-                  </div>
-                </div>   
-
-             </div><!-- end row -->
-
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Rice Harvested Area 2016, 2017, 2018 (Hectare) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agri1Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Rice Yield 2016, 2017, 2018 (Ton/Hectare) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agri2Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Rice Production 2016, 2017, 2018 (Ton)   <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agri3Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="col-lg-12">
+                        <div class="card" id="sec2" style="background-color: #3a9538;">
+                        <h1>Fruite and Vegetable</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Vegetable and Fruit Havested Area 2016, 2017, 2018 (Hectare) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agriVet1Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Vegetable and Fruit Yield 2016, 2017, 2018 (Ton/Hectare)  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agriVet2Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Vegetable and Fruit Production 2016, 2017, 2018 (Ton)   <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agriVet3Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="col-lg-12">
+                        <div class="card" id="sec2">
+                            <h1>Animal Population</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Buffalo and Cattle Population (Thaosand Head)  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agriVet4Chart"></canvas>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Pig, Goat and Sheep Population (Thaosand Head) <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agriVet5Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Poultry Population (Thaosand Head)  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <div style="position: relative; display: block; height: 300px; padding-top: 5px;"> 
+                                    <canvas id="agriVet7Chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="col-lg-6">
+                        <div class="cardChart">
+                            <h5 class="topic" style="padding-top: 10px;"> Culture Fish and Capture Fish: Meat Production (Ton)  <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h5>
+                            <div style="position: relative; display: block; height: 360px; width: auto;">
+                                <canvas id="agriVet6Chart"></canvas>
+                            </div>
+                        </div>
+                    </div>   
+                </div><!-- end row -->
             <br/>
            </div> <!-- End agriculture -->
 
@@ -886,6 +853,4 @@
           </div>
       </footer>
 </body>
-<!-- BS JS-->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </html>

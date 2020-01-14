@@ -256,13 +256,11 @@ function buildChart(value) {
                         beginAtZero: true,
                         maxTicksLimit: 5,
                     },
-                    stacked: true,
                     gridLines: {
                         borderDash: [3, 10]
                     }
                 }],
                 yAxes: [{
-                    stacked: true,
                     gridLines: {
                         drawOnChartArea: false,
                     }
@@ -299,13 +297,11 @@ function buildChart(value) {
                         beginAtZero: true,
                         maxTicksLimit: 5,
                     },
-                    stacked: true,
                     gridLines: {
                         borderDash: [3, 10]
                     }
                 }],
                 yAxes: [{
-                    stacked: true,
                     gridLines: {
                         drawOnChartArea: false,
                     }
@@ -398,7 +394,7 @@ function buildChart(value) {
     let valueUnderweight = nssUnderweight.map(d => d.value);
     let valueUnderweightLsis = nssUnderweight.map(d => d.lsis);
 
-    //Test Section
+    //Variable for update on click button
     let lsisStuntingButton = [valueStunting, valueStuntingLsis];
     let lsisWastingButton = [valueWasting, valueWastingLsis];
     let lsisUnderweightButton = [valueUnderweight, valueUnderweightLsis];
@@ -455,18 +451,18 @@ function buildChart(value) {
 
     //Funtion to highlight activated button and update data based on click button
     $(document).ready(function () {
-        let t = document.getElementById("toolbarLSIS");
-        let b = t.getElementsByClassName("btn btn-default");
+        let toolbarLSIS = document.getElementById("toolbarLSIS");
+        let btnClass = toolbarLSIS.getElementsByClassName("btn btn-default");
 
         //Create a list of this button
         let listLSISButton = [];
-        for (let i = 0; i < b.length; i++) {
-            listLSISButton.push(b[i].id);
+        for (let i = 0; i < btnClass.length; i++) {
+            listLSISButton.push(btnClass[i].id);
         }
 
-        for (let i=0; i< b.length; i++) {
-            b[i].addEventListener("click", function () { //Add event to capture click
-                for (let j = 0; j < b.length; j++) { //remove previous actived element
+        for (let i=0; i< btnClass.length; i++) {
+            btnClass[i].addEventListener("click", function () { //Add event to capture click
+                for (let j = 0; j < btnClass.length; j++) { //remove previous actived element
                     listLSISButton.map(element => {
                         document.getElementById(element).classList.remove("active");
                     });
@@ -475,9 +471,9 @@ function buildChart(value) {
 
                 //Update data for Child Mulnutrition Chart
                 listTestChart.map(element => {
-                    if (Object.keys(element) == b[i].id) {
-                        nssChildMulnutritionChart.data.datasets[0].data = element[b[i].id][0];
-                        nssChildMulnutritionChart.data.datasets[1].data = element[b[i].id][1];
+                    if (Object.keys(element) == btnClass[i].id) {
+                        nssChildMulnutritionChart.data.datasets[0].data = element[btnClass[i].id][0];
+                        nssChildMulnutritionChart.data.datasets[1].data = element[btnClass[i].id][1];
                         nssChildMulnutritionChart.update();
                     }
                 });

@@ -20,7 +20,7 @@ const green = "#66bb6a";
 const grey = "#bdbdbd";
 const purpleXyellow = "#999EFF";
 const colorSetLSISAreaChart = ["#FFAC4DB3", "#BF9C73B3", "#FFCF99B3", "#B37836B3", "#7F5626B3"];
-const colorSetLSISEducationChart = ["#1739E5B3", "#0F2699B3", "#4455AAB3", "#5C73E5B3", "#0A1A66B3"];
+const colorSetLSISEducationChart = ["#C7C7EAB3", "#1739E5B3", "#0F2699B3", "#4455AAB3", "#5C73E5B3", "#0A1A66B3"];
 const colorSetLSISEthnicityChart = ["#39806EB3", "#BFFFEFB3", "#608078B3", "#5CCCB0B3", "#73FFDCB3"];
 const colorSetLSISWealthChart = ["#4C74A8B3", "#68A0E8B3", "#2F4869B3", "#6EA9F5B3", "#5D8ECFB3"];
 
@@ -129,65 +129,49 @@ function buildChart (value) {
             maintainAspectRatio: false,
         }
     });
-    //Add function for click button
-    let x = 0;
-    $('#Chart1SortWasting').on('click', function() {
-        if (x == 0) {
-            wastingAndOverweightChart.data.datasets.forEach((d, i) => { //d: dataset; i: index
-                if (i == 0) { //Add condition to change group set for 2 array
-                    d.data = valueWSort;
-                } else {
-                    d.data = valueOByWSort;
+    
+
+    //Variable for update on click button
+    let overviewWastingButton = [valueWSort, valueOByWSort, provinceW];
+    let overviewOverweightButton = [valueOSort, valueSByOSort, provinceOSort];
+    let overviewResetButton = [valueW, valueO, provinceW];
+
+    let overviewTestChart = [
+        {"overviewWastingButton":overviewWastingButton},
+        {"overviewOverweightButton": overviewOverweightButton},
+        {"overviewResetButton": overviewResetButton},
+    ]
+
+    //Funtion to highlight activated button and update data based on click button
+    $(document).ready(function () {
+        let toolbarOverview = document.getElementById("toolbarOverview");
+        let btnClass = toolbarOverview.getElementsByClassName("btn btn-default");
+
+        //Create a list of this button
+        let listOverviewButton = [];
+        for (let i = 0; i < btnClass.length; i++) {
+            listOverviewButton.push(btnClass[i].id);
+        }
+
+        for (let i=0; i< btnClass.length; i++) {
+            btnClass[i].addEventListener("click", function () { //Add event to capture click
+                for (let j = 0; j < btnClass.length; j++) { //remove previous actived element
+                    listOverviewButton.map(element => {
+                        document.getElementById(element).classList.remove("active");
+                    });
                 }
+                this.classList.add("active"); //Add color highlight for activated button
+                //Update data for Child Mulnutrition Chart
+                overviewTestChart.map(element => {
+                    if (Object.keys(element) == btnClass[i].id) {
+                        wastingAndOverweightChart.data.datasets[0].data = element[btnClass[i].id][0];
+                        wastingAndOverweightChart.data.datasets[1].data = element[btnClass[i].id][1];
+                        wastingAndOverweightChart.data.labels = element[btnClass[i].id][2];
+                        wastingAndOverweightChart.update();
+                    }
+                });
             });
-            wastingAndOverweightChart.data.labels.forEach(() =>  {
-                wastingAndOverweightChart.data.labels = provinceWSort;
-            });
-            wastingAndOverweightChart.update();
-            x = 1;
-        } else {
-            wastingAndOverweightChart.data.datasets.forEach((d, i) => {
-                if (i == 0) {
-                    d.data = valueW;
-                } else {
-                    d.data = valueO;
-                }
-            });
-            wastingAndOverweightChart.data.labels.forEach(() =>  {
-                wastingAndOverweightChart.data.labels = provinceW;
-            });
-            wastingAndOverweightChart.update();
-            x = 0;
-        };
-    });
-    $('#Chart1SortOverWeight').on('click', function() {
-        if (x == 0) {
-            wastingAndOverweightChart.data.datasets.forEach((d, i) => { //d: dataset; i: index
-                if (i == 0) { //Add condition to change group set for 2 array
-                    d.data = valueOSort;
-                } else {
-                    d.data = valueSByOSort;
-                }
-            });
-            wastingAndOverweightChart.data.labels.forEach(() =>  {
-                wastingAndOverweightChart.data.labels = provinceOSort;
-            });
-            wastingAndOverweightChart.update();
-            x = 1;
-        } else {
-            wastingAndOverweightChart.data.datasets.forEach((d, i) => {
-                if (i == 0) {
-                    d.data = valueW;
-                } else {
-                    d.data = valueO;
-                }
-            });
-            wastingAndOverweightChart.data.labels.forEach(() =>  {
-                wastingAndOverweightChart.data.labels = provinceW;
-            });
-            wastingAndOverweightChart.update();
-            x = 0;
-        };
+        }
     });
 
 
@@ -1124,10 +1108,6 @@ var stData = {
 
 var chartOptions = {
  cutoutPercentage: 88,
-  animation: {
-    animateRotate: true,
-    duration: 9000
-  },
   legend: {
     display:false
   },
@@ -1202,10 +1182,6 @@ var stData = {
 
 var chartOptions = {
  cutoutPercentage: 88,
-  animation: {
-    animateRotate: true,
-    duration: 9000
-  },
   legend: {
     display:false
   },
@@ -1280,10 +1256,6 @@ $(document).ready(function() {
 
     var chartOptions = {
     cutoutPercentage: 88,
-    animation: {
-        animateRotate: true,
-        duration: 9000
-    },
     legend: {
         display:false
     },

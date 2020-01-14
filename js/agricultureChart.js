@@ -699,78 +699,58 @@ function buildChart (value) {
 
    //Start chart5 
 
-       let agriVet5Label = agriVet5.map(d=> d.Year);
-       let agriVet5value = agriVet5.map(d=> d.pig);
-       let agriVet5value2 = agriVet5.map(d=> d.gs);
+    let agriVet5Label = agriVet5.map(d=> d.Year);
+    let agriVet5value = agriVet5.map(d=> d.pig);
+    let agriVet5value2 = agriVet5.map(d=> d.gs);
 
-       let getagriVet5Chart = document.getElementById('agriVet5Chart').getContext("2d");
-        let agriVet5Chart = new Chart(getagriVet5Chart, {
-
-             type: 'bar',
-                                data: {
-                                    labels: agriVet5Label,
-                                    datasets: [
-                                        {
-                                            label: "Pig",
-                                            data: agriVet5value,
-                                            backgroundColor: '#fd837b',
-                                            borderColor:'#fd837b',
-                                            pointRadius: 5,
-                                            pointBorderColor:'#7e807e',
-                                            pointBorderwidth:1,
-                                            fill:true
-                                            
-                                            
+    let getagriVet5Chart = document.getElementById('agriVet5Chart').getContext("2d");
+    
+    let agriVet5Chart = new Chart(getagriVet5Chart, {
+        type: 'bar',
+            data: {
+                labels: agriVet5Label,
+                datasets: [
+                    {
+                        label: "Pig",
+                        data: agriVet5value,
+                        backgroundColor: '#fd837b',
+                        borderColor:'#fd837b',
+                        fill: false,
+                    },
+                    {
+                        label: "Goat and Sheep",
+                        data: agriVet5value2,
                         
-                                        },
-                                        {
-                                            label: "Goat and Sheep",
-                                            data: agriVet5value2,
-                                            
-                                            borderColor: '#00688b',
-                                            backgroundColor:'#00688b',
-                                            pointRadius: 5,
-                                            pointBorderColor:'#7e807e',
-                                            pointBorderwidth:1,
-                                            fill:true
-                                            
-                        
-                                        },
-                                                    
-                                                              
-                                    ]
-                                    
-                                },
-                                options: {
-                                   
-                                    legend: {
-                                        display: true,
-                                        usePointStyle: true,
-                                        
-                                    },
-                                    maintainAspectRatio: false,
-                                    scales: {
-                                yAxes: [{
-                                     
-                                    ticks: {
-                                        beginAtZero: true,
-                                        maxTicksLimit: 4,
-                                    },
-                                    gridLines: {
-                                        borderDash: [3, 5]
-                                    }
-                                }],
-                                xAxes: [{
-                                     
-                                    gridLines: {
-                                        drawOnChartArea: false,
-                                    }
-                                }]
-                            },
-                                    
-                                }
-
-        });
+                        borderColor: '#00688b',
+                        backgroundColor:'#00688b',
+                        fill: false,
+                    },
+                ]
+            },
+            options: {
+                legend: {
+                    display: true,
+                },
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 4,
+                        },
+                        gridLines: {
+                            borderDash: [3, 5]
+                        }
+                    }],
+                    xAxes: [{
+                            
+                        gridLines: {
+                            drawOnChartArea: false,
+                        }
+                    }],
+                },
+            }
+    });
 
 
    //End agriVet5

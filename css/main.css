@@ -267,7 +267,32 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
 }
 
 /* ****************************** */
-/* Customize NSS Tab */
+/* Customize Overview Tab | Button*/
+/* ****************************** */
+
+button#overviewWastingButton, button#overviewOverweightButton, button#overviewResetButton {
+  background-image: none;
+  background-color: none;
+}
+
+button.active#overviewWastingButton, button.active#overviewOverweightButton, button.active#overviewResetButton {
+  background: #f1f8e9;;
+  text-shadow: none
+}
+
+button#overviewWastingButton:active, button#overviewOverweightButton:active, button#overviewResetButton:active {
+  background: #f1f8e9;
+  background-color: none;
+}
+
+
+button#overviewWastingButton:hover, button#overviewOverweightButton:hover, button#overviewResetButton:hover {
+  background: #f1f8e9;
+  text-shadow: none;
+}
+
+/* ****************************** */
+/* Customize NSS Tab | Button*/
 /* ****************************** */
 
 button#lsisStuntingButton, button#lsisWastingButton, button#lsisUnderweightButton {
