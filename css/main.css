@@ -316,22 +316,10 @@ button#lsisStuntingButton:hover, button#lsisWastingButton:hover, button#lsisUnde
   text-shadow: none;
 }
 /* tooltip link css */
-<<<<<<< HEAD
- .tooltip.right .tooltip-inner {
+ #testInfo + .tooltip > .tooltip-inner {
     background-color: #df5036 ;
     text-align: left;
-  }
-.tooltip.right > .tooltip-arrow {
-          border: 5px solid #df5036;
-       }
-
-=======
-#testInfo + .tooltip > .tooltip-inner {
-    color: white;
-    border: 1px solid blue;
-    background-color: blue;
 }
 #testInfo + .tooltip.right > .tooltip-arrow {
-    border-right: 5px solid blue;
+    border-right: 5px solid #df5036;
 }
->>>>>>> fcd18e12ed6e09cca06e62ff941fcf7fed7ecf4e
