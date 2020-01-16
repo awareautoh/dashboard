@@ -143,6 +143,13 @@ function buildChart (value) {
                     },
                 }]
             },
+            title: {
+                display: true,
+                text: initialChoosedIndicator,
+            },
+            legend: {
+                display: false,
+            },
             maintainAspectRatio: false,
         }
     });
@@ -182,6 +189,13 @@ function buildChart (value) {
                         drawOnChartArea: false,
                     },
                 }]
+            },
+            title: {
+                display: true,
+                text: initialChoosedIndicator,
+            },
+            legend: {
+                display: false,
             },
             maintainAspectRatio: false,
         }
@@ -227,6 +241,7 @@ function buildChart (value) {
             chart.data.datasets.forEach((dataset) => {
                 dataset.data = data;
             });
+            chart.options.title.text = dataLabel;
             chart.update();
         }
 
@@ -242,7 +257,7 @@ function buildChart (value) {
             chart.options.title.text = dataLabel;
             chart.update();
         }
-        
+
         //Set function to change data based on click
         function changeBackgoundColor (chart, color) {
             activePoints[0]._chart.config.data.datasets[0].backgroundColor = color;

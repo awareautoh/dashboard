@@ -256,13 +256,11 @@ function buildChart(value) {
                         beginAtZero: true,
                         maxTicksLimit: 5,
                     },
-                    stacked: true,
                     gridLines: {
                         borderDash: [3, 10]
                     }
                 }],
                 yAxes: [{
-                    stacked: true,
                     gridLines: {
                         drawOnChartArea: false,
                     }
@@ -299,13 +297,11 @@ function buildChart(value) {
                         beginAtZero: true,
                         maxTicksLimit: 5,
                     },
-                    stacked: true,
                     gridLines: {
                         borderDash: [3, 10]
                     }
                 }],
                 yAxes: [{
-                    stacked: true,
                     gridLines: {
                         drawOnChartArea: false,
                     }
@@ -390,14 +386,36 @@ function buildChart(value) {
     let valueStunting = nssStunting.map(d => d.value);
     let valueStuntingLsis = nssStunting.map(d => d.lsis);
 
-    let getNssStunting = document.getElementById('nssStunting').getContext("2d");
-    let nssStuntingChart = new Chart(getNssStunting, {
-        type: 'horizontalBar',
+    //Build Wasting Chart
+    let valueWasting = nssWasting.map(d => d.value);
+    let valueWastingLsis = nssWasting.map(d => d.lsis);
+
+    //Build Underweight Chart
+    let valueUnderweight = nssUnderweight.map(d => d.value);
+    let valueUnderweightLsis = nssUnderweight.map(d => d.lsis);
+
+    //Variable for update on click button
+    let lsisStuntingButton = [valueStunting, valueStuntingLsis];
+    let lsisWastingButton = [valueWasting, valueWastingLsis];
+    let lsisUnderweightButton = [valueUnderweight, valueUnderweightLsis];
+
+    let listTestChart = [
+        {"lsisStuntingButton":lsisStuntingButton},
+        {"lsisWastingButton": lsisWastingButton},
+        {"lsisUnderweightButton": lsisUnderweightButton},
+    ]
+
+
+    //Build Household Food Security Chart
+
+    let getNssChildMulnutrition = document.getElementById('nssChildMulnutrition').getContext("2d");
+    let nssChildMulnutritionChart = new Chart(getNssChildMulnutrition, {
+        type: 'bar',
         data: {
             labels: targetProvince,
             datasets: [
                 {
-                    label: 'Stunting',
+                    label: 'NSS',
                     data: valueStunting,
                     backgroundColor: blue,
                     borderWidth: 0,
@@ -412,7 +430,7 @@ function buildChart(value) {
         },
         options: {
             scales: {
-                xAxes: [{
+                yAxes: [{
                     ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
@@ -421,7 +439,7 @@ function buildChart(value) {
                         borderDash: [3, 10]
                     }
                 }],
-                yAxes: [{
+                xAxes: [{
                     gridLines: {
                         drawOnChartArea: false,
                     }
@@ -431,131 +449,37 @@ function buildChart(value) {
         }
     });
 
-    //Build Wasting Chart
-    let valueWasting = nssWasting.map(d => d.value);
-    let valueWastingLsis = nssWasting.map(d => d.lsis);
+    //Funtion to highlight activated button and update data based on click button
+    $(document).ready(function () {
+        let toolbarLSIS = document.getElementById("toolbarLSIS");
+        let btnClass = toolbarLSIS.getElementsByClassName("btn btn-default");
 
-    let getNssWasting = document.getElementById('nssWasting').getContext("2d");
-    let nssWastingChart = new Chart(getNssWasting, {
-        type: 'horizontalBar',
-        data: {
-            labels: targetProvince,
-            datasets: [
-                {
-                    label: 'Wasting',
-                    data: valueWasting,
-                    backgroundColor: blue,
-                    borderWidth: 0,
-                },
-                {
-                    label: 'LSIS II',
-                    data: valueWastingLsis,
-                    backgroundColor: lightBlue,
-                    borderWidth: 0,
-                },
-            ]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    gridLines: {
-                        borderDash: [3, 10]
-                    }
-                }],
-                yAxes: [{
-                    gridLines: {
-                        drawOnChartArea: false,
-                    }
-                }]
-            },
-            maintainAspectRatio: false,
+        //Create a list of this button
+        let listLSISButton = [];
+        for (let i = 0; i < btnClass.length; i++) {
+            listLSISButton.push(btnClass[i].id);
         }
-    });
 
-    //Build Underweight Chart
-    let valueUnderweight = nssUnderweight.map(d => d.value);
-    let valueUnderweightLsis = nssUnderweight.map(d => d.lsis);
+        for (let i=0; i< btnClass.length; i++) {
+            btnClass[i].addEventListener("click", function () { //Add event to capture click
+                for (let j = 0; j < btnClass.length; j++) { //remove previous actived element
+                    listLSISButton.map(element => {
+                        document.getElementById(element).classList.remove("active");
+                    });
+                }
+                this.classList.add("active"); //Add color highlight for activated button
 
-    let getNssUnderweight = document.getElementById('nssUnderweight').getContext("2d");
-    let nssUnderweightChart = new Chart(getNssUnderweight, {
-        type: 'horizontalBar',
-        data: {
-            labels: province,
-            datasets: [
-                {
-                    label: 'Underweight',
-                    data: valueUnderweight,
-                    backgroundColor: blue,
-                    borderWidth: 0,
-                },
-                {
-                    label: 'LSIS II',
-                    data: valueUnderweightLsis,
-                    backgroundColor: lightBlue,
-                    borderWidth: 0,
-                },
-            ]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    gridLines: {
-                        borderDash: [3, 10]
+                //Update data for Child Mulnutrition Chart
+                listTestChart.map(element => {
+                    if (Object.keys(element) == btnClass[i].id) {
+                        nssChildMulnutritionChart.data.datasets[0].data = element[btnClass[i].id][0];
+                        nssChildMulnutritionChart.data.datasets[1].data = element[btnClass[i].id][1];
+                        nssChildMulnutritionChart.update();
                     }
-                }],
-                yAxes: [{
-                    gridLines: {
-                        drawOnChartArea: false,
-                    }
-                }]
-            },
-            maintainAspectRatio: false,
+                });
+            });
         }
-    });
 
-    //Build Household Food Security Chart
-
-    let getNssTest = document.getElementById('nssTest').getContext("2d");
-    let nssTestChart = new Chart(getNssTest, {
-        type: 'bar',
-        data: {
-            labels: targetProvince,
-            datasets: [
-                {
-                    label: 'Household Food Security',
-                    data: valueStunting,
-                    backgroundColor: green,
-                    borderWidth: 0,
-                },
-            ]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    gridLines: {
-                        borderDash: [3, 10]
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawOnChartArea: false,
-                    }
-                }]
-            },
-            maintainAspectRatio: false,
-        }
     });
 
     //****************************************/
