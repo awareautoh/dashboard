@@ -267,9 +267,11 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
 }
 
 /* tooltip link css */
-.tooltip.right .tooltip-inner {
-    background-color:blue;
+ .tooltip.right .tooltip-inner {
+    background-color: #df5036 ;
+    text-align: left;
   }
-.tooltip.right .tooltip-arrow {
-          border-right-color: blue;
+.tooltip.right > .tooltip-arrow {
+          border: 5px solid #df5036;
        }
+
