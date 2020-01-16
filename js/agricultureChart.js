@@ -845,60 +845,102 @@ function buildChart (value) {
 
    // start agriVet7 
 
-       let agriVet7Label = agriVet7.map(d=> d.Year);
-       let agriVet7value = agriVet7.map(d=> d.poultry);
+    let agriVet7Label = agriVet7.map(d=> d.Year);
+    let agriVet7value = agriVet7.map(d=> d.poultry);
 
-       let getagriVet7Chart = document.getElementById('agriVet7Chart').getContext("2d");
-        let agriVet7Chart = new Chart(getagriVet7Chart, {
+    let getagriVet7Chart = document.getElementById('agriVet7Chart').getContext("2d");
+    let agriVet7Chart = new Chart(getagriVet7Chart, {
+        type: 'bar',
+        data: {
+            labels: agriVet7Label,
+            datasets: [
+                {
+                    label: "Poultry",
+                    data: agriVet7value,
+                    backgroundColor: yellow,
+                    fill: true,
+                }
+            ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
+            },
+            legend: {
+                display: false,
+            },
+            maintainAspectRatio: false,
+        }
 
-
-                                type: 'pie',
-                                data: {
-                                    labels: agriVet7Label,
-                                    datasets: [
-                                        {
-                                            label: "Poultry",
-                                            data: agriVet7value,
-                                            backgroundColor: ['rgba(0,168,240,0.4)',red,yellow],
-                                            
-                                            pointRadius: 5,
-                                            
-                                            fill:true			
-                        
-                                        }
-                                        
-                                                    
-                                                              
-                                    ]
-                                    
-                                },
-                                plugins: [ChartDataLabels],
-                                options: {
-                                   
-                                    legend: {
-                                        display: true,
-                                        usePointStyle: true,
-                                        
-                                    },
-                                    maintainAspectRatio: false,
-
-                                    plugins: {
-                                            datalabels: {
-                                                align: 'middle',
-                                                color:'#fff'
-
-                                            },
-                                            
-                                        }
-                                
-                                    
-                                }
-
-
-         });
+    });
 
 
    //End agriVet7 
+
+    //******************** */
+    //Test Chart
+    //******************** */
+    let getTestChart = document.getElementById('testChart').getContext("2d");
+    let testChart = new Chart(getTestChart, {
+        type: 'line',
+        data: {
+            labels: ["2016", "2017", "2018"],
+            datasets: [
+                {
+                    label: 'Buffalo',
+                    data: agriVet4value,
+                    backgroundColor: yellow,
+                    borderColor: yellow,
+                    fill: false,
+                },
+                {
+                    label: 'Caattle',
+                    data: agriVet4value2,
+                    backgroundColor: lightYellow,
+                    borderColor: lightYellow,
+                    fill: false,
+                },
+                {
+                    label: 'Capture Fish',
+                    data: [57401, 59050, 60508],
+                    backgroundColor: blue,
+                    borderColor: blue,
+                    fill: false,
+                },
+                {
+                    label: 'Poultry',
+                    data: [33150, 36960, 39218],
+                    backgroundColor: red,
+                    borderColor: red,
+                    fill: false,
+                },
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }],
+            },
+            maintainAspectRatio: false,
+        }
+
+    });
 
 
 }

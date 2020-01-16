@@ -672,9 +672,11 @@ function buildChart (value) {
             cutoutPercentage: 88,
             pluginDH2:[],
             tooltips: {
-            enabled: false
-            
-            }
+                enabled: false
+            },
+            legend: {
+                display: false,
+            },
         },
 
     });
@@ -699,9 +701,11 @@ function buildChart (value) {
             cutoutPercentage: 88,
             pluginDH2:[],
             tooltips: {
-            enabled: false
-            
-            }
+                enabled: false
+            },
+            legend: {
+                display: false
+            },
         }
     });
 
