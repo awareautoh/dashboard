@@ -1290,10 +1290,6 @@ $(document).ready(function() {
 // function to save chart js as picture 
 
 // Tooltips
-$('.tip').each(function () {
-	$(this).tooltip(
-	{
-		html: true,
-		title: $('#' + $(this).data('tip')).html()
-	});
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
 });
