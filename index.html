@@ -9,8 +9,6 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- BS JS-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <!-- BS CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- BS OPT THEME -->
@@ -113,8 +111,17 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="cardChart">
-                        <i id="testInfo" class='glyphicon glyphicon-info-sign' style="float: left; padding: 5px;" data-placement="right" data-toggle="tooltip" title="This is the test of the tooltips that will be giving more information on the chart or graph"></i><h3 class="topic" style="padding-top: 10px;">Child Mulnutrition <i class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i> </h3> 
-    
+                        <i id="testInfo" class='glyphicon glyphicon-info-sign' style="float: left; padding: 5px;" data-placement="right" data-toggle="tooltip" title="This is the test of the tooltips that will be giving more information on the chart or graph"></i>
+                        <h3 class="topic" style="padding-top: 10px;">Child Mulnutrition</h3>
+                        <div class="dropup" style="text-align: right;">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-menu-hamburger"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="right: 0; left: initial;">
+                                <li><a href="#" id="wastingAndOverweightChartDownload" download="chart.png">Download as PNG</a></li>
+                            </ul>
+                          </div>
+
                         <div style="position: relative; display: block; height: 360px; width: auto;">
                             <canvas id="wastingAndOverweightChart"></canvas>
                         </div>

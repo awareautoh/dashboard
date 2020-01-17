@@ -127,6 +127,14 @@ function buildChart (value) {
                 }]
             },
             maintainAspectRatio: false,
+            animation: {
+                onComplete: function(){
+                    let wastingAndOverweightChartURL = wastingAndOverweightChart.toBase64Image();
+                    $("#wastingAndOverweightChartDownload").click(function () {
+                        $("#wastingAndOverweightChartDownload").attr("href", wastingAndOverweightChartURL);
+                    });
+                }
+            }
         }
     });
     
@@ -173,7 +181,6 @@ function buildChart (value) {
             });
         }
     });
-
 
 
 //---Women Undernutrition Chart---
@@ -1290,8 +1297,3 @@ $('.tip').each(function () {
 		title: $('#' + $(this).data('tip')).html()
 	});
 });
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
-});
-
-
