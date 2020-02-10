@@ -4,9 +4,9 @@
   Version: 1.0
   Created date: 29 Nov 2019
   The national platforms for Nutrition project Lao PDR
-  Data Analysis Unit, Center for Development Policy Research 
-  Ministry of Planning and Inestment 
- 
+  Data Analysis Unit, Center for Development Policy Research
+  Ministry of Planning and Inestment
+
 */
 
 //Color shade
@@ -37,14 +37,14 @@ const socioStatusPath = "data/socio_status.csv";
 
 
 Promise.all([
-    d3.csv(wastingPath),
-    d3.csv(anemiaPath),
-    d3.csv(weightAndObesity),
-    d3.csv(IYCFPath),
-    d3.csv(minimumDietPath),
-    d3.csv(womenDietPath),
-    d3.csv(session3Path),
-    d3.csv(socioStatusPath),
+  d3.csv(wastingPath),
+  d3.csv(anemiaPath),
+  d3.csv(weightAndObesity),
+  d3.csv(IYCFPath),
+  d3.csv(minimumDietPath),
+  d3.csv(womenDietPath),
+  d3.csv(session3Path),
+  d3.csv(socioStatusPath),
 ]).then(buildChart);
 
 //*************************************/
@@ -59,128 +59,126 @@ Chart.defaults.global.plugins.deferred.xOffset = "50%"; //Global set up for Char
 //Build Chart All ChartJS gose here
 //*********************************/
 function buildChart (value) {
-    const wasting = value[0];
-    const anemia = value[1];
-    const overWeightObese = value[2];
-    const IYCF = value[3];
-    const miniDiet = value[4];
-    const womenDiet = value[5];
-    const mapSec3 = value[6];
-    const socio = value[7];
+  const wasting = value[0];
+  const anemia = value[1];
+  const overWeightObese = value[2];
+  const IYCF = value[3];
+  const miniDiet = value[4];
+  const womenDiet = value[5];
+  const mapSec3 = value[6];
+  const socio = value[7];
 
 
 
-    //---Child Mulnutrtion Chart
-    //*******************************/
-    //START Home Tab Chart
-    //*******************************/
-    //---Wasting Chart---
-    //Create a sub data from main file (sorting list)
-    let wastingSort = wasting.slice().sort((a, b) => a.ValueWasting - b.ValueWasting);
-    let overWeightSort = wasting.slice().sort((a, b) => a.ValueOverWeight - b.ValueOverWeight);
-    //Create Variable by Stat index
-    let provinceW = wasting.map(d => d.Province);
-    let valueW = wasting.map(d => d.ValueWasting);
-    let provinceO = wasting.map(d => d.Province);
-    let valueO = wasting.map(d => d.ValueOverWeight);
-    //Sorted Variable for Wasting
-    let provinceWSort = wastingSort.map(d => d.Province);
-    let valueWSort = wastingSort.map(d => d.ValueWasting);
-    let valueOByWSort = wastingSort.map(d => d.ValueOverWeight);
-    //Sorted Variable for Overweight
-    let provinceOSort = overWeightSort.map(d => d.Province);
-    let valueOSort = overWeightSort.map(d => d.ValueWasting);
-    let valueSByOSort = overWeightSort.map(d => d.ValueOverWeight);
-    let getWastingAndOverweightChart = document.getElementById('wastingAndOverweightChart').getContext("2d");
-    let wastingAndOverweightChart = new Chart(getWastingAndOverweightChart, {
-        type: 'bar',
-        data: {
-            labels: provinceW,
-            datasets: [{
-                label: 'Wasting',
-                data: valueW,
-                backgroundColor: blue,
-                borderWidth: 0,
-            },{
-                label: 'Overweight',
-                data: valueO,
-                backgroundColor: lightBlue,
-                borderWidth: 0,
-            }]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    gridLines: {
-                        borderDash: [3, 5]
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawOnChartArea: false,
-                    }
-                }]
-            },
-            maintainAspectRatio: false,
-            animation: {
-                onComplete: function(){
-                    let wastingAndOverweightChartURL = wastingAndOverweightChart.toBase64Image();
-                    $("#wastingAndOverweightChartDownload").click(function () {
-                        $("#wastingAndOverweightChartDownload").attr("href", wastingAndOverweightChartURL);
-                    });
-                }
-            }
+  //---Child Mulnutrtion Chart
+  //*******************************/
+  //START Home Tab Chart
+  //*******************************/
+  //---Wasting Chart---
+  //Create a sub data from main file (sorting list)
+  let wastingSort = wasting.slice().sort((a, b) => a.ValueWasting - b.ValueWasting);
+  let overWeightSort = wasting.slice().sort((a, b) => a.ValueOverWeight - b.ValueOverWeight);
+  //Create Variable by Stat index
+  let provinceW = wasting.map(d => d.Province);
+  let valueW = wasting.map(d => d.ValueWasting);
+  let provinceO = wasting.map(d => d.Province);
+  let valueO = wasting.map(d => d.ValueOverWeight);
+  //Sorted Variable for Wasting
+  let provinceWSort = wastingSort.map(d => d.Province);
+  let valueWSort = wastingSort.map(d => d.ValueWasting);
+  let valueOByWSort = wastingSort.map(d => d.ValueOverWeight);
+  //Sorted Variable for Overweight
+  let provinceOSort = overWeightSort.map(d => d.Province);
+  let valueOSort = overWeightSort.map(d => d.ValueWasting);
+  let valueSByOSort = overWeightSort.map(d => d.ValueOverWeight);
+  let getWastingAndOverweightChart = document.getElementById('wastingAndOverweightChart').getContext("2d");
+  let wastingAndOverweightChart = new Chart(getWastingAndOverweightChart, {
+    type: 'bar',
+    data: {
+      labels: provinceW,
+      datasets: [{
+        label: 'Wasting',
+        data: valueW,
+        backgroundColor: blue,
+        borderWidth: 0,
+      },{
+        label: 'Overweight',
+        data: valueO,
+        backgroundColor: lightBlue,
+        borderWidth: 0,
+      }]
+    },
+    plugins: [ChartDataLabels],
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            maxTicksLimit: 5,
+          },
+          gridLines: {
+            borderDash: [3, 5]
+          }
+      }],
+        xAxes: [{
+          gridLines: {
+            drawOnChartArea: false,
+          }
+          }]
+      },
+      maintainAspectRatio: false,
+      animation: {
+        onComplete: function() {
+          let wastingAndOverweightChartURL = wastingAndOverweightChart.toBase64Image();
+          downloadChartDataButton( "#wastingAndOverweightChartPNGDownload", wastingAndOverweightChartURL );
+          downloadChartDataButton( "#wastingAndOverweightChartDataDownload", wastingPath );
         }
-    });
-    
+      }
+    }
+  });
 
-    //Variable for update on click button
-    let overviewWastingButton = [valueWSort, valueOByWSort, provinceW];
-    let overviewOverweightButton = [valueOSort, valueSByOSort, provinceOSort];
-    let overviewResetButton = [valueW, valueO, provinceW];
+  //Variable for update on click button
+  let overviewWastingButton = [valueWSort, valueOByWSort, provinceW];
+  let overviewOverweightButton = [valueOSort, valueSByOSort, provinceOSort];
+  let overviewResetButton = [valueW, valueO, provinceW];
 
-    let overviewTestChart = [
-        {"overviewWastingButton":overviewWastingButton},
-        {"overviewOverweightButton": overviewOverweightButton},
-        {"overviewResetButton": overviewResetButton},
-    ]
+  let overviewTestChart = [
+    {"overviewWastingButton":overviewWastingButton},
+    {"overviewOverweightButton": overviewOverweightButton},
+    {"overviewResetButton": overviewResetButton},
+  ]
 
-    //Funtion to highlight activated button and update data based on click button
-    $(document).ready(function () {
-        let toolbarOverview = document.getElementById("toolbarOverview");
-        let btnClass = toolbarOverview.getElementsByClassName("btn btn-default");
+  //Funtion to highlight activated button and update data based on click button
+  $(document).ready(function () {
+    let toolbarOverview = document.getElementById("toolbarOverview");
+    let btnClass = toolbarOverview.getElementsByClassName("btn btn-default");
 
-        //Create a list of this button
-        let listOverviewButton = [];
-        for (let i = 0; i < btnClass.length; i++) {
-            listOverviewButton.push(btnClass[i].id);
+    //Create a list of this button
+    let listOverviewButton = [];
+    for (let i = 0; i < btnClass.length; i++) {
+      listOverviewButton.push(btnClass[i].id);
+    }
+
+    for (let i=0; i< btnClass.length; i++) {
+      btnClass[i].addEventListener("click", function () { //Add event to capture click
+        for (let j = 0; j < btnClass.length; j++) { //remove previous actived element
+          listOverviewButton.map(element => {
+            document.getElementById(element).classList.remove("active");
+          });
         }
-
-        for (let i=0; i< btnClass.length; i++) {
-            btnClass[i].addEventListener("click", function () { //Add event to capture click
-                for (let j = 0; j < btnClass.length; j++) { //remove previous actived element
-                    listOverviewButton.map(element => {
-                        document.getElementById(element).classList.remove("active");
-                    });
-                }
-                this.classList.add("active"); //Add color highlight for activated button
-                //Update data for Child Mulnutrition Chart
-                overviewTestChart.map(element => {
-                    if (Object.keys(element) == btnClass[i].id) {
-                        wastingAndOverweightChart.data.datasets[0].data = element[btnClass[i].id][0];
-                        wastingAndOverweightChart.data.datasets[1].data = element[btnClass[i].id][1];
-                        wastingAndOverweightChart.data.labels = element[btnClass[i].id][2];
-                        wastingAndOverweightChart.update();
-                    }
-                });
-            });
-        }
-    });
+        this.classList.add("active"); //Add color highlight for activated button
+        //Update data for Child Mulnutrition Chart
+        overviewTestChart.map(element => {
+          if (Object.keys(element) == btnClass[i].id) {
+            wastingAndOverweightChart.data.datasets[0].data = element[btnClass[i].id][0];
+            wastingAndOverweightChart.data.datasets[1].data = element[btnClass[i].id][1];
+            wastingAndOverweightChart.data.labels = element[btnClass[i].id][2];
+            wastingAndOverweightChart.update();
+          }
+        });
+      });
+    }
+  });
 
 
 //---Women Undernutrition Chart---
@@ -188,7 +186,7 @@ function buildChart (value) {
     let province = anemia.map(d => d.Province); //This province variable represent every province variable in home tab chart
     let WHO = anemia.map(d => d.WHOCutOff);
     let valueAnemia = anemia.map(d=> d.ValueAnemia);
-    
+
 
     //Creat Women Mulnutrtion
     let getWomenAnemia = document.getElementById('womenAnemia').getContext("2d");
@@ -213,7 +211,7 @@ function buildChart (value) {
                     borderColor: '#0ABDE3',
                     borderWidth: 0,
                 }
-                
+
             ]
         },
         options: {
@@ -234,113 +232,108 @@ function buildChart (value) {
                 }]
             },
             maintainAspectRatio: false,
-                legend: {
-                        labels: {
-                            usePointStyle: true,
-                        }
-                    },
         }
     });
 
 //Creat Women Overweight and Obesiry Chart
-    let valueWOverWeight = overWeightObese.map(d => d.ValueWomenOverWeight);
-    let valueWObese = overWeightObese.map(d => d.ValueObese);
-    let getWomenOverweightAndObese = document.getElementById('womenOverweightAndObese').getContext("2d");
-    let womenOverweightAndObese = new Chart(getWomenOverweightAndObese, {
-        type: 'bar',
-        data: {
-            labels: province,
-            datasets: [
-                {
-                    label: 'Women Overweight',
-                    data: valueWOverWeight,
-                    backgroundColor: blue,
-                    borderWidth: 0,
-                },
-                {
-                    label: 'Women Obese',
-                    data: valueWObese,
-                    backgroundColor: lightBlue,
-                    borderWidth: 0,
-                }
-            ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    stacked: true,
-                    gridLines: {
-                        borderDash: [3, 10]
-                    }
-                }],
-                xAxes: [{
-                    stacked: true,
-                    gridLines: {
-                        drawOnChartArea: false,
-                    }
-                }]
-            },
-            maintainAspectRatio: false,
-        }
-    });
+  let valueWOverWeight = overWeightObese.map(d => d.ValueWomenOverWeight);
+  let valueWObese = overWeightObese.map(d => d.ValueObese);
+  let getWomenOverweightAndObese = document.getElementById('womenOverweightAndObese').getContext("2d");
+  let womenOverweightAndObese = new Chart(getWomenOverweightAndObese, {
+    type: 'bar',
+    data: {
+      labels: province,
+      datasets: [{
+        label: 'Women Overweight',
+        data: valueWOverWeight,
+        backgroundColor: blue,
+        borderWidth: 0,
+      },
+      {
+        label: 'Women Obese',
+        data: valueWObese,
+        backgroundColor: lightBlue,
+        borderWidth: 0,
+      }]
+    },
+    plugins: [ChartDataLabels],
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            maxTicksLimit: 5,
+          },
+          stacked: true,
+          gridLines: {
+            borderDash: [3, 10]
+          }
+        }],
+        xAxes: [{
+          stacked: true,
+          gridLines: {
+            drawOnChartArea: false,
+          }
+        }]
+      },
+      maintainAspectRatio: false,
+  }
+  });
 
 //Section 2 Chart: Immediate determinants of undernutrition
 
 //IYCF Chart
-    let valueInitiationBreast = IYCF.map(d => d.ValueEarlyBreast);
-    let valueExclusiveBreast = IYCF.map(d => d.ValueExclusiveBreast);
-    let NPANTagetIYCF = IYCF.map(d => d.NPANTarget);
-    let getIYCFChart = document.getElementById('IYCFChart').getContext("2d");
-    let IYCFChart = new Chart(getIYCFChart, {
-        type: 'bar',
-        data: {
-            labels: province,
-            datasets: [{
-                label: 'NPAN Taget 70%',
-                data: NPANTagetIYCF,
-                backgroundColor: 'lightPink',
-                borderColor: 'red',
-                borderWidth: 0,
-                type: 'line',
-                pointStyle: "line",
-                fill: false,
-            }, {
-                label: 'Early Initiation of Breastfeeding',
-                data: valueInitiationBreast,
-                backgroundColor: yellow,
-                borderWidth: 0,
-            }, {
-                label: 'Exclusive Breastfeeding',
-                data: valueExclusiveBreast,
-                backgroundColor: lightYellow,
-                borderWidth: 0,
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    gridLines: {
-                        borderDash: [3, 10]
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawOnChartArea: false,
-                    }
-                }],
-            },
-            maintainAspectRatio: false,
-        }
-    });
+  let valueInitiationBreast = IYCF.map(d => d.ValueEarlyBreast);
+  let valueExclusiveBreast = IYCF.map(d => d.ValueExclusiveBreast);
+  let NPANTagetIYCF = IYCF.map(d => d.NPANTarget);
+  let getIYCFChart = document.getElementById('IYCFChart').getContext("2d");
+  let IYCFChart = new Chart(getIYCFChart, {
+    type: 'bar',
+    data: {
+      labels: province,
+      datasets: [{
+          label: 'NPAN Taget 70%',
+          data: NPANTagetIYCF,
+          backgroundColor: 'lightPink',
+          borderColor: 'red',
+          borderWidth: 0,
+          type: 'line',
+          pointStyle: "line",
+          fill: false,
+      },
+      {
+        label: 'Early Initiation of Breastfeeding',
+        data: valueInitiationBreast,
+        backgroundColor: yellow,
+        borderWidth: 0,
+      },
+      {
+        label: 'Exclusive Breastfeeding',
+        data: valueExclusiveBreast,
+        backgroundColor: lightYellow,
+        borderWidth: 0,
+      }]
+    },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+                      maxTicksLimit: 5,
+                  },
+                  gridLines: {
+                      borderDash: [3, 10]
+                  }
+              }],
+              xAxes: [{
+                  gridLines: {
+                      drawOnChartArea: false,
+                  }
+              }],
+          },
+          maintainAspectRatio: false,
+      }
+  });
 
 //MiniDiet Chart
     let valueMiniDiet = miniDiet.map(d => d.ValueMiniDietDiversity);
@@ -605,7 +598,7 @@ function buildChart (value) {
                     }
                 }],
             },
-            maintainAspectRatio: false, 
+            maintainAspectRatio: false,
         }
     });
 
@@ -655,7 +648,7 @@ function buildChart (value) {
                     }
                 }],
             },
-            maintainAspectRatio: false, 
+            maintainAspectRatio: false,
         }
     });
 
@@ -671,7 +664,7 @@ function buildChart (value) {
                     data: [100,0],
                     backgroundColor: '#0091EA',
                     borderWidth: 0
-                    
+
                 }]
         },
         options: {
@@ -700,7 +693,7 @@ function buildChart (value) {
                     data: [100],
                     backgroundColor: '#26ae60',
                     borderWidth: 0
-                    
+
                 }]
         },
         options: {
@@ -733,7 +726,7 @@ $(document).ready(function () {
     //Set Scale
     let colorScale = d3.scaleQuantize([0, 40], d3.schemeOranges[5]);
     //Set tooltips
-    let tooltipOpenDeface = d3.select(".tab-content").append("div") 
+    let tooltipOpenDeface = d3.select(".tab-content").append("div")
     .attr("class", "tooltipOpenDeface")
     .style("opacity", 0);
 
@@ -768,19 +761,19 @@ $(document).ready(function () {
         svg.selectAll("path")
             .data(openDefaceMap.features)
             .on("mouseover", function(d) {
-                tooltipOpenDeface.transition()    
-                .duration(200)    
-                .style("opacity", .9);    
-                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                .style("left", (d3.event.pageX) + "px")   
+                tooltipOpenDeface.transition()
+                .duration(200)
+                .style("opacity", .9);
+                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)
+                .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
-            })          
-            .on("mouseout", function(d) {   
-                tooltipOpenDeface.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
+            })
+            .on("mouseout", function(d) {
+                tooltipOpenDeface.transition()
+                .duration(500)
+                .style("opacity", 0);
             });
-            
+
         //Draw a line border for each province
         svg.append("path")
             .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
@@ -811,10 +804,10 @@ $(document).ready(function () {
         .domain([0, 0.699, 0.799, 0.879, 0.967])
         .range(["#fbe9e7", "#f44336", "#ffeb3b", "#8bc34a", "#4caf50"]);
     //Set tooltips
-    let tooltipWomenStatus = d3.select(".tab-content").append("div") 
+    let tooltipWomenStatus = d3.select(".tab-content").append("div")
     .attr("class", "tooltipWomenStatus")
     .style("opacity", 0);
-    
+
     //Set variable to import data
     let womenStatusSort = d3.map();
     let promise = [
@@ -841,26 +834,26 @@ $(document).ready(function () {
 
         svg.selectAll("path")
             .data(womenStatusMap.features)
-            .on("mouseover", function(d) {    
-                tooltipWomenStatus.transition()    
-                .duration(200)    
-                .style("opacity", .9);    
-                tooltipWomenStatus.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                .style("left", (d3.event.pageX) + "px")   
+            .on("mouseover", function(d) {
+                tooltipWomenStatus.transition()
+                .duration(200)
+                .style("opacity", .9);
+                tooltipWomenStatus.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)
+                .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
-            })          
-            .on("mouseout", function(d) {   
-                tooltipWomenStatus.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
+            })
+            .on("mouseout", function(d) {
+                tooltipWomenStatus.transition()
+                .duration(500)
+                .style("opacity", 0);
             });
-        
+
         //Draw a line border for each province
         svg.append("path")
             .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
             .attr("class", "mapBorder")
             .attr("d", d3.geoPath().projection(projection));
-    
+
         //Add Legend
         svg.append("g")
             .attr("transform", "translate(0,250)")
@@ -884,8 +877,8 @@ $(document).ready(function () {
         .domain([0, 0.025, 0.10, 0.20, 0.30])
         .range(["#fafafa", "#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]);
     //Set tooltips
-    let tooltip1 = d3.select(".tab-content").append("div") 
-    .attr("class", "tooltip")       
+    let tooltip1 = d3.select(".tab-content").append("div")
+    .attr("class", "tooltip")
     .style("opacity", 0);
 
     //Set variable to import data
@@ -915,20 +908,20 @@ $(document).ready(function () {
             .attr("fill", d => colorScale((d.properties.feature_id = stuntingSort.get(d.properties.feature_id))/100));
         svg.selectAll("path")
             .data(myMap.features)
-            .on("mouseover", function(d) {    
-                tooltip1.transition()    
-                .duration(200)    
-                .style("opacity", .9);    
-                tooltip1.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");  
-            })          
-            .on("mouseout", function(d) {   
-                tooltip1.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
+            .on("mouseover", function(d) {
+                tooltip1.transition()
+                .duration(200)
+                .style("opacity", .9);
+                tooltip1.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function(d) {
+                tooltip1.transition()
+                .duration(500)
+                .style("opacity", 0);
             });
-        
+
         //Draw a line border for each province
         svg.append("path")
             .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
@@ -943,8 +936,8 @@ $(document).ready(function () {
             ["#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]),
             title: "WHO Classification, 2017 (%)",
             width: 190}));
-    
-    
+
+
     }
 });
 
@@ -960,8 +953,8 @@ $(document).ready(function () {
         .domain([0, 0.025, 0.10, 0.20, 0.30])
         .range(["#fafafa", "#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]);
     //Set tooltips
-    let tooltip = d3.select(".tab-content").append("div") 
-    .attr("class", "tooltip1")       
+    let tooltip = d3.select(".tab-content").append("div")
+    .attr("class", "tooltip1")
     .style("opacity", 0);
 
     //Set variable to import data
@@ -989,23 +982,23 @@ $(document).ready(function () {
             .append("path")
             .attr("d", d3.geoPath().projection(projection))
             .attr("fill", d => colorScale((d.properties.feature_id = stuntingSort1.get(d.properties.feature_id))/100));
-    
+
         svg.selectAll("path")
             .data(myMap.features)
-            .on("mouseover", function(d) {    
-                tooltip.transition()    
-                .duration(200)    
-                .style("opacity", .9);    
-                tooltip.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");  
-            })          
-            .on("mouseout", function(d) {   
-                tooltip.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
+            .on("mouseover", function(d) {
+                tooltip.transition()
+                .duration(200)
+                .style("opacity", .9);
+                tooltip.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function(d) {
+                tooltip.transition()
+                .duration(500)
+                .style("opacity", 0);
             });
-        
+
         //Draw a line border for each province
         svg.append("path")
             .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
@@ -1019,10 +1012,10 @@ $(document).ready(function () {
             color: d3.scaleThreshold(["<2.5", "2.5", "10", "20", ">=30"],
             ["#0091ea",  "#00c853",  "#ffd600", "#ff6d00", "#d50000"]),
             title: "WHO Classification, 2017 (%)",
-            width: 190}));    
-    
-    
-    
+            width: 190}));
+
+
+
     }
 });
 //************************
@@ -1033,8 +1026,8 @@ $(document).ready(function () {
 //Custom plugins for DHIS2 and provinacial committee **********
 const jsPluginDH2 = {
   beforeDraw: function(chart)  {
-	  
-				if(chart.config.options.pluginDH2){
+
+        if(chart.config.options.pluginDH2){
                     var width = chart.chart.width,
                         height = chart.chart.height,
                         ctt = chart.chart.ctx;
@@ -1050,11 +1043,11 @@ const jsPluginDH2 = {
 
                     ctt.fillText(text, textX, textY);
                     ctt.save();
-					ctt.restore();
-					
-				}
-                  
-			}
+          ctt.restore();
+
+        }
+
+      }
 };
 
 //Add Custom plugins ****************************
@@ -1064,14 +1057,14 @@ Chart.pluginService.register(jsPluginDH2);
 
 
 //for  Sentinel  survey ********************************************************************
-// For the first block graph 
-// all of these charts are consisted of custom plugin called 
+// For the first block graph
+// all of these charts are consisted of custom plugin called
 //******************************************************************************************
 
 const myChartJSPlugin = {
   beforeDraw: function(chart)  {
-	  
-				if(chart.config.options.plugins1){
+
+        if(chart.config.options.plugins1){
                     var width = chart.chart.width,
                         height = chart.chart.height,
                         ctt = chart.chart.ctx;
@@ -1087,11 +1080,11 @@ const myChartJSPlugin = {
 
                     ctt.fillText(text, textX, textY);
                     ctt.save();
-					ctt.restore();
-					
-				}
-                  
-			}
+          ctt.restore();
+
+        }
+
+      }
 };
 
 Chart.pluginService.register(myChartJSPlugin);
@@ -1101,18 +1094,18 @@ var tohCanvas = document.getElementById("stunts");
 var stData = {
     labels: [
        '',
-        
+
     ],
     datasets: [
         {
-			label: '',
+      label: '',
             data: [24.3,(100-24.3)],
             backgroundColor: [
                 "#75C050",
-				
-               
+
+
             ],
-            
+
             borderWidth: 0
         }]
 };
@@ -1124,11 +1117,11 @@ var chartOptions = {
   },
   tooltips: {
     enabled: false
-  
+
   },
   plugins1: [myChartJSPlugin],
   maintainAspectRatio : false
-   
+
 };
 
 
@@ -1144,8 +1137,8 @@ var pieChart = new Chart(tohCanvas, {
 
 const myChartJSPlugin1 = {
   beforeDraw: function(chart)  {
-	  
-				if(chart.config.options.plugins2){
+
+        if(chart.config.options.plugins2){
                     var width = chart.chart.width,
                         height = chart.chart.height,
                         ctt = chart.chart.ctx;
@@ -1161,11 +1154,11 @@ const myChartJSPlugin1 = {
 
                     ctt.fillText(text, textX, textY);
                     ctt.save();
-					ctt.restore();
-					
-				}
-                  
-			}
+          ctt.restore();
+
+        }
+
+      }
 };
 
 Chart.pluginService.register(myChartJSPlugin1);
@@ -1175,18 +1168,18 @@ var tohCanvas = document.getElementById("wastingS");
 var stData = {
     labels: [
        '',
-        
+
     ],
     datasets: [
         {
-			label: '',
+      label: '',
             data: [9.9,(100-9.9)],
             backgroundColor: [
                 "#EA528F",
-				
-               
+
+
             ],
-            
+
             borderWidth: 0
         }]
 };
@@ -1198,11 +1191,11 @@ var chartOptions = {
   },
   tooltips: {
     enabled: false
-  
+
   },
   plugins2: [myChartJSPlugin1],
   maintainAspectRatio : false
-   
+
 };
 
 
@@ -1214,12 +1207,12 @@ var pieChart = new Chart(tohCanvas, {
 
 });
 
-//Underweight graph 
+//Underweight graph
 
 const myChartJSPlugin2 = {
   beforeDraw: function(chart)  {
-	  
-				if(chart.config.options.plugins3){
+
+        if(chart.config.options.plugins3){
                     var width = chart.chart.width,
                         height = chart.chart.height,
                         ctt = chart.chart.ctx;
@@ -1235,11 +1228,11 @@ const myChartJSPlugin2 = {
 
                     ctt.fillText(text, textX, textY);
                     ctt.save();
-					ctt.restore();
-					
-				}
-                  
-			}
+          ctt.restore();
+
+        }
+
+      }
 };
 
 Chart.pluginService.register(myChartJSPlugin2);
@@ -1249,7 +1242,7 @@ $(document).ready(function() {
     var stData = {
         labels: [
         '',
-            
+
         ],
         datasets: [
             {
@@ -1257,10 +1250,10 @@ $(document).ready(function() {
                 data: [20.1,(100-20.1)],
                 backgroundColor: [
                     "#F27B53",
-                    
-                
+
+
                 ],
-                
+
                 borderWidth: 0
             }]
     };
@@ -1272,11 +1265,11 @@ $(document).ready(function() {
     },
     tooltips: {
         enabled: false
-    
+
     },
     plugins3: [myChartJSPlugin2],
     maintainAspectRatio : false
-    
+
     };
 
 
@@ -1287,9 +1280,15 @@ $(document).ready(function() {
     });
 });
 
-// function to save chart js as picture 
+// function to save chart js as picture and download data
+function downloadChartDataButton ( buttonElement, link ) {
+  $( buttonElement ).click( function () {
+    $( buttonElement ).attr( 'href', link );
+  });
+}
+
 
 // Tooltips
 $(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
+  $('[data-toggle="tooltip"]').tooltip();
 });

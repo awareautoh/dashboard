@@ -12,13 +12,13 @@ const lsisSubCategoryWealthPath = "data/lsis_sub_category_Wealth.csv";
 
 
 Promise.all([
-    d3.csv(lsisOverviewPath),
-    d3.csv(lsisTrendPath),
-    d3.csv(lsisIndicatorSubPath),
-    d3.csv(lsisSubCategoryAreaPath),
-    d3.csv(lsisSubCategoryEducationPath),
-    d3.csv(lsisSubCategoryEthnicityPath),
-    d3.csv(lsisSubCategoryWealthPath),
+  d3.csv(lsisOverviewPath),
+  d3.csv(lsisTrendPath),
+  d3.csv(lsisIndicatorSubPath),
+  d3.csv(lsisSubCategoryAreaPath),
+  d3.csv(lsisSubCategoryEducationPath),
+  d3.csv(lsisSubCategoryEthnicityPath),
+  d3.csv(lsisSubCategoryWealthPath),
 ]).then(buildChart);
 
 
@@ -28,178 +28,172 @@ Promise.all([
 
 
 function buildChart (value) {
-    const lsisOverview = value[0];
-    const lsisTrend = value[1];
-    const lsisIndicatorSub = value[2];
-    const lsisSubCategoryArea = value[3];
-    const lsisSubCategoryEducation = value[4];
-    const lsisSubCategoryEthnicity = value[5];
-    const lsisSubCategoryWealth = value[6];
+  const lsisOverview = value[0];
+  const lsisTrend = value[1];
+  const lsisIndicatorSub = value[2];
+  const lsisSubCategoryArea = value[3];
+  const lsisSubCategoryEducation = value[4];
+  const lsisSubCategoryEthnicity = value[5];
+  const lsisSubCategoryWealth = value[6];
 
 
-    //**********************************************/
-    //LSIS Tab
-    //*********************************************/
-    
-    //Creat LSIS Overview Indicator
-    let valueLSISOverview = (lsisOverview.slice().sort((a, b) => b.Value - a.Value)).map(d => d.Value);
-    let LSISIndicator = (lsisOverview.slice().sort((a, b) => b.Value - a.Value)).map(d => d.Indicator);
+  //**********************************************/
+  //LSIS Tab
+  //*********************************************/
 
-    //Customize selected 1st index of bar chart
-    const lsisOverviewChartLabelLenght = LSISIndicator.length;
-    let initialBackgroundColor = [];
-    for (let i = 0; i < lsisOverviewChartLabelLenght; i++) {
-        initialBackgroundColor.push('#e0e0e0');
+  //Creat LSIS Overview Indicator
+  let valueLSISOverview = (lsisOverview.slice().sort((a, b) => b.Value - a.Value)).map(d => d.Value);
+  let LSISIndicator = (lsisOverview.slice().sort((a, b) => b.Value - a.Value)).map(d => d.Indicator);
+
+  //Customize selected 1st index of bar chart
+  const lsisOverviewChartLabelLenght = LSISIndicator.length;
+  let initialBackgroundColor = [];
+  for (let i = 0; i < lsisOverviewChartLabelLenght; i++) {
+    initialBackgroundColor.push('#e0e0e0');
+  }
+  initialBackgroundColor[0] = blue;
+
+
+  //Creat LSIS Overview Indicator
+  let getLsisOverviewChart = document.getElementById('lsisOverviewChart').getContext("2d");
+  let lsisOverviewChart = new Chart(getLsisOverviewChart, {
+    type: 'horizontalBar',
+    data: {
+      labels: LSISIndicator,
+      datasets: [{
+        label: "Indicator",
+        data: valueLSISOverview,
+        backgroundColor: initialBackgroundColor,
+        borderWidth: 0,
+      }],
+    },
+    plugins: [ChartDataLabels],
+    options: {
+      scales: {
+        xAxes: [{
+          ticks: {
+              beginAtZero: true,
+              maxTicksLimit: 5,
+          },
+          gridLines: {
+              borderDash: [3, 5],
+          }
+        }],
+        yAxes: [{
+          gridLines: {
+              drawOnChartArea: false,
+          },
+          display: false,
+        }]
+      },
+      maintainAspectRatio: false,
+      legend: {
+        display: false,
+      },
+      onClick: activateLSISSubChart,
+      plugins: {
+        datalabels: {
+          formatter: function(value, context) {
+            return context.chart.data.labels[context.dataIndex];
+          },
+          anchor: "start",
+          align: "end",
+        },
+      },
     }
-    initialBackgroundColor[0] = blue;
+  });
 
+  //Create LSIS Overview Provincial
+  let provinceLSIS = lsisIndicatorSub.map(d => d.Province);
+  let getLsisProvincialOverview = document.getElementById('lsisProvincialOverview').getContext("2d");
+  let initialChoosedIndicator = LSISIndicator[0];
+  let initailValueLSISOverviewSub = lsisIndicatorSub.map(d => d[initialChoosedIndicator])
+  let lsisProvincialOverview = new Chart(getLsisProvincialOverview, {
+    type: 'bar',
+    data: {
+      labels: provinceLSIS,
+      datasets: [{
+        label: initialChoosedIndicator,
+        data: initailValueLSISOverviewSub,
+        backgroundColor: '#80d8ff',
+        borderColor: '#0ABDE3',
+        borderWidth: 0,
+      }],
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            maxTicksLimit: 5,
+          },
+          gridLines: {
+            borderDash: [3, 5],
+          }
+        }],
+        xAxes: [{
+          gridLines: {
+            drawOnChartArea: false,
+          },
+        }]
+      },
+      title: {
+        display: true,
+        text: initialChoosedIndicator,
+      },
+      legend: {
+        display: false,
+      },
+      maintainAspectRatio: false,
+    }
+  });
 
-
-
-    //Creat LSIS Overview Indicator
-    let getLsisOverviewChart = document.getElementById('lsisOverviewChart').getContext("2d");
-    let lsisOverviewChart = new Chart(getLsisOverviewChart, {
-        type: 'horizontalBar',
-        data: {
-            labels: LSISIndicator,
-            datasets: [
-                {
-                    label: "Indicator",
-                    data: valueLSISOverview,
-                    backgroundColor: initialBackgroundColor,
-                    borderWidth: 0,
-                }
-            ],
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    gridLines: {
-                        borderDash: [3, 5],
-                    }
-                }],
-                yAxes: [{
-                    gridLines: {
-                        drawOnChartArea: false,
-                    },
-                    display: false,
-                }]
-            },
-            maintainAspectRatio: false,
-            legend: {
-                display: false,
-            },
-            onClick: activateLSISSubChart,
-            plugins: {
-                datalabels: {
-                    formatter: function(value, context) {
-                        return context.chart.data.labels[context.dataIndex];
-                    },
-                    anchor: "start",
-                    align: "end",
-                },
-            },
-        }
-    });
-
-    //Create LSIS Overview Provincial
-    let provinceLSIS = lsisIndicatorSub.map(d => d.Province);
-    let getLsisProvincialOverview = document.getElementById('lsisProvincialOverview').getContext("2d");
-    let initialChoosedIndicator = LSISIndicator[0];
-    let initailValueLSISOverviewSub = lsisIndicatorSub.map(d => d[initialChoosedIndicator])
-    let lsisProvincialOverview = new Chart(getLsisProvincialOverview, {
-        type: 'bar',
-        data: {
-            labels: provinceLSIS,
-            datasets: [
-                {
-                    label: initialChoosedIndicator,
-                    data: initailValueLSISOverviewSub,
-                    backgroundColor: '#80d8ff',
-                    borderColor: '#0ABDE3',
-                    borderWidth: 0,
-                }
-            ],
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    gridLines: {
-                        borderDash: [3, 5],
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawOnChartArea: false,
-                    },
-                }]
-            },
-            title: {
-                display: true,
-                text: initialChoosedIndicator,
-            },
-            legend: {
-                display: false,
-            },
-            maintainAspectRatio: false,
-        }
-    });
-
-    //Create LSIS Overview Indicator
-    let getLsisOverviewTrend = document.getElementById('lsisOverviewTrend').getContext("2d");
-    let LsisYear = lsisTrend.map(d => d.Year);
-    let initialValueLsisTrend = lsisTrend.map(d=> d[initialChoosedIndicator]);
-    let lsisOverviewTrend = new Chart(getLsisOverviewTrend, {
-        type: 'line',
-        data: {
-            labels: LsisYear,
-            datasets: [
-                {
-                    label: initialChoosedIndicator,
-                    data: initialValueLsisTrend,
-                    backgroundColor: '#80d8ff',
-                    borderColor: '#0ABDE3',
-                    borderWidth: 0,
-                }
-            
-            ]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                    },
-                    gridLines: {
-                        borderDash: [3, 5],
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawOnChartArea: false,
-                    },
-                }]
-            },
-            title: {
-                display: true,
-                text: initialChoosedIndicator,
-            },
-            legend: {
-                display: false,
-            },
-            maintainAspectRatio: false,
-        }
-    });
+  //Create LSIS Overview Indicator
+  let getLsisOverviewTrend = document.getElementById('lsisOverviewTrend').getContext("2d");
+  let LsisYear = lsisTrend.map(d => d.Year);
+  let initialValueLsisTrend = lsisTrend.map(d=> d[initialChoosedIndicator]);
+  let lsisOverviewTrend = new Chart(getLsisOverviewTrend, {
+      type: 'line',
+      data: {
+          labels: LsisYear,
+          datasets: [
+              {
+                  label: initialChoosedIndicator,
+                  data: initialValueLsisTrend,
+                  backgroundColor: '#80d8ff',
+                  borderColor: '#0ABDE3',
+                  borderWidth: 0,
+              }
+          
+          ]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+                      maxTicksLimit: 5,
+                  },
+                  gridLines: {
+                      borderDash: [3, 5],
+                  }
+              }],
+              xAxes: [{
+                  gridLines: {
+                      drawOnChartArea: false,
+                  },
+              }]
+          },
+          title: {
+              display: true,
+              text: initialChoosedIndicator,
+          },
+          legend: {
+              display: false,
+          },
+          maintainAspectRatio: false,
+      }
+  });
 
     //Set function for onClick event of LSIS overview chart
     function activateLSISSubChart(chart) {
@@ -272,7 +266,6 @@ function buildChart (value) {
         updateDataPolar(lsisSubCategoryEducationChart, choosedIndicator, valueLsisSubCategoryEducation);
         updateDataPolar(lsisSubCategoryEthnicityChart, choosedIndicator, valueLsisSubCategoryEthnicity);
         updateDataPolar(lsisSubCategoryWealthChart, choosedIndicator, valueLsisSubCategoryWealth);
-
     }
 
     //Create LSIS Sub Category Indicator

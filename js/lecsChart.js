@@ -36,88 +36,53 @@ function buildChart (value) {
 
      //start Lect1 chart
 
-     let lec1Label = lec1.map(d=> d.Province);
-     let lec1value = lec1.map(d=> d.rice);
-     let lec1value2 = lec1.map(d=> d.meat);
-     let lec1value3 = lec1.map(d=> d.fish);
+    let lec1Label = lec1.map(d=> d.Province);
+    let lec1value = lec1.map(d=> d.rice);
+    let lec1value2 = lec1.map(d=> d.meat);
+    let lec1value3 = lec1.map(d=> d.fish);
 
-     let getlec1Chart = document.getElementById('lec1Chart').getContext("2d");
-      let lec1Chart = new Chart(getlec1Chart, {
-
-             type: 'bar',
-                              data: {
-                                  labels: lec1Label,
-                                  datasets: [
-                                      {
-                                          label: "Rice",
-                                          data: lec1value,
-                                          backgroundColor: 'rgba(0,168,240,0.9)',
-                                          borderColor:'rgba(0,168,240,0.5)',
-                                          
-                                          lineTension: 0,
-                                          fill:false			
-                      
-                                      },
-                                       {
-                                          label: "Meat",
-                                          data: lec1value2,
-                                          backgroundColor: 'rgba(213,51,105,0.8)',
-                                          borderColor:'rgba(213,51,105,0.5)',
-                                          pointRadius: 3,
-                                          lineTension: 0,
-                                  
-                                          fill:true			
-                      
-                                      },
-                                       {
-                                          label: "Fish",
-                                          data: lec1value3,
-                                          backgroundColor: 'rgba(245,193,14,0.7)',
-                                          borderColor:'rgba(245,193,14,0.5)',
-                                          pointRadius: 3,
-                                          lineTension: 0,
-                                          
-                                          fill:true			
-                      
-                                      }
-                                      
-                                                  
-                                                            
-                                  ]
-                                  
-                              },
-                              options: {
-                                 
-                                  legend: {
-                                      display: true,
-                                      labels: {
-                                                  usePointStyle: false
-                                              }
-                                                                          
-                                  },
-                                  maintainAspectRatio: false,
-                                  scales: {
-                              yAxes: [{
-                                  //stacked: true,
-                                  ticks: {
-                                      beginAtZero: true,
-                                      maxTicksLimit: 8,
-                                  },
-                                  gridLines: {
-                                      borderDash: [3, 5]
-                                  }
-                              }],
-                              xAxes: [{
-                                  //stacked: true,
-                                  gridLines: {
-                                      drawOnChartArea: false,
-                                  }
-                              }]
-                          },
-                                  
-                              }
-
-      });
+    let getlec1Chart = document.getElementById('lec1Chart').getContext("2d");
+    let lec1Chart = new Chart(getlec1Chart, {
+        type: 'bar',
+            data: {
+                labels: lec1Label,
+                datasets: [{
+                        label: "Rice",
+                        data: lec1value,
+                        backgroundColor: 'rgba(0,168,240,0.9)',
+                        borderColor:'rgba(0,168,240,0.5)',
+                    }, {
+                        label: "Meat",
+                        data: lec1value2,
+                        backgroundColor: 'rgba(213,51,105,0.8)',
+                        borderColor:'rgba(213,51,105,0.5)',
+                    }, {
+                        label: "Fish",
+                        data: lec1value3,
+                        backgroundColor: 'rgba(245,193,14,0.7)',
+                        borderColor:'rgba(245,193,14,0.5)',
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 8,
+                        },
+                        gridLines: {
+                            borderDash: [3, 5]
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: false,
+                        }
+                    }]
+                },
+        }
+    });
 
 
 
@@ -311,89 +276,55 @@ function buildChart (value) {
 
  //strt Lec4
 
-     let lec4Label = lec4.map(d=> d.Province);
-     let lec4value = lec4.map(d=> d.pharmacy);
-     let lec4value2 = lec4.map(d=> d.licensedpharmacy);
-     let lec4value3 = lec4.map(d=> d.medical);
+let lec4Label = lec4.map(d=> d.Province);
+let lec4value = lec4.map(d=> d.pharmacy);
+let lec4value2 = lec4.map(d=> d.licensedpharmacy);
+let lec4value3 = lec4.map(d=> d.medical);
 
-      let getlec4Chart = document.getElementById('lec4Chart').getContext("2d");
-       let lec4Chart = new Chart(getlec4Chart, {
-
-           type: 'bar',
-                               data: {
-                                   labels: lec4Label,
-                                   datasets: [
-                                       {
-                                           label: "Pharmacy",
-                                           data: lec4value,
-                                           backgroundColor: 'rgba(0,144,241,0.9)',
-                                           borderColor:'rgba(10,168,240,0.5)',
-                                           
-                                           lineTension: 0,
-                                           fill:true			
-                       
-                                       },
-                                        {
-                                           label: "Licensed Pharmacy",
-                                           data: lec4value2,
-                                           backgroundColor: 'rgba(213,51,105,0.9)',
-                                           borderColor:'rgba(213,51,105,0.5)',
-                                           pointRadius: 3,
-                                           lineTension: 0,
-                                   
-                                           fill:true			
-                       
-                                       },
-                                        {
-                                           label: "Medical",
-                                           data: lec4value3,
-                                           backgroundColor: 'rgba(245,193,14,1)',
-                                           borderColor:'rgba(245,193,14,0.5)',
-                                           pointRadius: 3,
-                                           lineTension: 0,
-                                           
-                                           fill:true		
-                       
-                                       }
-                                       
-                                       
-                                                   
-                                                             
-                                   ]
-                                   
-                               },
-                               options: {
-                                  
-                                   legend: {
-                                       display: true,
-                                       labels: {
-                                                   usePointStyle: true
-                                               }
-                                                                           
-                                   },
-                                   maintainAspectRatio: false,
-                                   scales: {
-                               yAxes: [{
-                                   stacked: true,
-                                   ticks: {
-                                       beginAtZero: true,
-                                       maxTicksLimit: 8,
-                                   },
-                                   gridLines: {
-                                       borderDash: [3, 5]
-                                   }
-                               }],
-                               xAxes: [{
-                                   stacked: true,
-                                   gridLines: {
-                                       drawOnChartArea: false,
-                                   }
-                               }]
-                           },
-                                   
-                               }
-
-       });
+let getlec4Chart = document.getElementById('lec4Chart').getContext("2d");
+let lec4Chart = new Chart(getlec4Chart, {
+    type: 'bar',
+        data: {
+            labels: lec4Label,
+            datasets: [{
+                    label: "Pharmacy",
+                    data: lec4value,
+                    backgroundColor: 'rgba(0,144,241,0.9)',
+                    borderColor:'rgba(10,168,240,0.5)',
+                    }, {
+                    label: "Licensed Pharmacy",
+                    data: lec4value2,
+                    backgroundColor: 'rgba(213,51,105,0.9)',
+                    borderColor:'rgba(213,51,105,0.5)',
+                }, {
+                    label: "Medical",
+                    data: lec4value3,
+                    backgroundColor: 'rgba(245,193,14,1)',
+                    borderColor:'rgba(245,193,14,0.5)',
+                }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 8,
+                    },
+                    gridLines: {
+                        borderDash: [3, 5]
+                    }
+                }],
+                xAxes: [{
+                    stacked: true,
+                    gridLines: {
+                        drawOnChartArea: false,
+                    }
+                }]
+            },
+        }
+});
 
  //End Lec4 
 
