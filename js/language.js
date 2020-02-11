@@ -2,9 +2,9 @@
 
 let language;
 function getLanguage() {
-    (localStorage.getItem('language') == null) ? setLanguage('en') : false;
+    (localStorage.getItem('language') === null) ? setLanguage('en') : false;
     $.ajax({
-        url:  '/dashboard/language/' +  localStorage.getItem('language') + '.json',
+        url:  'language/' +  localStorage.getItem('language') + '.json',
         dataType: 'json', async: false,
         success: function (lang) { language = lang } });
     $(document).ready(function(){
