@@ -7,8 +7,15 @@ function getLanguage() {
         url:  'language/' +  localStorage.getItem('language') + '.json',
         dataType: 'json', async: false,
         success: function (lang) { language = lang } });
+
+    //Revise
     $(document).ready(function(){
-        $('#Nutrition_Status').text(language["nutritionStatus"]);
+        //Nav Menu
+        $('#nutritionStatus').text(language["nutritionStatus"]);
+        $('#lsis').text(language["lsis"]);
+        $('#sentinelSurvey').text(language["sentinelSurvey"]);
+        $('#lecs').text(language["lecs"]);
+        $('#agricultureCencus').text(language["agricultureCencus"]);
     });
 }
 function setLanguage(lang) {

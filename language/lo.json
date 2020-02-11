@@ -1,3 +1,7 @@
 {
-  "nutritionStatus": "ພາບລວມໂພຊະນາການ"
+  "nutritionStatus": "ພາບລວມໂພຊະນາການ",
+  "lsis": "LSIS",
+  "sentinelSurvey": "ສໍາຫຼວດເຝົ້າລະວັງໂພຊະນາການ",
+  "lecs": "LECS",
+  "agricultureCencus": "ສະຖິຕິກະສິກໍາ"
 }

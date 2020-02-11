@@ -1,3 +1,7 @@
 {
-  "nutritionStatus": "Nutrition Status"
+  "nutritionStatus": "Nutrition Status",
+  "lsis": "LSIS",
+  "sentinelSurvey": "SENTINEL SURVEY",
+  "lecs": "LECS",
+  "agricultureCencus": "AGRICULTURE CENCUS"
 }
