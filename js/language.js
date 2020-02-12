@@ -6,16 +6,17 @@ function getLanguage() {
     $.ajax({
         url:  'language/' +  localStorage.getItem('language') + '.json',
         dataType: 'json', async: false,
-        success: function (lang) { language = lang } });
+        success: function (lang) { language = lang }
+    });
 
     //Revise
     $(document).ready(function(){
         //Nav Menu
-        $('#nutritionStatus').text(language["nutritionStatus"]);
-        $('#lsis').text(language["lsis"]);
-        $('#sentinelSurvey').text(language["sentinelSurvey"]);
-        $('#lecs').text(language["lecs"]);
-        $('#agricultureCencus').text(language["agricultureCencus"]);
+        $('#home-tab').text(language["nutritionStatus"]);
+        $('#lsis-tab').text(language["lsis"]);
+        $('#sentinelSurvey-tab').text(language["sentinelSurvey"]);
+        $('#lecs-tab').text(language["lecs"]);
+        $('#agricultureCencus-tab').text(language["agricultureCencus"]);
     });
 }
 function setLanguage(lang) {
