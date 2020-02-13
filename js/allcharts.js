@@ -151,7 +151,7 @@ function buildChart (value) {
   //Funtion to highlight activated button and update data based on click button
   $(document).ready(function () {
     let toolbarOverview = document.getElementById("toolbarOverview");
-    let btnClass = toolbarOverview.getElementsByClassName("btn btn-outline-secondary");
+    let btnClass = toolbarOverview.getElementsByClassName("btn btn-outline-primary");
 
     //Create a list of this button
     let listOverviewButton = [];
@@ -166,7 +166,7 @@ function buildChart (value) {
             document.getElementById(element).classList.remove("active");
           });
         }
-        this.classList.add("active"); //Add color highlight for activated button
+        //this.classList.add("active"); //Add color highlight for activated button
         //Update data for Child Mulnutrition Chart
         overviewTestChart.map(element => {
           if (Object.keys(element) == btnClass[i].id) {
