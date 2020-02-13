@@ -151,7 +151,7 @@ function buildChart (value) {
   //Funtion to highlight activated button and update data based on click button
   $(document).ready(function () {
     let toolbarOverview = document.getElementById("toolbarOverview");
-    let btnClass = toolbarOverview.getElementsByClassName("btn btn-default");
+    let btnClass = toolbarOverview.getElementsByClassName("btn btn-outline-secondary");
 
     //Create a list of this button
     let listOverviewButton = [];
