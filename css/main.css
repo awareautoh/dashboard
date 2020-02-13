@@ -209,3 +209,11 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
   color: #ffffff;
   text-align: center;
 }
+
+/*Customize Footer Logo*/
+ #euLogo{
+     height: 5rem;
+ }
+ #footer-copyright {
+     background-color: #173C78 !important;
+ }

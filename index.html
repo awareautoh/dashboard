@@ -76,11 +76,10 @@
                            aria-controls="pills-agriculture" aria-selected="false"></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Language
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownLanguage">
                             <a class="dropdown-item" href="#" onclick="setLanguage('en')">English</a>
                             <a class="dropdown-item" href="#" onclick="setLanguage('lo')">ພາສາລາວ</a>
                         </div>
@@ -977,10 +976,25 @@
 
 
 <!--Add Footer-->
-<footer class="footer-fixed-bottom-wrap mt-4">
-    <div class="footer-fixed-bottom">
-        <p class="copyright"> &copy 2019 - 2020 NIPN Laos | Supported by: <img src="images/unicef.png"></p>
+<div class="card mt-4">
+    <div class="card-body text-center align-middle text-white bg-primary">
+        <a>
+            Supported By:
+        </a>
+        <img id="euLogo" src="images/Lao_Government_logo.png">
+        <img id="euLogo" src="images/EU_logo.png">
+        <img id="unicefLogo" src="images/unicef_logo.png">
     </div>
-</footer>
+    <div class="card-footer text-white" id="footer-copyright">
+        <p class="copyright">
+            &copy 2019 - 2021 NIPN Lao PDR
+        </p>
+    </div>
+</div>
+<!--<footer class="footer-fixed-bottom-wrap mt-4">
+    <div class="footer-fixed-bottom">
+        <p class="copyright"> &copy 2019 - 2020 NIPN Laos | Supported by: <img src="images/unicef_logo.png"></p>
+    </div>
+</footer>-->
 </body>
 </html>

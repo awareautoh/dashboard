@@ -1,8 +1,8 @@
 "use strict";
 //Color Shade
-const hhMainSourceIncomeColor = ["#FFCB21", "#FFDD6E", "#806611", "#CCA31B", "#806F37"];
-const AnnualHHIncomeColor = ["#27418F", "#7D95DB", "#5C6DA2", "#192A5C", "#3B63DB"];
-const maternalNutritionColor = ["#A2C754", "#414733", "#BED096", "#79943E", "#3A471E"];
+const hhMainSourceIncomeColor = ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"];
+const AnnualHHIncomeColor = ["#003f5c", "#7a5195", "#ef5675","#ffa600"];
+const maternalNutritionColor = ["#003f5c", "#bc5090", "#ffa600"];
 
 
 //File Path for import data

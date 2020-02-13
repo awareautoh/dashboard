@@ -12,6 +12,7 @@ function getLanguage() {
     //Revise
     $(document).ready(function(){
         //Nav Menu
+        $('#navbarDropdownLanguage').text(language["navbarDropdownLanguage"]);
         $('#home-tab').text(language["nutritionStatus"]);
         $('#lsis-tab').text(language["lsis"]);
         $('#sentinelSurvey-tab').text(language["sentinelSurvey"]);
