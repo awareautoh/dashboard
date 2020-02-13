@@ -211,7 +211,7 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
 }
 
 /*Customize Footer Logo*/
- #euLogo{
+ #euLogo, #unicefLogo {
      height: 5rem;
  }
  #footer-copyright {
