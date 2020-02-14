@@ -1,8 +1,8 @@
 "use strict";
 //Color Shade
-const hhMainSourceIncomeColor = ["#FFCB21", "#FFDD6E", "#806611", "#CCA31B", "#806F37"];
-const AnnualHHIncomeColor = ["#27418F", "#7D95DB", "#5C6DA2", "#192A5C", "#3B63DB"];
-const maternalNutritionColor = ["#A2C754", "#414733", "#BED096", "#79943E", "#3A471E"];
+const hhMainSourceIncomeColor = ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"];
+const AnnualHHIncomeColor = ["#003f5c", "#7a5195", "#ef5675","#ffa600"];
+const maternalNutritionColor = ["#003f5c", "#bc5090", "#ffa600"];
 
 
 //File Path for import data
@@ -59,11 +59,11 @@ function buildChart(value) {
     for (let i = 0; i < nssProvince.length; i++) {
         indexOfOriginProvince.push(province.indexOf(targetProvince[i]));
     }
-    
-    function changeOriginValueIndex (indicator, target) {
+
+    function changeOriginValueIndex(indicator, target) {
         for (let i = 0; i < indicator.length; i++) {
             target.push(indicator[indexOfOriginProvince[i]]);
-    }
+        }
     }
 
     //****************************************/
@@ -232,7 +232,7 @@ function buildChart(value) {
     let valueMiniDiet = nssMinimumDiet.map(d => d.value);
 
     let replacedValueMiniDiet = [];
-    
+
     changeOriginValueIndex(valueMiniDiet, replacedValueMiniDiet);
 
     let getNssMiniAcceptDiet = document.getElementById('nssMiniAcceptDiet').getContext("2d");
@@ -400,7 +400,7 @@ function buildChart(value) {
     let lsisUnderweightButton = [valueUnderweight, valueUnderweightLsis];
 
     let listTestChart = [
-        {"lsisStuntingButton":lsisStuntingButton},
+        {"lsisStuntingButton": lsisStuntingButton},
         {"lsisWastingButton": lsisWastingButton},
         {"lsisUnderweightButton": lsisUnderweightButton},
     ]
@@ -452,7 +452,7 @@ function buildChart(value) {
     //Funtion to highlight activated button and update data based on click button
     $(document).ready(function () {
         let toolbarLSIS = document.getElementById("toolbarLSIS");
-        let btnClass = toolbarLSIS.getElementsByClassName("btn btn-default");
+        let btnClass = toolbarLSIS.getElementsByClassName("btn btn-outline-primary");
 
         //Create a list of this button
         let listLSISButton = [];
@@ -460,14 +460,14 @@ function buildChart(value) {
             listLSISButton.push(btnClass[i].id);
         }
 
-        for (let i=0; i< btnClass.length; i++) {
+        for (let i = 0; i < btnClass.length; i++) {
             btnClass[i].addEventListener("click", function () { //Add event to capture click
                 for (let j = 0; j < btnClass.length; j++) { //remove previous actived element
                     listLSISButton.map(element => {
                         document.getElementById(element).classList.remove("active");
                     });
                 }
-                this.classList.add("active"); //Add color highlight for activated button
+                //this.classList.add("active"); //Add color highlight for activated button
 
                 //Update data for Child Mulnutrition Chart
                 listTestChart.map(element => {
@@ -544,9 +544,9 @@ $(document).ready(function () {
     //Set Scale
     let colorScale = d3.scaleQuantize([0, 40], d3.schemeOranges[5]);
     //Set tooltips
-    let tooltipOpenDeface = d3.select(".tab-content").append("div") 
-    .attr("class", "tooltipOpenDeface")
-    .style("opacity", 0);
+    let tooltipOpenDeface = d3.select(".tab-content").append("div")
+        .attr("class", "tooltipOpenDeface")
+        .style("opacity", 0);
 
     //Select DOM
     let svg = d3.select("#nssOpenDefecation");
@@ -559,9 +559,10 @@ $(document).ready(function () {
     ];
 
     Promise.all(promise).then(creatMap);
+
     function creatMap(value) {
         let lao = value[0];
-    //Draw a graph use "g" because draw multiple path in one time
+        //Draw a graph use "g" because draw multiple path in one time
         //Import Map Topojson type as Geojson structure
         let openDefaceMap = topojson.feature(lao, lao.objects.LAO_ADM1);
         //Set porjection map type
@@ -578,36 +579,39 @@ $(document).ready(function () {
 
         svg.selectAll("path")
             .data(openDefaceMap.features)
-            .on("mouseover", function(d) {
-                tooltipOpenDeface.transition()    
-                .duration(200)    
-                .style("opacity", .9);    
-                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");
-            })          
-            .on("mouseout", function(d) {   
-                tooltipOpenDeface.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
+            .on("mouseover", function (d) {
+                tooltipOpenDeface.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function (d) {
+                tooltipOpenDeface.transition()
+                    .duration(500)
+                    .style("opacity", 0);
             });
-            
+
         //Draw a line border for each province
         svg.append("path")
-            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function (a, b) {
+                return a !== b;
+            }))
             .attr("class", "mapBorder")
             .attr("d", d3.geoPath().projection(projection));
 
 
         //Add legend
         svg.append("g")
-        .attr("transform", "translate(0,250)")
-        .append(() => legend({
-            color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
-            d3.schemeOranges[5]),
-            title: "Open Defaction (%)",
-            width: 190}));
-        }
+            .attr("transform", "translate(0,250)")
+            .append(() => legend({
+                color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
+                    d3.schemeOranges[5]),
+                title: "Open Defaction (%)",
+                width: 190
+            }));
+    }
 });
 
 //NSS Open Defaction Map
@@ -618,9 +622,9 @@ $(document).ready(function () {
     //Set Scale
     let colorScale = d3.scaleQuantize([0, 40], d3.schemeOranges[5]);
     //Set tooltips
-    let tooltipOpenDeface = d3.select(".tab-content").append("div") 
-    .attr("class", "tooltipOpenDeface")
-    .style("opacity", 0);
+    let tooltipOpenDeface = d3.select(".tab-content").append("div")
+        .attr("class", "tooltipOpenDeface")
+        .style("opacity", 0);
 
     //Select DOM
     let svg = d3.select("#nssDiarrhoeal");
@@ -633,9 +637,10 @@ $(document).ready(function () {
     ];
 
     Promise.all(promise).then(creatMap);
+
     function creatMap(value) {
         let lao = value[0];
-    //Draw a graph use "g" because draw multiple path in one time
+        //Draw a graph use "g" because draw multiple path in one time
         //Import Map Topojson type as Geojson structure
         let openDefaceMap = topojson.feature(lao, lao.objects.LAO_ADM1);
         //Set porjection map type
@@ -652,34 +657,37 @@ $(document).ready(function () {
 
         svg.selectAll("path")
             .data(openDefaceMap.features)
-            .on("mouseover", function(d) {
-                tooltipOpenDeface.transition()    
-                .duration(200)    
-                .style("opacity", .9);    
-                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");
-            })          
-            .on("mouseout", function(d) {   
-                tooltipOpenDeface.transition()    
-                .duration(500)    
-                .style("opacity", 0); 
+            .on("mouseover", function (d) {
+                tooltipOpenDeface.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltipOpenDeface.html(d.properties.Name + '<br>' + 'value:' + d.properties.feature_id)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function (d) {
+                tooltipOpenDeface.transition()
+                    .duration(500)
+                    .style("opacity", 0);
             });
-            
+
         //Draw a line border for each province
         svg.append("path")
-            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function(a, b) { return a !== b; }))
+            .datum(topojson.mesh(lao, lao.objects.LAO_ADM1, function (a, b) {
+                return a !== b;
+            }))
             .attr("class", "mapBorder")
             .attr("d", d3.geoPath().projection(projection));
 
 
         //Add legend
         svg.append("g")
-        .attr("transform", "translate(0,250)")
-        .append(() => legend({
-            color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
-            d3.schemeOranges[5]),
-            title: "Open Defaction (%)",
-            width: 190}));
-        }
+            .attr("transform", "translate(0,250)")
+            .append(() => legend({
+                color: d3.scaleThreshold(["<10", "<20", "<30", ">=40"],
+                    d3.schemeOranges[5]),
+                title: "Open Defaction (%)",
+                width: 190
+            }));
+    }
 });

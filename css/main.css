@@ -6,12 +6,12 @@
   Ministry of Planning and Inestment 
   Created by: Data Analysis Unit 
 */
- @media (min-width: 768px) {
-  .container{
-    max-width: 970px;
-  }
-}
 
+ /*Customize Navbar and Body*/
+ body {
+     padding-top: 5rem;  /*Prevent overlapping between NavBar and Body*/
+     font-family: Arial, Helvetica, sans-serif;
+ }
 
 /*Customize Card*/
 .card {
@@ -51,6 +51,7 @@
     padding: 10px;
     text-align: center;
 }
+<<<<<<< HEAD
 
 body {
     font-family: Arial, Helvetica, sans-serif,Phetsarath OT;
@@ -65,14 +66,7 @@ body {
     width: 100%;
     left: 0;
 }
-.navbar-nav{
-  font-size: 16px;
-  color:#2C3335;
-  font-weight: bolder;
-}
-.green{
-  font-weight: bolder;
-}
+
 .footer-fixed-bottom-wrap {
   width: 100%;
   height: auto;
@@ -143,54 +137,13 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
   pointer-events: none;
 }
 /*  icon for the first 4 card */
-.icon1 {
-          display: inline-block;
-          background: url(../images/sprites-1.png) no-repeat;
-          overflow: hidden;
-          text-indent: -9999px;
-          text-align: left;
-          float: left;
-          margin: 20px;
-          background-position: -929px -248px;
-          width: 93px;
-          height: 93px;
-            }
-.icon2{
-          display: inline-block;
-          background: url(../images/sprites-1.png) no-repeat;
-          overflow: hidden;
-          text-indent: -9999px;
-          text-align: left;
-          float: left;
-          margin: 20px;
-          background-position: -843px -845px;
-          width: 71px;
-          height: 118px;
-}
-.icon3 {
-    display: inline-block;
-    background: url(../images/sprites-1.png) no-repeat;
-    overflow: hidden;
-    text-indent: -9999px;
-    text-align: left;
-    float: left;
-    margin: 20px;
-    background-position: -941px -701px;
-    width: 81px;
-    height: 84px;
-}
-.icon4 {
-    display: inline-block;
-    background: url(../images/sprites-1.png) no-repeat;
-    overflow: hidden;
-    text-indent: -9999px;
-    text-align: left;
-    float: left;
-    margin: 20px;
-    background-position: -682px -500px;
-    width: 122px;
-    height: 82px;
-}
+ .card-img.icon {
+     margin: 20px;
+     width: 100px !important;
+     height: 100px;
+ }
+
+
 /**** Ceate custom navbar */
 .navbar-custom {
     background-color:#229922;
@@ -224,11 +177,7 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
 .navbar-custom .icon-bar {
     background-color:#33aa33;
 }
-/* end custom navbar */ 
-.top{
-  margin-top: 0px !important;
-  font-weight: bolder;
-}
+
 /* Main header of the graph */ 
 #header{/* Nutrition Overview */ 
   background-color: #34AE8D;
@@ -266,60 +215,10 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
   text-align: center;
 }
 
-/* ****************************** */
-/* Customize Overview Tab | Button*/
-/* ****************************** */
-
-button#overviewWastingButton, button#overviewOverweightButton, button#overviewResetButton {
-  background-image: none;
-  background-color: none;
-}
-
-button.active#overviewWastingButton, button.active#overviewOverweightButton, button.active#overviewResetButton {
-  background: #f1f8e9;;
-  text-shadow: none
-}
-
-button#overviewWastingButton:active, button#overviewOverweightButton:active, button#overviewResetButton:active {
-  background: #f1f8e9;
-  background-color: none;
-}
-
-
-button#overviewWastingButton:hover, button#overviewOverweightButton:hover, button#overviewResetButton:hover {
-  background: #f1f8e9;
-  text-shadow: none;
-}
-
-/* ****************************** */
-/* Customize NSS Tab | Button*/
-/* ****************************** */
-
-button#lsisStuntingButton, button#lsisWastingButton, button#lsisUnderweightButton {
-  background-image: none;
-  background-color: none;
-}
-
-button.active#lsisStuntingButton, button.active#lsisWastingButton, button.active#lsisUnderweightButton {
-  background: #f1f8e9;;
-  text-shadow: none
-}
-
-button#lsisStuntingButton:active, button#lsisWastingButton:active, button#lsisUnderweightButton:active {
-  background: #f1f8e9;
-  background-color: none;
-}
-
-
-button#lsisStuntingButton:hover, button#lsisWastingButton:hover, button#lsisUnderweightButton:hover {
-  background: #f1f8e9;
-  text-shadow: none;
-}
-/* tooltip link css */
- #testInfo + .tooltip > .tooltip-inner {
-    background-color: #df5036 ;
-    text-align: left;
-}
-#testInfo + .tooltip.right > .tooltip-arrow {
-    border-right: 5px solid #df5036;
-}
+/*Customize Footer Logo*/
+ #euLogo, #unicefLogo {
+     height: 5rem;
+ }
+ #footer-copyright {
+     background-color: #173C78 !important;
+ }
