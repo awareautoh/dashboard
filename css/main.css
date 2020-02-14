@@ -211,9 +211,22 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
 }
 
 /*Customize Footer Logo*/
- #euLogo, #unicefLogo {
-     height: 5rem;
+ #euLogo, #unicefLogo, #laoGovLogo {
+     height: 3rem;
+     filter: grayscale(1);
+     -webkit-filter: grayscale(1);
+
+ }
+ #euLogo:hover, #unicefLogo:hover, #laoGovLogo:hover {
+     filter: none;
+     -webkit-filter: grayscale(0);
+
  }
  #footer-copyright {
+     padding: 0;
      background-color: #173C78 !important;
+ }
+ #textCopyright {
+     margin-top: 0 !important;
+     margin-bottom: 0 !important;
  }
