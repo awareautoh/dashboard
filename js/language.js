@@ -8,7 +8,6 @@ function getLanguage() {
         dataType: 'json', async: false,
         success: function (lang) { language = lang }
     });
-
     //Revise
     $(document).ready(function(){
         //Nav Menu

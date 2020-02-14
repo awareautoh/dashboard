@@ -709,6 +709,20 @@ function buildChart (value) {
         }
     });
 
+    //Function to change Language
+    function changeLanguage() {
+        let inputLanguage = localStorage.getItem( 'language' );
+        if ( ( inputLanguage === null ) || ( inputLanguage === "en" ) ) {
+        } else {
+            wastingAndOverweightChart.chart.data.datasets[0].label = 'ນໍ້າໜັກຕໍ່າກວ່າມາດຕະຖານ';
+            wastingAndOverweightChart.chart.data.datasets[1].label = 'ນໍ້າໜັກຕໍ່າເກີນມາດຕະຖານ';
+            drawVitAChart.chart.data.datasets[0].label = "ເປີເຊັນການປົກຫຸ້ມວິຕາມິນເອ";
+        }
+        //console.log(drawVitAChart);
+    }
+
+    changeLanguage();
+
 };
 
 //**********************************************/
