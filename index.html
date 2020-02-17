@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
     <link rel="shortcut icon" type="image/png" href="http://example.com/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/load.js"></script>
     <!-- Google jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- BS CSS -->
@@ -41,8 +42,13 @@
         /* Add Initial CSS Here */
     </style>
 </head>
+<div class="d-flex justify-content-center" id="loadingImg">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <body>
-<header>
+<header id="content-header">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -89,7 +95,7 @@
         </div>
     </nav>
 </header>
-<div class="container">
+<div class="container" id="content-container">
     <div class="tab-content" id="pills-tabContent">
         <!--        Strat Home Tab-->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -976,7 +982,7 @@
 
 
 <!--Add Footer-->
-<div class="card mt-4">
+<div class="card mt-4" id="content-footer">
     <div class="card-body text-center align-middle text-muted bg-white">
         <a>
             Supported By:
