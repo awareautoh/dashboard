@@ -4,5 +4,10 @@
   "lsis": "LSIS",
   "sentinelSurvey": "SENTINEL SURVEY",
   "lecs": "LECS",
-  "agricultureCencus": "AGRICULTURE CENCUS"
+  "agricultureCencus": "AGRICULTURE CENCUS",
+  "overviewOfNutrition": "Overview of Nutrition",
+  "textCardIcon1": "Exclusive breastfeeding under 6 months",
+  "textCardIcon2": "Underweight prevalence",
+  "textCardIcon3": "Overweight prevalence",
+  "textCardIcon4": "Minimum Diet Diversity"
 }

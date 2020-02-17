@@ -17,6 +17,13 @@ function getLanguage() {
         $('#sentinelSurvey-tab').text(language["sentinelSurvey"]);
         $('#lecs-tab').text(language["lecs"]);
         $('#agricultureCencus-tab').text(language["agricultureCencus"]);
+
+        //Overview of Nutrition Row
+        $('#overviewOfNutrition').text(language["overviewOfNutrition"]);
+        $('#textCardIcon1').text(language["textCardIcon1"]);
+        $('#textCardIcon2').text(language["textCardIcon2"]);
+        $('#textCardIcon3').text(language["textCardIcon3"]);
+        $('#textCardIcon4').text(language["textCardIcon4"]);
     });
 }
 function setLanguage(lang) {

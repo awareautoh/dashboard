@@ -10,7 +10,7 @@
  /*Customize Navbar and Body*/
  body {
      padding-top: 5rem;  /*Prevent overlapping between NavBar and Body*/
-     font-family: Arial, Helvetica, sans-serif ;
+     font-family: Arial, Helvetica, Phetsarath OT, sans-serif;
  }
 
 /*Customize Card*/
@@ -50,11 +50,6 @@
 .card h1, p{
     padding: 10px;
     text-align: center;
-}
-<<<<<<< HEAD
-
-body {
-    font-family: Arial, Helvetica, sans-serif,Phetsarath OT;
 }
  
 .nav-tabs{
