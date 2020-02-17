@@ -10,7 +10,7 @@
  /*Customize Navbar and Body*/
  body {
      padding-top: 5rem;  /*Prevent overlapping between NavBar and Body*/
-     font-family: Arial, Helvetica, Phetsarath OT, sans-serif;
+     font-family: Arial, Helvetica, "Phetsarath OT", sans-serif;
  }
 
 /*Customize Card*/
