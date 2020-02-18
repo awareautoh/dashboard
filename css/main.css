@@ -82,10 +82,26 @@
 .footer-fixed-bottom > .btn {
   border-radius: 0;
 }
-/* box shadow */
+/* box shadow on the top menu */
 .bg-light{
 	box-shadow: 3px 3px 3px #aaa;
 }
+/*  Add collapse menu on mobile   */
+
+@media(max-width:33.9em) {
+  .navbar .collapse {max-height:250px;width:100%;overflow-y:auto;overflow-x:hidden;}
+  .navbar .navbar-brand {float:none;display: inline-block;}
+  .navbar .navbar-nav>.nav-item { float: none; margin-left: .1rem;}
+  .navbar .navbar-nav {float:none !important;}
+  .nav-item{width:100%;text-align:left;}
+  .navbar .collapse .dropdown-menu {
+    position: relative;
+    float: none;
+    background:none;
+    border:none;
+  }
+}
+
 /*  
 top header
 */
