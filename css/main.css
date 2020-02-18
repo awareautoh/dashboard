@@ -82,6 +82,10 @@
 .footer-fixed-bottom > .btn {
   border-radius: 0;
 }
+/* box shadow */
+.bg-light{
+	box-shadow: 3px 3px 3px #aaa;
+}
 /*  
 top header
 */
