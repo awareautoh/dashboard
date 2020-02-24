@@ -714,8 +714,8 @@ function buildChart (value) {
         let inputLanguage = localStorage.getItem( 'language' );
         if ( ( inputLanguage === null ) || ( inputLanguage === "en" ) ) {
         } else {
-            wastingAndOverweightChart.chart.data.datasets[0].label = 'ນໍ້າໜັກຕໍ່າກວ່າມາດຕະຖານ';
-            wastingAndOverweightChart.chart.data.datasets[1].label = 'ນໍ້າໜັກຕໍ່າເກີນມາດຕະຖານ';
+            wastingAndOverweightChart.chart.data.datasets[0].label = 'ເດັກຂາດສານອາຫານຊໍາເຮື້ອແບບຈ໋ອຍ';
+            wastingAndOverweightChart.chart.data.datasets[1].label = 'ເດັກນໍ້າໜັກເກີນມາດຕະຖານ';
             drawVitAChart.chart.data.datasets[0].label = "ເປີເຊັນການປົກຫຸ້ມວິຕາມິນເອ";
         }
         //console.log(drawVitAChart);

@@ -8,7 +8,6 @@
     <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
     <link rel="shortcut icon" type="image/png" href="http://example.com/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="js/load.js"></script>
     <!-- Google jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- BS CSS -->
@@ -38,12 +37,13 @@
     <script src="https://unpkg.com/topojson@3"></script> <!-- Import TopoJSON to read topoJSON Map file-->
     <script src="js/allcharts.js"></script>
     <script src="js/language.js"></script> <!-- Script for multi language -->
+    <script src="js/load.js"></script>
     <style>
         /* Add Initial CSS Here */
     </style>
 </head>
-<div class="d-flex justify-content-center" id="loadingImg">
-    <div class="spinner-border" role="status">
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" id="loadingImg" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>
@@ -85,7 +85,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownLanguage">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownLanguageList">
                             <a class="dropdown-item" href="#" onclick="setLanguage('en')">English</a>
                             <a class="dropdown-item" href="#" onclick="setLanguage('lo')">ພາສາລາວ</a>
                         </div>
@@ -110,7 +110,6 @@
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
                     <div class="card" id="highLight"
                          style="background-color: #FFCA22; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
-                        <img class="card-img icon" src="images/icon1.png">
                         <div class="card-img-overlay">
                             <h1>44.9%</h1>
                             <p id="textCardIcon1"></p>
@@ -121,7 +120,6 @@
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
                     <div class="card" id="highLight"
                          style="background-color:#6CE2FF; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
-                        <img class="card-img icon" src="images/icon2.png">
                         <div class="card-img-overlay">
                             <h1>21.1%</h1>
                             <p id="textCardIcon2"></p>
@@ -131,7 +129,6 @@
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
                     <div class="card" id="highLight"
                          style="background-color: #F15D4A; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
-                        <img class="card-img icon" src="images/icon3.png">
                         <div class="card-img-overlay">
                             <h1>9%</h1>
                             <p id="textCardIcon3"></p>
@@ -141,7 +138,6 @@
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
                     <div class="card" id="highLight"
                          style="background-color: #919AA3; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 192px;">
-                        <img class="card-img icon" src="images/icon4.png">
                         <div class="card-img-overlay">
                             <h1>45.3%</h1>
                             <p id="textCardIcon4"></p>
@@ -154,17 +150,19 @@
             <div class="row mt-4">
                 <div class="col-lg">
                     <div class="card" id="sec1">
-                        <h1 class="sec1">Current Status of Key Nutrition Indicators</h1>
+                        <h1 class="sec1" id="textSec1Header"></h1>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 mt-4">
                     <div class="card">
-                        <h3 class="topic" style="padding-top: 10px;">Child Mulnutrition
+                        <h3 class="topic pt-3">
+                            <sec id="textTitleChildMalnutrition"></sec>
                             <i id="testInfo" class="fas fa-info" style="float: left; padding: 5px;"
                                data-placement="right" data-toggle="tooltip"
-                               title="This is the test of the tooltips that will be giving more information on the chart or graph"></i>
+                               title="This is the test of the tooltips that will be giving more information on the chart or graph">
+                            </i>
                             <div class="dropup" style="text-align: right; float: right;">
                                 <button class="btn btn-outline-primary" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -173,40 +171,44 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
                                     style="right: 0; left: initial;">
                                     <li><a class="dropdown-item" href="#" id="wastingAndOverweightChartPNGDownload"
-                                           download="chart.png">Export
-                                        Chart</a></li>
-                                    <li><a class="dropdown-item" href="#" id="wastingAndOverweightChartDataDownload">Export
-                                        Data</a></li>
+                                           download="chart.png"></a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                           id="wastingAndOverweightChartDataDownload"></a></li>
                                 </ul>
                             </div>
                         </h3>
 
-                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <div class="drawChart">
                             <canvas id="wastingAndOverweightChart"></canvas>
                         </div>
                         <div id="toolbarOverview" style="text-align: center;">
-                            <button type="button" id='overviewWastingButton' class="btn btn-outline-primary" data-toggle="button"
-                                    style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Wasting
+                            <button type="button" id='overviewWastingButton' class="btn btn-outline-primary"
+                                    data-toggle="button"
+                                    style="margin: 10px 5px 15px 5px; display: inline-block;">
                             </button>
-                            <button type="button" id='overviewOverweightButton' class="btn btn-outline-primary" data-toggle="button" aria-pressed="false"
-                                    style="margin: 10px 5px 15px 5px; display: inline-block;">Sort Overweight
+                            <button type="button" id='overviewOverweightButton' class="btn btn-outline-primary"
+                                    data-toggle="button" aria-pressed="false"
+                                    style="margin: 10px 5px 15px 5px; display: inline-block;">
                             </button>
-                            <button type="button" id='overviewResetButton' class="btn btn-outline-primary" data-toggle="button" aria-pressed="false"
-                                    style="margin: 10px 5px 15px 5px; display: inline-block;">Reset
+                            <button type="button" id='overviewResetButton' class="btn btn-outline-primary"
+                                    data-toggle="button" aria-pressed="false"
+                                    style="margin: 10px 5px 15px 5px; display: inline-block;">
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12 mt-4">
                     <div class="card">
-                        <h3 class="topic" style="padding-top: 10px;"> Women Undernutrtion <i
-                                class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <h3 class="topic pt-3">
+                            <sec id="textHeaderWomenUndernutrition"></sec>
+                        </h3>
+                        <div class="drawChart">
                             <canvas id="womenAnemia"></canvas>
                         </div>
-                        <h3 class="topic" style="padding-top: 10px;">Prevalence of Overweight and Obesity <i
-                                class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <h3 class="topic pt-3">
+                            <sec id="textHeaderPrevalenceOfOverweightAndObesity"></sec>
+                        </h3>
+                        <div class="drawChart">
                             <canvas id="womenOverweightAndObese"></canvas>
                         </div>
                     </div>
@@ -216,19 +218,18 @@
             <div class="row">
                 <div class="col-lg-12 mt-4">
                     <div class="card" id="sec2">
-                        <h1>Immediate determinants of undernutrition</h1>
+                        <h1 id="textSec2Header"></h1>
                     </div>
                 </div>
                 <div class="col-lg-12 mt-4">
                     <div class="cardChart">
-                        <h3 class="topic" style="padding-top: 10px;">Infant and Young Child Feeding Practices <i
-                                class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <h3 class="topic pt-4">
+                            <sec id="infantAndYoungChildFeedingPractices"></sec>
+                        </h3>
+                        <div class="drawChart">
                             <canvas id="IYCFChart"></canvas>
                         </div>
-                        <h3 class="topic" style="padding-top: 10px;">Infant and Young Child Feeding Practices <i
-                                class='glyphicon glyphicon-menu-hamburger' style="float: right;"></i></h3>
-                        <div style="position: relative; display: block; height: 360px; width: auto;">
+                        <div class="drawChart">
                             <canvas id="miniDietChart"></canvas>
                         </div>
                     </div>
@@ -676,13 +677,16 @@
                 <div class="col-lg-12 mt-4">
                     <div class="card">
                         <div id="toolbarLSIS" style="text-align: center;">
-                            <button type="button" id='lsisStuntingButton' class="btn btn-outline-primary" aria-pressed="true" data-toggle="button"
+                            <button type="button" id='lsisStuntingButton' class="btn btn-outline-primary"
+                                    aria-pressed="true" data-toggle="button"
                                     style="margin: 10px 5px 15px 5px; display: inline-block;">Stunting
                             </button>
-                            <button type="button" id='lsisWastingButton' class="btn btn-outline-primary" data-toggle="button"
+                            <button type="button" id='lsisWastingButton' class="btn btn-outline-primary"
+                                    data-toggle="button"
                                     style="margin: 10px 5px 15px 5px; display: inline-block;">Wasting
                             </button>
-                            <button type="button" id='lsisUnderweightButton' class="btn btn-outline-primary" data-toggle="button"
+                            <button type="button" id='lsisUnderweightButton' class="btn btn-outline-primary"
+                                    data-toggle="button"
                                     style="margin: 10px 5px 15px 5px; display: inline-block;">Underweight
                             </button>
                         </div>

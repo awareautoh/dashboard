@@ -10,5 +10,5 @@ function showPage() {
     document.getElementById("content-container").style.visibility = "visible";
     document.getElementById("content-footer").style.visibility = "visible";
 }
+
 load();
-showPage();

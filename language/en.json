@@ -9,5 +9,16 @@
   "textCardIcon1": "Exclusive breastfeeding under 6 months",
   "textCardIcon2": "Underweight prevalence",
   "textCardIcon3": "Overweight prevalence",
-  "textCardIcon4": "Minimum Diet Diversity"
+  "textCardIcon4": "Minimum Diet Diversity",
+  "textSec1Header": "Current Status of Key Nutrition Indicators",
+  "textTitleChildMalnutrition": "Child Malnutrition",
+  "wastingAndOverweightChartPNGDownload": "Export Graph",
+  "wastingAndOverweightChartDataDownload": "Export Data",
+  "overviewWastingButton": "Sort Wasting",
+  "overviewOverweightButton": "Sort Overweight",
+  "overviewResetButton": "Reset",
+  "textHeaderWomenUndernutrition": "Women Undernutrition",
+  "textHeaderPrevalenceOfOverweightAndObesity": "Prevalence of Overweight and Obesity",
+  "textSec2Header": "Immediate determinants of Undernutrition",
+  "infantAndYoungChildFeedingPractices": "Infant and Young Child Feeding Practices"
 }

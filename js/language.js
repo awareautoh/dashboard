@@ -24,6 +24,29 @@ function getLanguage() {
         $('#textCardIcon2').text(language["textCardIcon2"]);
         $('#textCardIcon3').text(language["textCardIcon3"]);
         $('#textCardIcon4').text(language["textCardIcon4"]);
+
+        //***
+        //Section 1: Current Nutrition Status
+        //***
+        $('#textSec1Header').text(language["textSec1Header"]);
+        //Child Malnutrition
+        $('#textTitleChildMalnutrition').text(language["textTitleChildMalnutrition"]);
+        $('#wastingAndOverweightChartPNGDownload').text(language["wastingAndOverweightChartPNGDownload"]);
+        $('#wastingAndOverweightChartDataDownload').text(language["wastingAndOverweightChartDataDownload"]);
+        $('#overviewWastingButton').text(language["overviewWastingButton"]);
+        $('#overviewOverweightButton').text(language["overviewOverweightButton"]);
+        $('#overviewResetButton').text(language["overviewResetButton"]);
+        //Women Undernutrition
+        $('#textHeaderWomenUndernutrition').text(language["textHeaderWomenUndernutrition"]);
+        //Prevalence of Overweight and Obesity
+        $('#textHeaderPrevalenceOfOverweightAndObesity').text(language["textHeaderPrevalenceOfOverweightAndObesity"]);
+
+        //***
+        //Section 2: Immediate determinant of Undernutrition
+        //***
+        $('#textSec2Header').text(language["textSec2Header"]);
+        //Infant and Young Child Feeding Practices
+        $('#infantAndYoungChildFeedingPractices').text(language["infantAndYoungChildFeedingPractices"]);
     });
 }
 function setLanguage(lang) {

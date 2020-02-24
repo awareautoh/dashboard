@@ -6,6 +6,9 @@
   Ministry of Planning and Inestment 
   Created by: Data Analysis Unit 
 */
+ #loadingImg {
+     visibility: visible;
+ }
 #content-container, #content-header, #content-footer {
     visibility: hidden;
 }
@@ -231,6 +234,14 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
   color: #ffffff;
   text-align: center;
 }
+
+/* Customize Draw Chart Area for ChartJS Canvas Tag */
+ .drawChart {
+     position: relative;
+     display: block;
+     height: 480px;
+     width: 100%;
+ }
 
 /*Customize Footer Logo*/
  #euLogo, #unicefLogo, #laoGovLogo {
