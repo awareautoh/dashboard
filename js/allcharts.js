@@ -53,6 +53,8 @@ Promise.all([
 Chart.plugins.unregister(ChartDataLabels); //cogfig Chart.JS label pugin not to show label on all chart by default
 Chart.defaults.global.plugins.deferred.delay = 250; //Global set up for ChartJS plugin: deffer, delay transition: 500
 Chart.defaults.global.plugins.deferred.xOffset = "50%"; //Global set up for ChartJS plugin: deffer, 50% view point to activate plugin
+Chart.defaults.global.defaultFontFamily ='Phetsarath OT', 'sans-serif', 'Arial', 'Helvetica'; //set font family
+Chart.defaults.global.defaultFontSize=14; //set font size
 
 
 //**********************************/

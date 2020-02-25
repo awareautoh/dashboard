@@ -13,9 +13,11 @@
     <script src="js/language.js"></script> <!-- Script for multi language -->
     <!-- BS CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="js/load.js"></script>
     <!-- BS OPT THEME -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <!--Add Awesome font for icon-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <!--ChartJS Library-->
@@ -32,13 +34,13 @@
     <script src="js/d3-sankey.min.js"></script>  <!-- Add Sankey D3JS -->
     <script src="https://unpkg.com/topojson@3"></script> <!-- Import TopoJSON to read topoJSON Map file-->
     <script src="js/allcharts.js"></script>
-    <script src="js/load.js"></script>
+    
     <style>
         /* Add Initial CSS Here */
     </style>
 </head>
 <div class="d-flex justify-content-center">
-    <div class="spinner-border" id="loadingImg" role="status">
+    <div class="spinner-border text-primary" id="loadingImg" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>
@@ -154,10 +156,6 @@
                     <div class="card">
                         <h3 class="topic pt-3">
                             <sec id="textTitleChildMalnutrition"></sec>
-                            <i id="testInfo" class="fas fa-info" style="float: left; padding: 5px;"
-                               data-placement="right" data-toggle="tooltip"
-                               title="This is the test of the tooltips that will be giving more information on the chart or graph">
-                            </i>
                             <div class="dropup" style="text-align: right; float: right;">
                                 <button class="btn btn-outline-primary" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

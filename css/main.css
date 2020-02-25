@@ -24,6 +24,9 @@
     transition: 0.3s;
     height: 100%;
     width: 100%;
+	border-radius: 0px !important;
+	border:0px !important;
+	
 }
 
 .cardChart {
