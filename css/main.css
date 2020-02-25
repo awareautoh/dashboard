@@ -14,7 +14,7 @@
 }
  /*Customize Navbar and Body*/
  body {
-     padding-top: 5rem;  /*Prevent overlapping between NavBar and Body*/
+     padding-top: 3.2rem;  /*Prevent overlapping between NavBar and Body*/
      font-family: Arial, Helvetica, "Phetsarath OT", sans-serif !important;
  }
 
@@ -41,7 +41,7 @@
     width: 100%;
 }
 .card#highLight h1 {
-    font-size: 50px;
+    font-size: 50px !important;
     color: #fff;
     padding: 10px;
     text-align: right;
@@ -49,14 +49,14 @@
 }
 
 .card#highLight p {
-    font-size: 18px;
+    font-size: 22px;
     color: #fff;
     padding: 10px;
     text-align: right;
 }
 
 .card h1, p{
-    padding: 10px;
+    padding: 5px;
     text-align: center;
 }
  
@@ -107,7 +107,9 @@
     border:none;
   }
 }
-
+.h1,h1{
+	font-size:2rem !important;
+}
 /*  
 top header
 */
@@ -266,3 +268,51 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
      margin-top: 0 !important;
      margin-bottom: 0 !important;
  }
+ .icon1 {
+          display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -929px -248px;
+          width: 93px;
+          height: 93px;
+            }
+.icon2{
+          display: inline-block;
+          background: url(../images/sprites-1.png) no-repeat;
+          overflow: hidden;
+          text-indent: -9999px;
+          text-align: left;
+          float: left;
+          margin: 20px;
+          background-position: -843px -845px;
+          width: 71px;
+          height: 118px;
+}
+.icon3 {
+    display: inline-block;
+    background: url(../images/sprites-1.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    float: left;
+    margin: 20px;
+    background-position: -941px -701px;
+    width: 81px;
+    height: 84px;
+}
+.icon4 {
+    display: inline-block;
+    background: url(../images/sprites-1.png) no-repeat;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    float: left;
+    margin: 20px;
+    background-position: -682px -500px;
+    width: 122px;
+    height: 82px;
+}
