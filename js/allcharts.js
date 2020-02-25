@@ -409,7 +409,8 @@ function buildChart (value) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+						maxTicksLimit:10,
                     },
                     gridLines: {
                         drawOnChartArea: false,
@@ -418,7 +419,7 @@ function buildChart (value) {
                 xAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 9,
                     },
                     gridLines: {
                         borderDash: [3, 10]
@@ -468,7 +469,8 @@ function buildChart (value) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+						maxTicksLimit: 10,
                     },
                     gridLines: {
                         drawOnChartArea: false,
@@ -477,7 +479,7 @@ function buildChart (value) {
                 xAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 9,
                     },
                     gridLines: {
                         borderDash: [3, 10]
@@ -522,7 +524,8 @@ function buildChart (value) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+						maxTicksLimit: 10,
                     },
                     gridLines: {
                         drawOnChartArea: false,
@@ -531,7 +534,7 @@ function buildChart (value) {
                 xAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 9,
                     },
                     gridLines: {
                         borderDash: [3, 10]
@@ -638,13 +641,17 @@ function buildChart (value) {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 6,
                     },
                     gridLines: {
                         borderDash: [3, 10]
                     }
                 }],
                 xAxes: [{
+					ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 12,
+                    },
                     gridLines: {
                         drawOnChartArea: false,
                     }
