@@ -18,7 +18,7 @@ function getLanguage() {
         $('#lecs-tab').text(language["lecs"]);
         $('#agricultureCencus-tab').text(language["agricultureCencus"]);
 
-        //Overview of Nutrition Row
+        //*********Overview of Nutrition Row
         $('#overviewOfNutrition').text(language["overviewOfNutrition"]);
         $('#textCardIcon1').text(language["textCardIcon1"]);
         $('#textCardIcon2').text(language["textCardIcon2"]);
