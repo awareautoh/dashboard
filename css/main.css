@@ -12,6 +12,9 @@
 #content-container, #content-header, #content-footer {
     visibility: hidden;
 }
+#navBarTop {
+    background-color: #f8f9faeb!important;
+}
  /*Customize Navbar and Body*/
  body {
      padding-top: 3.2rem;  /*Prevent overlapping between NavBar and Body*/
