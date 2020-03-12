@@ -12,10 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/language.js"></script> <!-- Script for multi language -->
     <!-- BS CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="js/bootstrap-4/css/bootstrap.min.css">
+	<script src="js/bootstrap-4/js/bootstrap.bundle.min.js"></script>
 	<script src="js/load.js"></script>
     <!-- BS OPT THEME -->
     <!--Add Awesome font for icon-->
@@ -39,14 +37,36 @@
         /* Add Initial CSS Here */
     </style>
 </head>
-<div class="d-flex justify-content-center">
-    <div class="spinner-border text-primary" id="loadingImg" role="status">
-        <span class="sr-only">Loading...</span>
+<!--<div class="d-flex justify-content-center">-->
+<!--    <div class="spinner-border text-primary" id="loadingImg" role="status">-->
+<!--        <span class="sr-only">Loading...</span>-->
+<!--    </div>-->
+<!--</div>-->
+<body onload="modal()">
+
+<!--  activate spiner   here -->
+
+<div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="width: 48px">
+            <span class="fa fa-spinner fa-spin fa-3x"></span>
+        </div>
     </div>
 </div>
-<body>
+<script>
+    function modal(){
+        $('.modal').modal('show');
+        setTimeout(function () {
+            console.log('hejsan');
+            $('.modal').modal('hide');
+        }, 4000);
+    }
+</script>
+
+<!--    End spiner                -->
+
 <header id="content-header">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" id="navBarTop">
         <div class="container">
             <a class="navbar-brand" href="#home">
                 <img src="images/laos.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -96,7 +116,7 @@
     <div class="tab-content" id="pills-tabContent">
         <!--        Strat Home Tab-->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="card" id="header">
                         <h1 class="top" id="overviewOfNutrition"></h1>
@@ -384,7 +404,7 @@
         -->
         <div class="tab-pane fade" id="menu1" role="tabpanel" aria-labelledby="lsis-tab"> <!--  start menu 2 -->
             <script src="js/lsisChart.js"></script>
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="card" id="header">
                         <h1 class="top">LSIS II Survey 2017</h1>
@@ -398,7 +418,7 @@
                             <h3 class="topic" style="padding-top: 10px;">
                                 Indicator Overview
                             </h3>
-                            <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <div class="drawChart">
                                 <canvas id="lsisOverviewChart"></canvas>
                             </div>
                         </div>
@@ -410,7 +430,7 @@
                             <h3 class="topic" style="padding-top: 10px;">
                                 Indicator Trending
                             </h3>
-                            <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <div class="drawChart">
                                 <canvas id="lsisOverviewTrend"></canvas>
                             </div>
                         </div>
@@ -422,7 +442,7 @@
                             <h3 class="topic" style="padding-top: 10px;">
                                 Provincial Overview
                             </h3>
-                            <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <div class="drawChart">
                                 <canvas id="lsisProvincialOverview"></canvas>
                             </div>
                         </div>
@@ -434,7 +454,7 @@
                             <h3 class="topic" style="padding-top: 10px;">
                                 Area
                             </h3>
-                            <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <div class="drawChart">
                                 <canvas id="lsisSubCategoryArea"></canvas>
                             </div>
                         </div>
@@ -446,7 +466,7 @@
                             <h3 class="topic" style="padding-top: 10px;">
                                 Education
                             </h3>
-                            <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <div class="drawChart">
                                 <canvas id="lsisSubCategoryEducation"></canvas>
                             </div>
                         </div>
@@ -458,7 +478,7 @@
                             <h3 class="topic" style="padding-top: 10px;">
                                 Ethnicity
                             </h3>
-                            <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <div class="drawChart">
                                 <canvas id="lsisSubCategoryEthnicity"></canvas>
                             </div>
                         </div>
@@ -470,7 +490,7 @@
                             <h3 class="topic" style="padding-top: 10px;">
                                 Wealth Index Quintile
                             </h3>
-                            <div style="position: relative; display: block; height: 360px; width: auto; padding: 20px;">
+                            <div class="drawChart">
                                 <canvas id="lsisSubCategoryWealth"></canvas>
                             </div>
                         </div>
@@ -499,7 +519,7 @@
         -->
         <div class="tab-pane fade" id="menu2" role="tabpanel" aria-labelledby="sentinel-tab"> <!-- Start senitel -->
             <script src="js/nssChart.js"></script>
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="card" id="header">
                         <h1 class="top">Overview</h1>
@@ -727,7 +747,7 @@
         -->
         <div class="tab-pane fade" id="menu3" role="tabpanel" aria-labelledby="lecs-tab">
             <script src="js/lecsChart.js"></script>
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="card" id="header">
                         <h1 class="top">LECS Survey</h1>
@@ -851,7 +871,7 @@
         <div class="tab-pane fade" id="menu4" role="tabpanel" aria-labelledby="agriculture-tab">
             <!-- start Agriculture -->
             <script src="js/agricultureChart.js"></script>
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="card" id="header">
                         <h1 class="top">Agriculture Cencus 2018</h1>
