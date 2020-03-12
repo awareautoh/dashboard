@@ -6,9 +6,9 @@
   Ministry of Planning and Inestment 
   Created by: Data Analysis Unit 
 */
- #loadingImg {
-     visibility: visible;
- }
+ /*#loadingImg {*/
+ /*    visibility: visible;*/
+ /*}*/
 #content-container, #content-header, #content-footer {
     visibility: hidden;
 }
