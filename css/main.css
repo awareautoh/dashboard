@@ -18,14 +18,6 @@
      background-color: transparent;
      border: none;
  }
- .fa .fa-spiner{
-     color:blue;
-
-
- }
-#content-container, #content-header, #content-footer {
-    visibility: hidden;
-}
 
  /*Customize Navbar and Body*/
  body {
