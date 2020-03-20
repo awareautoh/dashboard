@@ -359,4 +359,7 @@ tr.greenTag > th, tr.greenTag > td:first-of-type { /*Add Darkgreen color to th a
      width: 5rem;
  }
 
+ .tableLegend {
+     font-size: 0.6rem;
+ }
  /* END TEST CSS */
