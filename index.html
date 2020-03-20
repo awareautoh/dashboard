@@ -12,9 +12,9 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/language.js"></script> <!-- Script for multi language -->
     <!-- BS CSS -->
-	<link rel="stylesheet" href="js/bootstrap-4/css/bootstrap.min.css">
-	<script src="js/bootstrap-4/js/bootstrap.bundle.min.js"></script>
-	<script src="js/load.js"></script>
+    <link rel="stylesheet" href="js/bootstrap-4/css/bootstrap.min.css">
+    <script src="js/bootstrap-4/js/bootstrap.bundle.min.js"></script>
+    <script src="js/load.js"></script>
     <!-- BS OPT THEME -->
     <!--Add Awesome font for icon-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
@@ -30,9 +30,9 @@
     <script src="js/d3.v5.min.js"></script>
     <script src="js/d3_legend.js"></script> <!-- Import script for add legend to map -->
     <script src="js/d3-sankey.min.js"></script>  <!-- Add Sankey D3JS -->
-    <script src="https://unpkg.com/topojson@3"></script> <!-- Import TopoJSON to read topoJSON Map file-->
-    <script src="js/allcharts.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+    <!-- Import TopoJSON to read topoJSON Map file -->
+
     <style>
         /* Add Initial CSS Here */
     </style>
@@ -101,8 +101,14 @@
 </header>
 <div class="container" id="content-container">
     <div class="tab-content" id="pills-tabContent">
-        <!--        Strat Home Tab-->
+        <!--
+            ****************************************
+            Start Tab 1: Home
+            ****************************************
+        -->
+        <!--        Start Home Tab-->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <script src="js/allcharts.js"></script>
             <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="card" id="header">
@@ -110,45 +116,163 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
-                    <div class="card" id="highLight"
-                         style="background-color: #FFCA22;background-image: linear-gradient(to right,#de6262, #ffc3a0); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 182px;">
-						 <div class="icon1"></div>
-                        <div class="card-img-overlay">
-                            <h1>44.9%</h1>
-                            <p id="textCardIcon1"></p>
+            <div class="row mt-4">
+                <div class="col-lg-5">
+                    <div class="card" style="height: 480px; padding: 1.4rem;">
+                        <div class="list-group list-group-flush" style="font-size: 0.8rem;">
+                            <a href="#" class="list-group-item list-group-item-action disabled" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 10rem;">Indicator</th>
+                                            <th scope="col">LSIS 2017 (%)</th>
+                                            <th scope="col">Target 2025 (%)</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0; padding: 0;">
+                                    <tbody>
+                                    <tr class="greenTag" onclick="console.log('a');">
+                                        <td>Stunting in CU5s</td>
+                                        <td>33</td>
+                                        <td>25</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0; padding: 0;">
+                                    <tbody>
+                                    <tr class="redTag">
+                                        <td>Wasting in CU5s</td>
+                                        <td> 9</td>
+                                        <td> <5</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0; padding: 0;">
+                                    <tbody>
+                                    <tr class="yellowTag">
+                                        <td>Underweight in CU5s</td>
+                                        <td> 21</td>
+                                        <td> 12</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0; padding: 0;">
+                                    <tbody>
+                                    <tr class="redTag">
+                                        <td>C6-59m with Anemia</td>
+                                        <td> 44</td>
+                                        <td> 30</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0; padding: 0;">
+                                    <tbody>
+                                    <tr class="redTag">
+                                        <td>WRA (15-49Y) with Anemia</td>
+                                        <td> 40</td>
+                                        <td> 15</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0; padding: 0;">
+                                    <tbody>
+                                    <tr class="greenTag">
+                                        <td>Low Birth Weight</td>
+                                        <td> 6.5</td>
+                                        <td> 8</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0; padding: 0;">
+                                    <tbody>
+                                    <tr class="redTag">
+                                        <td>Overweight</td>
+                                        <td> 3.5</td>
+                                        <td> <= 2</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="padding: 0;">
+                                <table class="table table-borderless" style="margin-bottom: 0; padding: 0;">
+                                    <tbody>
+                                    <tr class="redTag">
+                                        <td>C0-6m Exclusively Breastfed</td>
+                                        <td> 45</td>
+                                        <td> 60</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
-                    <div class="card" id="highLight"
-                         style="background-color:#6CE2FF;background-image: linear-gradient(to right,  #2193b0, #6dd5ed); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 182px;">
-						  <div class="icon2"></div>
-                        <div class="card-img-overlay">
-                            <h1>21.1%</h1>
-                            <p id="textCardIcon2"></p>
+                <div class="col-lg-7">
+                    <script src="js/testChart.js"></script>
+                    <div class="card" style="height: 480px; padding: 1rem;">
+                        <div id="navBarOverviewCard">
+                            <ul class="nav nav-tabs" id="overviewCardTab" role="tablist" style="font-size: 1rem;">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="bar-tab" data-toggle="tab" href="#lineTab" role="tab"
+                                       aria-controls="home" aria-selected="true">Trend</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="line-rentab" data-toggle="tab" href="#barTab" role="tab"
+                                       aria-controls="profile" aria-selected="false">Province</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="map-tab" data-toggle="tab" href="#mapTab" role="tab"
+                                       aria-controls="contact" aria-selected="false">Map</a>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
-                    <div class="card" id="highLight"
-                         style="background-color: #F15D4A;background-image: linear-gradient(to right,  #02aab0, #00cdac); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 182px;">
-						  <div class="icon3"></div>
-                        <div class="card-img-overlay">
-                            <h1>9%</h1>
-                            <p id="textCardIcon3"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
-                    <div class="card" id="highLight"
-                         style="background-color: #919AA3;background-image: linear-gradient(to right,  #bdc3c7,  #2c3e50 ); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; height: 182px;">
-						  <div class="icon4"></div>
-                        <div class="card-img-overlay">
-                            <h1>45.3%</h1>
-                            <p id="textCardIcon4"></p>
+                        <div id="contentOfNavBarOverviewCard">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="lineTab" role="tabpanel"
+                                     aria-labelledby="nav-home-tab" style="padding: 2rem;">
+                                    <div id="drawLineChart"
+                                         style="position: relative; display: block; height: 360px; width: auto;">
+                                        <!--                                        <canvas id="lineChartForOverviewCard"></canvas>-->
+                                        <svg id="lineChartForOverviewCard"
+                                             style="width: 100%; height: 100%; display: block; margin: auto;"
+                                             viewBox="0 0 360 360">
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="barTab" role="tabpanel"
+                                     aria-labelledby="nav-profile-tab" style="padding: 2rem;">
+                                    <div class="chartJS" id="drawProvinceChart"
+                                         style="position: relative; display: block; height: 360px; width: auto;">
+                                        <canvas id="provinceChartForOverviewCard"></canvas>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="mapTab" role="tabpanel"
+                                     aria-labelledby="nav-contact-tab" style="padding: 2rem;">
+                                    <div id="drawMapChart"
+                                         style="position: relative; display: block; height: 360px; width: auto;">
+                                        <!--                                        <canvas id="lineChartForOverviewCard"></canvas>-->
+                                        <svg id="mapChartForOverviewCard"
+                                             style="width: 100%; height: 100%; display: block; margin: auto;"
+                                             viewBox="0 0 360 360">
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -946,12 +1070,11 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div><!-- end row -->
             <br/>
         </div>
         <!-- End agriculture -->
-
 
     </div>    <!-- end Tab content -->
 </div> <!-- End container -->

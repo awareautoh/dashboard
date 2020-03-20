@@ -323,3 +323,40 @@ div.tooltip, div.tooltip1, div.tooltipOpenDeface, div.tooltipWomenStatus {
     width: 122px;
     height: 82px;
 }
+
+/* To config ChatJS Size by config Class name, please add this to desire class to global config for ChartJS */
+ .chartJS {
+     position: relative;
+     display: block;
+     height: 360px;
+     width: auto;
+ }
+
+/*
+*
+The CSS for TEST
+*
+ */
+
+ /* Table Row Green Highlight */
+tr.greenTag > th, tr.greenTag > td:first-of-type { /*Add Darkgreen color to th and td tag */
+    color: #039245;
+    width: 12rem;
+}
+
+ tr.redTag > th, tr.redTag > td:first-of-type { /*Add red color to th and td tag */
+     color: #ea5771;
+     width: 12rem;
+ }
+
+ tr.yellowTag > th, tr.yellowTag > td:first-of-type { /*Add red color to th and td tag */
+     color: #ecb800;
+     width: 12rem;
+ }
+
+ tr.greenTag > td:nth-child(3), tr.redTag > td:nth-child(3), tr.yellowTag > td:nth-child(3) { /* Add Grey colour to the third column of the table */
+     color: gray;
+     width: 5rem;
+ }
+
+ /* END TEST CSS */

@@ -1315,3 +1315,6 @@ function downloadChartDataButton ( buttonElement, link ) {
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
 });
+
+
+//*******Test Chart on the top of Home tab
